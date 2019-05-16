@@ -14,7 +14,7 @@ class AddColumnFotoTable extends Migration
     public function up()
     {
         Schema::table('master_galeri', function($table){
-          $table->string('flag_slider')->after('keterangan_gambar');
+          $table->string('flag_gambar')->after('keterangan_gambar');
         });
     }
 

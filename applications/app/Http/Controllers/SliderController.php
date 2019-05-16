@@ -21,8 +21,8 @@ class SliderController extends Controller
 
     public function index()
     {
-          $getslider = DB::table('master_slider')->paginate(15);
-          return view('backend.slider.kelolaslider', compact('getslider'));
+          $getSlider = DB::table('master_slider')->paginate(15);
+          return view('backend.slider.kelolaslider', compact('getSlider'));
     }
 
     public function store(Request $request)

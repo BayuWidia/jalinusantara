@@ -8,7 +8,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="block-header">
-        <h2>FORM KELOLA SLIDER</h2>
+        <h2>FORM KELOLA FOTO</h2>
     </div>
     <div class="row clearfix">
         <div class="col-md-12">
@@ -35,43 +35,43 @@
           <div class="card">
               <div class="header bg-orange">
                   <h2>
-                      Formulir Tambah Slider
+                      Formulir Tambah Foto
                   </h2>
               </div>
               <div class="body">
-                <form action="{{route('slider.store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('galeri.store')}}" method="post" enctype="multipart/form-data">
                   {{csrf_field()}}
                   <div class="row clearfix">
                       <div class="col-sm-12">
                           <div class="form-group">
                               <div class="form-line">
-                                  <label>Gambar Slider</label>
+                                  <label>Gambar Foto</label>
                                   @if ($errors->has('urlSlider'))
-                                    <small style="color:red">* {{$errors->first('urlSlider')}}</small>
+                                    <small style="color:red">* {{$errors->first('urlGaleri')}}</small>
                                   @endif
-                                  <input type="file" name="urlSlider" class="form-control">
+                                  <input type="file" name="urlGaleri" class="form-control">
                               </div>
                               <div>
                                 <span class="text-muted"><i>* Max Size: 2MB.</i></span><br>
-                                <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 1144 x 550 px.</i></span>
+                                <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 570 x 325 px.</i></span>
                               </div>
                           </div>
                           <div class="form-group">
                               <div class="form-line">
-                                  <label>Judul Slider</label>
+                                  <label>Judul Foto</label>
                                   @if ($errors->has('judul'))
                                     <small style="color:red">* {{$errors->first('judul')}}</small>
                                   @endif
-                                  <input type="text" class="form-control" placeholder="Ketikkan Judul Slider..." name="judul" id="judul"/>
+                                  <input type="text" class="form-control" placeholder="Ketikkan Judul Foto..." name="judul" id="judul"/>
                               </div>
                           </div>
                           <div class="form-group">
                               <div class="form-line">
-                                  <label>Keterangan Slider</label>
-                                  @if ($errors->has('keteranganSlider'))
-                                    <small style="color:red">* {{$errors->first('keteranganSlider')}}</small>
+                                  <label>Keterangan Foto</label>
+                                  @if ($errors->has('keteranganGaleri'))
+                                    <small style="color:red">* {{$errors->first('keteranganGaleri')}}</small>
                                   @endif
-                                  <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Slider..." name="keteranganSlider" id="keteranganSlider"></textarea>
+                                  <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Foto..." name="keteranganGaleri" id="keteranganGaleri"></textarea>
                               </div>
                           </div>
                           <div class="form-group">
@@ -96,7 +96,7 @@
             <div class="card">
                 <div class="header bg-orange">
                     <h2>
-                        List Data Slider
+                        List Data Foto
                     </h2>
                 </div>
                 <div class="body">
@@ -106,20 +106,20 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Judul</th>
-                                    <th>Slider</th>
+                                    <th>Foto</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                               @php $i=1; @endphp
-                              @foreach($getSlider as $key)
+                              @foreach($getGaleri as $key)
                                 <tr>
                                   <td>{{$i++}}</td>
                                   <td>{{$key->judul}}</td>
                                   <td>
-                                    @if($key->url_slider!="")
-                                      <img src="{{url('_thumbs/Slider')}}/{{$key->url_slider}}">
+                                    @if($key->url_gambar!="")
+                                      <img src="{{url('_thumbs/Galeri')}}/{{$key->url_gambar}}">
                                     @else
                                       <img src="{{url('images/')}}/no_image.jpg">
                                     @endif
@@ -137,7 +137,7 @@
                                   </td>
                                   <td>
                                     <a href="#" class="btn btn-warning btn-xs edit" data-toggle="modal" data-target="#modaledit" data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false">Update</a>
-                                    @if($key->flag_slider=="1")
+                                    @if($key->flag_gambar=="1")
                                         <a href="#" class="btn btn-success btn-xs flagpublish" data-toggle="modal" data-target="#modalflagedit" data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false">Publish</a>
                                     @else
                                         <a href="#" class="btn bg-indigo btn-xs flagpublish" data-toggle="modal" data-target="#modalflagedit" data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false">Un Publish</a>
@@ -165,23 +165,23 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content bounceInRight">
                   <div class="modal-header">
-                      <h4 class="modal-title">Edit Konten Slider</h4>
+                      <h4 class="modal-title">Edit Konten Foto</h4>
                   </div>
                   <div class="modal-body">
-                      <form action="{{route('slider.update')}}" method="post" enctype="multipart/form-data">
+                      <form action="{{route('galeri.update')}}" method="post" enctype="multipart/form-data">
                         {{csrf_field()}}
                         <div class="row clearfix">
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <label>Gambar Slider</label>
-                                        @if ($errors->has('urlSlider'))
-                                          <small style="color:red">* {{$errors->first('urlSlider')}}</small>
+                                        <label>Gambar Foto</label>
+                                        @if ($errors->has('urlGaleri'))
+                                          <small style="color:red">* {{$errors->first('urlGaleri')}}</small>
                                         @endif
                                         <div style="margin-bottom:10px;">
                                           <img src="" id="gambarSlider">
                                         </div>
-                                        <input type="file" name="urlSlider" class="form-control" id="urlSliderEdit">
+                                        <input type="file" name="urlGaleri" class="form-control" id="urlGaleriEdit">
                                         <input type="hidden" name="id" id="id">
                                     </div>
                                     <div>
@@ -192,20 +192,20 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <label>Judul Slider</label>
+                                        <label>Judul Foto</label>
                                         @if ($errors->has('judul'))
                                           <small style="color:red">* {{$errors->first('judul')}}</small>
                                         @endif
-                                        <input type="text" class="form-control" placeholder="Ketikkan Judul Slider..." name="judul" id="judulEdit"/>
+                                        <input type="text" class="form-control" placeholder="Ketikkan Judul Foto..." name="judul" id="judulEdit"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <label>Keterangan Slider</label>
-                                        @if ($errors->has('keteranganSlider'))
-                                          <small style="color:red">* {{$errors->first('keteranganSlider')}}</small>
+                                        <label>Keterangan Foto</label>
+                                        @if ($errors->has('keteranganGaleri'))
+                                          <small style="color:red">* {{$errors->first('keteranganGaleri')}}</small>
                                         @endif
-                                        <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Slider..." name="keteranganSlider" id="keteranganSliderEdit"></textarea>
+                                        <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Foto..." name="keteranganGaleri" id="keteranganGaleriEdit"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -232,10 +232,10 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content bounceInRight">
                   <div class="modal-header">
-                      <h4 class="modal-title">Edit Status Slider</h4>
+                      <h4 class="modal-title">Edit Status Foto</h4>
                   </div>
                   <div class="modal-body">
-                        <p>Apakah anda yakin untuk mengubah status slider ini?</p>
+                        <p>Apakah anda yakin untuk mengubah status foto ini?</p>
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-white" data-dismiss="modal"  onclick="resetPage()">Tidak</button>
@@ -250,10 +250,10 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content bounceInRight">
                   <div class="modal-header">
-                      <h4 class="modal-title">Non Aktifkan Data Slider</h4>
+                      <h4 class="modal-title">Non Aktifkan Data Foto</h4>
                   </div>
                   <div class="modal-body">
-                      <p>Apakah anda yakin untuk mengnonaktifkan data slider ini?</p>
+                      <p>Apakah anda yakin untuk mengnonaktifkan data foto ini?</p>
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-white" data-dismiss="modal"  onclick="resetPage()">Tidak</button>
@@ -268,10 +268,10 @@
       <div class="modal-dialog">
         <div class="modal-content bounceInRight">
               <div class="modal-header">
-                  <h4 class="modal-title">Aktifkan Data Slider</h4>
+                  <h4 class="modal-title">Aktifkan Data Foto</h4>
               </div>
               <div class="modal-body">
-                  <p>Apakah anda yakin untuk mengaktifkan data slider ini?</p>
+                  <p>Apakah anda yakin untuk mengaktifkan data foto ini?</p>
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-white" data-dismiss="modal"  onclick="resetPage()">Tidak</button>
@@ -290,38 +290,38 @@
 <script>
   $("#tabelinfo").on("click", "a.flagpublish", function(){
     var a = $(this).data('value');
-    $('#setFlagPublish').attr('href', '{{url('admin/publish-slider/')}}/'+a);
+    $('#setFlagPublish').attr('href', '{{url('admin/publish-galeri/')}}/'+a);
   });
 
   $("#tabelinfo").on("click", "a.hapus", function(){
     var a = $(this).data('value');
     var b = "hapus";
-    $('#setYaHapus').attr('href', '{{url('admin/delete-slider/')}}/'+a+'/'+b);
+    $('#setYaHapus').attr('href', '{{url('admin/delete-galeri/')}}/'+a+'/'+b);
   });
 
   $("#tabelinfo").on("click", "a.aktifkan", function(){
     var a = $(this).data('value');
     var b = "aktifkan";
-    $('#setYaAktifkan').attr('href', '{{url('admin/delete-slider/')}}/'+a+'/'+b);
+    $('#setYaAktifkan').attr('href', '{{url('admin/delete-galeri/')}}/'+a+'/'+b);
   });
 
   $("#tabelinfo").on("click", "a.edit", function(){
     var a = $(this).data('value');
     $.ajax({
-      url: "{{url('/')}}/admin/bind-slider/"+a,
+      url: "{{url('/')}}/admin/bind-galeri/"+a,
       dataType: 'json',
       success: function(data){
         var id = data.id;
         var judul = data.judul;
-        var keterangan_slider = data.keterangan_slider;
-        var flag_slider = data.flag_slider;
-        var url_slider = data.url_slider;
+        var keterangan_gambar = data.keterangan_gambar;
+        var flag_gambar = data.flag_gambar;
+        var url_gambar = data.url_gambar;
 
         $('#id').attr('value', id);
-        $('#gambarSlider').attr('src', "{{url('_thumbs/slider')}}/"+url_slider);
+        $('#gambarSlider').attr('src', "{{url('_thumbs/galeri')}}/"+url_gambar);
         $('#judulEdit').val(judul);
-        $('#keteranganSliderEdit').val(keterangan_slider);
-        if(flag_slider=="1") {
+        $('#keteranganGaleriEdit').val(keterangan_gambar);
+        if(flag_gambar=="1") {
           $('#flag_aktif').attr('selected', true);
         } else {
           $('#flag_nonaktif').attr('selected', true);
