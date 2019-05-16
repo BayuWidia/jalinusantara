@@ -4,34 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
+use Image;
+use Validator;
+use DB;
+use App\Models\MasterVideo;
+use App\Http\Requests;
+
 class VideoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('isAdmin');
+    }
+
+
     public function index()
     {
         //
+        $getVideo = DB::table('master_video')->paginate(15);
+        return view('backend.video.kelolavideo', compact('getVideo'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         //
