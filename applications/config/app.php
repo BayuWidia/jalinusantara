@@ -253,7 +253,6 @@ return [
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
-        'LogActivities' => App\Helpers\LogActivitiesHelper::class,
         'UtilHelper' => App\Helpers\UtilHelper::class,
 
     ],

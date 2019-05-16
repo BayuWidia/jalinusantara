@@ -21,8 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('url_foto');
             $table->integer('login_count')->nullable()->default(1);
-            // 0 = developer; 1 = superadmin; 2 = admin; 3 = user
-            $table->integer('level')->default(1);
+            $table->integer('id_role');
             //0:belum aktif, 1:sudah aktif
             $table->integer('activated')->default(1);
             $table->string('created_by');

@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Validator;
 use Auth;
 use Session;
+use Hash;
 
 use App\Models\User;
 
@@ -65,7 +66,7 @@ class LoginController extends Controller
         return redirect()->route('backend.login.index')->withErrors($validator)->withInput();
       }
 
-
+      // dd(Hash::make($request->password));
       if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'activated' => '1'])) {
         $user = Auth::User();
         $set = User::find(Auth::user()->id);
@@ -73,7 +74,7 @@ class LoginController extends Controller
         $set->login_count = $getCounter+1;
         $set->save();
 
-        session()->put('level', Auth::user()->level);
+        // session()->put('id_role', Auth::user()->id_role);
 
         return redirect()->route('backend.dashboard');
       } else {

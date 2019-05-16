@@ -21,7 +21,7 @@ class CreateEventsTable extends Migration
             $table->date('tanggal_akhir');
             $table->string('url_foto')->nullable();
             $table->string('tags')->nullable();
-            $table->string('isi_event');
+            $table->longText('isi_event');
             $table->string('maps');
             $table->string('fasilitator');
             $table->string('jumlah_peserta');
@@ -51,6 +51,6 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('events');
+        // Schema::dropIfExists('events');
     }
 }

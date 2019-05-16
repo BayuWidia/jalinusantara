@@ -20,7 +20,7 @@ class CreateInformasiTable extends Migration
             $table->date('tanggal_publish');
             $table->string('url_foto')->nullable();
             $table->string('tags')->nullable();
-            $table->string('isi_berita');
+            $table->longText('isi_informasi');
             //0:bukan headline, 1:headline.
             $table->integer('flag_headline')->default(0);
             //0:belum publish, 1:publish.
@@ -46,6 +46,6 @@ class CreateInformasiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('informasi');
+        // Schema::dropIfExists('informasi');
     }
 }

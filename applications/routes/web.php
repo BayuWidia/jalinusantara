@@ -24,16 +24,16 @@ Route::get('/admin', function () {return view('backend.login.login');})->name('b
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 //dashboard basic
-Route::get('dashboard', 'DashboardController@index')->name('backend.dashboard');
+Route::get('backend.dashboard', 'DashboardController@index')->name('backend.dashboard');
 
 //form basic
-Route::get('form', 'FormController@index')->name('backend.form.basic');
+Route::get('backend.form.basic', 'FormController@index')->name('backend.form.basic');
 
 //table basic
-Route::get('table', 'TableController@index')->name('backend.table.basic');
+Route::get('backend.table.basic', 'TableController@index')->name('backend.table.basic');
 
 //profile
-Route::get('profile', 'UserController@profile')->name('backend.profile');
+Route::get('backend.profile', 'UserController@profile')->name('backend.profile');
 
 // =================================== END BACK END ====================================================================
 

@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','fullname','email','password','url_foto','login_count','level','activated','created_by', 'updated_by',
+        'name','fullname','email','password','url_foto','login_count','id_role','activated','created_by', 'updated_by',
     ];
 
     /**
@@ -28,6 +28,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token'
     ];
+
+    public function roles()
+    {
+      return $this->belongsTo('App\Models\MasterRoles', 'id_role');
+    }
 
     // override function to disable remember_token column.
     public function setAttribute($key, $value)
