@@ -23,8 +23,20 @@ Route::get('/admin', function () {return view('backend.login.login');})->name('b
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
-//dashboard basic
-Route::get('backend.dashboard', 'DashboardController@index')->name('backend.dashboard');
+// Route::group(['middleware' => ['IsAdmin']], function () {
+
+    //dashboard basic
+    Route::get('backend.dashboard', 'DashboardController@index')->name('backend.dashboard');
+
+    //Menu Slider
+    Route::get('slider.index', 'SliderController@index')->name('slider.index');
+    Route::post('admin/store-slider', 'SliderController@store')->name('slider.store');
+    Route::get('admin/delete-slider/{id}/{status}', 'SliderController@destroy')->name('slider.destroy');
+    Route::post('admin/edit-slider', 'SliderController@update')->name('slider.update');
+    Route::get('admin/publish-slider/{id}', 'SliderController@show')->name('slider.show');
+    Route::get('admin/bind-slider/{id}', 'SliderController@edit')->name('slider.edit');
+// });
+
 
 //form basic
 Route::get('backend.form.basic', 'FormController@index')->name('backend.form.basic');
