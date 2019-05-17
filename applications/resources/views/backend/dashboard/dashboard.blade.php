@@ -1,7 +1,7 @@
 @extends('backend.master.layouts.master')
 
 @section('title')
-    <title>PT Ramayana Lestari Sentosa</title>
+    <title>Jalinusantara</title>
 @endsection
 
 

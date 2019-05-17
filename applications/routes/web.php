@@ -43,7 +43,7 @@ Route::get('admin/publish-galeri/{id}', 'GaleriController@show')->name('galeri.s
 Route::get('admin/bind-galeri/{id}', 'GaleriController@edit')->name('galeri.edit');
 
 //Menu Video
-Route::get('admin/kelola-video', 'VideoController@index')->name('video.index');
+Route::get('video.index', 'VideoController@index')->name('video.index');
 Route::post('admin/store-video', 'VideoController@store')->name('video.store');
 Route::get('admin/delete-video/{id}/{status}', 'VideoController@destroy')->name('video.destroy');
 Route::post('admin/edit-video', 'VideoController@update')->name('video.update');

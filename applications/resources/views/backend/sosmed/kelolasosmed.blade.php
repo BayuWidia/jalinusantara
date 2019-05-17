@@ -31,27 +31,84 @@
     </div>
 
     <div class="row clearfix">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+          <div class="card">
+              <div class="header bg-orange">
+                  <h2>
+                      Formulir Tambah Foto
+                  </h2>
+              </div>
+              <div class="body">
+                <form action="{{route('galeri.store')}}" method="post" enctype="multipart/form-data">
+                  {{csrf_field()}}
+                  <div class="row clearfix">
+                      <div class="col-sm-12">
+                          <div class="form-group">
+                              <div class="form-line">
+                                  <label>Gambar Foto</label>
+                                  @if ($errors->has('urlSlider'))
+                                    <small style="color:red">* {{$errors->first('urlGaleri')}}</small>
+                                  @endif
+                                  <input type="file" name="urlGaleri" class="form-control">
+                              </div>
+                              <div>
+                                <span class="text-muted"><i>* Max Size: 2MB.</i></span><br>
+                                <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 570 x 325 px.</i></span>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <div class="form-line">
+                                  <label>Judul Foto</label>
+                                  @if ($errors->has('judul'))
+                                    <small style="color:red">* {{$errors->first('judul')}}</small>
+                                  @endif
+                                  <input type="text" class="form-control" placeholder="Ketikkan Judul Foto..." name="judul" id="judul"/>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <div class="form-line">
+                                  <label>Keterangan Foto</label>
+                                  @if ($errors->has('keteranganGaleri'))
+                                    <small style="color:red">* {{$errors->first('keteranganGaleri')}}</small>
+                                  @endif
+                                  <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Foto..." name="keteranganGaleri" id="keteranganGaleri"></textarea>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <div class="form-line">
+                                  <label>Status</label>
+                                  <select class="form-control show-tick" name="activated" id="activated">
+                                      <option value="1">Active</option>
+                                      <option value="0">Non Active</option>
+                                  </select>
+                              </div>
+                          </div>
+                          <button type="submit" class="btn pull-right btn-primary">Simpan Data</button>
+                          <button type="reset" class="btn btn-danger">Reset Formulir</button>
+                      </div>
+                  </div>
+                </form>
+              </div>
+          </div>
+        </div>
+
+        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header bg-orange">
                     <h2>
-                        <a href="#" class="btn bg-blue"
-                           data-toggle="modal" data-target="#modalinsert"
-                           data-backdrop="static" data-keyboard="false"><i class="material-icons">playlist_add</i></a>
+                        List Data Foto
                     </h2>
                 </div>
                 <div class="body">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="tabelinfo">
+                        <table class="table table-bordered table-striped table-hover" id="tabelinfo">
                             <thead>
                                 <tr>
-                                    <th style="text-align:center">No</th>
-                                    <th style="text-align:center">Judul</th>
-                                    <th style="text-align:center">Keterangan</th>
-                                    <th style="text-align:center">Foto</th>
-                                    <th style="text-align:center">Status</th>
-                                    <th style="text-align:center">Status Publish</th>
-                                    <th style="text-align:center">Action</th>
+                                    <th>No</th>
+                                    <th>Judul</th>
+                                    <th>Foto</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -60,7 +117,6 @@
                                 <tr>
                                   <td>{{$i++}}</td>
                                   <td>{{$key->judul}}</td>
-                                  <td>{{$key->keterangan_gambar}}</td>
                                   <td>
                                     @if($key->url_gambar!="")
                                       <img src="{{url('_thumbs/Galeri')}}/{{$key->url_gambar}}">
@@ -68,7 +124,7 @@
                                       <img src="{{url('images/')}}/no_image.jpg">
                                     @endif
                                   </td>
-                                  <td style="text-align:center">
+                                  <td>
                                     @if($key->activated=="1")
                                       <span class="label label-success">
                                         Active
@@ -79,31 +135,17 @@
                                       </span>
                                     @endif
                                   </td>
-                                  <td style="text-align:center">
+                                  <td>
+                                    <a href="#" class="btn btn-warning btn-xs edit" data-toggle="modal" data-target="#modaledit" data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false">Update</a>
                                     @if($key->flag_gambar=="1")
-                                      <a href="#" class="btn btn-warning btn-circle waves-effect waves-circle waves-float flagpublish"
-                                      data-toggle="modal" data-target="#modalflagedit"
-                                      data-value="{{$key->id}}" data-backdrop="static"
-                                      data-keyboard="false"><i class="material-icons">favorite</i></a>
+                                        <a href="#" class="btn btn-success btn-xs flagpublish" data-toggle="modal" data-target="#modalflagedit" data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false">Publish</a>
                                     @else
-                                      <a href="#" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float flagpublish"
-                                      data-toggle="modal" data-target="#modalflagedit" data-value="{{$key->id}}"
-                                      data-backdrop="static" data-keyboard="false"><i class="material-icons">favorite_border</i></a>
+                                        <a href="#" class="btn bg-indigo btn-xs flagpublish" data-toggle="modal" data-target="#modalflagedit" data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false">Un Publish</a>
                                     @endif
-                                  </td>
-                                  <td style="text-align:center">
-                                    <a href="#" class="btn btn-success btn-circle waves-effect waves-circle waves-float edit"
-                                       data-toggle="modal" data-target="#modaledit" data-value="{{$key->id}}"
-                                       data-backdrop="static" data-keyboard="false"><i class="material-icons">open_in_new</i></a>
                                     @if($key->activated=="1")
-                                      <a href="#" class="btn btn-danger btn-circle waves-effect waves-circle waves-float hapus"
-                                      data-toggle="modal" data-target="#modaldelete"
-                                      data-value="{{$key->id}}" data-backdrop="static"
-                                      data-keyboard="false"><i class="material-icons">lock_outline</i></a>
+                                      <a href="#" class="btn btn-danger btn-xs hapus" data-toggle="modal" data-target="#modaldelete" data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false">Non Aktifkan?</a>
                                     @else
-                                      <a href="#" class="btn btn-danger btn-circle waves-effect waves-circle waves-float aktifkan"
-                                      data-toggle="modal" data-target="#modalAktifkan"
-                                      data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false"><i class="material-icons">lock_open</i></a>
+                                      <a href="#" class="btn btn-danger btn-xs aktifkan" data-toggle="modal" data-target="#modalAktifkan" data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false">Aktifkan?</a>
                                     @endif
 
                                   </td>
@@ -117,68 +159,6 @@
           </div>
     </div>
     <!-- #END# Input -->
-
-    <!-- Modal Insert-->
-    <div class="modal fade" id="modalinsert" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content bounceInRight">
-                  <div class="modal-header">
-                      <h4 class="modal-title">Tambah Konten Foto</h4>
-                  </div>
-                  <div class="modal-body">
-                      <form action="{{route('galeri.store')}}" method="post" enctype="multipart/form-data">
-                        {{csrf_field()}}
-                        <div class="row clearfix">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <label>Gambar Foto</label>
-                                        @if ($errors->has('urlSlider'))
-                                          <small style="color:red">* {{$errors->first('urlGaleri')}}</small>
-                                        @endif
-                                        <input type="file" name="urlGaleri" class="form-control">
-                                    </div>
-                                    <div>
-                                      <span class="text-muted"><i>* Max Size: 2MB.</i></span><br>
-                                      <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 457 x 250 px.</i></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <label>Judul Foto</label>
-                                        @if ($errors->has('judul'))
-                                          <small style="color:red">* {{$errors->first('judul')}}</small>
-                                        @endif
-                                        <input type="text" class="form-control" placeholder="Ketikkan Judul Foto..." name="judul" id="judul"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <label>Keterangan Foto</label>
-                                        @if ($errors->has('keteranganGaleri'))
-                                          <small style="color:red">* {{$errors->first('keteranganGaleri')}}</small>
-                                        @endif
-                                        <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Foto..." name="keteranganGaleri" id="keteranganGaleri"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <label>Status</label>
-                                        <select class="form-control show-tick" name="activated" id="activated">
-                                            <option value="1">Active</option>
-                                            <option value="0">Non Active</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn pull-right btn-primary">Simpan Data</button>
-                                <button type="reset" class="btn btn-danger" data-dismiss="modal">Reset Formulir</button>
-                            </div>
-                        </div>
-                      </form>
-                  </div>
-              </div>
-        </div>
-    </div>
 
     <!-- Modal Update-->
     <div class="modal fade" id="modaledit" tabindex="-1" role="dialog">
@@ -207,7 +187,7 @@
                                     <div>
                                       <span style="color:red;">* Biarkan kosong jika tidak ingin diganti.</span><br>
                                       <span class="text-muted"><i>* Max Size: 2MB.</i></span><br>
-                                      <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 457 x 250 px.</i></span>
+                                      <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 1144 x 550 px.</i></span>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -252,7 +232,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content bounceInRight">
                   <div class="modal-header">
-                      <h4 class="modal-title">Publish Data Foto</h4>
+                      <h4 class="modal-title">Edit Status Foto</h4>
                   </div>
                   <div class="modal-body">
                         <p>Apakah anda yakin untuk mengubah status foto ini?</p>

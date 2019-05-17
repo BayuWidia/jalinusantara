@@ -39,6 +39,7 @@
 <!-- Custom Js -->
 <script src="{{asset('theme/js/admin.js')}}"></script>
 <script src="{{asset('theme/js/pages/tables/jquery-datatable.js')}}"></script>
+<script src="{{asset('theme/js/pages/ui/tooltips-popovers.js')}}"></script>
 
 <!-- Demo Js -->
 <script src="{{asset('theme/js/demo.js')}}"></script>

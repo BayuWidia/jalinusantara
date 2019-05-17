@@ -8,7 +8,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="block-header">
-        <h2>FORM KELOLA FOTO</h2>
+        <h2>FORM KELOLA VIDEO</h2>
     </div>
     <div class="row clearfix">
         <div class="col-md-12">
@@ -46,27 +46,22 @@
                             <thead>
                                 <tr>
                                     <th style="text-align:center">No</th>
-                                    <th style="text-align:center">Judul</th>
-                                    <th style="text-align:center">Keterangan</th>
-                                    <th style="text-align:center">Foto</th>
+                                    <th style="text-align:center">Judul Video</th>
+                                    <th style="text-align:center">Url Video</th>
                                     <th style="text-align:center">Status</th>
+                                    <th style="text-align:center">Video Utama</th>
                                     <th style="text-align:center">Status Publish</th>
-                                    <th style="text-align:center">Action</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                               @php $i=1; @endphp
-                              @foreach($getGaleri as $key)
+                              @foreach($getVideo as $key)
                                 <tr>
                                   <td>{{$i++}}</td>
                                   <td>{{$key->judul}}</td>
-                                  <td>{{$key->keterangan_gambar}}</td>
                                   <td>
-                                    @if($key->url_gambar!="")
-                                      <img src="{{url('_thumbs/Galeri')}}/{{$key->url_gambar}}">
-                                    @else
-                                      <img src="{{url('images/')}}/no_image.jpg">
-                                    @endif
+                                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<?php echo substr($key->url_video,-11,23)?>" allowfullscreen></iframe>
                                   </td>
                                   <td style="text-align:center">
                                     @if($key->activated=="1")
@@ -79,19 +74,31 @@
                                       </span>
                                     @endif
                                   </td>
-                                  <td style="text-align:center">
-                                    @if($key->flag_gambar=="1")
-                                      <a href="#" class="btn btn-warning btn-circle waves-effect waves-circle waves-float flagpublish"
-                                      data-toggle="modal" data-target="#modalflagedit"
+                                  <td>
+                                    @if($key->flag_important_video=="1")
+                                      <a href="#" class="btn bg-deep-purple btn-circle waves-effect waves-circle waves-float flagutama"
+                                      data-toggle="modal" data-target="#modalflagutama"
                                       data-value="{{$key->id}}" data-backdrop="static"
                                       data-keyboard="false"><i class="material-icons">favorite</i></a>
                                     @else
-                                      <a href="#" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float flagpublish"
-                                      data-toggle="modal" data-target="#modalflagedit" data-value="{{$key->id}}"
+                                      <a href="#" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float flagutama"
+                                      data-toggle="modal" data-target="#modalflagutama" data-value="{{$key->id}}"
                                       data-backdrop="static" data-keyboard="false"><i class="material-icons">favorite_border</i></a>
                                     @endif
                                   </td>
-                                  <td style="text-align:center">
+                                  <td>
+                                    @if($key->flag_video=="1")
+                                      <a href="#" class="btn btn-warning btn-circle waves-effect waves-circle waves-float flagpublish"
+                                      data-toggle="modal" data-target="#modalflagedit"
+                                      data-value="{{$key->id}}" data-backdrop="static"
+                                      data-keyboard="false"><i class="material-icons">star</i></a>
+                                    @else
+                                      <a href="#" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float flagpublish"
+                                      data-toggle="modal" data-target="#modalflagedit" data-value="{{$key->id}}"
+                                      data-backdrop="static" data-keyboard="false"><i class="material-icons">star_border</i></a>
+                                    @endif
+                                  </td>
+                                  <td>
                                     <a href="#" class="btn btn-success btn-circle waves-effect waves-circle waves-float edit"
                                        data-toggle="modal" data-target="#modaledit" data-value="{{$key->id}}"
                                        data-backdrop="static" data-keyboard="false"><i class="material-icons">open_in_new</i></a>
@@ -123,42 +130,37 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content bounceInRight">
                   <div class="modal-header">
-                      <h4 class="modal-title">Tambah Konten Foto</h4>
+                      <h4 class="modal-title">Tambah Konten Video</h4>
                   </div>
                   <div class="modal-body">
-                      <form action="{{route('galeri.store')}}" method="post" enctype="multipart/form-data">
+                      <form action="{{route('video.store')}}" method="post" enctype="multipart/form-data">
                         {{csrf_field()}}
                         <div class="row clearfix">
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <label>Gambar Foto</label>
-                                        @if ($errors->has('urlSlider'))
-                                          <small style="color:red">* {{$errors->first('urlGaleri')}}</small>
-                                        @endif
-                                        <input type="file" name="urlGaleri" class="form-control">
-                                    </div>
-                                    <div>
-                                      <span class="text-muted"><i>* Max Size: 2MB.</i></span><br>
-                                      <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 457 x 250 px.</i></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <label>Judul Foto</label>
+                                        <label>Judul Video</label>
                                         @if ($errors->has('judul'))
                                           <small style="color:red">* {{$errors->first('judul')}}</small>
                                         @endif
-                                        <input type="text" class="form-control" placeholder="Ketikkan Judul Foto..." name="judul" id="judul"/>
+                                        <input type="text" class="form-control" placeholder="Ketikkan Judul Video..." name="judul" id="judul"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <label>Keterangan Foto</label>
-                                        @if ($errors->has('keteranganGaleri'))
-                                          <small style="color:red">* {{$errors->first('keteranganGaleri')}}</small>
+                                        <label>Url Video</label>
+                                        @if ($errors->has('urlVideo'))
+                                          <small style="color:red">* {{$errors->first('urlVideo')}}</small>
                                         @endif
-                                        <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Foto..." name="keteranganGaleri" id="keteranganGaleri"></textarea>
+                                        <input type="text" class="form-control" placeholder="Ketikkan Url Video..." name="urlVideo" id="urlVideo"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <label>Video Utama</label>
+                                        <br>
+                                        <input type="checkbox" id="md_checkbox_21" name="flagImportantVideo" class="filled-in chk-col-red" value="1" />
+                                        <label for="md_checkbox_21">* Ya, tampilkan video ini pada halaman utama.</label>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -247,15 +249,33 @@
         </div>
     </div>
 
+    <!-- Modal Utama-->
+    <div class="modal fade" id="modalflagutama" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bounceInRight">
+                  <div class="modal-header">
+                      <h4 class="modal-title">Video Utama Data Slider</h4>
+                  </div>
+                  <div class="modal-body">
+                        <p>Apakah anda yakin untuk mengubah status video ini?</p>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-white" data-dismiss="modal"  onclick="resetPage()">Tidak</button>
+                      <a href="" class="btn btn-primary" id="setFlagUtama">Ya, saya yakin</a>
+                  </div>
+              </div>
+        </div>
+    </div>
+
     <!-- Modal Publish-->
     <div class="modal fade" id="modalflagedit" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content bounceInRight">
                   <div class="modal-header">
-                      <h4 class="modal-title">Publish Data Foto</h4>
+                      <h4 class="modal-title">Publish Data Video</h4>
                   </div>
                   <div class="modal-body">
-                        <p>Apakah anda yakin untuk mengubah status foto ini?</p>
+                        <p>Apakah anda yakin untuk mengubah status video ini?</p>
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-white" data-dismiss="modal"  onclick="resetPage()">Tidak</button>
@@ -270,10 +290,10 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content bounceInRight">
                   <div class="modal-header">
-                      <h4 class="modal-title">Non Aktifkan Data Foto</h4>
+                      <h4 class="modal-title">Non Aktifkan Data Video</h4>
                   </div>
                   <div class="modal-body">
-                      <p>Apakah anda yakin untuk mengnonaktifkan data foto ini?</p>
+                      <p>Apakah anda yakin untuk mengnonaktifkan data video ini?</p>
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-white" data-dismiss="modal"  onclick="resetPage()">Tidak</button>
@@ -288,10 +308,10 @@
       <div class="modal-dialog">
         <div class="modal-content bounceInRight">
               <div class="modal-header">
-                  <h4 class="modal-title">Aktifkan Data Foto</h4>
+                  <h4 class="modal-title">Aktifkan Data Video</h4>
               </div>
               <div class="modal-body">
-                  <p>Apakah anda yakin untuk mengaktifkan data foto ini?</p>
+                  <p>Apakah anda yakin untuk mengaktifkan data video ini?</p>
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-white" data-dismiss="modal"  onclick="resetPage()">Tidak</button>
@@ -308,21 +328,26 @@
 <script src="{{asset('theme/js/pages/forms/basic-form-elements.js')}}"></script>
 
 <script>
+  $("#tabelinfo").on("click", "a.flagutama", function(){
+    var a = $(this).data('value');
+    $('#setFlagUtama').attr('href', '{{url('admin/edit-important-video/')}}/'+a);
+  });
+
   $("#tabelinfo").on("click", "a.flagpublish", function(){
     var a = $(this).data('value');
-    $('#setFlagPublish').attr('href', '{{url('admin/publish-galeri/')}}/'+a);
+    $('#setFlagPublish').attr('href', '{{url('admin/publish-video/')}}/'+a);
   });
 
   $("#tabelinfo").on("click", "a.hapus", function(){
     var a = $(this).data('value');
     var b = "hapus";
-    $('#setYaHapus').attr('href', '{{url('admin/delete-galeri/')}}/'+a+'/'+b);
+    $('#setYaHapus').attr('href', '{{url('admin/delete-video/')}}/'+a+'/'+b);
   });
 
   $("#tabelinfo").on("click", "a.aktifkan", function(){
     var a = $(this).data('value');
     var b = "aktifkan";
-    $('#setYaAktifkan').attr('href', '{{url('admin/delete-galeri/')}}/'+a+'/'+b);
+    $('#setYaAktifkan').attr('href', '{{url('admin/delete-video/')}}/'+a+'/'+b);
   });
 
   $("#tabelinfo").on("click", "a.edit", function(){

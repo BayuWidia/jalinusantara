@@ -54,7 +54,7 @@ class GaleriController extends Controller
           $file = $request->file('urlGaleri');
           if($file!="") {
               $photoName = time(). '.' . $file->getClientOriginalExtension();
-              Image::make($file)->fit(570,325)->save('images/'. $photoName);
+              Image::make($file)->fit(457,250)->save('images/'. $photoName);
               Image::make($file)->fit(200,122)->save('_thumbs/Galeri/'. $photoName);
 
               $set = new MasterGaleri;
@@ -99,7 +99,7 @@ class GaleriController extends Controller
         $file = $request->file('urlGaleri');
         if($file!="") {
           $photoName = time(). '.' . $file->getClientOriginalExtension();
-          Image::make($file)->fit(570,325)->save('images/'. $photoName);
+          Image::make($file)->fit(457,250)->save('images/'. $photoName);
           Image::make($file)->fit(200,122)->save('_thumbs/galeri/'. $photoName);
 
           $set = MasterGaleri::find($request->id);

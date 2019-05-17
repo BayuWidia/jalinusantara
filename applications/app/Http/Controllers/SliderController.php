@@ -55,7 +55,7 @@ class SliderController extends Controller
           $file = $request->file('urlSlider');
           if($file!="") {
               $photoName = time(). '.' . $file->getClientOriginalExtension();
-              Image::make($file)->fit(1144,550)->save('images/'. $photoName);
+              Image::make($file)->fit(1920,900)->save('images/'. $photoName);
               Image::make($file)->fit(200,122)->save('_thumbs/Slider/'. $photoName);
 
               $set = new MasterSlider;
@@ -101,7 +101,7 @@ class SliderController extends Controller
         $file = $request->file('urlSlider');
         if($file!="") {
           $photoName = time(). '.' . $file->getClientOriginalExtension();
-          Image::make($file)->fit(1144,550)->save('images/'. $photoName);
+          Image::make($file)->fit(1920,900)->save('images/'. $photoName);
           Image::make($file)->fit(200,122)->save('_thumbs/Slider/'. $photoName);
 
           $set = MasterSlider::find($request->id);

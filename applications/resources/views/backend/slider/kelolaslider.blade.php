@@ -1,7 +1,7 @@
 @extends('backend.master.layouts.master')
 
 @section('title')
-    <title>PT Ramayana Lestari Sentosa</title>
+    <title>Jalinusantara</title>
 @endsection
 
 
@@ -31,132 +31,71 @@
     </div>
 
     <div class="row clearfix">
-      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-          <div class="card">
-              <div class="header bg-orange">
-                  <h2>
-                      Formulir Tambah Slider
-                  </h2>
-              </div>
-              <div class="body">
-                <form action="{{route('slider.store')}}" method="post" enctype="multipart/form-data">
-                  {{csrf_field()}}
-                  <div class="row clearfix">
-                      <div class="col-sm-12">
-                          <div class="form-group">
-                              <div class="form-line">
-                                  <label>Gambar Slider</label>
-                                  @if ($errors->has('urlSlider'))
-                                    <small style="color:red">* {{$errors->first('urlSlider')}}</small>
-                                  @endif
-                                  <input type="file" name="urlSlider" class="form-control">
-                              </div>
-                              <div>
-                                <span class="text-muted"><i>* Max Size: 2MB.</i></span><br>
-                                <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 1144 x 550 px.</i></span>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <div class="form-line">
-                                  <label>Judul Slider</label>
-                                  @if ($errors->has('judul'))
-                                    <small style="color:red">* {{$errors->first('judul')}}</small>
-                                  @endif
-                                  <input type="text" class="form-control" placeholder="Ketikkan Judul Slider..." name="judul" id="judul"/>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <div class="form-line">
-                                  <label>Keterangan Slider</label>
-                                  @if ($errors->has('keteranganSlider'))
-                                    <small style="color:red">* {{$errors->first('keteranganSlider')}}</small>
-                                  @endif
-                                  <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Slider..." name="keteranganSlider" id="keteranganSlider"></textarea>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <div class="form-line">
-                                  <label>Status</label>
-                                  <select class="form-control show-tick" name="activated" id="activated">
-                                      <option value="1">Active</option>
-                                      <option value="0">Non Active</option>
-                                  </select>
-                              </div>
-                          </div>
-                          <button type="submit" class="btn pull-right btn-primary">Simpan Data</button>
-                          <button type="reset" class="btn btn-danger">Reset Formulir</button>
-                      </div>
-                  </div>
-                </form>
-              </div>
-          </div>
-        </div>
-
-        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
-                <div class="header bg-orange">
+                <div class="header">
                     <h2>
-                        List Data Slider
+                        Slider yang ditampilkan
                     </h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#" class="edit" data-toggle="modal" data-target="#modaledit" data-value="{{$getSlider[0]->id}}" data-backdrop="static" data-keyboard="false">Update</a></li>
+                                @if($getSlider[0]->flag_slider=="1")
+                                  <li><a href="#" class="flagpublish" data-toggle="modal" data-target="#modalflagedit" data-value="{{$getSlider[0]->id}}" data-backdrop="static" data-keyboard="false">Un Publish ?</a></li>
+                                @else
+                                  <li><a href="#" class="flagpublish" data-toggle="modal" data-target="#modalflagedit" data-value="{{$getSlider[0]->id}}" data-backdrop="static" data-keyboard="false">Publish ?</a></li>
+                                @endif
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
                 <div class="body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-hover" id="tabelinfo">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Judul</th>
-                                    <th>Slider</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                              @php $i=1; @endphp
-                              @foreach($getSlider as $key)
-                                <tr>
-                                  <td>{{$i++}}</td>
-                                  <td>{{$key->judul}}</td>
-                                  <td>
-                                    @if($key->url_slider!="")
-                                      <img src="{{url('_thumbs/Slider')}}/{{$key->url_slider}}">
-                                    @else
-                                      <img src="{{url('images/')}}/no_image.jpg">
-                                    @endif
-                                  </td>
-                                  <td>
-                                    @if($key->activated=="1")
-                                      <span class="label label-success">
-                                        Active
-                                      </span>
-                                    @else
-                                      <span class="label label-danger">
-                                        Non Active
-                                      </span>
-                                    @endif
-                                  </td>
-                                  <td>
-                                    <a href="#" class="btn btn-warning btn-xs edit" data-toggle="modal" data-target="#modaledit" data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false">Update</a>
-                                    @if($key->flag_slider=="1")
-                                        <a href="#" class="btn btn-success btn-xs flagpublish" data-toggle="modal" data-target="#modalflagedit" data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false">Publish</a>
-                                    @else
-                                        <a href="#" class="btn bg-indigo btn-xs flagpublish" data-toggle="modal" data-target="#modalflagedit" data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false">Un Publish</a>
-                                    @endif
-                                    @if($key->activated=="1")
-                                      <a href="#" class="btn btn-danger btn-xs hapus" data-toggle="modal" data-target="#modaldelete" data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false">Non Aktifkan?</a>
-                                    @else
-                                      <a href="#" class="btn btn-danger btn-xs aktifkan" data-toggle="modal" data-target="#modalAktifkan" data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false">Aktifkan?</a>
-                                    @endif
-
-                                  </td>
-                                </tr>
-                              @endforeach
-                            </tbody>
-                        </table>
+                    @if($getSlider[0]->url_slider!="")
+                      <img src="{{url('images/')}}/{{$getSlider[0]->url_slider}}" class="js-animating-object img-responsive">
+                    @else
+                      <img src="{{url('images/')}}/no_image.jpg" class="js-animating-object img-responsive">
+                    @endif
+                    <div class="demo-image-copyright">
+                        <b>
+                          @if ($getSlider[0]->flag_slider == '1')
+                            <span class="label bg-deep-orange">Image Publish</span>
+                          @else
+                            <span class="label bg-deep-purple">Image Un Publish</span>
+                          @endif
+                        </b>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>Judul Slider</label>
+                            <input type="text" class="form-control" value="{{$getSlider[0]->judul}}" disabled/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>Keterangan Slider</label>
+                            <textarea rows="4" class="form-control no-resize" disabled>{{$getSlider[0]->keterangan_slider}}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-line">
+                            <label>Status</label>
+                            <select class="form-control show-tick" disabled>
+                                @if ($getSlider[0]->activated == '1')
+                                  <option value="1" selected>Active</option>
+                                @else
+                                  <option value="0" selected>Non Active</option>
+                                @endif
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
-          </div>
+        </div>
     </div>
     <!-- #END# Input -->
 
@@ -187,7 +126,7 @@
                                     <div>
                                       <span style="color:red;">* Biarkan kosong jika tidak ingin diganti.</span><br>
                                       <span class="text-muted"><i>* Max Size: 2MB.</i></span><br>
-                                      <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 1144 x 550 px.</i></span>
+                                      <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 1920 x 900 px.</i></span>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -232,7 +171,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content bounceInRight">
                   <div class="modal-header">
-                      <h4 class="modal-title">Edit Status Slider</h4>
+                      <h4 class="modal-title">Publish Data Slider</h4>
                   </div>
                   <div class="modal-body">
                         <p>Apakah anda yakin untuk mengubah status slider ini?</p>
@@ -288,9 +227,13 @@
 <script src="{{asset('theme/js/pages/forms/basic-form-elements.js')}}"></script>
 
 <script>
-  $("#tabelinfo").on("click", "a.flagpublish", function(){
-    var a = $(this).data('value');
-    $('#setFlagPublish').attr('href', '{{url('admin/publish-slider/')}}/'+a);
+  @if ($errors->has('judul') || $errors->has('keteranganSlider'))
+  $('#modaledit').modal('show');
+  @endif
+
+  $("a.flagpublish").click(function(e){
+      var a = $(this).data('value');
+      $('#setFlagPublish').attr('href', '{{url('admin/publish-slider/')}}/'+a);
   });
 
   $("#tabelinfo").on("click", "a.hapus", function(){
@@ -299,13 +242,13 @@
     $('#setYaHapus').attr('href', '{{url('admin/delete-slider/')}}/'+a+'/'+b);
   });
 
-  $("#tabelinfo").on("click", "a.aktifkan", function(){
+  $("a.aktifkan").click(function(e){
     var a = $(this).data('value');
     var b = "aktifkan";
     $('#setYaAktifkan').attr('href', '{{url('admin/delete-slider/')}}/'+a+'/'+b);
   });
 
-  $("#tabelinfo").on("click", "a.edit", function(){
+  $("a.edit").click(function(e){
     var a = $(this).data('value');
     $.ajax({
       url: "{{url('/')}}/admin/bind-slider/"+a,
