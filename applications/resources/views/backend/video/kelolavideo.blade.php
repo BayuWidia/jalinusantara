@@ -137,7 +137,7 @@
                         {{csrf_field()}}
                         <div class="row clearfix">
                             <div class="col-sm-12">
-                                <div class="form-group">
+                                <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Judul Video</label>
                                         @if ($errors->has('judul'))
@@ -146,7 +146,7 @@
                                         <input type="text" class="form-control" placeholder="Ketikkan Judul Video..." name="judul" id="judul"/>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Url Video</label>
                                         @if ($errors->has('urlVideo'))
@@ -155,7 +155,7 @@
                                         <input type="text" class="form-control" placeholder="Ketikkan Url Video..." name="urlVideo" id="urlVideo"/>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Video Utama</label>
                                         <br>
@@ -163,7 +163,7 @@
                                         <label for="md_checkbox_21">* Ya, tampilkan video ini pada halaman utama.</label>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Status</label>
                                         <select class="form-control show-tick" name="activated" id="activated">
@@ -194,7 +194,7 @@
                         {{csrf_field()}}
                         <div class="row clearfix">
                             <div class="col-sm-12">
-                                <div class="form-group">
+                                <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Gambar Foto</label>
                                         @if ($errors->has('urlGaleri'))
@@ -212,7 +212,7 @@
                                       <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 457 x 250 px.</i></span>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Judul Foto</label>
                                         @if ($errors->has('judul'))
@@ -221,7 +221,7 @@
                                         <input type="text" class="form-control" placeholder="Ketikkan Judul Foto..." name="judul" id="judulEdit"/>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Keterangan Foto</label>
                                         @if ($errors->has('keteranganGaleri'))
@@ -230,7 +230,7 @@
                                         <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Foto..." name="keteranganGaleri" id="keteranganGaleriEdit"></textarea>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Status</label>
                                         <select class="form-control show-tick" name="activated" id="activated">

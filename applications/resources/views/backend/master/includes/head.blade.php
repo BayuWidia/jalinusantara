@@ -40,3 +40,6 @@
 
 <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
 <link href="{{asset('theme/css/themes/all-themes.css')}}" rel="stylesheet" />
+
+<!-- custome -->
+<link href="{{asset('theme/css/custome.css')}}" rel="stylesheet" />

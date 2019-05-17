@@ -22,7 +22,7 @@ class VideoController extends Controller
     public function index()
     {
         //
-        $getVideo = DB::table('master_video')->paginate(15);
+        $getVideo = MasterVideo::all();
         return view('backend.video.kelolavideo', compact('getVideo'));
     }
 

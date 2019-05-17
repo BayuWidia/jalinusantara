@@ -4,16 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
+use Image;
+use Validator;
+use DB;
+use App\Models\MasterMedsos;
+use App\Http\Requests;
+
+
 class SponsorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
+        $getMedsos = MasterMedsos::all();
+        return view('backend.galeri.kelolamedsos', compact('getMedsos'));
     }
 
     /**

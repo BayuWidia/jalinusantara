@@ -51,6 +51,14 @@ Route::get('admin/publish-video/{id}', 'VideoController@show')->name('video.show
 Route::get('admin/bind-video/{id}', 'VideoController@edit')->name('video.edit');
 Route::get('admin/edit-important-video/{id}', 'VideoController@editimportantvideo')->name('importantvideo.publish');
 
+//Menu Slider
+Route::get('sponsor.index', 'SponsorController@index')->name('sponsor.index');
+Route::post('admin/store-sponsor', 'SponsorController@store')->name('sponsor.store');
+Route::get('admin/delete-sponsor/{id}/{status}', 'SponsorController@destroy')->name('sponsor.destroy');
+Route::post('admin/edit-slider', 'SponsorController@update')->name('sponsor.update');
+Route::get('admin/publish-sponsor/{id}', 'SponsorController@show')->name('sponsor.show');
+Route::get('admin/bind-sponsor/{id}', 'SponsorController@edit')->name('sponsor.edit');
+
 
 //profile
 Route::get('backend.profile', 'UserController@profile')->name('backend.profile');

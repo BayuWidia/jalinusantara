@@ -20,7 +20,7 @@ class GaleriController extends Controller
 
     public function index()
     {
-          $getGaleri = DB::table('master_galeri')->paginate(15);
+          $getGaleri = MasterGaleri::all();
           return view('backend.galeri.kelolagaleri', compact('getGaleri'));
     }
 

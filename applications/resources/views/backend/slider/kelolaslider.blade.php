@@ -111,7 +111,7 @@
                         {{csrf_field()}}
                         <div class="row clearfix">
                             <div class="col-sm-12">
-                                <div class="form-group">
+                                <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Gambar Slider</label>
                                         @if ($errors->has('urlSlider'))
@@ -129,7 +129,7 @@
                                       <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 1920 x 900 px.</i></span>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Judul Slider</label>
                                         @if ($errors->has('judul'))
@@ -138,7 +138,7 @@
                                         <input type="text" class="form-control" placeholder="Ketikkan Judul Slider..." name="judul" id="judulEdit"/>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Keterangan Slider</label>
                                         @if ($errors->has('keteranganSlider'))
@@ -147,7 +147,7 @@
                                         <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Slider..." name="keteranganSlider" id="keteranganSliderEdit"></textarea>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Status</label>
                                         <select class="form-control show-tick" name="activated" id="activated">
