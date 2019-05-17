@@ -121,7 +121,7 @@
                                           <img src="" id="gambarSlider">
                                         </div>
                                         <input type="file" name="urlSlider" class="form-control" id="urlSliderEdit">
-                                        <input type="hidden" name="id" id="id">
+                                        <input type="hidden" name="id" id="id" value="{{ old('id') }}">
                                     </div>
                                     <div>
                                       <span style="color:red;">* Biarkan kosong jika tidak ingin diganti.</span><br>
@@ -135,7 +135,7 @@
                                         @if ($errors->has('judul'))
                                           <small style="color:red">* {{$errors->first('judul')}}</small>
                                         @endif
-                                        <input type="text" class="form-control" placeholder="Ketikkan Judul Slider..." name="judul" id="judulEdit"/>
+                                        <input type="text" value="{{ old('judul') }}" class="form-control" placeholder="Ketikkan Judul Slider..." name="judul" id="judulEdit"/>
                                     </div>
                                 </div>
                                 <div class="form-group mandatory">
@@ -144,15 +144,15 @@
                                         @if ($errors->has('keteranganSlider'))
                                           <small style="color:red">* {{$errors->first('keteranganSlider')}}</small>
                                         @endif
-                                        <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Slider..." name="keteranganSlider" id="keteranganSliderEdit"></textarea>
+                                        <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Slider..." name="keteranganSlider" id="keteranganSliderEdit">{{ old('keteranganSlider') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Status</label>
                                         <select class="form-control show-tick" name="activated" id="activated">
-                                            <option value="1" id="flag_aktif">Active</option>
-                                            <option value="0" id="flag_nonaktif">Non Active</option>
+                                            <option value="1" id="flag_aktif" {{old('activated')=="1"? 'selected':''}}>Active</option>
+                                            <option value="0" id="flag_nonaktif" {{old('activated')=="0"? 'selected':''}}>Non Active</option>
                                         </select>
                                     </div>
                                 </div>
@@ -227,7 +227,7 @@
 <script src="{{asset('theme/js/pages/forms/basic-form-elements.js')}}"></script>
 
 <script>
-  @if ($errors->has('judul') || $errors->has('keteranganSlider'))
+  @if ($errors->has('judul') || $errors->has('keteranganSlider') || $errors->has('activated')))
   $('#modaledit').modal('show');
   @endif
 
@@ -257,14 +257,14 @@
         var id = data.id;
         var judul = data.judul;
         var keterangan_slider = data.keterangan_slider;
-        var flag_slider = data.flag_slider;
+        var activated = data.activated;
         var url_slider = data.url_slider;
 
         $('#id').attr('value', id);
         $('#gambarSlider').attr('src', "{{url('_thumbs/slider')}}/"+url_slider);
         $('#judulEdit').val(judul);
         $('#keteranganSliderEdit').val(keterangan_slider);
-        if(flag_slider=="1") {
+        if(activated=="1") {
           $('#flag_aktif').attr('selected', true);
         } else {
           $('#flag_nonaktif').attr('selected', true);

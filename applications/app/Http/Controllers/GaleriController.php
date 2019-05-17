@@ -45,11 +45,9 @@ class GaleriController extends Controller
                   'urlGaleri' => 'required|image|mimes:jpeg,jpg,png|max:20000',
               ], $messages);
 
-              if ($validator->fails()) {
-                  return redirect()->route('galeri.index')
-                              ->withErrors($validator)
-                              ->withInput();
-              }
+          if ($validator->fails()) {
+              return redirect()->route('galeri.index')->withErrors($validator)->withInput();
+          }
 
           $file = $request->file('urlGaleri');
           if($file!="") {
@@ -64,7 +62,6 @@ class GaleriController extends Controller
               $set->flag_gambar = 1;
               $set->activated = $request->activated;
               $set->created_by = Auth::user()->id;
-              $set->updated_by = Auth::user()->id;
               $set->save();
           } else {
             return redirect()->route('galeri.index')->with('messagefail', 'Gambar galeri harus di upload.');
@@ -96,27 +93,38 @@ class GaleriController extends Controller
     public function update(Request $request)
     {
         // dd($request);
+        $messages = [
+          'id.required' => 'Tidak boleh kosong.',
+          'judulEdit.required' => 'Tidak boleh kosong.',
+          'keteranganGaleriEdit.required' => 'Tidak boleh kosong.',
+          'activatedEdit.required' => 'Tidak boleh kosong.',
+        ];
+
+        $validator = Validator::make($request->all(), [
+                'id' => 'required',
+                'judulEdit' => 'required',
+                'keteranganGaleriEdit' => 'required',
+                'activatedEdit' => 'required',
+            ], $messages);
+
+        if ($validator->fails()) {
+          // dd($validator);
+            return redirect()->route('galeri.index')->withErrors($validator)->withInput();
+        }
+
+        $set = MasterGaleri::find($request->id);
+        $set->judul = $request->judulEdit;
         $file = $request->file('urlGaleri');
         if($file!="") {
           $photoName = time(). '.' . $file->getClientOriginalExtension();
           Image::make($file)->fit(457,250)->save('images/'. $photoName);
           Image::make($file)->fit(200,122)->save('_thumbs/galeri/'. $photoName);
-
-          $set = MasterGaleri::find($request->id);
-          $set->judul = $request->judul;
           $set->url_gambar = $photoName;
-          $set->keterangan_gambar = $request->keteranganGaleri;
-          $set->activated = $request->activated;
-          $set->updated_by = Auth::user()->id;
-          $set->save();
-        } else {
-          $set = MasterGaleri::find($request->id);
-          $set->judul = $request->judul;
-          $set->keterangan_gambar = $request->keteranganGaleri;
-          $set->activated = $request->activated;
-          $set->updated_by = Auth::user()->id;
-          $set->save();
-        }
+        } 
+        $set->keterangan_gambar = $request->keteranganGaleriEdit;
+        $set->activated = $request->activatedEdit;
+        $set->updated_by = Auth::user()->id;
+        $set->save();
 
         return redirect()->route('galeri.index')->with('message', 'Berhasil mengubah konten galeri.');
     }

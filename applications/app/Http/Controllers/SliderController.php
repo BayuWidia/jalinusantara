@@ -98,27 +98,38 @@ class SliderController extends Controller
     public function update(Request $request)
     {
         // dd($request);
+
+        $messages = [
+          'id.required' => 'Tidak boleh kosong.',
+          'judul.required' => 'Tidak boleh kosong.',
+          'keteranganSlider.required' => 'Tidak boleh kosong.',
+          'activated.required' => 'Tidak boleh kosong.',
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'judul' => 'required',
+            'keteranganSlider' => 'required',
+            'activated' => 'required',
+        ], $messages);
+
+        if ($validator->fails()) {
+            return redirect()->route('slider.index')->withErrors($validator)->withInput();
+        }
+
+        $set = MasterSlider::find($request->id);
+        $set->judul = $request->judul;
         $file = $request->file('urlSlider');
         if($file!="") {
           $photoName = time(). '.' . $file->getClientOriginalExtension();
           Image::make($file)->fit(1920,900)->save('images/'. $photoName);
           Image::make($file)->fit(200,122)->save('_thumbs/Slider/'. $photoName);
-
-          $set = MasterSlider::find($request->id);
-          $set->judul = $request->judul;
           $set->url_slider = $photoName;
-          $set->keterangan_slider = $request->keteranganSlider;
-          $set->activated = $request->activated;
-          $set->updated_by = Auth::user()->id;
-          $set->save();
-        } else {
-          $set = MasterSlider::find($request->id);
-          $set->judul = $request->judul;
-          $set->keterangan_slider = $request->keteranganSlider;
-          $set->activated = $request->activated;
-          $set->updated_by = Auth::user()->id;
-          $set->save();
         }
+        $set->keterangan_slider = $request->keteranganSlider;
+        $set->activated = $request->activated;
+        $set->updated_by = Auth::user()->id;
+        $set->save();
 
         return redirect()->route('slider.index')->with('message', 'Berhasil mengubah konten slider.');
     }

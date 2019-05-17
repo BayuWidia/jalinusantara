@@ -8,7 +8,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="block-header">
-        <h2>FORM KELOLA VIDEO</h2>
+        <h2>FORM KELOLA SPONSOR</h2>
     </div>
     <div class="row clearfix">
         <div class="col-md-12">
@@ -34,11 +34,11 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header bg-orange">
-                    <h2>
-                        <a href="#" class="btn bg-blue"
-                           data-toggle="modal" data-target="#modalinsert"
-                           data-backdrop="static" data-keyboard="false"><i class="material-icons">playlist_add</i></a>
-                    </h2>
+                  <h2>
+                      <a href="#" class="btn bg-blue"
+                         data-toggle="modal" data-target="#modalinsert"
+                         data-backdrop="static" data-keyboard="false"><i class="material-icons">playlist_add</i></a>
+                  </h2>
                 </div>
                 <div class="body">
                     <div class="table-responsive">
@@ -46,22 +46,37 @@
                             <thead>
                                 <tr>
                                     <th style="text-align:center">No</th>
-                                    <th style="text-align:center">Judul Video</th>
-                                    <th style="text-align:center">Url Video</th>
+                                    <th style="text-align:center">Nama</th>
+                                    <th style="text-align:center">Link</th>
+                                    <th style="text-align:center">Keterangan</th>
+                                    <th style="text-align:center">Sponsor</th>
                                     <th style="text-align:center">Status</th>
-                                    <th style="text-align:center">Video Utama</th>
                                     <th style="text-align:center">Status Publish</th>
-                                    <th>Action</th>
+                                    <th style="text-align:center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                               @php $i=1; @endphp
-                              @foreach($getVideo as $key)
+                              @foreach($getSponsor as $key)
                                 <tr>
                                   <td>{{$i++}}</td>
-                                  <td>{{$key->judul}}</td>
+                                  <td>{{$key->nama_sponsor}}</td>
                                   <td>
-                                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<?php echo substr($key->url_video,-11,23)?>" allowfullscreen></iframe>
+                                    @php
+                                      if (strpos($key->link_sponsor, 'http') !== false) {
+                                        @endphp
+                                          <a href="{{$key->link_sponsor}}" target="_blank">{{$key->link_sponsor}}</a>
+                                        @php
+                                      } else {
+                                        @endphp
+                                        <a href="http://{{$key->link_sponsor}}" target="_blank">{{$key->link_sponsor}}</a>
+                                        @php
+                                      }
+                                    @endphp
+                                  </td>
+                                  <td>{{$key->keterangan_sponsor}}</td>
+                                  <td>
+                                    <img src="{{url('images')}}/{{$key->url_sponsor}}">
                                   </td>
                                   <td style="text-align:center">
                                     @if($key->activated=="1")
@@ -74,31 +89,19 @@
                                       </span>
                                     @endif
                                   </td>
-                                  <td>
-                                    @if($key->flag_important_video=="1")
-                                      <a href="#" class="btn bg-deep-purple btn-circle waves-effect waves-circle waves-float flagutama"
-                                      data-toggle="modal" data-target="#modalflagutama"
-                                      data-value="{{$key->id}}" data-backdrop="static"
-                                      data-keyboard="false"><i class="material-icons">favorite</i></a>
-                                    @else
-                                      <a href="#" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float flagutama"
-                                      data-toggle="modal" data-target="#modalflagutama" data-value="{{$key->id}}"
-                                      data-backdrop="static" data-keyboard="false"><i class="material-icons">favorite_border</i></a>
-                                    @endif
-                                  </td>
-                                  <td>
-                                    @if($key->flag_video=="1")
+                                  <td style="text-align:center">
+                                    @if($key->flag_sponsor=="1")
                                       <a href="#" class="btn btn-warning btn-circle waves-effect waves-circle waves-float flagpublish"
                                       data-toggle="modal" data-target="#modalflagedit"
                                       data-value="{{$key->id}}" data-backdrop="static"
-                                      data-keyboard="false"><i class="material-icons">star</i></a>
+                                      data-keyboard="false"><i class="material-icons">favorite</i></a>
                                     @else
                                       <a href="#" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float flagpublish"
                                       data-toggle="modal" data-target="#modalflagedit" data-value="{{$key->id}}"
-                                      data-backdrop="static" data-keyboard="false"><i class="material-icons">star_border</i></a>
+                                      data-backdrop="static" data-keyboard="false"><i class="material-icons">favorite_border</i></a>
                                     @endif
                                   </td>
-                                  <td>
+                                  <td style="text-align:center">
                                     <a href="#" class="btn btn-success btn-circle waves-effect waves-circle waves-float edit"
                                        data-toggle="modal" data-target="#modaledit" data-value="{{$key->id}}"
                                        data-backdrop="static" data-keyboard="false"><i class="material-icons">open_in_new</i></a>
@@ -130,37 +133,51 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content bounceInRight">
                   <div class="modal-header">
-                      <h4 class="modal-title">Tambah Konten Video</h4>
+                      <h4 class="modal-title">Tambah Konten Sponsor</h4>
                   </div>
                   <div class="modal-body">
-                      <form action="{{route('video.store')}}" method="post" enctype="multipart/form-data">
+                      <form action="{{route('sponsor.store')}}" method="post" enctype="multipart/form-data">
                         {{csrf_field()}}
                         <div class="row clearfix">
                             <div class="col-sm-12">
                                 <div class="form-group mandatory">
                                     <div class="form-line">
-                                        <label>Judul Video</label>
-                                        @if ($errors->has('judul'))
-                                          <small style="color:red">* {{$errors->first('judul')}}</small>
+                                        <label>Gambar Sponsor</label>
+                                        @if ($errors->has('urlSponsor'))
+                                          <small style="color:red">* {{$errors->first('urlSponsor')}}</small>
                                         @endif
-                                        <input type="text" class="form-control" value="{{ old('judul') }}"  placeholder="Ketikkan Judul Video..." name="judul" id="judul"/>
+                                        <input type="file" name="urlSponsor" class="form-control" value="{{ old('urlSponsor') }}" >
+                                    </div>
+                                    <div>
+                                      <span class="text-muted"><i>* Max Size: 2MB.</i></span><br>
+                                      <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 126 x 60 px.</i></span>
                                     </div>
                                 </div>
                                 <div class="form-group mandatory">
                                     <div class="form-line">
-                                        <label>Url Video</label>
-                                        @if ($errors->has('urlVideo'))
-                                          <small style="color:red">* {{$errors->first('urlVideo')}}</small>
+                                        <label>Nama Sponsor</label>
+                                        @if ($errors->has('namaSponsor'))
+                                          <small style="color:red">* {{$errors->first('namaSponsor')}}</small>
                                         @endif
-                                        <input type="text" class="form-control" value="{{ old('urlVideo') }}" placeholder="Ketikkan Url Video..." name="urlVideo" id="urlVideo"/>
+                                        <input type="text" value="{{ old('namaSponsor') }}" class="form-control" placeholder="Ketikkan Nama Sponsor..." name="namaSponsor" id="namaSponsor"/>
                                     </div>
                                 </div>
                                 <div class="form-group mandatory">
                                     <div class="form-line">
-                                        <label>Video Utama</label>
-                                        <br>
-                                        <input type="checkbox" id="md_checkbox_21" name="flagImportantVideo" class="filled-in chk-col-red" value="1" />
-                                        <label for="md_checkbox_21">* Ya, tampilkan video ini pada halaman utama.</label>
+                                        <label>Link Sponsor</label>
+                                        @if ($errors->has('linkSponsor'))
+                                          <small style="color:red">* {{$errors->first('linkSponsor')}}</small>
+                                        @endif
+                                        <input type="text" value="{{ old('linkSponsor') }}" class="form-control" placeholder="Ketikkan Link Sponsor..." name="linkSponsor" id="linkSponsor"/>
+                                    </div>
+                                </div>
+                                <div class="form-group mandatory">
+                                    <div class="form-line">
+                                        <label>Keterangan Sponsor</label>
+                                        @if ($errors->has('keteranganSponsor'))
+                                          <small style="color:red">* {{$errors->first('keteranganSponsor')}}</small>
+                                        @endif
+                                        <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Sponsor..." name="keteranganSponsor" id="keteranganSponsor">{{ old('keteranganSponsor') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group mandatory">
@@ -187,30 +204,55 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content bounceInRight">
                   <div class="modal-header">
-                      <h4 class="modal-title">Edit Konten Video</h4>
+                      <h4 class="modal-title">Edit Konten Sponsor</h4>
                   </div>
                   <div class="modal-body">
-                      <form action="{{route('video.update')}}" method="post" enctype="multipart/form-data">
+                      <form action="{{route('sponsor.update')}}" method="post" enctype="multipart/form-data">
                         {{csrf_field()}}
                         <div class="row clearfix">
                             <div class="col-sm-12">
                                 <div class="form-group mandatory">
                                     <div class="form-line">
-                                        <label>Judul Video</label>
-                                        @if ($errors->has('judulEdit'))
-                                          <small style="color:red">* {{$errors->first('judulEdit')}}</small>
+                                        <label>Gambar Sponsor</label>
+                                        @if ($errors->has('urlSponsor'))
+                                          <small style="color:red">* {{$errors->first('urlSponsor')}}</small>
                                         @endif
+                                        <div style="margin-bottom:10px;">
+                                          <img src="" id="gambarSponsor">
+                                        </div>
+                                        <input type="file" name="urlSponsor" class="form-control" value="{{ old('urlSponsor') }}" >
                                         <input type="hidden" name="id" id="id" value="{{ old('id') }}">
-                                        <input type="text" class="form-control" value="{{ old('judulEdit') }}"  placeholder="Ketikkan Judul Video..." name="judulEdit" id="judulEdit"/>
+                                    </div>
+                                    <div>
+                                      <span class="text-muted"><i>* Max Size: 2MB.</i></span><br>
+                                      <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 126 x 60 px.</i></span>
                                     </div>
                                 </div>
                                 <div class="form-group mandatory">
                                     <div class="form-line">
-                                        <label>Url Video</label>
-                                        @if ($errors->has('urlVideoEdit'))
-                                          <small style="color:red">* {{$errors->first('urlVideoEdit')}}</small>
+                                        <label>Nama Sponsor</label>
+                                        @if ($errors->has('namaSponsorEdit'))
+                                          <small style="color:red">* {{$errors->first('namaSponsorEdit')}}</small>
                                         @endif
-                                        <input type="text" class="form-control" value="{{ old('urlVideoEdit') }}" placeholder="Ketikkan Url Video..." name="urlVideoEdit" id="urlVideoEdit"/>
+                                        <input type="text" value="{{ old('namaSponsorEdit') }}" class="form-control" placeholder="Ketikkan Nama Sponsor..." name="namaSponsorEdit" id="namaSponsorEdit"/>
+                                    </div>
+                                </div>
+                                <div class="form-group mandatory">
+                                    <div class="form-line">
+                                        <label>Link Sponsor</label>
+                                        @if ($errors->has('linkSponsorEdit'))
+                                          <small style="color:red">* {{$errors->first('linkSponsorEdit')}}</small>
+                                        @endif
+                                        <input type="text" value="{{ old('linkSponsorEdit') }}" class="form-control" placeholder="Ketikkan Link Sponsor..." name="linkSponsorEdit" id="linkSponsorEdit"/>
+                                    </div>
+                                </div>
+                                <div class="form-group mandatory">
+                                    <div class="form-line">
+                                        <label>Keterangan Sponsor</label>
+                                        @if ($errors->has('keteranganSponsorEdit'))
+                                          <small style="color:red">* {{$errors->first('keteranganSponsorEdit')}}</small>
+                                        @endif
+                                        <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Sponsor..." name="keteranganSponsorEdit" id="keteranganSponsorEdit">{{ old('keteranganSponsorEdit') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group mandatory">
@@ -232,33 +274,15 @@
         </div>
     </div>
 
-    <!-- Modal Utama-->
-    <div class="modal fade" id="modalflagutama" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content bounceInRight">
-                  <div class="modal-header">
-                      <h4 class="modal-title">Video Utama Data Slider</h4>
-                  </div>
-                  <div class="modal-body">
-                        <p>Apakah anda yakin untuk mengubah status video ini?</p>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-white" data-dismiss="modal"  onclick="resetPage()">Tidak</button>
-                      <a href="" class="btn btn-primary" id="setFlagUtama">Ya, saya yakin</a>
-                  </div>
-              </div>
-        </div>
-    </div>
-
     <!-- Modal Publish-->
     <div class="modal fade" id="modalflagedit" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content bounceInRight">
                   <div class="modal-header">
-                      <h4 class="modal-title">Publish Data Video</h4>
+                      <h4 class="modal-title">Publish Data Sponsor</h4>
                   </div>
                   <div class="modal-body">
-                        <p>Apakah anda yakin untuk mengubah status video ini?</p>
+                        <p>Apakah anda yakin untuk mengubah status sponsor ini?</p>
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-white" data-dismiss="modal"  onclick="resetPage()">Tidak</button>
@@ -273,10 +297,10 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content bounceInRight">
                   <div class="modal-header">
-                      <h4 class="modal-title">Non Aktifkan Data Video</h4>
+                      <h4 class="modal-title">Non Aktifkan Data Sponsor</h4>
                   </div>
                   <div class="modal-body">
-                      <p>Apakah anda yakin untuk mengnonaktifkan data video ini?</p>
+                      <p>Apakah anda yakin untuk mengnonaktifkan data sponsor ini?</p>
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-white" data-dismiss="modal"  onclick="resetPage()">Tidak</button>
@@ -291,10 +315,10 @@
       <div class="modal-dialog">
         <div class="modal-content bounceInRight">
               <div class="modal-header">
-                  <h4 class="modal-title">Aktifkan Data Video</h4>
+                  <h4 class="modal-title">Aktifkan Data Sponsor</h4>
               </div>
               <div class="modal-body">
-                  <p>Apakah anda yakin untuk mengaktifkan data video ini?</p>
+                  <p>Apakah anda yakin untuk mengaktifkan data sponsor ini?</p>
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-white" data-dismiss="modal"  onclick="resetPage()">Tidak</button>
@@ -311,51 +335,49 @@
 <script src="{{asset('theme/js/pages/forms/basic-form-elements.js')}}"></script>
 
 <script>
-  @if ($errors->has('judul') || $errors->has('urlVideo') || $errors->has('activated'))
+  @if ($errors->has('urlSponsor') || $errors->has('namaSponsor') || $errors->has('linkSponsor') || $errors->has('keteranganSponsor') || $errors->has('activated'))
   $('#modalinsert').modal('show');
   @endif
 
-  @if ($errors->has('judulEdit') || $errors->has('urlVideoEdit') || $errors->has('activatedEdit'))
+  @if ($errors->has('namaSponsorEdit') || $errors->has('linkSponsorEdit') || $errors->has('keteranganSponsorEdit') || $errors->has('activatedEdit'))
   $('#modaledit').modal('show');
   @endif
 
-  $("#tabelinfo").on("click", "a.flagutama", function(){
-    var a = $(this).data('value');
-    $('#setFlagUtama').attr('href', '{{url('admin/edit-important-video/')}}/'+a);
-  });
-
   $("#tabelinfo").on("click", "a.flagpublish", function(){
     var a = $(this).data('value');
-    $('#setFlagPublish').attr('href', '{{url('admin/publish-video/')}}/'+a);
+    $('#setFlagPublish').attr('href', '{{url('admin/publish-sponsor/')}}/'+a);
   });
 
   $("#tabelinfo").on("click", "a.hapus", function(){
     var a = $(this).data('value');
     var b = "hapus";
-    $('#setYaHapus').attr('href', '{{url('admin/delete-video/')}}/'+a+'/'+b);
+    $('#setYaHapus').attr('href', '{{url('admin/delete-sponsor/')}}/'+a+'/'+b);
   });
 
   $("#tabelinfo").on("click", "a.aktifkan", function(){
     var a = $(this).data('value');
     var b = "aktifkan";
-    $('#setYaAktifkan').attr('href', '{{url('admin/delete-video/')}}/'+a+'/'+b);
+    $('#setYaAktifkan').attr('href', '{{url('admin/delete-sponsor/')}}/'+a+'/'+b);
   });
 
   $("#tabelinfo").on("click", "a.edit", function(){
     var a = $(this).data('value');
     $.ajax({
-      url: "{{url('/')}}/admin/bind-video/"+a,
+      url: "{{url('/')}}/admin/bind-sponsor/"+a,
       dataType: 'json',
       success: function(data){
         var id = data.id;
-        var judul = data.judul;
-        var url_video = data.url_video;
-        var flag_important_video = data.flag_important_video;
+        var nama_sponsor = data.nama_sponsor;
+        var link_sponsor = data.link_sponsor;
+        var keterangan_sponsor = data.keterangan_sponsor;
         var activated = data.activated;
+        var url_sponsor = data.url_sponsor;
 
         $('#id').attr('value', id);
-        $('#judulEdit').val(judul);
-        $('#urlVideoEdit').val(url_video);
+        $('#gambarSponsor').attr('src', "{{url('images')}}/"+url_sponsor);
+        $('#namaSponsorEdit').val(nama_sponsor);
+        $('#linkSponsorEdit').val(link_sponsor);
+        $('#keteranganSponsorEdit').val(keterangan_sponsor);
         if(activated=="1") {
           $('#flag_aktif').attr('selected', true);
         } else {

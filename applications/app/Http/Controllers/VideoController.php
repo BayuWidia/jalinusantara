@@ -34,17 +34,17 @@ class VideoController extends Controller
         $messages = [
           'judul.required' => 'Tidak boleh kosong.',
           'urlVideo.required' => 'Tidak boleh kosong.',
+          'activated.required' => 'Tidak boleh kosong.',
         ];
 
         $validator = Validator::make($request->all(), [
                 'judul' => 'required',
                 'urlVideo' => 'required',
+                'activated' => 'required',
             ], $messages);
 
         if ($validator->fails()) {
-            return redirect()->route('video.index')
-                        ->withErrors($validator)
-                        ->withInput();
+            return redirect()->route('video.index')->withErrors($validator)->withInput();
         }
 
         //set important video value
@@ -115,10 +115,28 @@ class VideoController extends Controller
     public function update(Request $request)
     {
         //
+        $messages = [
+          'id.required' => 'Tidak boleh kosong.',
+          'judulEdit.required' => 'Tidak boleh kosong.',
+          'urlVideoEdit.required' => 'Tidak boleh kosong.',
+          'activatedEdit.required' => 'Tidak boleh kosong.',
+        ];
+
+        $validator = Validator::make($request->all(), [
+                'id' => 'required',
+                'judulEdit' => 'required',
+                'urlVideoEdit' => 'required',
+                'activatedEdit' => 'required',
+            ], $messages);
+
+        if ($validator->fails()) {
+            return redirect()->route('video.index')->withErrors($validator)->withInput();
+        }
+
         $set = MasterVideo::find($request->id);
-        $set->judul = $request->judul;
-        $set->url_video = $request->urlVideo;
-        $set->activated = $request->activated;
+        $set->judul = $request->judulEdit;
+        $set->url_video = $request->urlVideoEdit;
+        $set->activated = $request->activatedEdit;
         $set->updated_by = Auth::user()->id;
         $set->save();
 

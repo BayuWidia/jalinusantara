@@ -62,11 +62,7 @@
                                   <td>{{$key->judul}}</td>
                                   <td>{{$key->keterangan_gambar}}</td>
                                   <td>
-                                    @if($key->url_gambar!="")
-                                      <img src="{{url('_thumbs/Galeri')}}/{{$key->url_gambar}}">
-                                    @else
-                                      <img src="{{url('images/')}}/no_image.jpg">
-                                    @endif
+                                    <img src="{{url('_thumbs/Galeri')}}/{{$key->url_gambar}}">
                                   </td>
                                   <td style="text-align:center">
                                     @if($key->activated=="1")
@@ -136,7 +132,7 @@
                                         @if ($errors->has('urlSlider'))
                                           <small style="color:red">* {{$errors->first('urlGaleri')}}</small>
                                         @endif
-                                        <input type="file" name="urlGaleri" class="form-control">
+                                        <input type="file" name="urlGaleri" class="form-control" value="{{ old('urlGaleri') }}" >
                                     </div>
                                     <div>
                                       <span class="text-muted"><i>* Max Size: 2MB.</i></span><br>
@@ -149,7 +145,7 @@
                                         @if ($errors->has('judul'))
                                           <small style="color:red">* {{$errors->first('judul')}}</small>
                                         @endif
-                                        <input type="text" class="form-control" placeholder="Ketikkan Judul Foto..." name="judul" id="judul"/>
+                                        <input type="text" value="{{ old('judul') }}" class="form-control" placeholder="Ketikkan Judul Foto..." name="judul" id="judul"/>
                                     </div>
                                 </div>
                                 <div class="form-group mandatory">
@@ -158,15 +154,15 @@
                                         @if ($errors->has('keteranganGaleri'))
                                           <small style="color:red">* {{$errors->first('keteranganGaleri')}}</small>
                                         @endif
-                                        <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Foto..." name="keteranganGaleri" id="keteranganGaleri"></textarea>
+                                        <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Foto..." name="keteranganGaleri" id="keteranganGaleri">{{ old('keteranganGaleri') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Status</label>
                                         <select class="form-control show-tick" name="activated" id="activated">
-                                            <option value="1">Active</option>
-                                            <option value="0">Non Active</option>
+                                            <option value="1" {{old('activated')=="1"? 'selected':''}}>Active</option>
+                                            <option value="0" {{old('activated')=="0"? 'selected':''}}>Non Active</option>
                                         </select>
                                     </div>
                                 </div>
@@ -202,7 +198,7 @@
                                           <img src="" id="gambarSlider">
                                         </div>
                                         <input type="file" name="urlGaleri" class="form-control" id="urlGaleriEdit">
-                                        <input type="hidden" name="id" id="id">
+                                        <input type="hidden" name="id" id="id" value="{{ old('id') }}">
                                     </div>
                                     <div>
                                       <span style="color:red;">* Biarkan kosong jika tidak ingin diganti.</span><br>
@@ -213,27 +209,27 @@
                                 <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Judul Foto</label>
-                                        @if ($errors->has('judul'))
-                                          <small style="color:red">* {{$errors->first('judul')}}</small>
+                                        @if ($errors->has('judulEdit'))
+                                          <small style="color:red">* {{$errors->first('judulEdit')}}</small>
                                         @endif
-                                        <input type="text" class="form-control" placeholder="Ketikkan Judul Foto..." name="judul" id="judulEdit"/>
+                                        <input type="text" class="form-control" value="{{ old('judulEdit') }}" placeholder="Ketikkan Judul Foto..." name="judulEdit" id="judulEdit"/>
                                     </div>
                                 </div>
                                 <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Keterangan Foto</label>
-                                        @if ($errors->has('keteranganGaleri'))
-                                          <small style="color:red">* {{$errors->first('keteranganGaleri')}}</small>
+                                        @if ($errors->has('keteranganGaleriEdit'))
+                                          <small style="color:red">* {{$errors->first('keteranganGaleriEdit')}}</small>
                                         @endif
-                                        <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Foto..." name="keteranganGaleri" id="keteranganGaleriEdit"></textarea>
+                                        <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Foto..." name="keteranganGaleriEdit" id="keteranganGaleriEdit">{{ old('keteranganGaleriEdit') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Status</label>
-                                        <select class="form-control show-tick" name="activated" id="activated">
-                                            <option value="1" id="flag_aktif">Active</option>
-                                            <option value="0" id="flag_nonaktif">Non Active</option>
+                                        <select class="form-control show-tick" name="activatedEdit" id="activated">
+                                            <option value="1" id="flag_aktif" {{old('activatedEdit')=="1"? 'selected':''}}>Active</option>
+                                            <option value="0" id="flag_nonaktif" {{old('activatedEdit')=="0"? 'selected':''}}>Non Active</option>
                                         </select>
                                     </div>
                                 </div>
@@ -308,6 +304,14 @@
 <script src="{{asset('theme/js/pages/forms/basic-form-elements.js')}}"></script>
 
 <script>
+  @if ($errors->has('urlGaleri') || $errors->has('judul') || $errors->has('keteranganGaleri') || $errors->has('activated'))
+  $('#modalinsert').modal('show');
+  @endif
+
+  @if ($errors->has('judulEdit') || $errors->has('keteranganGaleriEdit') || $errors->has('activatedEdit'))
+  $('#modaledit').modal('show');
+  @endif
+
   $("#tabelinfo").on("click", "a.flagpublish", function(){
     var a = $(this).data('value');
     $('#setFlagPublish').attr('href', '{{url('admin/publish-galeri/')}}/'+a);
@@ -334,14 +338,14 @@
         var id = data.id;
         var judul = data.judul;
         var keterangan_gambar = data.keterangan_gambar;
-        var flag_gambar = data.flag_gambar;
+        var activated = data.activated;
         var url_gambar = data.url_gambar;
 
         $('#id').attr('value', id);
         $('#gambarSlider').attr('src', "{{url('_thumbs/galeri')}}/"+url_gambar);
         $('#judulEdit').val(judul);
         $('#keteranganGaleriEdit').val(keterangan_gambar);
-        if(flag_gambar=="1") {
+        if(activated=="1") {
           $('#flag_aktif').attr('selected', true);
         } else {
           $('#flag_nonaktif').attr('selected', true);
