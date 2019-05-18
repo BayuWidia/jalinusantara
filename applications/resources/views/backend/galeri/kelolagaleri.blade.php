@@ -62,7 +62,11 @@
                                   <td>{{$key->judul}}</td>
                                   <td>{{$key->keterangan_gambar}}</td>
                                   <td>
-                                    <img src="{{url('_thumbs/Galeri')}}/{{$key->url_gambar}}">
+                                    @if($getSlider[0]->url_gambar!="")
+                                      <img src="{{url('_thumbs/Galeri')}}/{{$key->url_gambar}}">
+                                    @else
+                                      <img src="{{url('images/')}}/no_image.jpg" class="js-animating-object img-responsive">
+                                    @endif
                                   </td>
                                   <td style="text-align:center">
                                     @if($key->activated=="1")

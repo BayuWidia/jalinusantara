@@ -86,10 +86,11 @@
 
 <!-- Ckeditor -->
 <script src="{{asset('theme/plugins/ckeditor/ckeditor.js')}}"></script>
-<script src="{{asset('theme/js/pages/forms/editors.js')}}"></script>
 
 <!-- TinyMCE -->
 <script src="{{asset('theme/plugins/tinymce/tinymce.js')}}"></script>
+
+<script src="{{asset('theme/js/pages/forms/editors.js')}}"></script>
 
 <script>
   $(document).ready(function() {

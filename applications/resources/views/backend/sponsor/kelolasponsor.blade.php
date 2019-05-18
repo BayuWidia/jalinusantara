@@ -76,7 +76,13 @@
                                   </td>
                                   <td>{{$key->keterangan_sponsor}}</td>
                                   <td>
-                                    <img src="{{url('images')}}/{{$key->url_sponsor}}">
+                                    <td>
+                                      @if($getSlider[0]->url_sponsor!="")
+                                        <img src="{{url('images')}}/{{$key->url_sponsor}}">
+                                      @else
+                                        <img src="{{url('images/')}}/no_image.jpg" class="js-animating-object img-responsive">
+                                      @endif
+                                    </td>
                                   </td>
                                   <td style="text-align:center">
                                     @if($key->activated=="1")
