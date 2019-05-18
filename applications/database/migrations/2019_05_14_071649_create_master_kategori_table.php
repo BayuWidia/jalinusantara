@@ -17,8 +17,8 @@ class CreateMasterKategoriTable extends Migration
             $table->increments('id');
             $table->string('nama_kategori');
             $table->string('keterangan_kategori');
-            // 1 untuk about; 2 untuk event; 3 untuk berita
-            $table->integer('flag_utama')->nullable();
+            // 1 untuk profile; 2 untuk article; 3 untuk event
+            $table->string('flag_utama')->nullable();
             $table->string('activated');
             $table->string('created_by');
             $table->string('updated_by');

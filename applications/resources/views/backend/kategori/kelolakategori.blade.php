@@ -8,7 +8,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="block-header">
-        <h2>FORM KELOLA MEDIA SOSIAL</h2>
+        <h2>FORM KELOLA KATEGORI</h2>
     </div>
     <div class="row clearfix">
         <div class="col-md-12">
@@ -34,36 +34,32 @@
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header bg-orange">
-                    Formulir Set Link Media Sosial
+                    Formulir Set Kategori
                 </div>
                 <div class="body">
-                  <form action="{{route('medsos.store')}}" method="post" enctype="multipart/form-data">
+                  <form action="{{route('kategori.store')}}" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="row clearfix">
                         <div class="col-sm-12">
                             <div class="form-group mandatory">
                                 <div class="form-line">
-                                    <label>Nama Media Sosial</label>
-                                    @if ($errors->has('namaSosmed'))
-                                      <small style="color:red">* {{$errors->first('namaSosmed')}}</small>
+                                    <label>Nama Kategori</label>
+                                    @if ($errors->has('namaKategori'))
+                                      <small style="color:red">* {{$errors->first('namaKategori')}}</small>
                                     @endif
-                                    <select class="form-control show-tick" name="namaSosmed" id="activated">
-                                        <option value="">-- Pilih --</option>
-                                        <option value="facebook" {{old('namaSosmed')=="facebook"? 'selected':''}}>Facebook</option>
-                                        <option value="twitter" {{old('namaSosmed')=="twitter"? 'selected':''}}>Twitter</option>
-                                        <option value="google-plus"{{old('namaSosmed')=="google-plus"? 'selected':''}}>Google Plus</option>
-                                        <option value="linkedin" {{old('namaSosmed')=="linkedin"? 'selected':''}}>Linked In</option>
-                                        <option value="youtube" {{old('namaSosmed')=="youtube"? 'selected':''}}>Youtube</option>
-                                    </select>
+
+                                    <input type="text" class="form-control" value="{{ old('namaKategori') }}" placeholder="Ketikkan Nama Kategori..." name="namaKategori" id="namaKategori"/>
+
+                                    <input type="hidden" value="{{ $getParams }}" name="flagUtama" id="flagUtama"/>
                                 </div>
                             </div>
                             <div class="form-group mandatory">
                                 <div class="form-line">
-                                    <label>Link</label>
-                                    @if ($errors->has('linkSosmed'))
-                                      <small style="color:red">* {{$errors->first('linkSosmed')}}</small>
+                                    <label>Keterangan Kategori</label>
+                                    @if ($errors->has('keteranganKategori'))
+                                      <small style="color:red">* {{$errors->first('keteranganKategori')}}</small>
                                     @endif
-                                    <input type="text" class="form-control" value="{{ old('linkSosmed') }}" placeholder="Ketikkan Link..." name="linkSosmed" id="linkSosmed"/>
+                                    <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Kategori..." name="keteranganKategori" id="keteranganKategori">{{ old('keteranganKategori') }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group mandatory">
@@ -86,7 +82,7 @@
           <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
               <div class="card">
                   <div class="header bg-orange">
-                      List Data Media Sosial
+                      List Data Kategori
                   </div>
                   <div class="body">
                       <div class="table-responsive">
@@ -95,30 +91,18 @@
                                   <tr>
                                       <th style="text-align:center">No</th>
                                       <th style="text-align:center">Nama</th>
-                                      <th style="text-align:center">Link</th>
+                                      <th style="text-align:center">Keterangan</th>
                                       <th style="text-align:center">Status</th>
                                       <th style="text-align:center">Action</th>
                                   </tr>
                               </thead>
                               <tbody>
                                 @php $i=1; @endphp
-                                @foreach($getMedsos as $key)
+                                @foreach($getKategori as $key)
                                   <tr>
                                     <td>{{$i++}}</td>
-                                    <td>{{$key->nama_sosmed}}</td>
-                                    <td>
-                                      @php
-                                        if (strpos($key->link_sosmed, 'http') !== false) {
-                                          @endphp
-                                            <a href="{{$key->link_sosmed}}" target="_blank">{{$key->link_sosmed}}</a>
-                                          @php
-                                        } else {
-                                          @endphp
-                                          <a href="http://{{$key->link_sosmed}}" target="_blank">{{$key->link_sosmed}}</a>
-                                          @php
-                                        }
-                                      @endphp
-                                    </td>
+                                    <td>{{$key->nama_kategori}}</td>
+                                    <td>{{$key->keterangan_kategori}}</td>
                                     <td style="text-align:center">
                                       @if($key->activated=="1")
                                         <span class="label label-success">
@@ -144,7 +128,6 @@
                                         data-toggle="modal" data-target="#modalAktifkan"
                                         data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false"><i class="material-icons">lock_open</i></a>
                                       @endif
-
                                     </td>
                                   </tr>
                                 @endforeach
@@ -162,37 +145,31 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                   <div class="modal-header">
-                      <h4 class="modal-title">Edit Konten Foto</h4>
+                      <h4 class="modal-title">Edit Konten Kategori</h4>
                   </div>
                   <div class="modal-body">
-                      <form action="{{route('medsos.update')}}" method="post" enctype="multipart/form-data">
+                      <form action="{{route('kategori.update')}}" method="post" enctype="multipart/form-data">
                         {{csrf_field()}}
                         <div class="row clearfix">
                             <div class="col-sm-12">
                                 <div class="form-group mandatory">
                                     <div class="form-line">
-                                        <label>Nama Media Sosial</label>
-                                        @if ($errors->has('namaSosmedEdit'))
-                                          <small style="color:red">* {{$errors->first('namaSosmedEdit')}}</small>
+                                        <label>Nama Kategori</label>
+                                        @if ($errors->has('namaKategoriEdit'))
+                                          <small style="color:red">* {{$errors->first('namaKategoriEdit')}}</small>
                                         @endif
-                                        <select class="form-control show-tick" name="namaSosmedEdit" id="namaSosmedEdit" disabled>
-                                            <option value="-- Pilih --">-- Pilih --</option>
-                                            <option value="facebook" id="sosmedfb" {{old('namaSosmedEdit')=="facebook"? 'selected':''}}>Facebook</option>
-                                            <option value="twitter" id="sosmedtwit" {{old('namaSosmedEdit')=="twitter"? 'selected':''}}>Twitter</option>
-                                            <option value="google-plus" id="sosmedgoogle" {{old('namaSosmedEdit')=="google-plus"? 'selected':''}}>Google Plus</option>
-                                            <option value="linkedin" id="sosmedlink" {{old('namaSosmedEdit')=="linkedin"? 'selected':''}}>Linked In</option>
-                                            <option value="youtube" id="sosmedyoutube" {{old('namaSosmedEdit')=="youtube"? 'selected':''}}>Youtube</option>
-                                        </select>
+                                        <input type="text" class="form-control" value="{{ old('namaKategoriEdit') }}" placeholder="Ketikkan Link..." name="namaKategoriEdit" id="namaKategoriEdit"/>
+                                        <input type="hidden" name="id" id="id" value="{{ old('id') }}">
+                                        <input type="hidden" name="flagUtamaEdit" id="flagUtamaEdit" value="{{ old('flagUtamaEdit') }}">
                                     </div>
                                 </div>
                                 <div class="form-group mandatory">
                                     <div class="form-line">
-                                        <label>Link</label>
-                                        @if ($errors->has('linkSosmedEdit'))
-                                          <small style="color:red">* {{$errors->first('linkSosmedEdit')}}</small>
+                                        <label>Keterangan Kategori</label>
+                                        @if ($errors->has('keteranganKategoriEdit'))
+                                          <small style="color:red">* {{$errors->first('keteranganKategoriEdit')}}</small>
                                         @endif
-                                        <input type="text" class="form-control" value="{{ old('linkSosmedEdit') }}" placeholder="Ketikkan Link..." name="linkSosmedEdit" id="linkSosmedEdit"/>
-                                        <input type="hidden" name="id" id="id" value="{{ old('id') }}">
+                                        <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Kategori..." name="keteranganKategoriEdit" id="keteranganKategoriEdit">{{ old('keteranganKategoriEdit') }}</textarea>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn pull-right btn-primary">Simpan Perubahan</button>
@@ -205,33 +182,15 @@
         </div>
     </div>
 
-    <!-- Modal Publish-->
-    <div class="modal fade" id="modalflagedit" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content bounceInRight">
-                  <div class="modal-header">
-                      <h4 class="modal-title">Publish Data Foto</h4>
-                  </div>
-                  <div class="modal-body">
-                        <p>Apakah anda yakin untuk mengubah status foto ini?</p>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-white" data-dismiss="modal"  onclick="resetPage()">Tidak</button>
-                      <a href="" class="btn btn-primary" id="setFlagPublish">Ya, saya yakin</a>
-                  </div>
-              </div>
-        </div>
-    </div>
-
     <!-- Modal Delete-->
     <div class="modal fade" id="modaldelete" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content bounceInRight">
                   <div class="modal-header">
-                      <h4 class="modal-title">Non Aktifkan Data Foto</h4>
+                      <h4 class="modal-title">Non Aktifkan Data Kategori</h4>
                   </div>
                   <div class="modal-body">
-                      <p>Apakah anda yakin untuk mengnonaktifkan data foto ini?</p>
+                      <p>Apakah anda yakin untuk mengnonaktifkan data kategori ini?</p>
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-white" data-dismiss="modal"  onclick="resetPage()">Tidak</button>
@@ -246,10 +205,10 @@
       <div class="modal-dialog">
         <div class="modal-content bounceInRight">
               <div class="modal-header">
-                  <h4 class="modal-title">Aktifkan Data Foto</h4>
+                  <h4 class="modal-title">Aktifkan Data Kategori</h4>
               </div>
               <div class="modal-body">
-                  <p>Apakah anda yakin untuk mengaktifkan data foto ini?</p>
+                  <p>Apakah anda yakin untuk mengaktifkan data kategori ini?</p>
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-white" data-dismiss="modal"  onclick="resetPage()">Tidak</button>
@@ -267,49 +226,41 @@
 
 <script>
 
-  @if ($errors->has('linkSosmedEdit'))
+  @if ($errors->has('namaKategoriEdit') || $errors->has('keteranganKategoriEdit'))
   $('#modaledit').modal('show');
   @endif
 
 
   $("#tabelinfo").on("click", "a.hapus", function(){
+    var getParams = "<?php Print($getParams); ?>";
     var a = $(this).data('value');
     var b = "hapus";
-    $('#setYaHapus').attr('href', '{{url('admin/delete-medsos/')}}/'+a+'/'+b);
+    $('#setYaHapus').attr('href', '{{url('admin/delete-kategori/')}}/'+a+'/'+b+'/'+getParams);
   });
 
   $("#tabelinfo").on("click", "a.aktifkan", function(){
+    var getParams = "<?php Print($getParams); ?>";
     var a = $(this).data('value');
     var b = "aktifkan";
-    $('#setYaAktifkan').attr('href', '{{url('admin/delete-medsos/')}}/'+a+'/'+b);
+    $('#setYaAktifkan').attr('href', '{{url('admin/delete-kategori/')}}/'+a+'/'+b+'/'+getParams);
   });
 
   $("#tabelinfo").on("click", "a.edit", function(){
     var a = $(this).data('value');
     $.ajax({
-      url: "{{url('/')}}/admin/bind-medsos/"+a,
+      url: "{{url('/')}}/admin/bind-kategori/"+a,
       dataType: 'json',
       success: function(data){
         console.log(data);
         var id = data.id;
-        var nama_sosmed = data.nama_sosmed;
-        var link_sosmed = data.link_sosmed;
+        var nama_kategori = data.nama_kategori;
+        var keterangan_kategori = data.keterangan_kategori;
+        var flag_utama = data.flag_utama;
 
         $('#id').attr('value', id);
-
-        if(nama_sosmed=="facebook") {
-          $("#namaSosmedEdit").val('facebook').trigger("change");
-        } else if(nama_sosmed=="twitter") {
-          $("#namaSosmedEdit").val('twitter').trigger("change");
-        } else if(nama_sosmed=="google-plus") {
-          $("#namaSosmedEdit").val('google-plus').trigger("change");
-        } else if(nama_sosmed=="linkedin") {
-          $("#namaSosmedEdit").val('linkedin').trigger("change");
-        } else if(nama_sosmed=="youtube") {
-          $("#namaSosmedEdit").val('youtube').trigger("change");
-        }
-
-        $('#linkSosmedEdit').val(link_sosmed);
+        $('#namaKategoriEdit').val(nama_kategori);
+        $('#keteranganKategoriEdit').val(keterangan_kategori);
+        $('#flagUtamaEdit').val(flag_utama);
       }
     })
   });

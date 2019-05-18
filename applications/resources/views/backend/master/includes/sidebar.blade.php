@@ -57,7 +57,9 @@
                     @if(sizeof($menuChild)>0)
                       <a href="javascript:void(0);" class="menu-toggle">
                     @else
-                      <a href="{{$getDataParent[0]->url}}">
+                        <?php
+                          echo '<li><a href="'.url('/'.$getDataParent[0]->url).'">';
+                        ?>
                     @endif
                         <i class="material-icons">{{$getDataParent[0]->icon}}</i>
                         <span><b>{{$getDataParent[0]->nama_menu}}</b></span>

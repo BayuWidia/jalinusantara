@@ -66,6 +66,13 @@ Route::get('admin/delete-medsos/{id}/{status}', 'MedsosController@destroy')->nam
 Route::post('admin/edit-medsos', 'MedsosController@update')->name('medsos.update');
 Route::get('admin/bind-medsos/{id}', 'MedsosController@edit')->name('medsos.edit');
 
+//Menu Kategori
+Route::get('kategori.index/{status}', 'KategoriController@index')->name('kategori.index');
+Route::post('admin/store-kategori', 'KategoriController@store')->name('kategori.store');
+Route::get('admin/delete-kategori/{id}/{status}/{flag}', 'KategoriController@destroy')->name('kategori.destroy');
+Route::post('admin/edit-kategori', 'KategoriController@update')->name('kategori.update');
+Route::get('admin/bind-kategori/{id}', 'KategoriController@edit')->name('kategori.edit');
+
 
 //profile
 Route::get('backend.profile', 'UserController@profile')->name('backend.profile');
