@@ -15,6 +15,11 @@ use App\Http\Requests;
 class SponsorController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('isAdmin');
+    }
+
     public function index()
     {
         //

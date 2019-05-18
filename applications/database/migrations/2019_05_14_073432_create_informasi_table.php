@@ -16,7 +16,7 @@ class CreateInformasiTable extends Migration
         Schema::create('informasi', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_kategori')->unsigned()->nullable();
-            $table->string('judul_berita');
+            $table->string('judul_informasi');
             $table->date('tanggal_publish');
             $table->string('url_foto')->nullable();
             $table->string('tags')->nullable();

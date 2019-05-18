@@ -15,7 +15,7 @@ class Events extends Model
     protected $fillable = [
       'id_kategori', 'judul_event', 'tanggal_mulai', 'tanggal_akhir', 'url_foto', 'tags',
       'isi_event', 'maps', 'fasilitator', 'jumlah_peserta', 'lokasi', 'flag_headline',
-      'flag_publish', 'flag_headline_utama', 'view_counter',
+      'flag_publish', 'view_counter',
       'activated', 'created_by', 'updated_by',
     ];
 

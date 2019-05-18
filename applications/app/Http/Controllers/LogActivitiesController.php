@@ -16,6 +16,12 @@ use Carbon\Carbon;
 
 class LogActivitiesController extends Controller
 {
+  
+    public function __construct()
+    {
+        $this->middleware('isAdmin');
+    }
+
     /**
      * Create a new controller instance.
      *

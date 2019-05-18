@@ -14,6 +14,12 @@ use Datatables;
 
 class LogFilesController extends Controller
 {
+  
+    public function __construct()
+    {
+        $this->middleware('isAdmin');
+    }
+
     /**
      * Create a new controller instance.
      *

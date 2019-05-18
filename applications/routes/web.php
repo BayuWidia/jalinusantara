@@ -83,6 +83,41 @@ Route::get('log.files.show/{filename}', 'LogFilesController@show')->name('log.fi
 Route::get('log.files.download/{filename}', 'LogFilesController@download')->name('log.files.download');
 
 
+//Menu informasi
+Route::get('profile.index', 'ProfileController@index')->name('profile.index');
+Route::get('datatables-profile', ['as'=>'datatables.profile', 'uses'=>'ProfileController@getDataForDataTable']);
+Route::get('profile.tambah', 'ProfileController@create')->name('profile.tambah');
+Route::post('admin/store-profile', 'ProfileController@store')->name('profile.store');
+Route::get('admin/delete-profile/{id}/{status}', 'ProfileController@destroy')->name('profile.destroy');
+Route::post('admin/edit-profile', 'ProfileController@update')->name('profile.update');
+Route::get('admin/headline-profile/{id}', 'ProfileController@headline')->name('profile.headline');
+Route::get('admin/publish-profile/{id}', 'ProfileController@show')->name('profile.show');
+Route::get('admin/bind-profile/{id}', 'ProfileController@edit')->name('profile.edit');
+
+//Menu article
+Route::get('article.index', 'ArticleController@index')->name('article.index');
+Route::get('datatables-article', ['as'=>'datatables.article', 'uses'=>'ArticleController@getDataForDataTable']);
+Route::get('profile.article', 'ArticleController@create')->name('article.tambah');
+Route::post('admin/store-article', 'ArticleController@store')->name('article.store');
+Route::get('admin/delete-article/{id}/{status}', 'ArticleController@destroy')->name('article.destroy');
+Route::post('admin/edit-article', 'ArticleController@update')->name('article.update');
+Route::get('admin/headline-article/{id}', 'ArticleController@headline')->name('article.headline');
+Route::get('admin/publish-article/{id}', 'ArticleController@show')->name('article.show');
+Route::get('admin/bind-article/{id}', 'ArticleController@edit')->name('article.edit');
+
+
+//Menu event
+Route::get('events.index', 'EventsController@index')->name('events.index');
+Route::get('datatables-events', ['as'=>'datatables.event', 'uses'=>'EventsController@getDataForDataTable']);
+Route::get('profile.events', 'EventsController@create')->name('events.tambah');
+Route::post('admin/store-events', 'EventsController@store')->name('events.store');
+Route::get('admin/delete-events/{id}/{status}', 'EventsController@destroy')->name('events.destroy');
+Route::post('admin/edit-events', 'EventsController@update')->name('events.update');
+Route::get('admin/headline-events/{id}', 'EventsController@headline')->name('events.headline');
+Route::get('admin/publish-events/{id}', 'EventsController@show')->name('events.show');
+Route::get('admin/bind-events/{id}', 'EventsController@edit')->name('events.edit');
+
+
 //profile
 Route::get('backend.profile', 'UserController@profile')->name('backend.profile');
 

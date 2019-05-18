@@ -13,6 +13,12 @@ use App\Http\Requests;
 
 class KategoriController extends Controller
 {
+  
+    public function __construct()
+    {
+        $this->middleware('isAdmin');
+    }
+
     public function index($getParams)
     {
         if ($getParams == 'profile') {

@@ -12,8 +12,8 @@ class Informasi extends Model
     protected $table = 'informasi';
 
     protected $fillable = [
-      'id_kategori', 'judul_berita', 'tanggal_publish', 'url_foto', 'tags', 'isi_informasi',
-      'flag_headline', 'flag_publish', 'flag_headline_utama', 'view_counter',
+      'id_kategori', 'judul_informasi', 'tanggal_publish', 'url_foto', 'tags', 'isi_informasi',
+      'flag_headline', 'flag_publish', 'view_counter',
       'activated', 'created_by', 'updated_by',
     ];
 

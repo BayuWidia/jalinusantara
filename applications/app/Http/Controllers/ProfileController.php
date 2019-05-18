@@ -4,16 +4,108 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
+use Image;
+use Validator;
+use DB;
+use Alert;
+use Datatables;
+use Carbon\Carbon;
+use PDF;
+use Dompdf\Dompdf;
+use App\Models\Informasi;
+use App\Models\MasterKategori;
+use App\Http\Requests;
+
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+        $this->middleware('isAdmin');
+    }
+
     public function index()
     {
         //
+        return view('backend.profile.index');
+    }
+
+    public function getDataForDataTable()
+    {
+
+      if (Auth::user()->id_role != 4) {
+        $querys = Informasi::leftJoin('master_kategori','informasi.id_kategori','=','master_kategori.id')
+            ->leftJoin('master_users','informasi.created_by','=','master_users.id')
+            ->select(['informasi.id as id_informasi',
+                      'informasi.judul_informasi', 'master_kategori.nama_kategori',
+                      'informasi.tanggal_publish', 'informasi.flag_publish'])
+                      ->orderBy('id_informasi', 'DESC');
+      } else {
+        $querys = Informasi::leftJoin('master_kategori','informasi.id_kategori','=','master_kategori.id')
+            ->leftJoin('master_users','informasi.created_by','=','master_users.id')
+            ->select(['informasi.id as id_informasi',
+                      'informasi.judul_informasi', 'master_kategori.nama_kategori',
+                      'informasi.tanggal_publish', 'informasi.flag_publish'])
+                      ->where('informasi.created_by', '=', Auth::user()->id)
+                      ->orderBy('id_informasi', 'DESC');
+      }
+
+                      // dd($querys);
+      return Datatables::of($querys)
+        ->addColumn('action', function($query){
+            if ($query->flag_publish == "1") {
+              $strPublish = '<a href="#" class="btn btn-warning btn-circle waves-effect waves-circle waves-float flagpublish"
+                              data-toggle="modal" data-target="#modalflagpublish" data-value="'.$query->id_informasi.'"
+                              data-backdrop="static" data-keyboard="false"><i class="material-icons">star</i></a>';
+            } else {
+              $strPublish = '<a href="#" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float flagpublish"
+                                data-toggle="modal" data-target="#modalflagpublish" data-value="'.$query->id_informasi.'"
+                                data-backdrop="static" data-keyboard="false"><i class="material-icons">star_border</i></a>';
+            }
+
+            if ($query->activated == "1") {
+              $strDelete = '<a href="#" class="btn btn-danger btn-circle waves-effect waves-circle waves-float hapus"
+                              data-toggle="modal" data-target="#modaldelete"
+                              data-value="'.$query->id_informasi.'" data-backdrop="static"
+                              data-keyboard="false"><i class="material-icons">lock_outline</i></a>';
+            } else {
+              $strDelete = '<a href="#" class="btn btn-danger btn-circle waves-effect waves-circle waves-float aktifkan"
+                              data-toggle="modal" data-target="#modalAktifkan"
+                              data-value="'.$query->id_informasi.'" data-backdrop="static"
+                              data-keyboard="false"><i class="material-icons">lock_open</i></a>';
+            }
+
+            $strUpd = '<a href="profile.edit/'.$query->id_informasi.'" class="btn btn-success btn-circle waves-effect waves-circle waves-float">
+                          <i class="material-icons">open_in_new</i></a>';
+
+            $strView = '<a href="profile.view/'.$query->id_informasi.'" class="btn btn-primary btn-circle waves-effect waves-circle waves-float">
+                          <i class="material-icons">pageview</i></a>';
+
+            if (Auth::user()->id_role != 4) {
+                  return $strPublish.$strUpd.$strDelete.$strView;
+            } else{
+                  if ($query->flag_publish == "1") {
+                    return $strView;
+                  } else {
+                    return $strUpd.$strDelete.$strView;
+                  }
+            }
+
+        })
+        ->editColumn('tanggal_publish', function ($query)
+        {
+            return Carbon::parse($query->tanggal_publish)->format('d-m-Y');
+        })
+        ->editColumn('flag_publish', function($query){
+          if ($query->flag_publish=="1") {
+            return "<span class='label btn-warning'>Publish</span>";
+          } elseif ($query->flag_publish=="0")  {
+            return "<span class='label bg-blue-grey'>Un Publish</span>";
+          }
+        })
+        ->removeColumn('id_informasi')
+        ->make();
     }
 
     /**
@@ -24,6 +116,8 @@ class ProfileController extends Controller
     public function create()
     {
         //
+        $getKategori = MasterKategori::where('flag_utama','=' ,'profile')->get();
+        return view('backend.profile.tambah', compact('getKategori'));
     }
 
     /**
@@ -44,6 +138,11 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
+    {
+        //
+    }
+
+    public function headline($id)
     {
         //
     }
