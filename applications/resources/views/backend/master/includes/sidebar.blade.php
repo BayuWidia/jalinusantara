@@ -77,13 +77,13 @@
                 <?php } ?>
                 <li class="header">DEVELOPER</li>
                 <li>
-                    <a href="javascript:void(0);">
+                    <a href="{{ route('log.activity') }}">
                         <i class="material-icons">code</i>
                         <span>Log Activity</span>
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:void(0);">
+                    <a href="{{ route('log.files') }}">
                         <i class="material-icons">attach_file</i>
                         <span>Log Files</span>
                     </a>

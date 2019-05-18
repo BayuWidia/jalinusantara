@@ -73,6 +73,15 @@ Route::get('admin/delete-kategori/{id}/{status}/{flag}', 'KategoriController@des
 Route::post('admin/edit-kategori', 'KategoriController@update')->name('kategori.update');
 Route::get('admin/bind-kategori/{id}', 'KategoriController@edit')->name('kategori.edit');
 
+//log Apps activity
+Route::get('log.activity', 'LogActivitiesController@index')->name('log.activity');
+Route::get('datatables-log-activity', ['as'=>'datatables.log.activity', 'uses'=>'LogActivitiesController@getDataForDataTable']);
+
+//log Apps files
+Route::get('log.files', 'LogFilesController@index')->name('log.files');
+Route::get('log.files.show/{filename}', 'LogFilesController@show')->name('log.files.show');
+Route::get('log.files.download/{filename}', 'LogFilesController@download')->name('log.files.download');
+
 
 //profile
 Route::get('backend.profile', 'UserController@profile')->name('backend.profile');
