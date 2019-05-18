@@ -119,14 +119,12 @@ class VideoController extends Controller
           'id.required' => 'Tidak boleh kosong.',
           'judulEdit.required' => 'Tidak boleh kosong.',
           'urlVideoEdit.required' => 'Tidak boleh kosong.',
-          'activatedEdit.required' => 'Tidak boleh kosong.',
         ];
 
         $validator = Validator::make($request->all(), [
                 'id' => 'required',
                 'judulEdit' => 'required',
                 'urlVideoEdit' => 'required',
-                'activatedEdit' => 'required',
             ], $messages);
 
         if ($validator->fails()) {
@@ -136,7 +134,6 @@ class VideoController extends Controller
         $set = MasterVideo::find($request->id);
         $set->judul = $request->judulEdit;
         $set->url_video = $request->urlVideoEdit;
-        $set->activated = $request->activatedEdit;
         $set->updated_by = Auth::user()->id;
         $set->save();
 

@@ -99,7 +99,6 @@ class SponsorController extends Controller
           'namaSponsorEdit.required' => 'Tidak boleh kosong.',
           'linkSponsorEdit.required' => 'Tidak boleh kosong.',
           'keteranganSponsorEdit.required' => 'Tidak boleh kosong.',
-          'activatedEdit.required' => 'Tidak boleh kosong.',
         ];
 
         $validator = Validator::make($request->all(), [
@@ -107,7 +106,6 @@ class SponsorController extends Controller
                 'namaSponsorEdit' => 'required',
                 'linkSponsorEdit' => 'required',
                 'keteranganSponsorEdit' => 'required',
-                'activatedEdit' => 'required',
             ], $messages);
 
         if ($validator->fails()) {
@@ -118,7 +116,6 @@ class SponsorController extends Controller
         $set = MasterSponsor::find($request->id);
         $set->nama_sponsor = $request->namaSponsorEdit;
         $set->link_sponsor = $request->linkSponsorEdit;
-
         $file = $request->file('urlSponsor');
         if($file!="") {
           $photoName = time(). '.' . $file->getClientOriginalExtension();
@@ -126,7 +123,6 @@ class SponsorController extends Controller
           $set->url_sponsor = $photoName;
         }
         $set->keterangan_sponsor = $request->keteranganSponsorEdit;
-        $set->activated = $request->activatedEdit;
         $set->updated_by = Auth::user()->id;
         $set->save();
 

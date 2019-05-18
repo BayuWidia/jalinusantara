@@ -18,7 +18,7 @@
 <link href="{{asset('theme/plugins/animate-css/animate.css')}}" rel="stylesheet" />
 
 <!-- JQuery DataTable Css -->
-<link href="../../plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+<link href="{{asset('theme/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}" rel="stylesheet">
 
 <!-- Morris Chart Css-->
 <link href="{{asset('theme/plugins/morrisjs/morris.css')}}" rel="stylesheet" />

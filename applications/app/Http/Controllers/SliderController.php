@@ -103,14 +103,12 @@ class SliderController extends Controller
           'id.required' => 'Tidak boleh kosong.',
           'judul.required' => 'Tidak boleh kosong.',
           'keteranganSlider.required' => 'Tidak boleh kosong.',
-          'activated.required' => 'Tidak boleh kosong.',
         ];
 
         $validator = Validator::make($request->all(), [
             'id' => 'required',
             'judul' => 'required',
             'keteranganSlider' => 'required',
-            'activated' => 'required',
         ], $messages);
 
         if ($validator->fails()) {
@@ -127,7 +125,6 @@ class SliderController extends Controller
           $set->url_slider = $photoName;
         }
         $set->keterangan_slider = $request->keteranganSlider;
-        $set->activated = $request->activated;
         $set->updated_by = Auth::user()->id;
         $set->save();
 

@@ -59,6 +59,13 @@ Route::post('admin/edit-sponsor', 'SponsorController@update')->name('sponsor.upd
 Route::get('admin/publish-sponsor/{id}', 'SponsorController@show')->name('sponsor.show');
 Route::get('admin/bind-sponsor/{id}', 'SponsorController@edit')->name('sponsor.edit');
 
+//Menu Medsos
+Route::get('medsos.index', 'MedsosController@index')->name('medsos.index');
+Route::post('admin/store-medsos', 'MedsosController@store')->name('medsos.store');
+Route::get('admin/delete-medsos/{id}/{status}', 'MedsosController@destroy')->name('medsos.destroy');
+Route::post('admin/edit-medsos', 'MedsosController@update')->name('medsos.update');
+Route::get('admin/bind-medsos/{id}', 'MedsosController@edit')->name('medsos.edit');
+
 
 //profile
 Route::get('backend.profile', 'UserController@profile')->name('backend.profile');

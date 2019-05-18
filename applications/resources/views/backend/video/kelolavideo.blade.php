@@ -213,15 +213,6 @@
                                         <input type="text" class="form-control" value="{{ old('urlVideoEdit') }}" placeholder="Ketikkan Url Video..." name="urlVideoEdit" id="urlVideoEdit"/>
                                     </div>
                                 </div>
-                                <div class="form-group mandatory">
-                                    <div class="form-line">
-                                        <label>Status</label>
-                                        <select class="form-control show-tick" name="activatedEdit" id="activated">
-                                            <option value="1" id="flag_aktif" {{old('activatedEdit')=="1"? 'selected':''}}>Active</option>
-                                            <option value="0" id="flag_nonaktif" {{old('activatedEdit')=="0"? 'selected':''}}>Non Active</option>
-                                        </select>
-                                    </div>
-                                </div>
                                 <button type="submit" class="btn pull-right btn-primary">Simpan Perubahan</button>
                                 <button type="reset" class="btn btn-default pull-left btn-flat" data-dismiss="modal">Tidak</button>
                             </div>
@@ -315,7 +306,7 @@
   $('#modalinsert').modal('show');
   @endif
 
-  @if ($errors->has('judulEdit') || $errors->has('urlVideoEdit') || $errors->has('activatedEdit'))
+  @if ($errors->has('judulEdit') || $errors->has('urlVideoEdit'))
   $('#modaledit').modal('show');
   @endif
 
@@ -351,16 +342,10 @@
         var judul = data.judul;
         var url_video = data.url_video;
         var flag_important_video = data.flag_important_video;
-        var activated = data.activated;
 
         $('#id').attr('value', id);
         $('#judulEdit').val(judul);
         $('#urlVideoEdit').val(url_video);
-        if(activated=="1") {
-          $('#flag_aktif').attr('selected', true);
-        } else {
-          $('#flag_nonaktif').attr('selected', true);
-        }
       }
     })
   });

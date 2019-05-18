@@ -217,13 +217,11 @@
                                         @if ($errors->has('urlSponsor'))
                                           <small style="color:red">* {{$errors->first('urlSponsor')}}</small>
                                         @endif
-                                        <div style="margin-bottom:10px;">
-                                          <img src="" id="gambarSponsor">
-                                        </div>
                                         <input type="file" name="urlSponsor" class="form-control" value="{{ old('urlSponsor') }}" >
                                         <input type="hidden" name="id" id="id" value="{{ old('id') }}">
                                     </div>
                                     <div>
+                                      <span style="color:red;">* Biarkan kosong jika tidak ingin diganti.</span><br>
                                       <span class="text-muted"><i>* Max Size: 2MB.</i></span><br>
                                       <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 126 x 60 px.</i></span>
                                     </div>
@@ -253,15 +251,6 @@
                                           <small style="color:red">* {{$errors->first('keteranganSponsorEdit')}}</small>
                                         @endif
                                         <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Sponsor..." name="keteranganSponsorEdit" id="keteranganSponsorEdit">{{ old('keteranganSponsorEdit') }}</textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group mandatory">
-                                    <div class="form-line">
-                                        <label>Status</label>
-                                        <select class="form-control show-tick" name="activatedEdit" id="activated">
-                                            <option value="1" id="flag_aktif" {{old('activatedEdit')=="1"? 'selected':''}}>Active</option>
-                                            <option value="0" id="flag_nonaktif" {{old('activatedEdit')=="0"? 'selected':''}}>Non Active</option>
-                                        </select>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn pull-right btn-primary">Simpan Perubahan</button>
@@ -339,7 +328,7 @@
   $('#modalinsert').modal('show');
   @endif
 
-  @if ($errors->has('namaSponsorEdit') || $errors->has('linkSponsorEdit') || $errors->has('keteranganSponsorEdit') || $errors->has('activatedEdit'))
+  @if ($errors->has('namaSponsorEdit') || $errors->has('linkSponsorEdit') || $errors->has('keteranganSponsorEdit'))
   $('#modaledit').modal('show');
   @endif
 
@@ -370,19 +359,12 @@
         var nama_sponsor = data.nama_sponsor;
         var link_sponsor = data.link_sponsor;
         var keterangan_sponsor = data.keterangan_sponsor;
-        var activated = data.activated;
         var url_sponsor = data.url_sponsor;
 
         $('#id').attr('value', id);
-        $('#gambarSponsor').attr('src', "{{url('images')}}/"+url_sponsor);
         $('#namaSponsorEdit').val(nama_sponsor);
         $('#linkSponsorEdit').val(link_sponsor);
         $('#keteranganSponsorEdit').val(keterangan_sponsor);
-        if(activated=="1") {
-          $('#flag_aktif').attr('selected', true);
-        } else {
-          $('#flag_nonaktif').attr('selected', true);
-        }
       }
     })
   });

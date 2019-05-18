@@ -97,14 +97,12 @@ class GaleriController extends Controller
           'id.required' => 'Tidak boleh kosong.',
           'judulEdit.required' => 'Tidak boleh kosong.',
           'keteranganGaleriEdit.required' => 'Tidak boleh kosong.',
-          'activatedEdit.required' => 'Tidak boleh kosong.',
         ];
 
         $validator = Validator::make($request->all(), [
                 'id' => 'required',
                 'judulEdit' => 'required',
                 'keteranganGaleriEdit' => 'required',
-                'activatedEdit' => 'required',
             ], $messages);
 
         if ($validator->fails()) {
@@ -120,9 +118,8 @@ class GaleriController extends Controller
           Image::make($file)->fit(457,250)->save('images/'. $photoName);
           Image::make($file)->fit(200,122)->save('_thumbs/galeri/'. $photoName);
           $set->url_gambar = $photoName;
-        } 
+        }
         $set->keterangan_gambar = $request->keteranganGaleriEdit;
-        $set->activated = $request->activatedEdit;
         $set->updated_by = Auth::user()->id;
         $set->save();
 

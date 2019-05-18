@@ -194,9 +194,6 @@
                                         @if ($errors->has('urlGaleri'))
                                           <small style="color:red">* {{$errors->first('urlGaleri')}}</small>
                                         @endif
-                                        <div style="margin-bottom:10px;">
-                                          <img src="" id="gambarSlider">
-                                        </div>
                                         <input type="file" name="urlGaleri" class="form-control" id="urlGaleriEdit">
                                         <input type="hidden" name="id" id="id" value="{{ old('id') }}">
                                     </div>
@@ -222,15 +219,6 @@
                                           <small style="color:red">* {{$errors->first('keteranganGaleriEdit')}}</small>
                                         @endif
                                         <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Foto..." name="keteranganGaleriEdit" id="keteranganGaleriEdit">{{ old('keteranganGaleriEdit') }}</textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group mandatory">
-                                    <div class="form-line">
-                                        <label>Status</label>
-                                        <select class="form-control show-tick" name="activatedEdit" id="activated">
-                                            <option value="1" id="flag_aktif" {{old('activatedEdit')=="1"? 'selected':''}}>Active</option>
-                                            <option value="0" id="flag_nonaktif" {{old('activatedEdit')=="0"? 'selected':''}}>Non Active</option>
-                                        </select>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn pull-right btn-primary">Simpan Perubahan</button>
@@ -308,7 +296,7 @@
   $('#modalinsert').modal('show');
   @endif
 
-  @if ($errors->has('judulEdit') || $errors->has('keteranganGaleriEdit') || $errors->has('activatedEdit'))
+  @if ($errors->has('judulEdit') || $errors->has('keteranganGaleriEdit'))
   $('#modaledit').modal('show');
   @endif
 
@@ -338,18 +326,11 @@
         var id = data.id;
         var judul = data.judul;
         var keterangan_gambar = data.keterangan_gambar;
-        var activated = data.activated;
         var url_gambar = data.url_gambar;
 
         $('#id').attr('value', id);
-        $('#gambarSlider').attr('src', "{{url('_thumbs/galeri')}}/"+url_gambar);
         $('#judulEdit').val(judul);
         $('#keteranganGaleriEdit').val(keterangan_gambar);
-        if(activated=="1") {
-          $('#flag_aktif').attr('selected', true);
-        } else {
-          $('#flag_nonaktif').attr('selected', true);
-        }
       }
     })
   });

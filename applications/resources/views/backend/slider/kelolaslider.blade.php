@@ -35,7 +35,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        Slider yang ditampilkan
+                        Gambar dibawah ini adalah slider yang di tampilkan di web.
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -117,9 +117,6 @@
                                         @if ($errors->has('urlSlider'))
                                           <small style="color:red">* {{$errors->first('urlSlider')}}</small>
                                         @endif
-                                        <div style="margin-bottom:10px;">
-                                          <img src="" id="gambarSlider">
-                                        </div>
                                         <input type="file" name="urlSlider" class="form-control" id="urlSliderEdit">
                                         <input type="hidden" name="id" id="id" value="{{ old('id') }}">
                                     </div>
@@ -145,15 +142,6 @@
                                           <small style="color:red">* {{$errors->first('keteranganSlider')}}</small>
                                         @endif
                                         <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Slider..." name="keteranganSlider" id="keteranganSliderEdit">{{ old('keteranganSlider') }}</textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group mandatory">
-                                    <div class="form-line">
-                                        <label>Status</label>
-                                        <select class="form-control show-tick" name="activated" id="activated">
-                                            <option value="1" id="flag_aktif" {{old('activated')=="1"? 'selected':''}}>Active</option>
-                                            <option value="0" id="flag_nonaktif" {{old('activated')=="0"? 'selected':''}}>Non Active</option>
-                                        </select>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn pull-right btn-primary">Simpan Perubahan</button>
@@ -227,7 +215,7 @@
 <script src="{{asset('theme/js/pages/forms/basic-form-elements.js')}}"></script>
 
 <script>
-  @if ($errors->has('judul') || $errors->has('keteranganSlider') || $errors->has('activated')))
+  @if ($errors->has('judul') || $errors->has('keteranganSlider'))
   $('#modaledit').modal('show');
   @endif
 
@@ -257,18 +245,11 @@
         var id = data.id;
         var judul = data.judul;
         var keterangan_slider = data.keterangan_slider;
-        var activated = data.activated;
         var url_slider = data.url_slider;
 
         $('#id').attr('value', id);
-        $('#gambarSlider').attr('src', "{{url('_thumbs/slider')}}/"+url_slider);
         $('#judulEdit').val(judul);
         $('#keteranganSliderEdit').val(keterangan_slider);
-        if(activated=="1") {
-          $('#flag_aktif').attr('selected', true);
-        } else {
-          $('#flag_nonaktif').attr('selected', true);
-        }
       }
     })
   });
