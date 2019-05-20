@@ -92,10 +92,10 @@ class EventsController extends Controller
                                data-keyboard="false"><i class="material-icons">lock_open</i></a>';
              }
 
-             $strUpd = '<a href="profile.edit/'.$query->id_events.'" class="btn btn-success btn-circle waves-effect waves-circle waves-float">
+             $strUpd = '<a href="admin/events.edit/'.$query->id_events.'" class="btn btn-success btn-circle waves-effect waves-circle waves-float">
                            <i class="material-icons">open_in_new</i></a>';
 
-             $strView = '<a href="profile.view/'.$query->id_events.'" class="btn btn-primary btn-circle waves-effect waves-circle waves-float">
+             $strView = '<a href="admin/events.view/'.$query->id_events.'" class="btn btn-primary btn-circle waves-effect waves-circle waves-float">
                            <i class="material-icons">pageview</i></a>';
 
              if (Auth::user()->id_role != 4) {

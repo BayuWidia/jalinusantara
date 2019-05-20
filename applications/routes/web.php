@@ -104,7 +104,8 @@ Route::get('admin/delete-article/{id}/{status}', 'ArticleController@destroy')->n
 Route::post('admin/edit-article', 'ArticleController@update')->name('article.update');
 Route::get('admin/headline-article/{id}', 'ArticleController@headline')->name('article.headline');
 Route::get('admin/publish-article/{id}', 'ArticleController@show')->name('article.show');
-Route::get('admin/bind-article/{id}', 'ArticleController@edit')->name('article.edit');
+Route::get('admin/profile.edit/{id}', 'ArticleController@edit')->name('article.edit');
+Route::get('admin/article.view/{id}', 'ArticleController@view')->name('article.view');
 
 
 //Menu event
@@ -116,7 +117,8 @@ Route::get('admin/delete-events/{id}/{status}', 'EventsController@destroy')->nam
 Route::post('admin/edit-events', 'EventsController@update')->name('events.update');
 Route::get('admin/headline-events/{id}', 'EventsController@headline')->name('events.headline');
 Route::get('admin/publish-events/{id}', 'EventsController@show')->name('events.show');
-Route::get('admin/bind-events/{id}', 'EventsController@edit')->name('events.edit');
+Route::get('admin/events.edit/{id}', 'EventsController@edit')->name('events.edit');
+Route::get('admin/events.view/{id}', 'EventsController@view')->name('events.view');
 
 
 //profile
