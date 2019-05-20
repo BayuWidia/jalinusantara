@@ -99,7 +99,7 @@ class ArticleController extends Controller
                            <i class="material-icons">open_in_new</i></a>';
 
              $strView = '<a href="admin/article.view/'.$query->id_informasi.'" class="btn btn-primary btn-circle waves-effect waves-circle waves-float">
-                           <i class="material-icons">pageview</i></a>';
+                           <i class="material-icons">remove_red_eye</i></a>';
 
              if (Auth::user()->id_role != 4) {
                    return $strHeadline.' '.$strPublish.' '.$strUpd.' '.$strDelete.' '.$strView;
@@ -212,6 +212,8 @@ class ArticleController extends Controller
           return redirect()->route('article.index')->with('messagefail', 'Gambar article harus di upload.');
         }
 
+        \LogActivities::insLogActivities('log insert successfully.');
+
         return redirect()->route('article.index')->with('message', 'Berhasil memasukkan article baru.');
     }
 
@@ -233,6 +235,8 @@ class ArticleController extends Controller
         $set->updated_by = Auth::user()->id;
         $set->save();
 
+        \LogActivities::insLogActivities('log publish successfully.');
+
         return redirect()->route('article.index')->with('message', 'Berhasil mengubah publish article.');
     }
 
@@ -247,6 +251,8 @@ class ArticleController extends Controller
         }
         $set->updated_by = Auth::user()->id;
         $set->save();
+
+        \LogActivities::insLogActivities('log headline successfully.');
 
         return redirect()->route('article.index')->with('message', 'Berhasil mengubah headline article.');
     }
@@ -329,6 +335,8 @@ class ArticleController extends Controller
         $set->updated_by = Auth::user()->id;
         $set->save();
 
+        \LogActivities::insLogActivities('log update successfully.');
+
         return redirect()->route('article.index')->with('message', 'Berhasil mengubah article.');
     }
 
@@ -349,6 +357,8 @@ class ArticleController extends Controller
         }
         $set->updated_by = Auth::user()->id;
         $set->save();
+
+        \LogActivities::insLogActivities('log destroy successfully.');
 
         return redirect()->route('article.index')->with('message', 'Berhasil mengubah status article.');
     }

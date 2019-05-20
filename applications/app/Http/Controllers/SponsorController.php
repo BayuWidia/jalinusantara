@@ -73,6 +73,8 @@ class SponsorController extends Controller
             return redirect()->route('sponsor.index')->with('messagefail', 'Gambar sponsor harus di upload.');
           }
 
+          \LogActivities::insLogActivities('log insert successfully.');
+
           return redirect()->route('sponsor.index')->with('message', 'Berhasil memasukkan sponsor baru.');
     }
 
@@ -86,6 +88,8 @@ class SponsorController extends Controller
         }
         $set->updated_by = Auth::user()->id;
         $set->save();
+
+        \LogActivities::insLogActivities('log publish successfully.');
 
         return redirect()->route('sponsor.index')->with('message', 'Berhasil mengubah publish sponsor.');
     }
@@ -131,6 +135,8 @@ class SponsorController extends Controller
         $set->updated_by = Auth::user()->id;
         $set->save();
 
+        \LogActivities::insLogActivities('log update successfully.');
+
         return redirect()->route('sponsor.index')->with('message', 'Berhasil mengubah konten sponsor.');
     }
 
@@ -144,6 +150,8 @@ class SponsorController extends Controller
         }
         $set->updated_by = Auth::user()->id;
         $set->save();
+
+        \LogActivities::insLogActivities('log destroy successfully.');
 
         return redirect()->route('sponsor.index')->with('message', 'Berhasil mengubah status sponsor.');
     }

@@ -14,7 +14,7 @@ use Datatables;
 
 class LogFilesController extends Controller
 {
-  
+
     public function __construct()
     {
         $this->middleware('isAdmin');
@@ -25,10 +25,6 @@ class LogFilesController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('isAdmin');
-    }
 
   /**
    * Show the application dashboard.

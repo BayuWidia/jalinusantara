@@ -59,6 +59,8 @@ class MedsosController extends Controller
           $set->created_by = Auth::user()->id;
           $set->save();
 
+          \LogActivities::insLogActivities('log insert successfully.');
+
           return redirect()->route('medsos.index')->with('message', 'Berhasil memasukkan medsos baru.');
     }
 
@@ -92,6 +94,8 @@ class MedsosController extends Controller
         $set->updated_by = Auth::user()->id;
         $set->save();
 
+        \LogActivities::insLogActivities('log update successfully.');
+
         return redirect()->route('medsos.index')->with('message', 'Berhasil mengubah konten medsos.');
     }
 
@@ -105,6 +109,8 @@ class MedsosController extends Controller
         }
         $set->updated_by = Auth::user()->id;
         $set->save();
+
+        \LogActivities::insLogActivities('log destroy successfully.');
 
         return redirect()->route('medsos.index')->with('message', 'Berhasil mengubah status medsos.');
     }

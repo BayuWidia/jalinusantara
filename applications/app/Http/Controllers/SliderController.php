@@ -71,6 +71,8 @@ class SliderController extends Controller
             return redirect()->route('slider.index')->with('messagefail', 'Gambar slider harus di upload.');
           }
 
+          \LogActivities::insLogActivities('log insert successfully.');
+
           return redirect()->route('slider.index')->with('message', 'Berhasil memasukkan slider baru.');
     }
 
@@ -85,6 +87,8 @@ class SliderController extends Controller
 
         $set->updated_by = Auth::user()->id;
         $set->save();
+
+        \LogActivities::insLogActivities('log publish successfully.');
 
         return redirect()->route('slider.index')->with('message', 'Berhasil mengubah publish slider.');
     }
@@ -128,6 +132,8 @@ class SliderController extends Controller
         $set->updated_by = Auth::user()->id;
         $set->save();
 
+        \LogActivities::insLogActivities('log update successfully.');
+
         return redirect()->route('slider.index')->with('message', 'Berhasil mengubah konten slider.');
     }
 
@@ -142,6 +148,8 @@ class SliderController extends Controller
         }
         $set->updated_by = Auth::user()->id;
         $set->save();
+
+        \LogActivities::insLogActivities('log destroy successfully.');
 
         return redirect()->route('slider.index')->with('message', 'Berhasil mengubah status slider.');
     }

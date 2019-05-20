@@ -75,7 +75,7 @@ Route::get('admin/bind-kategori/{id}', 'KategoriController@edit')->name('kategor
 
 //log Apps activity
 Route::get('log.activity', 'LogActivitiesController@index')->name('log.activity');
-Route::get('datatables-log-activity', ['as'=>'datatables.log.activity', 'uses'=>'LogActivitiesController@getDataForDataTable']);
+Route::get('datatables.log.activity', ['as'=>'datatables.log.activity', 'uses'=>'LogActivitiesController@getDataForDataTable']);
 
 //log Apps files
 Route::get('log.files', 'LogFilesController@index')->name('log.files');

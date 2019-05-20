@@ -24,13 +24,13 @@
                         <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="tabelinfo">
                             <thead>
                                 <tr>
-                                    <th>Subject</th>
-                                    <th>Url</th>
-                                    <th>Method</th>
-                                    <th>IP</th>
-                                    <th>Agent</th>
-                                    <th>By</th>
-                                    <th>Date</th>
+                                    <th style="text-align:center">Subject</th>
+                                    <th style="text-align:center">Url</th>
+                                    <th style="text-align:center">Method</th>
+                                    <th style="text-align:center">IP</th>
+                                    <th style="text-align:center">Agent</th>
+                                    <th style="text-align:center">By</th>
+                                    <th style="text-align:center">Date</th>
                                 </tr>
                             </thead>
                         </table>
@@ -49,7 +49,7 @@
 
 <script>
   $(document).ready(function() {
-    $('#tableInfo').DataTable({
+    $('#tabelinfo').DataTable({
         responsive: true,
         processing: true,
         serverSide: true,

@@ -37,8 +37,8 @@ class LogActivities extends Model
 	 }
 
    public static function insLogActivities($params){
-      $logId = DB::select('INSERT into log_activities(subject, url, method, ip, agent, created_by, created_date) values (?, ?, ?, ?, ?, ?, ?) returning id_log_activities',
-                              [$params['subject'], $params['url'], $params['method'], $params['ip'], $params['agent'],$params['createdBy'], 'now()']);
+      $logId = DB::select('INSERT into log_activities(subject, url, method, ip, agent, created_by, created_at) values (?, ?, ?, ?, ?, ?, ?)',
+                              [$params['subject'], $params['url'], $params['method'], $params['ip'], $params['agent'], $params['createdBy'], $params['createdAt']]);
       return $logId;
    }
 

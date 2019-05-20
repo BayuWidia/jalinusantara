@@ -61,7 +61,7 @@ class EventsController extends Controller
        return Datatables::of($querys)
          ->addColumn('action', function($query){
              if ($query->flag_headline == "1") {
-               $strHeadline = '<a href="#" class="btn btn-deep-purple btn-circle waves-effect waves-circle waves-float flagheadline"
+               $strHeadline = '<a href="#" class="btn bg-deep-purple btn-circle waves-effect waves-circle waves-float flagheadline"
                                data-toggle="modal" data-target="#modalflagheadline" data-value="'.$query->id_events.'"
                                data-backdrop="static" data-keyboard="false"><i class="material-icons">favorite</i></a>';
              } else {
@@ -96,15 +96,15 @@ class EventsController extends Controller
                            <i class="material-icons">open_in_new</i></a>';
 
              $strView = '<a href="admin/events.view/'.$query->id_events.'" class="btn btn-primary btn-circle waves-effect waves-circle waves-float">
-                           <i class="material-icons">pageview</i></a>';
+                           <i class="material-icons">remove_red_eye</i></a>';
 
              if (Auth::user()->id_role != 4) {
-                   return $strHeadline.$strPublish.$strUpd.$strDelete.$strView;
+                   return $strHeadline.' '.$strPublish.' '.$strUpd.' '.$strDelete.' '.$strView;
              } else{
                    if ($query->flag_publish == "1") {
                      return $strView;
                    } else {
-                     return $strUpd.$strDelete.$strView;
+                     return $strUpd.' '.$strDelete.' '.$strView;
                    }
              }
 
@@ -150,7 +150,6 @@ class EventsController extends Controller
      public function store(Request $request)
      {
          //
-         // dd($request->all());
          $messages = [
            'judul.required' => 'Tidak boleh kosong.',
            'kategoriId.required' => 'Tidak boleh kosong.',
@@ -197,11 +196,12 @@ class EventsController extends Controller
              $flagHeadline=1;
            }
 
-           $setTglPosting = date('Y-m-d');
+           $setStartDate = date("Y-m-d", strtotime($request->tglAwal));
+           $setEndDate = date("Y-m-d", strtotime($request->tglAkhir));
            $set = new Events;
            $set->judul_event = $request->judul;
-           $set->tanggal_mulai = $request->tglAwal;
-           $set->tanggal_akhir = $request->tglAkhir;
+           $set->tanggal_mulai = $setStartDate;
+           $set->tanggal_akhir = $setEndDate;
            $set->id_kategori = $request->kategoriId;
            $set->url_foto = $photoName;
            $set->maps = $request->maps;
@@ -211,14 +211,14 @@ class EventsController extends Controller
            $set->isi_event = $request->isiKonten;
            $set->tags = $request->tags;
            $set->flag_headline = $flagHeadline;
-           $set->tanggal_publish = $setTglPosting;
-           $set->flag_status = 'events';
            $set->activated = 1;
            $set->created_by = Auth::user()->id;
            $set->save();
          } else {
            return redirect()->route('events.index')->with('messagefail', 'Gambar events harus di upload.');
          }
+
+         \LogActivities::insLogActivities('log insert successfully.');
 
          return redirect()->route('events.index')->with('message', 'Berhasil memasukkan events baru.');
      }
@@ -241,6 +241,8 @@ class EventsController extends Controller
          $set->updated_by = Auth::user()->id;
          $set->save();
 
+         \LogActivities::insLogActivities('log publish successfully.');
+
          return redirect()->route('events.index')->with('message', 'Berhasil mengubah publish events.');
      }
 
@@ -255,6 +257,8 @@ class EventsController extends Controller
          }
          $set->updated_by = Auth::user()->id;
          $set->save();
+
+         \LogActivities::insLogActivities('log headline successfully.');
 
          return redirect()->route('events.index')->with('message', 'Berhasil mengubah headline events.');
      }
@@ -282,7 +286,7 @@ class EventsController extends Controller
 
          $getKategori = MasterKategori::where('flag_utama','=' ,'events')->get();
 
-         return view('backend/article/edit', compact('viewEvents', 'getKategori'));
+         return view('backend/events/edit', compact('viewEvents', 'getKategori'));
      }
 
      /**
@@ -336,6 +340,7 @@ class EventsController extends Controller
          $set->tanggal_mulai = $request->tglAwal;
          $set->tanggal_akhir = $request->tglAkhir;
          $set->id_kategori = $request->kategoriId;
+         $file = $request->file('urlFoto');
          if($file!="") {
            $photoName = time(). '.' . $file->getClientOriginalExtension();
            Image::make($file)->fit(555,280)->save('images/'. $photoName);
@@ -348,11 +353,11 @@ class EventsController extends Controller
          $set->isi_event = $request->isiKonten;
          $set->tags = $request->tags;
          $set->flag_headline = $flagHeadline;
-         $set->tanggal_publish = $setTglPosting;
-         $set->flag_status = 'events';
          $set->activated = 1;
          $set->updated_by = Auth::user()->id;
          $set->save();
+
+         \LogActivities::insLogActivities('log update successfully.');
 
          return redirect()->route('events.index')->with('message', 'Berhasil mengubah events.');
      }
@@ -374,6 +379,8 @@ class EventsController extends Controller
          }
          $set->updated_by = Auth::user()->id;
          $set->save();
+
+         \LogActivities::insLogActivities('log destroy successfully.');
 
          return redirect()->route('events.index')->with('message', 'Berhasil mengubah status events.');
      }

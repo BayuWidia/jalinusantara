@@ -16,7 +16,7 @@ use Carbon\Carbon;
 
 class LogActivitiesController extends Controller
 {
-  
+
     public function __construct()
     {
         $this->middleware('isAdmin');
@@ -27,10 +27,6 @@ class LogActivitiesController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('isAdmin');
-    }
 
   /**
    * Show the application dashboard.
@@ -45,7 +41,7 @@ class LogActivitiesController extends Controller
     public function getDataForDataTable()
     {
         $querys = LogActivities::select(['log_activities.subject','log_activities.url','log_activities.method','log_activities.ip',
-                                        'log_activities.agent','log_activities.created_by','log_activities.created_date'])->orderBy('log_activities.created_date', 'DESC');
+                                        'log_activities.agent','log_activities.created_by','log_activities.created_at'])->orderBy('log_activities.created_at', 'DESC');
 
       return Datatables::of($querys)
         ->editColumn('created_date', function ($query)

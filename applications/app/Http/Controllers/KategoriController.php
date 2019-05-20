@@ -13,7 +13,7 @@ use App\Http\Requests;
 
 class KategoriController extends Controller
 {
-  
+
     public function __construct()
     {
         $this->middleware('isAdmin');
@@ -62,6 +62,8 @@ class KategoriController extends Controller
           $set->created_by = Auth::user()->id;
           $set->save();
 
+          \LogActivities::insLogActivities('log insert successfully.');
+
           return redirect()->route('kategori.index',$request->flagUtama)->with('message', 'Berhasil memasukkan kategori baru.');
     }
 
@@ -98,6 +100,8 @@ class KategoriController extends Controller
         $set->updated_by = Auth::user()->id;
         $set->save();
 
+        \LogActivities::insLogActivities('log update successfully.');
+
         return redirect()->route('kategori.index',$request->flagUtamaEdit)->with('message', 'Berhasil mengubah kategori.');
     }
 
@@ -111,6 +115,8 @@ class KategoriController extends Controller
         }
         $set->updated_by = Auth::user()->id;
         $set->save();
+
+        \LogActivities::insLogActivities('log destroy successfully.');
 
         return redirect()->route('kategori.index',$flag)->with('message', 'Berhasil mengubah status kategori.');
     }

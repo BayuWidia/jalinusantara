@@ -70,6 +70,8 @@ class VideoController extends Controller
         $set->updated_by = Auth::user()->id;
         $set->save();
 
+        \LogActivities::insLogActivities('log insert successfully.');
+
         return redirect()->route('video.index')->with('message', 'Berhasil memasukkan video baru.');
     }
 
@@ -86,6 +88,8 @@ class VideoController extends Controller
         $set->updated_by = Auth::user()->id;
         $set->save();
 
+        \LogActivities::insLogActivities('log publish successfully.');
+
         return redirect()->route('video.index')->with('message', 'Berhasil mengubah publish video.');
     }
 
@@ -100,6 +104,8 @@ class VideoController extends Controller
         }
         $set->updated_by = Auth::user()->id;
         $set->save();
+
+        \LogActivities::insLogActivities('log update utama video successfully.');
 
         return redirect()->route('video.index')->with('message', 'Berhasil mengubah utama video.');
     }
@@ -136,6 +142,8 @@ class VideoController extends Controller
         $set->updated_by = Auth::user()->id;
         $set->save();
 
+        \LogActivities::insLogActivities('log update successfully.');
+
         return redirect()->route('video.index')->with('message', 'Berhasil mengubah konten video.');
     }
 
@@ -150,6 +158,8 @@ class VideoController extends Controller
         }
         $set->updated_by = Auth::user()->id;
         $set->save();
+
+        \LogActivities::insLogActivities('log destroy successfully.');
 
         return redirect()->route('video.index')->with('message', 'Berhasil mengubah status video.');
     }

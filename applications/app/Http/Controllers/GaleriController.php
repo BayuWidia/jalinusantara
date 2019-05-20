@@ -67,6 +67,8 @@ class GaleriController extends Controller
             return redirect()->route('galeri.index')->with('messagefail', 'Gambar galeri harus di upload.');
           }
 
+          \LogActivities::insLogActivities('log insert successfully.');
+
           return redirect()->route('galeri.index')->with('message', 'Berhasil memasukkan galeri baru.');
     }
 
@@ -80,6 +82,8 @@ class GaleriController extends Controller
         }
         $set->updated_by = Auth::user()->id;
         $set->save();
+
+        \LogActivities::insLogActivities('log publish successfully.');
 
         return redirect()->route('galeri.index')->with('message', 'Berhasil mengubah publish galeri.');
     }
@@ -123,6 +127,8 @@ class GaleriController extends Controller
         $set->updated_by = Auth::user()->id;
         $set->save();
 
+        \LogActivities::insLogActivities('log update successfully.');
+
         return redirect()->route('galeri.index')->with('message', 'Berhasil mengubah konten galeri.');
     }
 
@@ -136,6 +142,8 @@ class GaleriController extends Controller
         }
         $set->updated_by = Auth::user()->id;
         $set->save();
+
+        \LogActivities::insLogActivities('log destroy successfully.');
 
         return redirect()->route('galeri.index')->with('message', 'Berhasil mengubah status galeri.');
     }

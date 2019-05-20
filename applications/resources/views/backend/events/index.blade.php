@@ -162,7 +162,7 @@
 <script>
   $("#tabelinfo").on("click", "a.flagheadline", function(){
     var a = $(this).data('value');
-    $('#setFlagHeadline').attr('href', '{{url('admin/publish-events/')}}/'+a);
+    $('#setFlagHeadline').attr('href', '{{url('admin/headline-events/')}}/'+a);
   });
 
   $("#tabelinfo").on("click", "a.flagpublish", function(){

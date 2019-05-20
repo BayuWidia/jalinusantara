@@ -27,15 +27,15 @@
             <div class="card">
                 <div class="header bg-orange">
                   <h2>
-                      @if(isset($editArticle))
-                        Edit Article Jalinusantara
+                      @if(isset($editEvents))
+                        Edit Events Jalinusantara
                       @else
-                        View Article Jalinusantara
+                        View Events Jalinusantara
                       @endif
                   </h2>
                 </div>
                 <div class="body">
-                  <form action="{{route('article.update')}}" method="post" enctype="multipart/form-data">
+                  <form action="{{route('events.update')}}" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="row clearfix">
                         <div class="col-sm-12">
@@ -45,12 +45,12 @@
                                     @if ($errors->has('judul'))
                                       <small style="color:red">* {{$errors->first('judul')}}</small>
                                     @endif
-                                    @if(isset($editArticle))
-                                      <input type="text" class="form-control" value="{{$editArticle->judul_informasi}}" placeholder="Ketikkan Judul..." name="judul" id="judul"/>
-                                      <input type="hidden" value="{{$editArticle->id}}" name="id" id="id"/>
+                                    @if(isset($editEvents))
+                                      <input type="text" class="form-control" value="{{$editEvents->judul_event}}" placeholder="Ketikkan Judul..." name="judul" id="judul"/>
+                                      <input type="hidden" value="{{$editEvents->id}}" name="id" id="id"/>
                                     @else
-                                      <input type="text" disabled class="form-control" value="{{$viewArticle->judul_informasi}}" placeholder="Ketikkan Judul..." name="judul" id="judul"/>
-                                      <input type="hidden" value="{{$viewArticle->id}}" name="id" id="id"/>
+                                      <input type="text" disabled class="form-control" value="{{$viewEvents->judul_event}}" placeholder="Ketikkan Judul..." name="judul" id="judul"/>
+                                      <input type="hidden" value="{{$viewEvents->id}}" name="id" id="id"/>
                                     @endif
                                   </div>
                             </div>
@@ -60,11 +60,11 @@
                                   @if ($errors->has('kategoriId'))
                                     <small style="color:red">* {{$errors->first('kategoriId')}}</small>
                                   @endif
-                                      @if(isset($editArticle))
+                                      @if(isset($editEvents))
                                     <select class="form-control show-tick" name="kategoriId" id="kategoriId">
                                         <option value="-- Pilih --">-- Pilih --</option>
                                         @foreach($getKategori as $key)
-                                          @if($editArticle->id_kategori==$key->id)
+                                          @if($editEvents->id_kategori==$key->id)
                                             <option value="{{$key->id}}" selected>{{$key->nama_kategori}}</option>
                                           @else
                                             <option value="{{$key->id}}" {{ old('kategoriId') == $key->id ? 'selected=""' : ''}}>{{$key->nama_kategori}}</option>
@@ -74,7 +74,7 @@
                                     <select class="form-control show-tick" name="kategoriId" id="kategoriId" disabled>
                                         <option value="-- Pilih --">-- Pilih --</option>
                                         @foreach($getKategori as $key)
-                                          @if($viewArticle->id_kategori==$key->id)
+                                          @if($viewEvents->id_kategori==$key->id)
                                             <option value="{{$key->id}}" selected>{{$key->nama_kategori}}</option>
                                           @endif
                                         @endforeach
@@ -82,7 +82,92 @@
                                   </select>
                               </div>
                             </div>
-                            @if(isset($editArticle))
+                            <div class="form-group mandatory">
+                                <div class="form-line">
+                                    <label>Fasilitator</label>
+                                    @if ($errors->has('fasilitator'))
+                                      <small style="color:red">* {{$errors->first('fasilitator')}}</small>
+                                    @endif
+                                    @if(isset($editEvents))
+                                      <input type="text" class="form-control" value="{{$editEvents->fasilitator}}" placeholder="Ketikkan Fasilitator..." name="fasilitator" id="fasilitator"/>
+                                    @else
+                                      <input type="text" class="form-control" value="{{$viewEvents->fasilitator}}" placeholder="Ketikkan Fasilitator..." name="fasilitator" id="fasilitator" disabled/>
+                                    @endif
+
+                                </div>
+                            </div>
+                            <div class="form-group mandatory">
+                                <div class="form-line">
+                                    <label>Jumlah Peserta</label>
+                                    @if ($errors->has('jmlPeserta'))
+                                      <small style="color:red">* {{$errors->first('jmlPeserta')}}</small>
+                                    @endif
+                                    @if(isset($editEvents))
+                                      <input type="number" class="form-control" value="{{$editEvents->jumlah_peserta}}" placeholder="Ketikkan Jumlah Peserta..." name="jmlPeserta" id="jmlPeserta"/>
+                                    @else
+                                      <input type="number" class="form-control" value="{{$viewEvents->jumlah_peserta}}" placeholder="Ketikkan Jumlah Peserta..." name="jmlPeserta" id="jmlPeserta" disabled/>
+                                    @endif
+
+                                </div>
+                            </div>
+                            <div class="form-group mandatory">
+                                <div class="form-line">
+                                    <label>Lokasi</label>
+                                    @if ($errors->has('lokasi'))
+                                      <small style="color:red">* {{$errors->first('lokasi')}}</small>
+                                    @endif
+                                    @if(isset($editEvents))
+                                      <input type="text" class="form-control" value="{{$editEvents->lokasi}}" placeholder="Ketikkan Lokasi..." name="lokasi" id="lokasi"/>
+                                    @else
+                                      <input type="text" class="form-control" value="{{$viewEvents->lokasi}}" placeholder="Ketikkan Lokasi..." name="lokasi" id="lokasi" disabled/>
+                                    @endif
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <label>Maps</label>
+                                    @if ($errors->has('maps'))
+                                      <small style="color:red">* {{$errors->first('maps')}}</small>
+                                    @endif
+                                    @if(isset($editEvents))
+                                      <input type="text" class="form-control" value="{{$editEvents->maps}}" placeholder="Ketikkan Maps..." name="maps" id="maps"/>
+                                    @else
+                                      <input type="text" class="form-control" value="{{$viewEvents->maps}}" placeholder="Ketikkan Maps..." name="maps" id="maps" disabled/>
+                                    @endif
+                                </div>
+                                <div>
+                                  <span class="text-muted"><i>* Isikan dengan titik koordinat dari google.</i></span>
+                                </div>
+                            </div>
+                            <div class="form-group mandatory">
+                                <label>Tanggal</label>
+                                @if ($errors->has('tglAwal'))
+                                  <small style="color:red">* {{$errors->first('tglAwal')}}</small>
+                                @endif
+                                @if(isset($editEvents))
+                                  <div class="input-daterange input-group" id="bs_datepicker_range_container">
+                                      <div class="form-line">
+                                          <input type="text" class="form-control" value="{{$editEvents->tanggal_mulai}}" placeholder="Ketikkan Tanggal awal..." name="tglAwal" id="tglAwal">
+                                      </div>
+                                      <span class="input-group-addon">sampai</span>
+                                      <div class="form-line">
+                                          <input type="text" class="form-control" value="{{$editEvents->tanggal_akhir}}" placeholder="Ketikkan Tanggal Akhir..." name="tglAkhir" id="tglAkhir">
+                                      </div>
+                                  </div>
+                                @else
+                                  <div class="input-daterange input-group" id="bs_datepicker_range_container">
+                                      <div class="form-line">
+                                          <input type="text" class="form-control" value="{{$viewEvents->tanggal_mulai}}" placeholder="Ketikkan Tanggal awal..." name="tglAwal" id="tglAwal" disabled>
+                                      </div>
+                                      <span class="input-group-addon">sampai</span>
+                                      <div class="form-line">
+                                          <input type="text" class="form-control" value="{{$viewEvents->tanggal_akhir}}" placeholder="Ketikkan Tanggal Akhir..." name="tglAkhir" id="tglAkhir" disabled>
+                                      </div>
+                                  </div>
+                                @endif
+                            </div>
+                            @if(isset($editEvents))
                               <div class="form-group mandatory">
                                   <div class="form-line">
                                       <label>Gambar Article</label>
@@ -100,8 +185,8 @@
                             @else
                               <div class="form-group mandatory">
                                   <label>Gambar Article</label>
-                                  @if($viewArticle->url_foto!="")
-                                    <img src="{{url('images/')}}/{{$viewArticle->url_foto}}" class="js-animating-object img-responsive">
+                                  @if($viewEvents->url_foto!="")
+                                    <img src="{{url('images/')}}/{{$viewEvents->url_foto}}" class="js-animating-object img-responsive">
                                   @else
                                     <img src="{{url('images/')}}/no_image.jpg" class="js-animating-object img-responsive">
                                   @endif
@@ -118,10 +203,10 @@
                                       <small style="color:red">* {{$errors->first('tags')}}</small>
                                     @endif
                                     <br>
-                                    @if(isset($editArticle))
-                                      <input type="text" class="form-control" value="{{$editArticle->tags}}" name="tags" data-role="tagsinput" id="tagsinput"/>
+                                    @if(isset($editEvents))
+                                      <input type="text" class="form-control" value="{{$editEvents->tags}}" name="tags" data-role="tagsinput" id="tagsinput"/>
                                     @else
-                                      <input type="text" class="form-control" value="{{$viewArticle->tags}}" name="tags" data-role="tagsinput" id="tagsinput" disabled/>
+                                      <input type="text" class="form-control" value="{{$viewEvents->tags}}" name="tags" data-role="tagsinput" id="tagsinput" disabled/>
                                     @endif
                                 </div>
                                 <div>
@@ -132,14 +217,14 @@
                                 <div class="form-line">
                                     <label>Headline</label>
                                     <br>
-                                    @if(isset($editArticle))
-                                        @if($editArticle->flag_headline == 1)
+                                    @if(isset($editEvents))
+                                        @if($editEvents->flag_headline == 1)
                                           <input type="checkbox" id="md_checkbox_21" name="flagHeadline" class="filled-in chk-col-red" value="1" checked/>
                                         @else
                                           <input type="checkbox" id="md_checkbox_21" name="flagHeadline" class="filled-in chk-col-red" value="1" />
                                         @endif
                                     @else
-                                      @if($viewArticle->flag_headline == 1)
+                                      @if($viewEvents->flag_headline == 1)
                                         <input type="checkbox" id="md_checkbox_21" name="flagHeadline" class="filled-in chk-col-red" value="1" checked disabled/>
                                       @else
                                         <input type="checkbox" id="md_checkbox_21" name="flagHeadline" class="filled-in chk-col-red" value="1" disabled/>
@@ -154,17 +239,17 @@
                                   @if ($errors->has('isiKonten'))
                                     <small style="color:red">* {{$errors->first('isiKonten')}}</small>
                                   @endif
-                                  @if(isset($editArticle))
+                                  @if(isset($editEvents))
                                     <textarea id="ckeditor" name="isiKonten">
-                                      {{$editArticle->isi_informasi}}
+                                      {{$editEvents->isi_event}}
                                   @else
                                     <textarea id="ckeditor" name="isiKonten" disabled>
-                                      {{$viewArticle->isi_informasi}}
+                                      {{$viewEvents->isi_event}}
                                   @endif
                                    </textarea>
                               </div>
                             </div>
-                            @if(isset($editArticle))
+                            @if(isset($editEvents))
                             <button type="submit" class="btn pull-right btn-primary">Simpan Perubahan</button>
                             @endif
                             <a href="{{ URL::previous() }}" class="btn btn-default pull-left btn-flat" data-dismiss="modal">Tidak</a>

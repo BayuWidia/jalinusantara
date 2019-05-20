@@ -24,11 +24,11 @@
                         <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="tabelinfo">
                             <thead>
                                 <tr>
-                                  <th>#</th>
-                                  <th>File Name</th>
-                                  <th>Size</th>
-                                  <th>Time</th>
-                                  <th>Action</th>
+                                  <th style="text-align:center">#</th>
+                                  <th style="text-align:center">File Name</th>
+                                  <th style="text-align:center">Size</th>
+                                  <th style="text-align:center">Time</th>
+                                  <th style="text-align:center;width:12%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
