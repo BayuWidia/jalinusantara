@@ -97,7 +97,7 @@ Route::get('admin/profile.view/{id}', 'ProfileController@view')->name('profile.v
 
 //Menu article
 Route::get('article.index', 'ArticleController@index')->name('article.index');
-Route::get('datatables-article', ['as'=>'datatables.article', 'uses'=>'ArticleController@getDataForDataTable']);
+Route::get('datatables.article', ['as'=>'datatables.article', 'uses'=>'ArticleController@getDataForDataTable']);
 Route::get('profile.article', 'ArticleController@create')->name('article.tambah');
 Route::post('admin/store-article', 'ArticleController@store')->name('article.store');
 Route::get('admin/delete-article/{id}/{status}', 'ArticleController@destroy')->name('article.destroy');
@@ -109,7 +109,7 @@ Route::get('admin/bind-article/{id}', 'ArticleController@edit')->name('article.e
 
 //Menu event
 Route::get('events.index', 'EventsController@index')->name('events.index');
-Route::get('datatables-events', ['as'=>'datatables.event', 'uses'=>'EventsController@getDataForDataTable']);
+Route::get('datatables.events', ['as'=>'datatables.event', 'uses'=>'EventsController@getDataForDataTable']);
 Route::get('profile.events', 'EventsController@create')->name('events.tambah');
 Route::post('admin/store-events', 'EventsController@store')->name('events.store');
 Route::get('admin/delete-events/{id}/{status}', 'EventsController@destroy')->name('events.destroy');

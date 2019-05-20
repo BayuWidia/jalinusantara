@@ -44,7 +44,7 @@ class EventsController extends Controller
              ->select(['events.id as id_events',
                        'events.judul_event', 'master_kategori.nama_kategori',
                        'events.lokasi', 'events.fasilitator',
-                       'events.flag_headline', 'events.flag_publish'])
+                       'events.flag_headline', 'events.flag_publish', 'events.activated'])
                        ->orderBy('id_events', 'DESC');
        } else {
          $querys = Events::leftJoin('master_kategori','informasi.id_kategori','=','master_kategori.id')
@@ -52,7 +52,7 @@ class EventsController extends Controller
              ->select(['events.id as id_events',
                        'events.judul_event', 'master_kategori.nama_kategori',
                        'events.lokasi', 'events.fasilitator',
-                       'events.flag_headline', 'events.flag_publish'])
+                       'events.flag_headline', 'events.flag_publish', 'events.activated'])
                        ->where('events.created_by', '=', Auth::user()->id)
                        ->orderBy('id_events', 'DESC');
        }
@@ -124,6 +124,7 @@ class EventsController extends Controller
              return "<span class='label bg-blue-grey'>Un Publish</span>";
            }
          })
+         ->removeColumn('activated')
          ->removeColumn('id_events')
          ->make();
      }

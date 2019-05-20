@@ -45,7 +45,7 @@ class ArticleController extends Controller
              ->select(['informasi.id as id_informasi',
                        'informasi.judul_informasi', 'master_kategori.nama_kategori',
                        'informasi.tanggal_publish', 'master_users.fullname',
-                       'informasi.flag_headline', 'informasi.flag_publish'])
+                       'informasi.flag_headline', 'informasi.flag_publish', 'informasi.activated'])
                        ->orderBy('id_informasi', 'DESC');
        } else {
          $querys = Informasi::leftJoin('master_kategori','informasi.id_kategori','=','master_kategori.id')
@@ -53,7 +53,7 @@ class ArticleController extends Controller
              ->select(['informasi.id as id_informasi',
                        'informasi.judul_informasi', 'master_kategori.nama_kategori',
                        'informasi.tanggal_publish', 'master_users.fullname',
-                       'informasi.flag_headline', 'informasi.flag_publish'])
+                       'informasi.flag_headline', 'informasi.flag_publish', 'informasi.activated'])
                        ->where('informasi.created_by', '=', Auth::user()->id)
                        ->orderBy('id_informasi', 'DESC');
        }
@@ -130,6 +130,7 @@ class ArticleController extends Controller
              return "<span class='label bg-blue-grey'>Un Publish</span>";
            }
          })
+         ->removeColumn('activated')
          ->removeColumn('id_informasi')
          ->make();
      }

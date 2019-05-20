@@ -140,7 +140,7 @@
 
 <script>
   $(document).ready(function() {
-      $('#tableInfo').DataTable({
+      $('#tabelinfo').DataTable({
           responsive: true,
           processing: true,
           serverSide: true,
