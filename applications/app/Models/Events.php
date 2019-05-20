@@ -3,12 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
 
 class Events extends Model
 {
-
-    use Searchable;
 
     protected $table = 'events';
 
@@ -22,10 +19,5 @@ class Events extends Model
     public function kategori()
     {
       return $this->belongsTo('App\Models\MasterKategori', 'id_kategori');
-    }
-
-    public function searchableAs()
-    {
-        return 'berita';
     }
 }

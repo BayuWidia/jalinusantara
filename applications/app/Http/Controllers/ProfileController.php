@@ -40,6 +40,7 @@ class ProfileController extends Controller
             ->select(['informasi.id as id_informasi',
                       'informasi.judul_informasi', 'master_kategori.nama_kategori',
                       'informasi.tanggal_publish', 'informasi.flag_publish', 'informasi.activated'])
+                      ->where('informasi.flag_status', '=', 'profile')
                       ->orderBy('id_informasi', 'DESC');
       } else {
         $querys = Informasi::leftJoin('master_kategori','informasi.id_kategori','=','master_kategori.id')
@@ -48,6 +49,7 @@ class ProfileController extends Controller
                       'informasi.judul_informasi', 'master_kategori.nama_kategori',
                       'informasi.tanggal_publish', 'informasi.flag_publish', 'informasi.activated'])
                       ->where('informasi.created_by', '=', Auth::user()->id)
+                      ->where('informasi.flag_status', '=', 'profile')
                       ->orderBy('id_informasi', 'DESC');
       }
 
@@ -130,42 +132,42 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         //
-            $messages = [
-              'judul.required' => 'Tidak boleh kosong.',
-              'kategoriId.required' => 'Tidak boleh kosong.',
-              'isiKonten.required' => 'Tidak boleh kosong.',
-              'kategoriId.not_in' => 'Pilih salah satu.',
-            ];
+          $messages = [
+            'judul.required' => 'Tidak boleh kosong.',
+            'kategoriId.required' => 'Tidak boleh kosong.',
+            'isiKonten.required' => 'Tidak boleh kosong.',
+            'kategoriId.not_in' => 'Pilih salah satu.',
+          ];
 
-            $validator = Validator::make($request->all(), [
-                    'judul' => 'required',
-                    'kategoriId' => 'required',
-                    'isiKonten' => 'required',
-                    'kategoriId' => 'required|not_in:-- Pilih --',
-                ], $messages);
+          $validator = Validator::make($request->all(), [
+                  'judul' => 'required',
+                  'kategoriId' => 'required',
+                  'isiKonten' => 'required',
+                  'kategoriId' => 'required|not_in:-- Pilih --',
+              ], $messages);
 
-            if ($validator->fails()) {
-                return redirect()->route('profile.tambah')->withErrors($validator)->withInput();
-            }
+          if ($validator->fails()) {
+              return redirect()->route('profile.tambah')->withErrors($validator)->withInput();
+          }
 
-            $checkdouble = Informasi::where('id_kategori','=' ,$request->kategoriId)->get();
+          $checkdouble = Informasi::where('id_kategori','=' ,$request->kategoriId)->get();
 
-            if ($checkdouble != null) {
-              return redirect()->route('profile.tambah')->with('messagefail', 'Kategori sudah tersedia.');
-            }
+          if ($checkdouble != null) {
+            return redirect()->route('profile.tambah')->with('messagefail', 'Kategori sudah tersedia.');
+          }
 
-            $setTglPosting = date('Y-m-d');
-            $set = new Informasi;
-            $set->judul_informasi = $request->judul;
-            $set->id_kategori = $request->kategoriId;
-            $set->isi_informasi = $request->isiKonten;
-            $set->tanggal_publish = $setTglPosting;
-            $set->flag_status = 'profile';
-            $set->activated = 1;
-            $set->created_by = Auth::user()->id;
-            $set->save();
+          $setTglPosting = date('Y-m-d');
+          $set = new Informasi;
+          $set->judul_informasi = $request->judul;
+          $set->id_kategori = $request->kategoriId;
+          $set->isi_informasi = $request->isiKonten;
+          $set->tanggal_publish = $setTglPosting;
+          $set->flag_status = 'profile';
+          $set->activated = 1;
+          $set->created_by = Auth::user()->id;
+          $set->save();
 
-            return redirect()->route('profile.index')->with('message', 'Berhasil memasukkan profile baru.');
+          return redirect()->route('profile.index')->with('message', 'Berhasil memasukkan profile baru.');
     }
 
     /**
@@ -268,7 +270,7 @@ class ProfileController extends Controller
         $set->created_by = Auth::user()->id;
         $set->save();
 
-        return redirect()->route('profile.index')->with('message', 'Berhasil mengubah profile baru.');
+        return redirect()->route('profile.index')->with('message', 'Berhasil mengubah profile.');
     }
 
     /**

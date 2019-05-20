@@ -49,7 +49,7 @@
                                     <th style="text-align:center">Fasilitator</th>
                                     <th style="text-align:center">Headline</th>
                                     <th style="text-align:center">Publish</th>
-                                    <th style="text-align:center">Action</th>
+                                      <th style="text-align:center;width:25%">Action</th>
                                 </tr>
                             </thead>
                         </table>
@@ -144,7 +144,7 @@
           responsive: true,
           processing: true,
           serverSide: true,
-          ajax: '{!! route('datatables.article') !!}',
+          ajax: '{!! route('datatables.events') !!}',
           column: [
             {data: '0', name: 'judul_event'},
             {data: '1', name: 'nama_kategori'},

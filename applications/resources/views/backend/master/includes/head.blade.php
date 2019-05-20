@@ -21,6 +21,9 @@
 <!-- <link href="{{asset('theme/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}" rel="stylesheet"> -->
 <link href="{{asset('theme/DataTables/datatables.min.css')}}" rel="stylesheet" />
 
+<!-- tags -->
+<link href="{{asset('theme/Tags/bootstrap-tagsinput.css')}}" rel="stylesheet" />
+
 <!-- Morris Chart Css-->
 <link href="{{asset('theme/plugins/morrisjs/morris.css')}}" rel="stylesheet" />
 

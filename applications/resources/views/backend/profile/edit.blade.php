@@ -100,9 +100,9 @@
                               </div>
                             </div>
                             @if(isset($editProfile))
-                            <button type="submit" class="btn pull-right btn-primary">Simpan Data</button>
+                            <button type="submit" class="btn pull-right btn-primary">Simpan Perubahan</button>
                             @endif
-                            <a href="{{ URL::previous() }}" class="btn btn-danger">Reset Formulir</a>
+                            <a href="{{ URL::previous() }}" class="btn btn-default pull-left btn-flat" data-dismiss="modal">Tidak</a>
                         </div>
                     </div>
                   </form>

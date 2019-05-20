@@ -47,7 +47,7 @@
                                     <th style="text-align:center">Kategori</th>
                                     <th style="text-align:center">Tgl Posting</th>
                                     <th style="text-align:center">Publish</th>
-                                    <th style="text-align:center">Action</th>
+                                    <th style="text-align:center;width:21%">Action</th>
                                 </tr>
                             </thead>
                         </table>

@@ -51,7 +51,7 @@
                                     <th style="text-align:center">Status</th>
                                     <th style="text-align:center">Video Utama</th>
                                     <th style="text-align:center">Status Publish</th>
-                                    <th>Action</th>
+                                    <th style="text-align:center;width:12%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -43,7 +43,7 @@ class SliderController extends Controller
                   'judul' => 'required',
                   'keteranganSlider' => 'required',
                   'activated' => 'required',
-                  'urlSlider' => 'required|image|mimes:jpeg,jpg,png|max:20000',
+                  'urlSlider' => 'required|image|mimes:jpeg,jpg,png|max:50000',
               ], $messages);
 
               if ($validator->fails()) {

@@ -39,7 +39,7 @@ class EventsController extends Controller
      {
 
        if (Auth::user()->id_role != 4) {
-         $querys = Events::leftJoin('master_kategori','informasi.id_kategori','=','master_kategori.id')
+         $querys = Events::leftJoin('master_kategori','events.id_kategori','=','master_kategori.id')
              ->leftJoin('master_users','events.created_by','=','master_users.id')
              ->select(['events.id as id_events',
                        'events.judul_event', 'master_kategori.nama_kategori',
@@ -47,7 +47,7 @@ class EventsController extends Controller
                        'events.flag_headline', 'events.flag_publish', 'events.activated'])
                        ->orderBy('id_events', 'DESC');
        } else {
-         $querys = Events::leftJoin('master_kategori','informasi.id_kategori','=','master_kategori.id')
+         $querys = Events::leftJoin('master_kategori','events.id_kategori','=','master_kategori.id')
              ->leftJoin('master_users','events.created_by','=','master_users.id')
              ->select(['events.id as id_events',
                        'events.judul_event', 'master_kategori.nama_kategori',

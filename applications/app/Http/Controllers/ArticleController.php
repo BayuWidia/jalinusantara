@@ -46,6 +46,7 @@ class ArticleController extends Controller
                        'informasi.judul_informasi', 'master_kategori.nama_kategori',
                        'informasi.tanggal_publish', 'master_users.fullname',
                        'informasi.flag_headline', 'informasi.flag_publish', 'informasi.activated'])
+                       ->where('informasi.flag_status', '=', 'article')
                        ->orderBy('id_informasi', 'DESC');
        } else {
          $querys = Informasi::leftJoin('master_kategori','informasi.id_kategori','=','master_kategori.id')
@@ -55,6 +56,7 @@ class ArticleController extends Controller
                        'informasi.tanggal_publish', 'master_users.fullname',
                        'informasi.flag_headline', 'informasi.flag_publish', 'informasi.activated'])
                        ->where('informasi.created_by', '=', Auth::user()->id)
+                       ->where('informasi.flag_status', '=', 'article')
                        ->orderBy('id_informasi', 'DESC');
        }
 
@@ -62,7 +64,7 @@ class ArticleController extends Controller
        return Datatables::of($querys)
          ->addColumn('action', function($query){
              if ($query->flag_headline == "1") {
-               $strHeadline = '<a href="#" class="btn btn-deep-purple btn-circle waves-effect waves-circle waves-float flagheadline"
+               $strHeadline = '<a href="#" class="btn bg-deep-purple btn-circle waves-effect waves-circle waves-float flagheadline"
                                data-toggle="modal" data-target="#modalflagheadline" data-value="'.$query->id_informasi.'"
                                data-backdrop="static" data-keyboard="false"><i class="material-icons">favorite</i></a>';
              } else {
@@ -100,12 +102,12 @@ class ArticleController extends Controller
                            <i class="material-icons">pageview</i></a>';
 
              if (Auth::user()->id_role != 4) {
-                   return $strHeadline.$strPublish.$strUpd.$strDelete.$strView;
+                   return $strHeadline.' '.$strPublish.' '.$strUpd.' '.$strDelete.' '.$strView;
              } else{
                    if ($query->flag_publish == "1") {
                      return $strView;
                    } else {
-                     return $strUpd.$strDelete.$strView;
+                     return $strUpd.' '.$strDelete.' '.$strView;
                    }
              }
 
@@ -143,6 +145,8 @@ class ArticleController extends Controller
     public function create()
     {
         //
+        $getKategori = MasterKategori::where('flag_utama','=' ,'article')->get();
+        return view('backend.article.tambah', compact('getKategori'));
     }
 
     /**
@@ -154,6 +158,61 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request->all());
+        $messages = [
+          'judul.required' => 'Tidak boleh kosong.',
+          'kategoriId.required' => 'Tidak boleh kosong.',
+          'urlFoto.required' => 'Tidak boleh kosong.',
+          'urlFoto.required' => 'Periksa kembali file image anda.',
+          'urlFoto.image' => 'File upload harus image.',
+          'urlFoto.mimes' => 'Ekstensi file tidak valid.',
+          'urlFoto.max' => 'Ukuran file terlalu besar.',
+          'isiKonten.required' => 'Tidak boleh kosong.',
+          'kategoriId.not_in' => 'Pilih salah satu.',
+        ];
+
+        $validator = Validator::make($request->all(), [
+                'judul' => 'required',
+                'kategoriId' => 'required',
+                'isiKonten' => 'required',
+                'kategoriId' => 'required|not_in:-- Pilih --',
+                'urlFoto' => 'required|image|mimes:jpeg,jpg,png|max:40000',
+            ], $messages);
+
+        if ($validator->fails()) {
+            return redirect()->route('article.tambah')->withErrors($validator)->withInput();
+        }
+
+        $file = $request->file('urlFoto');
+        if($file!="") {
+          $photoName = time(). '.' . $file->getClientOriginalExtension();
+          Image::make($file)->fit(555,280)->save('images/'. $photoName);
+
+          $flagHeadline="";
+          if($request->flagHeadline=="") {
+            $flagHeadline=0;
+          } else {
+            $flagHeadline=1;
+          }
+
+          $setTglPosting = date('Y-m-d');
+          $set = new Informasi;
+          $set->judul_informasi = $request->judul;
+          $set->id_kategori = $request->kategoriId;
+          $set->url_foto = $photoName;
+          $set->isi_informasi = $request->isiKonten;
+          $set->tags = $request->tags;
+          $set->flag_headline = $flagHeadline;
+          $set->tanggal_publish = $setTglPosting;
+          $set->flag_status = 'article';
+          $set->activated = 1;
+          $set->created_by = Auth::user()->id;
+          $set->save();
+        } else {
+          return redirect()->route('article.index')->with('messagefail', 'Gambar Article harus di upload.');
+        }
+
+        return redirect()->route('article.index')->with('message', 'Berhasil memasukkan article baru.');
     }
 
     /**
@@ -165,11 +224,31 @@ class ArticleController extends Controller
     public function show($id)
     {
         //
+        $set = Informasi::find($id);
+        if($set->flag_publish=="1") {
+          $set->flag_publish = 0;
+        } elseif ($set->flag_publish=="0") {
+          $set->flag_publish = 1;
+        }
+        $set->updated_by = Auth::user()->id;
+        $set->save();
+
+        return redirect()->route('article.index')->with('message', 'Berhasil mengubah article profile.');
     }
 
     public function headline($id)
     {
         //
+        $set = Informasi::find($id);
+        if($set->flag_headline=="1") {
+          $set->flag_headline = 0;
+        } elseif ($set->flag_headline=="0") {
+          $set->flag_headline = 1;
+        }
+        $set->updated_by = Auth::user()->id;
+        $set->save();
+
+        return redirect()->route('article.index')->with('message', 'Berhasil mengubah article profile.');
     }
 
     /**
@@ -181,6 +260,21 @@ class ArticleController extends Controller
     public function edit($id)
     {
         //
+        $editArticle = Informasi::find($id);
+
+        $getKategori = MasterKategori::where('flag_utama','=' ,'article')->get();
+
+        return view('backend/article/edit', compact('editArticle', 'getKategori'));
+    }
+
+    public function view($id)
+    {
+        //
+        $viewArticle = Informasi::find($id);
+
+        $getKategori = MasterKategori::where('flag_utama','=' ,'article')->get();
+
+        return view('backend/article/edit', compact('viewArticle', 'getKategori'));
     }
 
     /**
@@ -190,9 +284,46 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $messages = [
+          'judul.required' => 'Tidak boleh kosong.',
+          'kategoriId.required' => 'Tidak boleh kosong.',
+          'isiKonten.required' => 'Tidak boleh kosong.',
+          'kategoriId.not_in' => 'Pilih salah satu.',
+        ];
+
+        $validator = Validator::make($request->all(), [
+                'judul' => 'required',
+                'kategoriId' => 'required',
+                'isiKonten' => 'required',
+                'kategoriId' => 'required|not_in:-- Pilih --',
+            ], $messages);
+
+        if ($validator->fails()) {
+            return redirect()->route('article.edit', $request->id)->withErrors($validator)->withInput();
+        }
+
+        $flagHeadline="";
+        if($request->flagHeadline=="") {
+          $flagHeadline=0;
+        } else {
+          $flagHeadline=1;
+        }
+
+        $setTglPosting = date('Y-m-d');
+        $set = Informasi::find($request->id);
+        $set->judul_informasi = $request->judul;
+        $set->id_kategori = $request->kategoriId;
+        $set->isi_informasi = $request->isiKonten;
+        $set->tags = $request->tags;
+        $set->flag_headline = $flagHeadline;
+        $set->tanggal_publish = $setTglPosting;
+        $set->created_by = Auth::user()->id;
+        $set->save();
+
+        return redirect()->route('article.index')->with('message', 'Berhasil mengubah article.');
     }
 
     /**
@@ -201,8 +332,18 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $status)
     {
         //
+        $set = Informasi::find($id);
+        if ($status == 'aktifkan') {
+          $set->activated = 1;
+        } else {
+          $set->activated = 0;
+        }
+        $set->updated_by = Auth::user()->id;
+        $set->save();
+
+        return redirect()->route('article.index')->with('message', 'Berhasil mengubah status article.');
     }
 }

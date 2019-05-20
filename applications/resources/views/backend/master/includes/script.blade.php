@@ -41,5 +41,8 @@
 <script src="{{asset('theme/DataTables/datatables.min.js')}}"></script>
 <script src="{{asset('theme/js/pages/ui/tooltips-popovers.js')}}"></script>
 
+<!-- Tags Js -->
+<script src="{{asset('theme/tags/bootstrap-tagsinput.js')}}"></script>
+
 <!-- Demo Js -->
 <script src="{{asset('theme/js/demo.js')}}"></script>

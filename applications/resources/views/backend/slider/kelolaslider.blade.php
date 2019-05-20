@@ -122,7 +122,7 @@
                                     </div>
                                     <div>
                                       <span style="color:red;">* Biarkan kosong jika tidak ingin diganti.</span><br>
-                                      <span class="text-muted"><i>* Max Size: 2MB.</i></span><br>
+                                      <span class="text-muted"><i>* Max Size: 5MB.</i></span><br>
                                       <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 1920 x 900 px.</i></span>
                                     </div>
                                 </div>

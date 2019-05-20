@@ -49,7 +49,7 @@
                                     <th style="text-align:center">Pembuat Article</th>
                                     <th style="text-align:center">Headline</th>
                                     <th style="text-align:center">Publish</th>
-                                    <th style="text-align:center">Action</th>
+                                    <th style="text-align:center;width:25%">Action</th>
                                 </tr>
                             </thead>
                         </table>
@@ -162,7 +162,7 @@
 <script>
   $("#tabelinfo").on("click", "a.flagheadline", function(){
     var a = $(this).data('value');
-    $('#setFlagHeadline').attr('href', '{{url('admin/publish-article/')}}/'+a);
+    $('#setFlagHeadline').attr('href', '{{url('admin/headline-article/')}}/'+a);
   });
 
   $("#tabelinfo").on("click", "a.flagpublish", function(){
