@@ -42,7 +42,7 @@
                 </div>
                 <div class="body">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="tabelinfo">
+                        <table class="table table-bordered table-striped table-hover" id="tabelinfo">
                             <thead>
                                 <tr>
                                     <th style="text-align:center">No</th>
@@ -294,6 +294,12 @@
 
 @section('footscript')
 <script src="{{asset('theme/js/pages/forms/basic-form-elements.js')}}"></script>
+<script>
+  $(document).ready(function() {
+      $('#tabelinfo').DataTable({
+      });
+  });
+</script>
 
 <script>
   @if ($errors->has('urlGaleri') || $errors->has('judul') || $errors->has('keteranganGaleri') || $errors->has('activated'))

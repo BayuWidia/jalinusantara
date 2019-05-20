@@ -120,9 +120,7 @@
 
 <script>
   $(document).ready(function() {
-      $('#tableInfo').DataTable({
-          responsive: true,
-          processing: true,
+      $('#tabelinfo').DataTable({
           serverSide: true,
           ajax: '{!! route('datatables.profile') !!}',
           column: [

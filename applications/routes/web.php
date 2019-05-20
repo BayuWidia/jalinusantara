@@ -85,14 +85,15 @@ Route::get('log.files.download/{filename}', 'LogFilesController@download')->name
 
 //Menu informasi
 Route::get('profile.index', 'ProfileController@index')->name('profile.index');
-Route::get('datatables-profile', ['as'=>'datatables.profile', 'uses'=>'ProfileController@getDataForDataTable']);
+Route::get('datatables.profile', ['as'=>'datatables.profile', 'uses'=>'ProfileController@getDataForDataTable']);
 Route::get('profile.tambah', 'ProfileController@create')->name('profile.tambah');
 Route::post('admin/store-profile', 'ProfileController@store')->name('profile.store');
 Route::get('admin/delete-profile/{id}/{status}', 'ProfileController@destroy')->name('profile.destroy');
 Route::post('admin/edit-profile', 'ProfileController@update')->name('profile.update');
 Route::get('admin/headline-profile/{id}', 'ProfileController@headline')->name('profile.headline');
 Route::get('admin/publish-profile/{id}', 'ProfileController@show')->name('profile.show');
-Route::get('admin/bind-profile/{id}', 'ProfileController@edit')->name('profile.edit');
+Route::get('admin/profile.edit/{id}', 'ProfileController@edit')->name('profile.edit');
+Route::get('admin/profile.view/{id}', 'ProfileController@view')->name('profile.view');
 
 //Menu article
 Route::get('article.index', 'ArticleController@index')->name('article.index');

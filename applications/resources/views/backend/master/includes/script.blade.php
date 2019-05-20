@@ -26,7 +26,7 @@
 <script src="{{asset('theme/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
 
 <!-- Jquery DataTable Plugin Js -->
-<script src="{{asset('theme/plugins/jquery-datatable/jquery.dataTables.js')}}"></script>
+<!-- <script src="{{asset('theme/plugins/jquery-datatable/jquery.dataTables.js')}}"></script>
 <script src="{{asset('theme/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js')}}"></script>
 <script src="{{asset('theme/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js')}}"></script>
 <script src="{{asset('theme/plugins/jquery-datatable/extensions/export/buttons.flash.min.js')}}"></script>
@@ -34,11 +34,11 @@
 <script src="{{asset('theme/plugins/jquery-datatable/extensions/export/pdfmake.min.js')}}"></script>
 <script src="{{asset('theme/plugins/jquery-datatable/extensions/export/vfs_fonts.js')}}"></script>
 <script src="{{asset('theme/plugins/jquery-datatable/extensions/export/buttons.html5.min.js')}}"></script>
-<script src="{{asset('theme/plugins/jquery-datatable/extensions/export/buttons.print.min.js')}}"></script>
+<script src="{{asset('theme/plugins/jquery-datatable/extensions/export/buttons.print.min.js')}}"></script> -->
 
 <!-- Custom Js -->
 <script src="{{asset('theme/js/admin.js')}}"></script>
-<script src="{{asset('theme/js/pages/tables/jquery-datatable.js')}}"></script>
+<script src="{{asset('theme/DataTables/datatables.min.js')}}"></script>
 <script src="{{asset('theme/js/pages/ui/tooltips-popovers.js')}}"></script>
 
 <!-- Demo Js -->

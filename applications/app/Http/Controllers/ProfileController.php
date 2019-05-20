@@ -39,14 +39,14 @@ class ProfileController extends Controller
             ->leftJoin('master_users','informasi.created_by','=','master_users.id')
             ->select(['informasi.id as id_informasi',
                       'informasi.judul_informasi', 'master_kategori.nama_kategori',
-                      'informasi.tanggal_publish', 'informasi.flag_publish'])
+                      'informasi.tanggal_publish', 'informasi.flag_publish', 'informasi.activated'])
                       ->orderBy('id_informasi', 'DESC');
       } else {
         $querys = Informasi::leftJoin('master_kategori','informasi.id_kategori','=','master_kategori.id')
             ->leftJoin('master_users','informasi.created_by','=','master_users.id')
             ->select(['informasi.id as id_informasi',
                       'informasi.judul_informasi', 'master_kategori.nama_kategori',
-                      'informasi.tanggal_publish', 'informasi.flag_publish'])
+                      'informasi.tanggal_publish', 'informasi.flag_publish', 'informasi.activated'])
                       ->where('informasi.created_by', '=', Auth::user()->id)
                       ->orderBy('id_informasi', 'DESC');
       }
@@ -76,19 +76,19 @@ class ProfileController extends Controller
                               data-keyboard="false"><i class="material-icons">lock_open</i></a>';
             }
 
-            $strUpd = '<a href="profile.edit/'.$query->id_informasi.'" class="btn btn-success btn-circle waves-effect waves-circle waves-float">
+            $strUpd = '<a href="admin/profile.edit/'.$query->id_informasi.'" class="btn btn-success btn-circle waves-effect waves-circle waves-float">
                           <i class="material-icons">open_in_new</i></a>';
 
-            $strView = '<a href="profile.view/'.$query->id_informasi.'" class="btn btn-primary btn-circle waves-effect waves-circle waves-float">
+            $strView = '<a href="admin/profile.view/'.$query->id_informasi.'" class="btn btn-primary btn-circle waves-effect waves-circle waves-float">
                           <i class="material-icons">pageview</i></a>';
 
             if (Auth::user()->id_role != 4) {
-                  return $strPublish.$strUpd.$strDelete.$strView;
+                  return $strPublish.' '.$strUpd.' '.$strDelete.' '.$strView;
             } else{
                   if ($query->flag_publish == "1") {
                     return $strView;
                   } else {
-                    return $strUpd.$strDelete.$strView;
+                    return $strUpd.' '.$strDelete.' '.$strView;
                   }
             }
 
@@ -104,6 +104,7 @@ class ProfileController extends Controller
             return "<span class='label bg-blue-grey'>Un Publish</span>";
           }
         })
+        ->removeColumn('activated')
         ->removeColumn('id_informasi')
         ->make();
     }
@@ -129,6 +130,42 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         //
+            $messages = [
+              'judul.required' => 'Tidak boleh kosong.',
+              'kategoriId.required' => 'Tidak boleh kosong.',
+              'isiKonten.required' => 'Tidak boleh kosong.',
+              'kategoriId.not_in' => 'Pilih salah satu.',
+            ];
+
+            $validator = Validator::make($request->all(), [
+                    'judul' => 'required',
+                    'kategoriId' => 'required',
+                    'isiKonten' => 'required',
+                    'kategoriId' => 'required|not_in:-- Pilih --',
+                ], $messages);
+
+            if ($validator->fails()) {
+                return redirect()->route('profile.tambah')->withErrors($validator)->withInput();
+            }
+
+            $checkdouble = Informasi::where('id_kategori','=' ,$request->kategoriId)->get();
+
+            if ($checkdouble != null) {
+              return redirect()->route('profile.tambah')->with('messagefail', 'Kategori sudah tersedia.');
+            }
+
+            $setTglPosting = date('Y-m-d');
+            $set = new Informasi;
+            $set->judul_informasi = $request->judul;
+            $set->id_kategori = $request->kategoriId;
+            $set->isi_informasi = $request->isiKonten;
+            $set->tanggal_publish = $setTglPosting;
+            $set->flag_status = 'profile';
+            $set->activated = 1;
+            $set->created_by = Auth::user()->id;
+            $set->save();
+
+            return redirect()->route('profile.index')->with('message', 'Berhasil memasukkan profile baru.');
     }
 
     /**
@@ -140,11 +177,31 @@ class ProfileController extends Controller
     public function show($id)
     {
         //
+        $set = Informasi::find($id);
+        if($set->flag_publish=="1") {
+          $set->flag_publish = 0;
+        } elseif ($set->flag_publish=="0") {
+          $set->flag_publish = 1;
+        }
+        $set->updated_by = Auth::user()->id;
+        $set->save();
+
+        return redirect()->route('profile.index')->with('message', 'Berhasil mengubah publish profile.');
     }
 
     public function headline($id)
     {
         //
+        $set = Informasi::find($id);
+        if($set->flag_headline=="1") {
+          $set->flag_headline = 0;
+        } elseif ($set->flag_headline=="0") {
+          $set->flag_headline = 1;
+        }
+        $set->updated_by = Auth::user()->id;
+        $set->save();
+
+        return redirect()->route('profile.index')->with('message', 'Berhasil mengubah headline profile.');
     }
 
     /**
@@ -156,6 +213,21 @@ class ProfileController extends Controller
     public function edit($id)
     {
         //
+        $editProfile = Informasi::find($id);
+
+        $getKategori = MasterKategori::where('flag_utama','=' ,'profile')->get();
+
+        return view('backend/profile/edit', compact('editProfile', 'getKategori'));
+    }
+
+    public function view($id)
+    {
+        //
+        $viewProfile = Informasi::find($id);
+
+        $getKategori = MasterKategori::where('flag_utama','=' ,'profile')->get();
+
+        return view('backend/profile/edit', compact('viewProfile', 'getKategori'));
     }
 
     /**
@@ -165,9 +237,38 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        // dd($request->all());
+        $messages = [
+          'judul.required' => 'Tidak boleh kosong.',
+          'kategoriId.required' => 'Tidak boleh kosong.',
+          'isiKonten.required' => 'Tidak boleh kosong.',
+          'kategoriId.not_in' => 'Pilih salah satu.',
+        ];
+
+        $validator = Validator::make($request->all(), [
+                'judul' => 'required',
+                'kategoriId' => 'required',
+                'isiKonten' => 'required',
+                'kategoriId' => 'required|not_in:-- Pilih --',
+            ], $messages);
+
+        if ($validator->fails()) {
+            return redirect()->route('profile.edit', $request->id)->withErrors($validator)->withInput();
+        }
+
+        $setTglPosting = date('Y-m-d');
+        $set = Informasi::find($request->id);
+        $set->judul_informasi = $request->judul;
+        $set->id_kategori = $request->kategoriId;
+        $set->isi_informasi = $request->isiKonten;
+        $set->tanggal_publish = $setTglPosting;
+        $set->created_by = Auth::user()->id;
+        $set->save();
+
+        return redirect()->route('profile.index')->with('message', 'Berhasil mengubah profile baru.');
     }
 
     /**
@@ -176,8 +277,18 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $status)
     {
         //
+        $set = Informasi::find($id);
+        if ($status == 'aktifkan') {
+          $set->activated = 1;
+        } else {
+          $set->activated = 0;
+        }
+        $set->updated_by = Auth::user()->id;
+        $set->save();
+
+        return redirect()->route('profile.index')->with('message', 'Berhasil mengubah status profile.');
     }
 }

@@ -51,7 +51,7 @@
                                     <small style="color:red">* {{$errors->first('kategoriId')}}</small>
                                   @endif
                                   <select class="form-control show-tick" name="kategoriId" id="kategoriId">
-                                      <option value="">-- Pilih --</option>
+                                      <option value="-- Pilih --">-- Pilih --</option>
                                       @foreach($getKategori as $key)
                                         <option value="{{ $key->id }}" {{ old('kategoriId') == $key->id ? 'selected=""' : ''}}>{{ $key->nama_kategori }}</option>
                                       @endforeach

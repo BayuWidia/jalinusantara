@@ -25,8 +25,6 @@ class CreateInformasiTable extends Migration
             $table->integer('flag_headline')->default(0);
             //0:belum publish, 1:publish.
             $table->integer('flag_publish')->default(0);
-            //0:biasa, 1:jadi pioritas.
-            $table->integer('flag_headline_utama');
             $table->integer('view_counter');
             $table->string('activated');
             $table->string('created_by');

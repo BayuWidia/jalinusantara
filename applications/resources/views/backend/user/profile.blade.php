@@ -329,4 +329,10 @@
 
 @section('footscript')
 <script src="{{asset('theme/js/pages/examples/profile.js')}}"></script>
+<script>
+  $(document).ready(function() {
+      $('#tabelinfo').DataTable({
+      });
+  });
+</script>
 @endsection

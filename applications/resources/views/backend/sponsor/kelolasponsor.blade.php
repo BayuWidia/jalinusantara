@@ -42,7 +42,7 @@
                 </div>
                 <div class="body">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="tabelinfo">
+                        <table class="table table-bordered table-striped table-hover" id="tabelinfo">
                             <thead>
                                 <tr>
                                     <th style="text-align:center">No</th>
@@ -76,13 +76,11 @@
                                   </td>
                                   <td>{{$key->keterangan_sponsor}}</td>
                                   <td>
-                                    <td>
                                       @if($key->url_sponsor!="")
                                         <img src="{{url('images')}}/{{$key->url_sponsor}}">
                                       @else
                                         <img src="{{url('images/')}}/no_image.jpg" class="js-animating-object img-responsive">
                                       @endif
-                                    </td>
                                   </td>
                                   <td style="text-align:center">
                                     @if($key->activated=="1")
@@ -328,6 +326,13 @@
 
 @section('footscript')
 <script src="{{asset('theme/js/pages/forms/basic-form-elements.js')}}"></script>
+
+<script>
+  $(document).ready(function() {
+      $('#tabelinfo').DataTable({
+      });
+  });
+</script>
 
 <script>
   @if ($errors->has('urlSponsor') || $errors->has('namaSponsor') || $errors->has('linkSponsor') || $errors->has('keteranganSponsor') || $errors->has('activated'))

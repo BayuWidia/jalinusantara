@@ -18,7 +18,7 @@ class MedsosController extends Controller
     {
         $this->middleware('isAdmin');
     }
-    
+
     public function index()
     {
         //
