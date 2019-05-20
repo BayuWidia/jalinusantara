@@ -134,69 +134,247 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+     public function create()
+     {
+         //
+         $getKategori = MasterKategori::where('flag_utama','=' ,'events')->get();
+         return view('backend.events.tambah', compact('getKategori'));
+     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+     /**
+      * Store a newly created resource in storage.
+      *
+      * @param  \Illuminate\Http\Request  $request
+      * @return \Illuminate\Http\Response
+      */
+     public function store(Request $request)
+     {
+         //
+         // dd($request->all());
+         $messages = [
+           'judul.required' => 'Tidak boleh kosong.',
+           'kategoriId.required' => 'Tidak boleh kosong.',
+           'tglAwal.required' => 'Tidak boleh kosong.',
+           'tglAkhir.required' => 'Tidak boleh kosong.',
+           'urlFoto.required' => 'Tidak boleh kosong.',
+           'urlFoto.required' => 'Periksa kembali file image anda.',
+           'urlFoto.image' => 'File upload harus image.',
+           'urlFoto.mimes' => 'Ekstensi file tidak valid.',
+           'urlFoto.max' => 'Ukuran file terlalu besar.',
+           'isiKonten.required' => 'Tidak boleh kosong.',
+           'fasilitator.required' => 'Tidak boleh kosong.',
+           'jmlPeserta.required' => 'Tidak boleh kosong.',
+           'lokasi.required' => 'Tidak boleh kosong.',
+           'kategoriId.not_in' => 'Pilih salah satu.',
+         ];
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+         $validator = Validator::make($request->all(), [
+                 'judul' => 'required',
+                 'kategoriId' => 'required',
+                 'isiKonten' => 'required',
+                 'tglAwal' => 'required',
+                 'tglAkhir' => 'required',
+                 'fasilitator' => 'required',
+                 'jmlPeserta' => 'required',
+                 'lokasi' => 'required',
+                 'kategoriId' => 'required|not_in:-- Pilih --',
+                 'urlFoto' => 'required|image|mimes:jpeg,jpg,png|max:40000',
+             ], $messages);
 
-    public function headline($id)
-    {
-        //
-    }
+         if ($validator->fails()) {
+             return redirect()->route('events.tambah')->withErrors($validator)->withInput();
+         }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+         $file = $request->file('urlFoto');
+         if($file!="") {
+           $photoName = time(). '.' . $file->getClientOriginalExtension();
+           Image::make($file)->fit(555,280)->save('images/'. $photoName);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+           $flagHeadline="";
+           if($request->flagHeadline=="") {
+             $flagHeadline=0;
+           } else {
+             $flagHeadline=1;
+           }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+           $setTglPosting = date('Y-m-d');
+           $set = new Events;
+           $set->judul_event = $request->judul;
+           $set->tanggal_mulai = $request->tglAwal;
+           $set->tanggal_akhir = $request->tglAkhir;
+           $set->id_kategori = $request->kategoriId;
+           $set->url_foto = $photoName;
+           $set->maps = $request->maps;
+           $set->fasilitator = $request->fasilitator;
+           $set->jumlah_peserta = $request->jmlPeserta;
+           $set->lokasi = $request->lokasi;
+           $set->isi_event = $request->isiKonten;
+           $set->tags = $request->tags;
+           $set->flag_headline = $flagHeadline;
+           $set->tanggal_publish = $setTglPosting;
+           $set->flag_status = 'events';
+           $set->activated = 1;
+           $set->created_by = Auth::user()->id;
+           $set->save();
+         } else {
+           return redirect()->route('events.index')->with('messagefail', 'Gambar events harus di upload.');
+         }
+
+         return redirect()->route('events.index')->with('message', 'Berhasil memasukkan events baru.');
+     }
+
+     /**
+      * Display the specified resource.
+      *
+      * @param  int  $id
+      * @return \Illuminate\Http\Response
+      */
+     public function show($id)
+     {
+         //
+         $set = Events::find($id);
+         if($set->flag_publish=="1") {
+           $set->flag_publish = 0;
+         } elseif ($set->flag_publish=="0") {
+           $set->flag_publish = 1;
+         }
+         $set->updated_by = Auth::user()->id;
+         $set->save();
+
+         return redirect()->route('events.index')->with('message', 'Berhasil mengubah publish events.');
+     }
+
+     public function headline($id)
+     {
+         //
+         $set = Events::find($id);
+         if($set->flag_headline=="1") {
+           $set->flag_headline = 0;
+         } elseif ($set->flag_headline=="0") {
+           $set->flag_headline = 1;
+         }
+         $set->updated_by = Auth::user()->id;
+         $set->save();
+
+         return redirect()->route('events.index')->with('message', 'Berhasil mengubah headline events.');
+     }
+
+     /**
+      * Show the form for editing the specified resource.
+      *
+      * @param  int  $id
+      * @return \Illuminate\Http\Response
+      */
+     public function edit($id)
+     {
+         //
+         $editEvents = Events::find($id);
+
+         $getKategori = MasterKategori::where('flag_utama','=' ,'events')->get();
+
+         return view('backend/events/edit', compact('editEvents', 'getKategori'));
+     }
+
+     public function view($id)
+     {
+         //
+         $viewEvents = Events::find($id);
+
+         $getKategori = MasterKategori::where('flag_utama','=' ,'events')->get();
+
+         return view('backend/article/edit', compact('viewEvents', 'getKategori'));
+     }
+
+     /**
+      * Update the specified resource in storage.
+      *
+      * @param  \Illuminate\Http\Request  $request
+      * @param  int  $id
+      * @return \Illuminate\Http\Response
+      */
+     public function update(Request $request)
+     {
+         //
+         $messages = [
+           'judul.required' => 'Tidak boleh kosong.',
+           'kategoriId.required' => 'Tidak boleh kosong.',
+           'tglAwal.required' => 'Tidak boleh kosong.',
+           'tglAkhir.required' => 'Tidak boleh kosong.',
+           'isiKonten.required' => 'Tidak boleh kosong.',
+           'fasilitator.required' => 'Tidak boleh kosong.',
+           'jmlPeserta.required' => 'Tidak boleh kosong.',
+           'lokasi.required' => 'Tidak boleh kosong.',
+           'kategoriId.not_in' => 'Pilih salah satu.',
+         ];
+
+         $validator = Validator::make($request->all(), [
+                 'judul' => 'required',
+                 'kategoriId' => 'required',
+                 'isiKonten' => 'required',
+                 'tglAwal' => 'required',
+                 'tglAkhir' => 'required',
+                 'fasilitator' => 'required',
+                 'jmlPeserta' => 'required',
+                 'lokasi' => 'required',
+                 'kategoriId' => 'required|not_in:-- Pilih --',
+             ], $messages);
+
+         if ($validator->fails()) {
+             return redirect()->route('events.edit', $request->id)->withErrors($validator)->withInput();
+         }
+
+         $flagHeadline="";
+         if($request->flagHeadline=="") {
+           $flagHeadline=0;
+         } else {
+           $flagHeadline=1;
+         }
+
+         $setTglPosting = date('Y-m-d');
+         $set = Events::find($request->id);
+         $set->judul_event = $request->judul;
+         $set->tanggal_mulai = $request->tglAwal;
+         $set->tanggal_akhir = $request->tglAkhir;
+         $set->id_kategori = $request->kategoriId;
+         if($file!="") {
+           $photoName = time(). '.' . $file->getClientOriginalExtension();
+           Image::make($file)->fit(555,280)->save('images/'. $photoName);
+           $set->url_foto = $photoName;
+         }
+         $set->maps = $request->maps;
+         $set->fasilitator = $request->fasilitator;
+         $set->jumlah_peserta = $request->jmlPeserta;
+         $set->lokasi = $request->lokasi;
+         $set->isi_event = $request->isiKonten;
+         $set->tags = $request->tags;
+         $set->flag_headline = $flagHeadline;
+         $set->tanggal_publish = $setTglPosting;
+         $set->flag_status = 'events';
+         $set->activated = 1;
+         $set->updated_by = Auth::user()->id;
+         $set->save();
+
+         return redirect()->route('events.index')->with('message', 'Berhasil mengubah events.');
+     }
+
+     /**
+      * Remove the specified resource from storage.
+      *
+      * @param  int  $id
+      * @return \Illuminate\Http\Response
+      */
+     public function destroy($id, $status)
+     {
+         //
+         $set = Events::find($id);
+         if ($status == 'aktifkan') {
+           $set->activated = 1;
+         } else {
+           $set->activated = 0;
+         }
+         $set->updated_by = Auth::user()->id;
+         $set->save();
+
+         return redirect()->route('events.index')->with('message', 'Berhasil mengubah status events.');
+     }
 }

@@ -267,7 +267,7 @@ class ProfileController extends Controller
         $set->id_kategori = $request->kategoriId;
         $set->isi_informasi = $request->isiKonten;
         $set->tanggal_publish = $setTglPosting;
-        $set->created_by = Auth::user()->id;
+        $set->updated_by = Auth::user()->id;
         $set->save();
 
         return redirect()->route('profile.index')->with('message', 'Berhasil mengubah profile.');

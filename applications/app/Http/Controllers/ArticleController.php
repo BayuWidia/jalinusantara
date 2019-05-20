@@ -209,7 +209,7 @@ class ArticleController extends Controller
           $set->created_by = Auth::user()->id;
           $set->save();
         } else {
-          return redirect()->route('article.index')->with('messagefail', 'Gambar Article harus di upload.');
+          return redirect()->route('article.index')->with('messagefail', 'Gambar article harus di upload.');
         }
 
         return redirect()->route('article.index')->with('message', 'Berhasil memasukkan article baru.');
@@ -233,7 +233,7 @@ class ArticleController extends Controller
         $set->updated_by = Auth::user()->id;
         $set->save();
 
-        return redirect()->route('article.index')->with('message', 'Berhasil mengubah article profile.');
+        return redirect()->route('article.index')->with('message', 'Berhasil mengubah publish article.');
     }
 
     public function headline($id)
@@ -248,7 +248,7 @@ class ArticleController extends Controller
         $set->updated_by = Auth::user()->id;
         $set->save();
 
-        return redirect()->route('article.index')->with('message', 'Berhasil mengubah article profile.');
+        return redirect()->route('article.index')->with('message', 'Berhasil mengubah headline article.');
     }
 
     /**
@@ -316,11 +316,17 @@ class ArticleController extends Controller
         $set = Informasi::find($request->id);
         $set->judul_informasi = $request->judul;
         $set->id_kategori = $request->kategoriId;
+        $file = $request->file('urlFoto');
+        if($file!="") {
+          $photoName = time(). '.' . $file->getClientOriginalExtension();
+          Image::make($file)->fit(555,280)->save('images/'. $photoName);
+          $set->url_foto = $photoName;
+        }
         $set->isi_informasi = $request->isiKonten;
         $set->tags = $request->tags;
         $set->flag_headline = $flagHeadline;
         $set->tanggal_publish = $setTglPosting;
-        $set->created_by = Auth::user()->id;
+        $set->updated_by = Auth::user()->id;
         $set->save();
 
         return redirect()->route('article.index')->with('message', 'Berhasil mengubah article.');
