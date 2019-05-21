@@ -74,7 +74,7 @@
                                       </span>
                                     @endif
                                   </td>
-                                  <td>
+                                  <td style="text-align:center">
                                     @if($key->flag_important_video=="1")
                                       <a href="#" class="btn bg-deep-purple btn-circle waves-effect waves-circle waves-float flagutama"
                                       data-toggle="modal" data-target="#modalflagutama"
@@ -86,7 +86,7 @@
                                       data-backdrop="static" data-keyboard="false"><i class="material-icons">favorite_border</i></a>
                                     @endif
                                   </td>
-                                  <td>
+                                  <td style="text-align:center">
                                     @if($key->flag_video=="1")
                                       <a href="#" class="btn btn-warning btn-circle waves-effect waves-circle waves-float flagpublish"
                                       data-toggle="modal" data-target="#modalflagedit"
@@ -98,7 +98,7 @@
                                       data-backdrop="static" data-keyboard="false"><i class="material-icons">star_border</i></a>
                                     @endif
                                   </td>
-                                  <td>
+                                  <td style="text-align:center">
                                     <a href="#" class="btn btn-success btn-circle waves-effect waves-circle waves-float edit"
                                        data-toggle="modal" data-target="#modaledit" data-value="{{$key->id}}"
                                        data-backdrop="static" data-keyboard="false"><i class="material-icons">open_in_new</i></a>

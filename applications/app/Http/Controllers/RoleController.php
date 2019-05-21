@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
+use Image;
+use Validator;
+use DB;
+use App\Models\MasterRoles;
+use App\Http\Requests;
+
 class RoleController extends Controller
 {
 
@@ -11,80 +18,103 @@ class RoleController extends Controller
     {
         $this->middleware('isAdmin');
     }
-    
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
+        $getRole = MasterRoles::all();
+        return view('backend.role.kelolarole', compact('getRole'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+      // dd($request->all());
+          $messages = [
+            'namaRole.required' => 'Tidak boleh kosong.',
+            'keteranganRole.required' => 'Tidak boleh kosong.',
+            'activated.required' => 'Tidak boleh kosong.',
+          ];
+
+          $validator = Validator::make($request->all(), [
+                  'namaRole' => 'required',
+                  'keteranganRole' => 'required',
+                  'activated' => 'required',
+              ], $messages);
+
+          if ($validator->fails()) {
+              return redirect()->route('role.index')->withErrors($validator)->withInput();
+          }
+
+          $checkdouble = MasterRoles::where('nama_role','=' ,$request->namaRole)->get();
+
+          if ($checkdouble != null) {
+            return redirect()->route('role.index')->with('messagefail', 'Role name sudah tersedia.');
+          }
+
+          $set = new MasterRoles;
+          $set->nama_role = $request->namaRole;
+          $set->keterangan = $request->keteranganRole;
+          $set->activated = $request->activated;
+          $set->created_by = Auth::user()->id;
+          $set->save();
+
+          \LogActivities::insLogActivities('log insert successfully.');
+
+          return redirect()->route('role.index')->with('message', 'Berhasil memasukkan role baru.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $get = MasterRoles::find($id);
+        return $get;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        // dd($request->all());
+        $messages = [
+          'id.required' => 'Tidak boleh kosong.',
+          'namaRoleEdit.required' => 'Tidak boleh kosong.',
+          'keteranganRoleEdit.required' => 'Tidak boleh kosong.',
+        ];
+
+        $validator = Validator::make($request->all(), [
+                'id' => 'required',
+                'namaRoleEdit' => 'required',
+                'keteranganRoleEdit' => 'required',
+            ], $messages);
+
+        if ($validator->fails()) {
+          // dd($validator);
+            return redirect()->route('role.index')->withErrors($validator)->withInput();
+        }
+
+        $set = MasterRoles::find($request->id);
+        $set->nama_role = $request->namaRoleEdit;
+        $set->keterangan = $request->keteranganRoleEdit;
+        $set->updated_by = Auth::user()->id;
+        $set->save();
+
+        \LogActivities::insLogActivities('log update successfully.');
+
+        return redirect()->route('role.index')->with('message', 'Berhasil mengubah konten role.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy($id, $status)
     {
-        //
+        $set = MasterRoles::find($id);
+        if ($status == 'aktifkan') {
+          $set->activated = 1;
+        } else {
+          $set->activated = 0;
+        }
+        $set->updated_by = Auth::user()->id;
+        $set->save();
+
+        \LogActivities::insLogActivities('log destroy successfully.');
+
+        return redirect()->route('role.index')->with('message', 'Berhasil mengubah status role.');
     }
 }

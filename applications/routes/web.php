@@ -121,6 +121,20 @@ Route::get('admin/events.edit/{id}', 'EventsController@edit')->name('events.edit
 Route::get('admin/events.view/{id}', 'EventsController@view')->name('events.view');
 
 
+//Menu Role
+Route::get('role.index', 'RoleController@index')->name('role.index');
+Route::post('admin/store-role', 'RoleController@store')->name('role.store');
+Route::get('admin/delete-role/{id}/{status}', 'RoleController@destroy')->name('role.destroy');
+Route::post('admin/edit-role', 'RoleController@update')->name('role.update');
+Route::get('admin/bind-role/{id}', 'RoleController@edit')->name('role.edit');
+
+//Menu Menu
+Route::get('menu.index', 'MenuController@index')->name('menu.index');
+Route::post('admin/store-menu', 'MenuController@store')->name('menu.store');
+Route::get('admin/delete-menu/{id}/{status}', 'MenuController@destroy')->name('menu.destroy');
+Route::post('admin/edit-menu', 'MenuController@update')->name('menu.update');
+Route::get('admin/bind-menu/{id}', 'MenuController@edit')->name('menu.edit');
+
 //profile
 Route::get('backend.profile', 'UserController@profile')->name('backend.profile');
 
