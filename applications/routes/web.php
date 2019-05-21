@@ -134,6 +134,8 @@ Route::post('admin/store-menu', 'MenuController@store')->name('menu.store');
 Route::get('admin/delete-menu/{id}/{status}', 'MenuController@destroy')->name('menu.destroy');
 Route::post('admin/edit-menu', 'MenuController@update')->name('menu.update');
 Route::get('admin/bind-menu/{id}', 'MenuController@edit')->name('menu.edit');
+Route::get('admin/get-menu-child/{id}', 'MenuController@getMenuChild')->name('get-menu-child');
+Route::get('admin/get-role-checked/{id}', 'MenuController@getRoleChecked')->name('get-role-checked');
 
 //profile
 Route::get('backend.profile', 'UserController@profile')->name('backend.profile');
