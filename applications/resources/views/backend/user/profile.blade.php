@@ -4,120 +4,66 @@
     <title>Jalinusantara</title>
 @endsection
 
-@section('breadcrumb')
-    <div class="row wrapper border-bottom white-bg page-heading">
-      <div class="col-lg-10">
-            <h2>Basic Form</h2>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="index.html">Home</a>
-                </li>
-                <li>
-                    <a>Forms</a>
-                </li>
-                <li class="active">
-                    <strong>Basic Form</strong>
-                </li>
-            </ol>
-        </div>
-        <div class="col-lg-2">
-
-        </div>
-    </div>
-@endsection
-
 @section('content')
 <div class="container-fluid">
+    <div class="block-header">
+        <h2>FORM PROFILE</h2>
+    </div>
     <div class="row clearfix">
-        <div class="col-xs-12 col-sm-3">
+      <div class="col-xs-12 col-sm-4">
             <div class="card profile-card">
                 <div class="profile-header">&nbsp;</div>
                 <div class="profile-body">
                     <div class="image-area">
-                        <img src="{{asset('theme/images/user-lg.jpg')}}" alt="AdminBSB - Profile Image" />
+                        @if($getDataUserById->url_photo!="")
+                          <img src="{{url('images/user')}}/{{$getDataUserById->url_photo}}">
+                        @else
+                          <img alt="image" src="{{asset('images/user/default.png')}}">
+                        @endif
                     </div>
                     <div class="content-area">
-                        <h3>Marc K. Hammond</h3>
-                        <p>Web Software Developer</p>
-                        <p>Administrator</p>
+                        <h3>{{$getDataUserById->name}}</h3>
+                        <p>{{$getDataUserById->email}}</p>
+                        <p>{{$getDataUserById->nama_role}}</p>
                     </div>
                 </div>
                 <div class="profile-footer">
                     <ul>
                         <li>
-                            <span>Followers</span>
-                            <span>1.234</span>
+                            <span>Full Name</span>
+                            <span>{{$getDataUserById->fullname}}</span>
                         </li>
                         <li>
-                            <span>Following</span>
-                            <span>1.201</span>
+                            <span>Status</span>
+                              @if ($getDataUserById->activated =="1")
+                              <span class="badge bg-green">Active</span>
+                              @elseif ($getDataUserById->activated =="0")
+                              <span class="badge bg-red">Non Active</span>
+                              @endif
                         </li>
                         <li>
-                            <span>Friends</span>
-                            <span>14.252</span>
-                        </li>
-                    </ul>
-                    <button class="btn btn-primary btn-lg waves-effect btn-block">FOLLOW</button>
-                </div>
-            </div>
-
-            <div class="card card-about-me">
-                <div class="header">
-                    <h2>ABOUT ME</h2>
-                </div>
-                <div class="body">
-                    <ul>
-                        <li>
-                            <div class="title">
-                                <i class="material-icons">library_books</i>
-                                Education
-                            </div>
-                            <div class="content">
-                                B.S. in Computer Science from the University of Tennessee at Knoxville
-                            </div>
+                            <span>Login Count</span>
+                            <span class="badge bg-orange">{{$getDataUserById->login_count}}</span>
                         </li>
                         <li>
-                            <div class="title">
-                                <i class="material-icons">location_on</i>
-                                Location
-                            </div>
-                            <div class="content">
-                                Malibu, California
-                            </div>
+                            <span>Jumlah Article</span>
+                            <span class="badge bg-blue">{{$getCountInformasi}}</span>
                         </li>
                         <li>
-                            <div class="title">
-                                <i class="material-icons">edit</i>
-                                Skills
-                            </div>
-                            <div class="content">
-                                <span class="label bg-red">UI Design</span>
-                                <span class="label bg-teal">JavaScript</span>
-                                <span class="label bg-blue">PHP</span>
-                                <span class="label bg-amber">Node.js</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="title">
-                                <i class="material-icons">notes</i>
-                                Description
-                            </div>
-                            <div class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.
-                            </div>
+                            <span>Jumlah Events</span>
+                            <span class="badge bg-red">{{$getCountEvents}}</span>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-9">
+        <div class="col-xs-12 col-sm-8">
             <div class="card">
                 <div class="body">
                     <div>
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
                             <li role="presentation"><a href="#profile_settings" aria-controls="settings" role="tab" data-toggle="tab">Profile Settings</a></li>
-                            <li role="presentation"><a href="#change_password_settings" aria-controls="settings" role="tab" data-toggle="tab">Change Password</a></li>
                         </ul>
 
                         <div class="tab-content">
@@ -235,85 +181,65 @@
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane fade in" id="profile_settings">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <label for="NameSurname" class="col-sm-2 control-label">Name Surname</label>
-                                        <div class="col-sm-10">
-                                            <div class="form-line">
-                                                <input type="text" class="form-control" id="NameSurname" name="NameSurname" placeholder="Name Surname" value="Marc K. Hammond" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Email" class="col-sm-2 control-label">Email</label>
-                                        <div class="col-sm-10">
-                                            <div class="form-line">
-                                                <input type="email" class="form-control" id="Email" name="Email" placeholder="Email" value="example@example.com" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="InputExperience" class="col-sm-2 control-label">Experience</label>
-
-                                        <div class="col-sm-10">
-                                            <div class="form-line">
-                                                <textarea class="form-control" id="InputExperience" name="InputExperience" rows="3" placeholder="Experience"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="InputSkills" class="col-sm-2 control-label">Skills</label>
-
-                                        <div class="col-sm-10">
-                                            <div class="form-line">
-                                                <input type="text" class="form-control" id="InputSkills" name="InputSkills" placeholder="Skills">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <input type="checkbox" id="terms_condition_check" class="chk-col-red filled-in" />
-                                            <label for="terms_condition_check">I agree to the <a href="#">terms and conditions</a></label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn btn-danger">SUBMIT</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade in" id="change_password_settings">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <label for="OldPassword" class="col-sm-3 control-label">Old Password</label>
+                                <form class="form-horizontal" action="{{route ('user.profile.password') }}" method="post">
+                                    <div class="form-group mandatory">
+                                        <label for="username" class="col-sm-3 control-label">Username</label>
+                                        @if ($errors->has('username'))
+                                          <small style="color:red">* {{$errors->first('username')}}</small>
+                                        @endif
                                         <div class="col-sm-9">
                                             <div class="form-line">
-                                                <input type="password" class="form-control" id="OldPassword" name="OldPassword" placeholder="Old Password" required>
+                                                <input type="text" class="form-control" id="username" name="username" placeholder="Ketikkan Username..." value="{{$getDataUserById->name}}" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mandatory">
+                                        <label for="fullname" class="col-sm-3 control-label">Fullname</label>
+                                        @if ($errors->has('fullname'))
+                                          <small style="color:red">* {{$errors->first('fullname')}}</small>
+                                        @endif
+                                        <div class="col-sm-9">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Ketikkan Fullname..." value="{{$getDataUserById->fullname}}" required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="NewPassword" class="col-sm-3 control-label">New Password</label>
+                                        <label for="oldpassword" class="col-sm-3 control-label">Password Lama</label>
+                                        @if ($errors->has('oldpassword'))
+                                          <small style="color:red">* {{$errors->first('oldpassword')}}</small>
+                                        @endif
                                         <div class="col-sm-9">
                                             <div class="form-line">
-                                                <input type="password" class="form-control" id="NewPassword" name="NewPassword" placeholder="New Password" required>
+                                                <input type="password" class="form-control" id="oldpassword" name="oldpassword" placeholder="Ketikkan Password Lama..." required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="NewPasswordConfirm" class="col-sm-3 control-label">New Password (Confirm)</label>
+                                        <label for="password" class="col-sm-3 control-label">Password Baru</label>
+                                        @if ($errors->has('password'))
+                                          <small style="color:red">* {{$errors->first('password')}}</small>
+                                        @endif
                                         <div class="col-sm-9">
                                             <div class="form-line">
-                                                <input type="password" class="form-control" id="NewPasswordConfirm" name="NewPasswordConfirm" placeholder="New Password (Confirm)" required>
+                                                <input type="password" class="form-control" id="password" name="password" placeholder="Ketikkan Password..." required>
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div class="form-group">
+                                        <label for="password_confirmation" class="col-sm-3 control-label">Konfirmasi Password Baru</label>
+                                        @if ($errors->has('password_confirmation'))
+                                          <small style="color:red">* {{$errors->first('password_confirmation')}}</small>
+                                        @endif
+                                        <div class="col-sm-9">
+                                            <div class="form-line">
+                                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Ketikkan Konfirmasi Password Baru..." required>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-3 col-sm-9">
-                                            <button type="submit" class="btn btn-danger">SUBMIT</button>
+                                            <button type="submit" class="btn btn-primary">Simpan Data Perubahan</button>
                                         </div>
                                     </div>
                                 </form>

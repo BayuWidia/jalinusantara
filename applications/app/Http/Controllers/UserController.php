@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\User;
+use App\Models\Events;
+use App\Models\Informasi;
 use Auth;
 use DB;
 
@@ -33,7 +35,7 @@ class UserController extends Controller
           select('master_users.*', 'master_roles.nama_role')
           ->leftjoin('master_roles', 'master_users.id_role', '=', 'master_roles.id')
           ->orderby('master_users.name', 'asc')
-          ->paginate(10);
+          ->paginate(15);
 
         return view('backend.user.kelolauser', compact('getDataUser', 'getDataRole'));
     }
@@ -191,7 +193,7 @@ class UserController extends Controller
         return redirect()->route('user.index')->withErrors($validator)->withInput();
       }
 
-      $set = User::find($request->$id);
+      $set = User::find($request->$id_pass);
       $set->password = Hash::make($request->passwordPass);
       $set->updated_by = Auth::user()->id;
       $set->save();
@@ -209,13 +211,21 @@ class UserController extends Controller
        ->where('master_users.id', Auth::user()->id)
        ->first();
 
-        return view('backend.user.profile', compact('getDataUserById'));
+       $geDataEvents = Events::where('created_by','=' ,Auth::user()->id)->get();
+       $getDataInformasi = Informasi::where('created_by','=' ,Auth::user()->id)->where('flag_status','=' ,'article')->get();
+
+       $getCountEvents = Events::where('created_by','=' ,Auth::user()->id)->count();
+       $getCountInformasi = Informasi::where('created_by','=' ,Auth::user()->id)->where('flag_status','=' ,'article')->count();
+
+        return view('backend.user.profile', compact('getDataUserById', 'getDataInformasi', 'getDataEvents', 'getCountEvents', 'getCountInformasi'));
     }
 
     public function updatepasswordByUser(Request $request)
     {
 
         $messages = [
+          'username.required' => 'Tidak boleh kosong.',
+          'fullname.required' => 'Tidak boleh kosong.',
           'oldpassword.required' => 'Password lama harus diisi.',
           'password.required' => 'Password baru harus diisi.',
           'password_confirmation.required' => 'Konfirmasi password baru harus diisi.',
@@ -223,6 +233,8 @@ class UserController extends Controller
         ];
 
         $validator = Validator::make($request->all(), [
+          'username' => 'required',
+          'fullname' => 'required',
           'oldpassword' => 'required',
           'password' => 'required|confirmed',
           'password_confirmation' => 'required'
@@ -236,6 +248,8 @@ class UserController extends Controller
       $get = User::find($request->id);
       if(Hash::check($request->oldpassword, $get->password)) {
         $set = User::find($request->$id);
+        $set->name = $request->username;
+        $set->fullname = $request->fullname;
         $set->password = Hash::make($request->password);
         $set->updated_by = Auth::user()->id;
         $set->save();
