@@ -26,7 +26,6 @@ class MenuController extends Controller
     {
         //
         $getMenuParent = Menu::where('id_parent', '=', '0')->get();
-        // $getRole = MasterRoles::all()->orderBy('id', 'ASC');
         $getRole = DB::table('master_roles')->select('*')->orderBy('id', 'ASC')->get();
         return view('backend.menu.kelolaMenu', compact('getMenuParent', 'getRole'));
     }

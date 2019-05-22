@@ -62,9 +62,9 @@
                     <div class="demo-image-copyright">
                         <b>
                           @if ($getSlider[0]->flag_slider == '1')
-                            <span class="label bg-deep-orange">Image Publish</span>
+                            <span class="badge bg-deep-orange">Image Publish</span>
                           @else
-                            <span class="label bg-deep-purple">Image Un Publish</span>
+                            <span class="badge bg-deep-purple">Image Un Publish</span>
                           @endif
                         </b>
                     </div>

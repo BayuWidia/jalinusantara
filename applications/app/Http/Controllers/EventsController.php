@@ -84,12 +84,12 @@ class EventsController extends Controller
                $strDelete = '<a href="#" class="btn btn-danger btn-circle waves-effect waves-circle waves-float hapus"
                                data-toggle="modal" data-target="#modaldelete"
                                data-value="'.$query->id_events.'" data-backdrop="static"
-                               data-keyboard="false"><i class="material-icons">lock_outline</i></a>';
+                               data-keyboard="false"><i class="material-icons">delete_forever</i></a>';
              } else {
-               $strDelete = '<a href="#" class="btn btn-danger btn-circle waves-effect waves-circle waves-float aktifkan"
+               $strDelete = '<a href="#" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float aktifkan"
                                data-toggle="modal" data-target="#modalAktifkan"
                                data-value="'.$query->id_events.'" data-backdrop="static"
-                               data-keyboard="false"><i class="material-icons">lock_open</i></a>';
+                               data-keyboard="false"><i class="material-icons">thumb_down</i></a>';
              }
 
              $strUpd = '<a href="admin/events.edit/'.$query->id_events.'" class="btn btn-success btn-circle waves-effect waves-circle waves-float">
@@ -111,17 +111,17 @@ class EventsController extends Controller
          })
          ->editColumn('flag_headline', function($query){
            if ($query->flag_headline=="1") {
-             return "<span class='label bg-deep-purple'>Headline</span>";
+             return "<span class='badge bg-deep-purple'>Headline</span>";
            } elseif ($query->flag_headline=="0")  {
-             return "<span class='label bg-blue-grey'>Un Headline</span>";
+             return "<span class='badge bg-blue-grey'>Un Headline</span>";
            }
          })
 
          ->editColumn('flag_publish', function($query){
            if ($query->flag_publish=="1") {
-             return "<span class='label btn-warning'>Publish</span>";
+             return "<span class='badge bg-orange'>Publish</span>";
            } elseif ($query->flag_publish=="0")  {
-             return "<span class='label bg-blue-grey'>Un Publish</span>";
+             return "<span class='badge bg-blue-grey'>Un Publish</span>";
            }
          })
          ->removeColumn('activated')

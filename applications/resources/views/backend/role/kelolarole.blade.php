@@ -102,11 +102,11 @@
                                     <td>{{$key->keterangan}}</td>
                                     <td style="text-align:center">
                                       @if($key->activated=="1")
-                                        <span class="label label-success">
+                                        <span class="badge bg-green">
                                           Active
                                         </span>
                                       @else
-                                        <span class="label label-danger">
+                                        <span class="badge bg-red">
                                           Non Active
                                         </span>
                                       @endif
@@ -119,11 +119,11 @@
                                         <a href="#" class="btn btn-danger btn-circle waves-effect waves-circle waves-float hapus"
                                         data-toggle="modal" data-target="#modaldelete"
                                         data-value="{{$key->id}}" data-backdrop="static"
-                                        data-keyboard="false"><i class="material-icons">lock_outline</i></a>
+                                        data-keyboard="false"><i class="material-icons">delete_forever</i></a>
                                       @else
-                                        <a href="#" class="btn btn-danger btn-circle waves-effect waves-circle waves-float aktifkan"
+                                        <a href="#" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float aktifkan"
                                         data-toggle="modal" data-target="#modalAktifkan"
-                                        data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false"><i class="material-icons">lock_open</i></a>
+                                        data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false"><i class="material-icons">thumb_down</i></a>
                                       @endif
                                     </td>
                                   </tr>

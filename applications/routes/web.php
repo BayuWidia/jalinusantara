@@ -137,8 +137,21 @@ Route::get('admin/bind-menu/{id}', 'MenuController@edit')->name('menu.edit');
 Route::get('admin/get-menu-child/{id}', 'MenuController@getMenuChild')->name('get-menu-child');
 Route::get('admin/get-role-checked/{id}', 'MenuController@getRoleChecked')->name('get-role-checked');
 
+//Menu User
+Route::get('user.index', 'UserController@index')->name('user.index');
+Route::post('admin/store-user', 'UserController@store')->name('user.store');
+Route::get('admin/delete-user/{id}/{status}', 'UserController@destroy')->name('user.destroy');
+Route::post('admin/edit-user', 'UserController@update')->name('user.update');
+Route::get('admin/bind-user/{id}', 'UserController@edit')->name('user.edit');
+Route::post('admin/user.update.password', 'UserController@updPassword')->name('user.update.password');
+Route::get('admin/user.search', 'UserController@search')->name('user.search');
+
 //profile
-Route::get('backend.profile', 'UserController@profile')->name('backend.profile');
+Route::get('user.profile', 'UserController@profile')->name('user.profile');
+Route::post('admin/user.profile.password', 'UserController@updatepasswordByUser')->name('user.profile.password');
+
+
+
 
 // =================================== END BACK END ====================================================================
 

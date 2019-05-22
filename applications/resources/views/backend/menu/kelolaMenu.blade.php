@@ -63,11 +63,11 @@
                                   <td>{{$key->url}}</td>
                                   <td style="text-align:center">
                                     @if($key->id_parent=="#")
-                                      <span class="label label-success">
+                                      <span class="badge bg-green">
                                         Parent
                                       </span>
                                     @else
-                                      <span class="label label-primary">
+                                      <span class="badge bg-blue">
                                         Child
                                       </span>
                                     @endif
@@ -75,11 +75,11 @@
                                   <td><i class="material-icons">{{$key->icon}}</i> - {{$key->icon}}</td>
                                   <td style="text-align:center">
                                     @if($key->activated=="1")
-                                      <span class="label label-success">
+                                      <span class="badge bg-green">
                                         Active
                                       </span>
                                     @else
-                                      <span class="label label-danger">
+                                      <span class="badge bg-red">
                                         Non Active
                                       </span>
                                     @endif
@@ -92,11 +92,11 @@
                                       <a href="#" class="btn btn-danger btn-circle waves-effect waves-circle waves-float hapus"
                                       data-toggle="modal" data-target="#modaldelete"
                                       data-value="{{$key->id}}" data-backdrop="static"
-                                      data-keyboard="false"><i class="material-icons">lock_outline</i></a>
+                                      data-keyboard="false"><i class="material-icons">delete_forever</i></a>
                                     @else
-                                      <a href="#" class="btn btn-danger btn-circle waves-effect waves-circle waves-float aktifkan"
+                                      <a href="#" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float aktifkan"
                                       data-toggle="modal" data-target="#modalaktifkan"
-                                      data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false"><i class="material-icons">lock_open</i></a>
+                                      data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false"><i class="material-icons">thumb_down</i></a>
                                     @endif
 
                                   </td>
@@ -488,11 +488,11 @@
                  .append('<td>' + $n + '</td>')
                  .append('<td class="details-control-child" value="'+data[i].id+'">'+data[i].nama_menu+'</td>')
                  .append('<td>'+data[i].url+'</td>')
-                 .append('<td><span class="label label-warning" style="color:white">'+$parent+'</span></td>')
-                 .append('<td><span class="label label-success">'+$statusChild+'</span></td>')
+                 .append('<td><span class="badge bg-orange" style="color:white">'+$parent+'</span></td>')
+                 .append('<td><span class="badge bg-red">'+$statusChild+'</span></td>')
                  .append('<td>'+
                       '<a href="#" data-value="'+data[i].id+'" class="btn btn-success btn-circle waves-effect waves-circle waves-float edit" data-toggle="modal" data-target="#modaledit" id="btnUbah" data-backdrop="static" data-keyboard="false"><i class="material-icons">open_in_new</i></a> &nbsp;'+
-                      '<a href="#" data-value="'+data[i].id+'" class="btn btn-danger btn-circle waves-effect waves-circle waves-float hapus" data-toggle="modal" data-target="#modaldelete" id="btnHapus" data-backdrop="static" data-keyboard="false"><i class="material-icons">lock_outline</i></a>'+
+                      '<a href="#" data-value="'+data[i].id+'" class="btn btn-danger btn-circle waves-effect waves-circle waves-float hapus" data-toggle="modal" data-target="#modaldelete" id="btnHapus" data-backdrop="static" data-keyboard="false"><i class="material-icons">delete_forever</i></a>'+
                       '</td>')
                  $n++;
               }else{
@@ -500,11 +500,11 @@
                  .append('<td>' + $n + '</td>')
                  .append('<td class="details-control-child" value="'+data[i].id+'">'+data[i].nama_menu+'</td>')
                  .append('<td>'+data[i].url+'</td>')
-                 .append('<td><span class="label label-warning" style="color:white">'+$parent+'</span></td>')
-                 .append('<td><span class="label label-danger">'+$statusChild+'</span></td>')
+                 .append('<td><span class="badge bg-orange" style="color:white">'+$parent+'</span></td>')
+                 .append('<td><span class="badge bg-red">'+$statusChild+'</span></td>')
                  .append('<td>'+
                       '<a href="#" data-value="'+data[i].id+'" class="btn btn-success btn-circle waves-effect waves-circle waves-float edit" data-toggle="modal" data-target="#modaledit" id="btnUbah" data-backdrop="static" data-keyboard="false"><i class="material-icons">open_in_new</i></a> &nbsp;'+
-                      '<a href="#" data-value="'+data[i].id+'"  style="color:white" class="btn btn-danger btn-circle waves-effect waves-circle waves-float aktifkan" data-toggle="modal" data-target="#modalaktifkan" id="btnmodalAktifkan" data-backdrop="static" data-keyboard="false"><i class="material-icons">lock_open</i></a>'+
+                      '<a href="#" data-value="'+data[i].id+'"  style="color:white" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float aktifkan" data-toggle="modal" data-target="#modalaktifkan" id="btnmodalAktifkan" data-backdrop="static" data-keyboard="false"><i class="material-icons">thumb_down</i></a>'+
                       '</td>')
                  $n++;
               }

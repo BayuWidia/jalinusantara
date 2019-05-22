@@ -32,7 +32,7 @@ class Menu extends Authenticatable
                                 INNER JOIN master_users users ON users.id_role = access.id_role
                                 INNER JOIN master_roles roles ON roles.id = users.id_role
                                 WHERE users.email =:email AND users.id_role =:roleId AND menu.activated = 1
-                                AND menu.id_parent = 0
+                                AND menu.id_parent = 0 and menu.activated = 1
                                 ORDER BY menu.id ASC',['email'=>$email, 'roleId'=>$roleId]);
   		return $menusParent;
   	}
@@ -46,7 +46,7 @@ class Menu extends Authenticatable
                                 INNER JOIN master_users users ON users.id_role = access.id_role
                                 INNER JOIN master_roles roles ON roles.id = users.id_role
                                 WHERE users.email =:email AND users.id_role =:roleId AND menu.activated = 1
-                                AND menu.id_parent =:parentId
+                                AND menu.id_parent =:parentId and menu.activated = 1
                                 ORDER BY menu.id ASC',['email'=>$email, 'roleId'=>$roleId, 'parentId'=>$parentId]);
   		return $menusParent;
   	}
