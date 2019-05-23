@@ -60,8 +60,8 @@ class DashboardController extends Controller
         $getCountEvents = Events::where('flag_publish','=' ,1)->count();
       } else {
 
-        $getCountEvents = Events::where('flag_publish','=' ,1)->where('informasi.created_by', '=', Auth::user()->id)->count();
-        $getCountEventsUn = Events::where('flag_publish','=' ,0)->where('informasi.created_by', '=', Auth::user()->id)->count();
+        $getCountEvents = Events::where('flag_publish','=' ,1)->where('events.created_by', '=', Auth::user()->id)->count();
+        $getCountEventsUn = Events::where('flag_publish','=' ,0)->where('events.created_by', '=', Auth::user()->id)->count();
         $getCountInformasi = Informasi::where('flag_publish','=' ,1)->where('informasi.created_by', '=', Auth::user()->id)->where('flag_status','=' ,'article')->count();
         $getCountInformasiUn = Informasi::where('flag_publish','=' ,0)->where('informasi.created_by', '=', Auth::user()->id)->where('flag_status','=' ,'article')->count();
 
