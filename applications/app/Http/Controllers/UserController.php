@@ -211,13 +211,9 @@ class UserController extends Controller
        ->where('master_users.id', Auth::user()->id)
        ->first();
 
-       $geDataEvents = Events::where('created_by','=' ,Auth::user()->id)->get();
-       $getDataInformasi = Informasi::where('created_by','=' ,Auth::user()->id)->where('flag_status','=' ,'article')->get();
 
-       $getCountEvents = Events::where('created_by','=' ,Auth::user()->id)->count();
-       $getCountInformasi = Informasi::where('created_by','=' ,Auth::user()->id)->where('flag_status','=' ,'article')->count();
 
-        return view('backend.user.profile', compact('getDataUserById', 'getDataInformasi', 'getDataEvents', 'getCountEvents', 'getCountInformasi'));
+        return view('backend.user.profile', compact('getDataUserById'));
     }
 
     public function updatepasswordByUser(Request $request)

@@ -25,9 +25,10 @@ class MenuController extends Controller
     public function index()
     {
         //
-        $getMenuParent = Menu::where('id_parent', '=', '0')->get();
+        $getListMenu = Menu::where('id_parent', '=', '0')->get();
+        $getMenuParent = Menu::where('id_parent', '=', '0')->where('url', '=', '#')->get();
         $getRole = DB::table('master_roles')->select('*')->orderBy('id', 'ASC')->get();
-        return view('backend.menu.kelolaMenu', compact('getMenuParent', 'getRole'));
+        return view('backend.menu.kelolaMenu', compact('getMenuParent', 'getRole','getListMenu'));
     }
 
 

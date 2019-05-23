@@ -14,183 +14,193 @@
       <!-- Widgets -->
       <div class="row clearfix">
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box bg-pink hover-expand-effect">
+              <div class="info-box bg-cyan hover-expand-effect">
                   <div class="icon">
-                      <i class="material-icons">playlist_add_check</i>
+                      <i class="material-icons">thumb_up</i>
                   </div>
                   <div class="content">
-                      <div class="text">NEW TASKS</div>
-                      <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                      <div class="text">ART PUBLISH</div>
+                      <div class="number count-to" data-from="0" data-to="{{$getCountInformasi}}"></div>
                   </div>
               </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box bg-cyan hover-expand-effect">
+              <div class="info-box bg-pink hover-expand-effect">
                   <div class="icon">
-                      <i class="material-icons">help</i>
+                      <i class="material-icons">thumb_down</i>
                   </div>
                   <div class="content">
-                      <div class="text">NEW TICKETS</div>
-                      <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"></div>
+                      <div class="text">ART UN PUBLISH</div>
+                      <div class="number count-to" data-from="0" data-to="{{$getCountInformasiUn}}"></div>
                   </div>
               </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
               <div class="info-box bg-light-green hover-expand-effect">
                   <div class="icon">
-                      <i class="material-icons">forum</i>
+                      <i class="material-icons">event_available</i>
                   </div>
                   <div class="content">
-                      <div class="text">NEW COMMENTS</div>
-                      <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
+                      <div class="text">EVENTS PUBLISH</div>
+                      <div class="number count-to" data-from="0" data-to="{{$getCountEvents}}"></div>
                   </div>
               </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box bg-orange hover-expand-effect">
+              <div class="info-box bg-deep-purple hover-expand-effect">
                   <div class="icon">
-                      <i class="material-icons">person_add</i>
+                      <i class="material-icons">event_busy</i>
                   </div>
                   <div class="content">
-                      <div class="text">NEW VISITORS</div>
-                      <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
+                      <div class="text">EVENTS UN PUBLISH</div>
+                      <div class="number count-to" data-from="0" data-to="{{$getCountEventsUn}}"></div>
                   </div>
               </div>
           </div>
       </div>
       <!-- #END# Widgets -->
-      <!-- CPU Usage -->
+
       <div class="row clearfix">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
               <div class="card">
-                  <div class="header">
-                      <div class="row clearfix">
-                          <div class="col-xs-12 col-sm-6">
-                              <h2>CPU USAGE (%)</h2>
-                          </div>
-                          <div class="col-xs-12 col-sm-6 align-right">
-                              <div class="switch panel-switch-btn">
-                                  <span class="m-r-10 font-12">REAL TIME</span>
-                                  <label>OFF<input type="checkbox" id="realtime" checked><span class="lever switch-col-cyan"></span>ON</label>
-                              </div>
-                          </div>
-                      </div>
-                      <ul class="header-dropdown m-r--5">
-                          <li class="dropdown">
-                              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                  <i class="material-icons">more_vert</i>
-                              </a>
-                              <ul class="dropdown-menu pull-right">
-                                  <li><a href="javascript:void(0);">Action</a></li>
-                                  <li><a href="javascript:void(0);">Another action</a></li>
-                                  <li><a href="javascript:void(0);">Something else here</a></li>
-                              </ul>
-                          </li>
-                      </ul>
+                  <div class="header bg-orange">
+                      List Data Article Terbaru
                   </div>
                   <div class="body">
-                      <div id="real_time_chart" class="dashboard-flot-chart"></div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <!-- #END# CPU Usage -->
-      <div class="row clearfix">
-          <!-- Visitors -->
-          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <div class="card">
-                  <div class="body bg-pink">
-                      <div class="sparkline" data-type="line" data-spot-Radius="4" data-highlight-Spot-Color="rgb(233, 30, 99)" data-highlight-Line-Color="#fff"
-                           data-min-Spot-Color="rgb(255,255,255)" data-max-Spot-Color="rgb(255,255,255)" data-spot-Color="rgb(255,255,255)"
-                           data-offset="90" data-width="100%" data-height="92px" data-line-Width="2" data-line-Color="rgba(255,255,255,0.7)"
-                           data-fill-Color="rgba(0, 188, 212, 0)">
-                          12,10,9,6,5,6,10,5,7,5,12,13,7,12,11
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover" id="tabelinfoa">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th style="text-align:center">Judul</th>
+                                    <th style="text-align:center">Pembuat Article</th>
+                                    <th style="text-align:center">Tanggal</th>
+                                    <th style="text-align:center">Views</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              @if(!$informasiTerbaru == null)
+                                @php $j=1; @endphp
+                                @foreach($informasiTerbaru as $key)
+                                  @if($j<=10)
+                                    <tr>
+                                      <td>{{$j}}</td>
+                                      <td>
+                                        @php $judul = explode(" ", $key->judul_informasi); @endphp
+                                        @if(count($judul)<=2)
+                                          {{$key->judul_informasi}}
+                                        @else
+                                          @for($i=0; $i < 2; $i++)
+                                            {{$judul[$i]}}
+                                          @endfor
+                                          ...
+                                        @endif
+                                      </td>
+                                      <td>
+                                        {{$key->fullname}}
+                                      </td>
+                                      <td>
+                                        @php $date = explode(" ", $key->created_at); echo $date[0]; @endphp
+                                      </td>
+                                      <td style="text-align:center">
+                                        <span class="badge bg-blue">
+                                          @if($key->view_counter=="")
+                                            0
+                                          @else
+                                            {{$key->view_counter}}
+                                          @endif
+                                        </span>
+                                      </td>
+                                    </tr>
+                                  @endif
+                                  @php $j++ @endphp
+                                @endforeach
+                              @else
+                                <tr>
+                                  <td colspan="5" style="text-align:center" class="text-muted">
+                                    Data tidak tersedia.
+                                  </td>
+                                </tr>
+                              @endif
+                            </tbody>
+                        </table>
                       </div>
-                      <ul class="dashboard-stat-list">
-                          <li>
-                              TODAY
-                              <span class="pull-right"><b>1 200</b> <small>USERS</small></span>
-                          </li>
-                          <li>
-                              YESTERDAY
-                              <span class="pull-right"><b>3 872</b> <small>USERS</small></span>
-                          </li>
-                          <li>
-                              LAST WEEK
-                              <span class="pull-right"><b>26 582</b> <small>USERS</small></span>
-                          </li>
-                      </ul>
+                      <div class="box-footer text-center">
+                        <a href="{{route('article.index')}}" class="uppercase">Lihat Seluruh Article</a>
+                      </div>
                   </div>
               </div>
-          </div>
-          <!-- #END# Visitors -->
-          <!-- Latest Social Trends -->
-          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <div class="card">
-                  <div class="body bg-cyan">
-                      <div class="m-b--35 font-bold">LATEST SOCIAL TRENDS</div>
-                      <ul class="dashboard-stat-list">
-                          <li>
-                              #socialtrends
-                              <span class="pull-right">
-                                  <i class="material-icons">trending_up</i>
-                              </span>
-                          </li>
-                          <li>
-                              #materialdesign
-                              <span class="pull-right">
-                                  <i class="material-icons">trending_up</i>
-                              </span>
-                          </li>
-                          <li>#adminbsb</li>
-                          <li>#freeadmintemplate</li>
-                          <li>#bootstraptemplate</li>
-                          <li>
-                              #freehtmltemplate
-                              <span class="pull-right">
-                                  <i class="material-icons">trending_up</i>
-                              </span>
-                          </li>
-                      </ul>
-                  </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header bg-orange">
+                        List Data Events Terbaru
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover" id="tabelinfob">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center">#</th>
+                                        <th style="text-align:center">Judul</th>
+                                        <th style="text-align:center">Lokasi</th>
+                                        <th style="text-align:center">Fasilitator</th>
+                                        <th style="text-align:center">Peserta</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  @if(!$eventsTerbaru == null)
+                                    @php $j=1; @endphp
+                                    @foreach($eventsTerbaru as $key)
+                                      @if($j<=10)
+                                        <tr>
+                                          <td>{{$j}}</td>
+                                          <td>
+                                            @php $judul = explode(" ", $key->judul_event); @endphp
+                                            @if(count($judul)<=5)
+                                              {{$key->judul_event}}
+                                            @else
+                                              @for($i=0; $i < 5; $i++)
+                                                {{$judul[$i]}}
+                                              @endfor
+                                              ...
+                                            @endif
+                                          </td>
+                                          <td>
+                                            {{$key->lokasi}}
+                                          </td>
+                                          <td>
+                                            {{$key->fasilitator}}
+                                          </td>
+                                          <td style="text-align:center">
+                                            <span class="badge bg-green">
+                                              @if($key->jumlah_peserta=="")
+                                                0
+                                              @else
+                                                {{$key->jumlah_peserta}}
+                                              @endif
+                                            </span>
+                                          </td>
+                                        </tr>
+                                      @endif
+                                      @php $j++ @endphp
+                                    @endforeach
+                                  @else
+                                    <tr>
+                                      <td colspan="5" style="text-align:center" class="text-muted">
+                                        Data tidak tersedia.
+                                      </td>
+                                    </tr>
+                                  @endif
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="box-footer text-center">
+                          <a href="{{route('events.index')}}" class="uppercase">Lihat Seluruh Events</a>
+                        </div>
+                    </div>
+                </div>
               </div>
-          </div>
-          <!-- #END# Latest Social Trends -->
-          <!-- Answered Tickets -->
-          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <div class="card">
-                  <div class="body bg-teal">
-                      <div class="font-bold m-b--35">ANSWERED TICKETS</div>
-                      <ul class="dashboard-stat-list">
-                          <li>
-                              TODAY
-                              <span class="pull-right"><b>12</b> <small>TICKETS</small></span>
-                          </li>
-                          <li>
-                              YESTERDAY
-                              <span class="pull-right"><b>15</b> <small>TICKETS</small></span>
-                          </li>
-                          <li>
-                              LAST WEEK
-                              <span class="pull-right"><b>90</b> <small>TICKETS</small></span>
-                          </li>
-                          <li>
-                              LAST MONTH
-                              <span class="pull-right"><b>342</b> <small>TICKETS</small></span>
-                          </li>
-                          <li>
-                              LAST YEAR
-                              <span class="pull-right"><b>4 225</b> <small>TICKETS</small></span>
-                          </li>
-                          <li>
-                              ALL
-                              <span class="pull-right"><b>8 752</b> <small>TICKETS</small></span>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-          <!-- #END# Answered Tickets -->
       </div>
 
       <div class="row clearfix">
@@ -198,19 +208,7 @@
           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
               <div class="card">
                   <div class="header">
-                      <h2>TASK INFOS</h2>
-                      <ul class="header-dropdown m-r--5">
-                          <li class="dropdown">
-                              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                  <i class="material-icons">more_vert</i>
-                              </a>
-                              <ul class="dropdown-menu pull-right">
-                                  <li><a href="javascript:void(0);">Action</a></li>
-                                  <li><a href="javascript:void(0);">Another action</a></li>
-                                  <li><a href="javascript:void(0);">Something else here</a></li>
-                              </ul>
-                          </li>
-                      </ul>
+                      <h2>Kategori Terfavorite</h2>
                   </div>
                   <div class="body">
                       <div class="table-responsive">
@@ -218,101 +216,76 @@
                               <thead>
                                   <tr>
                                       <th>#</th>
-                                      <th>Task</th>
-                                      <th>Status</th>
-                                      <th>Manager</th>
-                                      <th>Progress</th>
+                                      <th>Nama Kategori</th>
+                                      <th>Jumlah</th>
                                   </tr>
                               </thead>
                               <tbody>
+                                @if(!$getkategori == null)
+                                  @php $j=1; @endphp
+                                  @foreach($getkategori as $key)
+                                    @if($j<=10)
+                                      <tr>
+                                        <td>{{$j}}</td>
+                                        <td>
+                                          {{$key->nama_kategori}}
+                                        </td>
+                                        <td >
+                                          <span class="badge bg-purple">
+                                            @if($key->jumlahkategori=="")
+                                              0
+                                            @else
+                                              {{$key->jumlahkategori}}
+                                            @endif
+                                          </span>
+                                        </td>
+                                      </tr>
+                                    @endif
+                                    @php $j++ @endphp
+                                  @endforeach
+                                @else
                                   <tr>
-                                      <td>1</td>
-                                      <td>Task A</td>
-                                      <td><span class="label bg-green">Doing</span></td>
-                                      <td>John Doe</td>
-                                      <td>
-                                          <div class="progress">
-                                              <div class="progress-bar bg-green" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" style="width: 62%"></div>
-                                          </div>
-                                      </td>
+                                    <td colspan="3" style="text-align:center" class="text-muted">
+                                      Data tidak tersedia.
+                                    </td>
                                   </tr>
-                                  <tr>
-                                      <td>2</td>
-                                      <td>Task B</td>
-                                      <td><span class="label bg-blue">To Do</span></td>
-                                      <td>John Doe</td>
-                                      <td>
-                                          <div class="progress">
-                                              <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"></div>
-                                          </div>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>3</td>
-                                      <td>Task C</td>
-                                      <td><span class="label bg-light-blue">On Hold</span></td>
-                                      <td>John Doe</td>
-                                      <td>
-                                          <div class="progress">
-                                              <div class="progress-bar bg-light-blue" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 72%"></div>
-                                          </div>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>4</td>
-                                      <td>Task D</td>
-                                      <td><span class="label bg-orange">Wait Approvel</span></td>
-                                      <td>John Doe</td>
-                                      <td>
-                                          <div class="progress">
-                                              <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%"></div>
-                                          </div>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>5</td>
-                                      <td>Task E</td>
-                                      <td>
-                                          <span class="label bg-red">Suspended</span>
-                                      </td>
-                                      <td>John Doe</td>
-                                      <td>
-                                          <div class="progress">
-                                              <div class="progress-bar bg-red" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" style="width: 87%"></div>
-                                          </div>
-                                      </td>
-                                  </tr>
+                                @endif
                               </tbody>
                           </table>
+                          <nav>
+                              <ul class="pagination">
+                                {{ $getkategori->links() }}
+                              </ul>
+                          </nav>
                       </div>
+
                   </div>
               </div>
           </div>
           <!-- #END# Task Info -->
-          <!-- Browser Usage -->
+          <!-- Answered Tickets -->
           <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
               <div class="card">
-                  <div class="header">
-                      <h2>BROWSER USAGE</h2>
-                      <ul class="header-dropdown m-r--5">
-                          <li class="dropdown">
-                              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                  <i class="material-icons">more_vert</i>
-                              </a>
-                              <ul class="dropdown-menu pull-right">
-                                  <li><a href="javascript:void(0);">Action</a></li>
-                                  <li><a href="javascript:void(0);">Another action</a></li>
-                                  <li><a href="javascript:void(0);">Something else here</a></li>
-                              </ul>
-                          </li>
+                  <div class="body bg-teal">
+                      <div class="font-bold m-b--35">EVENTS HARI INI</div>
+                      <ul class="dashboard-stat-list">
+                        @if(sizeof($getEventsToday) != 0)
+                          @foreach($getEventsToday as $key)
+                            <li>
+                                {{$key->judul_event}}
+                                <span class="pull-right"><b>{{$key->jumlah_peserta}}</b> <small>Peserta</small></span>
+                            </li>
+                          @endforeach
+                        @else
+                        <li style="text-align:center">
+                            <i>Events hari ini belum tersedia</i>
+                        </li>
+                        @endif
                       </ul>
-                  </div>
-                  <div class="body">
-                      <div id="donut_chart" class="dashboard-donut-chart"></div>
                   </div>
               </div>
           </div>
-          <!-- #END# Browser Usage -->
+          <!-- #END# Answered Tickets -->
       </div>
   </div>
 @endsection

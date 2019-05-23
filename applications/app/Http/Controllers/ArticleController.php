@@ -47,6 +47,7 @@ class ArticleController extends Controller
                        'informasi.tanggal_publish', 'master_users.fullname',
                        'informasi.flag_headline', 'informasi.flag_publish', 'informasi.activated'])
                        ->where('informasi.flag_status', '=', 'article')
+                       ->orderBy('flag_publish', 'DESC')
                        ->orderBy('id_informasi', 'DESC');
        } else {
          $querys = Informasi::leftJoin('master_kategori','informasi.id_kategori','=','master_kategori.id')
@@ -57,6 +58,7 @@ class ArticleController extends Controller
                        'informasi.flag_headline', 'informasi.flag_publish', 'informasi.activated'])
                        ->where('informasi.created_by', '=', Auth::user()->id)
                        ->where('informasi.flag_status', '=', 'article')
+                       ->orderBy('flag_publish', 'DESC')
                        ->orderBy('id_informasi', 'DESC');
        }
 

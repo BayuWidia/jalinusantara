@@ -45,6 +45,7 @@ class EventsController extends Controller
                        'events.judul_event', 'master_kategori.nama_kategori',
                        'events.lokasi', 'events.fasilitator',
                        'events.flag_headline', 'events.flag_publish', 'events.activated'])
+                       ->orderBy('flag_publish', 'DESC')
                        ->orderBy('id_events', 'DESC');
        } else {
          $querys = Events::leftJoin('master_kategori','events.id_kategori','=','master_kategori.id')
@@ -54,6 +55,7 @@ class EventsController extends Controller
                        'events.lokasi', 'events.fasilitator',
                        'events.flag_headline', 'events.flag_publish', 'events.activated'])
                        ->where('events.created_by', '=', Auth::user()->id)
+                       ->orderBy('flag_publish', 'DESC')
                        ->orderBy('id_events', 'DESC');
        }
 

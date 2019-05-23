@@ -56,7 +56,7 @@
                             </thead>
                             <tbody>
                               @php $i=1; @endphp
-                              @foreach($getMenuParent  as $key)
+                              @foreach($getListMenu  as $key)
                                 <tr>
                                   <td>{{$i++}}</td>
                                   <td class='details-control' value='{{$key->id}}:{{$key->nama_menu}}'>{{$key->nama_menu}}</td>
