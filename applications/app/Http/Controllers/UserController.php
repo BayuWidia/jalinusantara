@@ -92,6 +92,12 @@ class UserController extends Controller
           return redirect()->route('user.index')->withErrors($validator)->withInput();
         }
 
+        $checkdouble = User::where('email','=' ,$request->email)->get();
+
+       if ($checkdouble != null) {
+         return redirect()->route('user.index')->with('messagefail', 'Email sudah tersedia.');
+       }
+
         $file = $request->file('urlPhoto');
         $photoName = '';
         if($file!="") {

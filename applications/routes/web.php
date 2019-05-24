@@ -82,7 +82,6 @@ Route::get('log.files', 'LogFilesController@index')->name('log.files');
 Route::get('log.files.show/{filename}', 'LogFilesController@show')->name('log.files.show');
 Route::get('log.files.download/{filename}', 'LogFilesController@download')->name('log.files.download');
 
-
 //Menu informasi
 Route::get('profile.index', 'ProfileController@index')->name('profile.index');
 Route::get('datatables.profile', ['as'=>'datatables.profile', 'uses'=>'ProfileController@getDataForDataTable']);
@@ -107,7 +106,6 @@ Route::get('admin/publish-article/{id}', 'ArticleController@show')->name('articl
 Route::get('admin/article.edit/{id}', 'ArticleController@edit')->name('article.edit');
 Route::get('admin/article.view/{id}', 'ArticleController@view')->name('article.view');
 
-
 //Menu event
 Route::get('events.index', 'EventsController@index')->name('events.index');
 Route::get('datatables.events', ['as'=>'datatables.events', 'uses'=>'EventsController@getDataForDataTable']);
@@ -119,7 +117,6 @@ Route::get('admin/headline-events/{id}', 'EventsController@headline')->name('eve
 Route::get('admin/publish-events/{id}', 'EventsController@show')->name('events.show');
 Route::get('admin/events.edit/{id}', 'EventsController@edit')->name('events.edit');
 Route::get('admin/events.view/{id}', 'EventsController@view')->name('events.view');
-
 
 //Menu Role
 Route::get('role.index', 'RoleController@index')->name('role.index');
@@ -149,14 +146,17 @@ Route::get('admin/user.search', 'UserController@search')->name('user.search');
 //profile
 Route::get('user.profile', 'UserController@profile')->name('user.profile');
 Route::post('admin/user.profile.password', 'UserController@updatepasswordByUser')->name('user.profile.password');
-
-
-
-
 // =================================== END BACK END ====================================================================
 
 
 
 
 // =================================== START FRONT END ====================================================================
+Route::get('/', 'FeHomeController@index')->name('home');
+Route::get('about.us/{id}', 'FeAboutController@index')->name('about.us');
+Route::get('article/{id}', 'FeArticleController@index')->name('article');
+Route::get('articleById/{id}/{idKategori}', 'FeArticleController@indexById')->name('articleById');
+Route::get('contact', 'FeContactController@index')->name('contact');
+Route::get('events', 'FeEventsController@index')->name('events');
+
 // =================================== END FRONT END ====================================================================
