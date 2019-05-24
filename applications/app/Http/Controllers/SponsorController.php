@@ -57,8 +57,8 @@ class SponsorController extends Controller
 
           $file = $request->file('urlSponsor');
           if($file!="") {
-              $photoName = time(). '.' . $file->getClientOriginalExtension();
-              Image::make($file)->fit(126,60)->save('images/'. $photoName);
+              $photoName = Auth::user()->email.'_'.time(). '.' . $file->getClientOriginalExtension();
+              Image::make($file)->fit(126,60)->save('images/sponsor/'. $photoName);
 
               $set = new MasterSponsor;
               $set->nama_sponsor = $request->namaSponsor;
@@ -127,8 +127,8 @@ class SponsorController extends Controller
         $set->link_sponsor = $request->linkSponsorEdit;
         $file = $request->file('urlSponsor');
         if($file!="") {
-          $photoName = time(). '.' . $file->getClientOriginalExtension();
-          Image::make($file)->fit(126,60)->save('images/'. $photoName);
+          $photoName = Auth::user()->email.'_'.time(). '.' . $file->getClientOriginalExtension();
+          Image::make($file)->fit(126,60)->save('images/sponsor/'. $photoName);
           $set->url_sponsor = $photoName;
         }
         $set->keterangan_sponsor = $request->keteranganSponsorEdit;

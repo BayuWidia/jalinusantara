@@ -55,7 +55,7 @@
                 </div>
                 <div class="body">
                     @if($getSlider[0]->url_slider!="")
-                      <img src="{{url('images/')}}/{{$getSlider[0]->url_slider}}" class="js-animating-object img-responsive">
+                      <img src="{{url('images/slider/')}}/{{$getSlider[0]->url_slider}}" class="js-animating-object img-responsive">
                     @else
                       <img src="{{url('images/')}}/no_image.jpg" class="js-animating-object img-responsive">
                     @endif

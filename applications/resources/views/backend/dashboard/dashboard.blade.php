@@ -291,26 +291,4 @@
 @endsection
 
 @section('footscript')
-<!-- Morris Plugin Js -->
-<script src="{{asset('theme/plugins/raphael/raphael.min.js')}}"></script>
-<script src="{{asset('theme/plugins/morrisjs/morris.js')}}"></script>
-
-<!-- ChartJs -->
-<script src="{{asset('theme/plugins/chartjs/Chart.bundle.js')}}"></script>
-
-<!-- Flot Charts Plugin Js -->
-<script src="{{asset('theme/plugins/flot-charts/jquery.flot.js')}}"></script>
-<script src="{{asset('theme/plugins/flot-charts/jquery.flot.resize.js')}}"></script>
-<script src="{{asset('theme/plugins/flot-charts/jquery.flot.pie.js')}}"></script>
-<script src="{{asset('theme/plugins/flot-charts/jquery.flot.categories.js')}}"></script>
-<script src="{{asset('theme/plugins/flot-charts/jquery.flot.time.js')}}"></script>
-
-<!-- Sparkline Chart Plugin Js -->
-<script src="{{asset('theme/plugins/jquery-sparkline/jquery.sparkline.js')}}"></script>
-
-
-<script src="{{asset('theme/js/pages/index.js')}}"></script>
-
-<!-- Jquery CountTo Plugin Js -->
-<script src="{{asset('theme/plugins/jquery-countto/jquery.countTo.js')}}"></script>
 @endsection

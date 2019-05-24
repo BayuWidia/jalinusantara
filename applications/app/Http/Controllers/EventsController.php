@@ -188,8 +188,8 @@ class EventsController extends Controller
 
          $file = $request->file('urlFoto');
          if($file!="") {
-           $photoName = time(). '.' . $file->getClientOriginalExtension();
-           Image::make($file)->fit(555,280)->save('images/'. $photoName);
+           $photoName = Auth::user()->email.'_'.time(). '.' . $file->getClientOriginalExtension();
+           Image::make($file)->fit(555,280)->save('images/events/'. $photoName);
 
            $flagHeadline="";
            if($request->flagHeadline=="") {
@@ -344,8 +344,8 @@ class EventsController extends Controller
          $set->id_kategori = $request->kategoriId;
          $file = $request->file('urlFoto');
          if($file!="") {
-           $photoName = time(). '.' . $file->getClientOriginalExtension();
-           Image::make($file)->fit(555,280)->save('images/'. $photoName);
+           $photoName = Auth::user()->email.'_'.time(). '.' . $file->getClientOriginalExtension();
+           Image::make($file)->fit(555,280)->save('images/events/'. $photoName);
            $set->url_foto = $photoName;
          }
          $set->maps = $request->maps;

@@ -54,9 +54,9 @@ class SliderController extends Controller
 
           $file = $request->file('urlSlider');
           if($file!="") {
-              $photoName = time(). '.' . $file->getClientOriginalExtension();
-              Image::make($file)->fit(1920,900)->save('images/'. $photoName);
-              Image::make($file)->fit(200,122)->save('_thumbs/Slider/'. $photoName);
+              $photoName = Auth::user()->email.'_'.time(). '.' . $file->getClientOriginalExtension();
+              Image::make($file)->fit(1920,900)->save('images/slider/'. $photoName);
+              Image::make($file)->fit(200,122)->save('_thumbs/slider/'. $photoName);
 
               $set = new MasterSlider;
               $set->judul = $request->judul;
@@ -123,9 +123,9 @@ class SliderController extends Controller
         $set->judul = $request->judul;
         $file = $request->file('urlSlider');
         if($file!="") {
-          $photoName = time(). '.' . $file->getClientOriginalExtension();
-          Image::make($file)->fit(1920,900)->save('images/'. $photoName);
-          Image::make($file)->fit(200,122)->save('_thumbs/Slider/'. $photoName);
+          $photoName = Auth::user()->email.'_'.time(). '.' . $file->getClientOriginalExtension();
+          Image::make($file)->fit(1920,900)->save('images/slider/'. $photoName);
+          Image::make($file)->fit(200,122)->save('_thumbs/slider/'. $photoName);
           $set->url_slider = $photoName;
         }
         $set->keterangan_slider = $request->keteranganSlider;

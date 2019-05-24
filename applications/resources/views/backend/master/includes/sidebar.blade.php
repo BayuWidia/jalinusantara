@@ -4,7 +4,13 @@
         <!-- User Info -->
         <div class="user-info">
             <div class="image">
-                <img src="{{asset('theme/images/user.png')}}" width="48" height="48" alt="User" />
+              @if(Auth::user())
+                @if(Auth::user()->url_foto=="")
+                  <img src="{{asset('images/user/default.png')}}" alt="image" width="48" height="48">
+                @else
+                  <img src="{{ url('images/user/') }}/{{Auth::user()->url_foto}}" alt="image" width="48" height="48">
+                @endif
+              @endif
             </div>
             <div class="info-container">
                 <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

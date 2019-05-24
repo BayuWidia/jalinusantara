@@ -63,7 +63,7 @@
                                   <td>{{$key->keterangan_gambar}}</td>
                                   <td>
                                     @if($key->url_gambar!="")
-                                      <img src="{{url('_thumbs/Galeri')}}/{{$key->url_gambar}}">
+                                      <img src="{{url('_thumbs/galeri')}}/{{$key->url_gambar}}">
                                     @else
                                       <img src="{{url('images/')}}/no_image.jpg" class="js-animating-object img-responsive">
                                     @endif

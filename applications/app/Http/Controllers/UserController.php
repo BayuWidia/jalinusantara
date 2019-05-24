@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
+use Auth;
+use DB;
+use Image;
+use Validator;
+use Carbon\Carbon;
+use PDF;
 use App\Models\User;
 use App\Models\Events;
 use App\Models\Informasi;
-use Auth;
-use DB;
 
 
 class UserController extends Controller
@@ -136,16 +141,17 @@ class UserController extends Controller
         return redirect()->route('user.index')->withErrors($validator)->withInput();
       }
 
+      // dd($request->all());
 
-      $set = Events::find($request->id);
+      $set = User::find($request->id);
       $set->id_role = $request->roleId_edit;
       $set->name = $request->username_edit;
       $set->fullname = $request->fullname_edit;
       $set->email = $request->email_edit;
       $file = $request->file('urlPhoto_edit');
       if($file!="") {
-        $photoName = time(). '.' . $file->getClientOriginalExtension();
-        Image::make($file)->fit(555,280)->save('images/'. $photoName);
+        $photoName = Auth::user()->email.'_'.time(). '.' . $file->getClientOriginalExtension();
+        Image::make($file)->fit(128,128)->save('images/user/'. $photoName);
         $set->url_foto = $photoName;
       }
       $set->created_by = Auth::user()->id;

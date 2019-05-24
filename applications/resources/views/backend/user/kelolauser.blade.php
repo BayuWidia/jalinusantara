@@ -68,8 +68,8 @@
                  <div class="profile-header">&nbsp;</div>
                  <div class="profile-body">
                      <div class="image-area">
-                         @if($key->url_photo!="")
-                           <img src="{{url('images/user')}}/{{$key->url_photo}}">
+                         @if($key->url_foto!="")
+                           <img alt="image" src="{{url('images/user/')}}/{{$key->url_foto}}">
                          @else
                            <img alt="image" src="{{asset('images/user/default.png')}}">
                          @endif
@@ -276,7 +276,7 @@
                                      @if ($errors->has('urlPhoto_edit'))
                                        <small style="color:red">* {{$errors->first('urlPhoto_edit')}}</small>
                                      @endif
-                                     <input type="file" name="urlPhoto" class="form-control" value="{{ old('urlPhoto_edit') }}" >
+                                     <input type="file" name="urlPhoto_edit" class="form-control" value="{{ old('urlPhoto_edit') }}" >
                                      <input type="hidden" name="id" id="id">
                                      <span style="color:red;">* Biarkan kosong jika tidak ingin diganti.</span>
                                  </div>
