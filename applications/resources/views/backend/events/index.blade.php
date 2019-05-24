@@ -49,7 +49,7 @@
                                     <th style="text-align:center">Fasilitator</th>
                                     <th style="text-align:center">Headline</th>
                                     <th style="text-align:center">Publish</th>
-                                      <th style="text-align:center;width:25%">Action</th>
+                                      <th style="text-align:center;width:28%">Action</th>
                                 </tr>
                             </thead>
                         </table>

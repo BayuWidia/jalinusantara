@@ -291,4 +291,8 @@
 @endsection
 
 @section('footscript')
+<script src="{{asset('theme/js/pages/index.js')}}"></script>
+
+<!-- Jquery CountTo Plugin Js -->
+<script src="{{asset('theme/plugins/jquery-countto/jquery.countTo.js')}}"></script>
 @endsection

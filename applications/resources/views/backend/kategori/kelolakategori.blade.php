@@ -117,16 +117,16 @@
                                     <td style="text-align:center">
                                       <a href="#" class="btn btn-success btn-circle waves-effect waves-circle waves-float edit"
                                          data-toggle="modal" data-target="#modaledit" data-value="{{$key->id}}"
-                                         data-backdrop="static" data-keyboard="false"><i class="material-icons">delete_forever</i></a>
+                                         data-backdrop="static" data-keyboard="false"><i class="material-icons">open_in_new</i></a>
                                       @if($key->activated=="1")
-                                        <a href="#" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float hapus"
+                                        <a href="#" class="btn btn-danger btn-circle waves-effect waves-circle waves-float hapus"
                                         data-toggle="modal" data-target="#modaldelete"
                                         data-value="{{$key->id}}" data-backdrop="static"
-                                        data-keyboard="false"><i class="material-icons">thumb_down</i></a>
+                                        data-keyboard="false"><i class="material-icons">delete_forever</i></a>
                                       @else
-                                        <a href="#" class="btn btn-danger btn-circle waves-effect waves-circle waves-float aktifkan"
+                                        <a href="#" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float aktifkan"
                                         data-toggle="modal" data-target="#modalAktifkan"
-                                        data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false"><i class="material-icons">lock_open</i></a>
+                                        data-value="{{$key->id}}" data-backdrop="static" data-keyboard="false"><i class="material-icons">thumb_down</i></a>
                                       @endif
                                     </td>
                                   </tr>

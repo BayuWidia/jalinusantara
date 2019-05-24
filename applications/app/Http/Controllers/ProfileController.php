@@ -150,11 +150,11 @@ class ProfileController extends Controller
               return redirect()->route('profile.tambah')->withErrors($validator)->withInput();
           }
 
-          $checkdouble = Informasi::where('id_kategori','=' ,$request->kategoriId)->get();
-
-          if ($checkdouble != null) {
-            return redirect()->route('profile.tambah')->with('messagefail', 'Kategori sudah tersedia.');
-          }
+          // $checkdouble = Informasi::where('id_kategori','=' ,$request->kategoriId)->get();
+          //
+          // if ($checkdouble != null) {
+          //   return redirect()->route('profile.tambah')->with('messagefail', 'Kategori sudah tersedia.');
+          // }
 
           $setTglPosting = date('Y-m-d');
           $set = new Informasi;

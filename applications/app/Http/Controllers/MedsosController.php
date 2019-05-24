@@ -46,11 +46,11 @@ class MedsosController extends Controller
               return redirect()->route('medsos.index')->withErrors($validator)->withInput();
           }
 
-          $checkdouble = MasterMedsos::where('nama_sosmed','=' ,$request->namaSosmed)->get();
-
-          if ($checkdouble != null) {
-            return redirect()->route('medsos.index')->with('messagefail', 'Media sosial sudah tersedia.');
-          }
+          // $checkdouble = MasterMedsos::where('nama_sosmed','=' ,$request->namaSosmed)->get();
+          //
+          // if ($checkdouble != null) {
+          //   return redirect()->route('medsos.index')->with('messagefail', 'Media sosial sudah tersedia.');
+          // }
 
           $set = new MasterMedsos;
           $set->nama_sosmed = $request->namaSosmed;

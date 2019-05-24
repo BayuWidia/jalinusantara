@@ -75,7 +75,7 @@
                                     @endphp
                                   </td>
                                   <td>{{$key->keterangan_sponsor}}</td>
-                                  <td>
+                                  <td style="text-align:center">
                                       @if($key->url_sponsor!="")
                                         <img src="{{url('images/sponsor/')}}/{{$key->url_sponsor}}">
                                       @else

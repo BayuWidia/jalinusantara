@@ -98,7 +98,6 @@ class DashboardController extends Controller
      $getEventsToday = DB::table('events')->select(DB::raw('*'))
                  ->whereRaw('Date(created_at) = CURDATE()')
                  ->where('flag_publish', '1')->get();
-                 // dd($getEventsToday);
       return view('backend.dashboard.dashboard',
                     compact('informasiTerbaru','eventsTerbaru',
                             'getCountEvents', 'getCountEventsUn',
