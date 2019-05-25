@@ -160,4 +160,6 @@ Route::get('events/{id}', 'FeEventsController@index')->name('events');
 Route::get('eventsById/{id}/{idKategori}', 'FeEventsController@indexById')->name('eventsById');
 Route::get('contact', 'FeContactController@index')->name('contact');
 
+Route::get('galeri', 'FeGaleriController@index')->name('galeri');
+
 // =================================== END FRONT END ====================================================================

@@ -65,29 +65,9 @@
 							@endforeach
 				    </ul>
 				</li>
+
+			  <li><a href="{{ route('galeri') }}">Galeri</a></li>
 				<li><a href="{{ route('contact') }}">Contact</a></li>
-			  <li class="menu-has-children"><a href="">Blog</a>
-			    <!-- <ul>
-			      <li><a href="blog-home.html">Blog Home</a></li>
-			      <li><a href="blog-single.html">Blog Single</a></li>
-			      <li class="menu-has-children"><a href="">Level 2</a>
-			        <ul>
-			          <li><a href="#">Item One</a></li>
-			          <li><a href="#">Item Two</a></li>
-			        </ul>
-			      </li>
-			    </ul> -->
-					<ul>
-			      <li><a href="blog-home.html">Blog Home</a></li>
-			      <li><a href="blog-single.html">Blog Single</a></li>
-			      <li class="menu-has-children"><a href="">Level 2</a>
-			        <ul>
-			          <li><a href="#">Item One</a></li>
-			          <li><a href="#">Item Two</a></li>
-			        </ul>
-			      </li>
-			    </ul>
-			  </li>
 			</ul>
 		</nav><!-- #nav-menu-container -->
   	</div>
