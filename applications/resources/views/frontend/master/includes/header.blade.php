@@ -38,6 +38,10 @@
 					$getMenuArticle = \App\Models\Informasi::join('master_kategori', 'informasi.id_kategori', '=', 'master_kategori.id')
 						->select(DB::raw('distinct(master_kategori.nama_kategori)'), 'master_kategori.id')
 						->where('informasi.flag_status', '=', 'article')->where('informasi.activated', '=', '1')->get();
+
+					$getMenuEvents = \App\Models\Events::join('master_kategori', 'events.id_kategori', '=', 'master_kategori.id')
+						->select(DB::raw('distinct(master_kategori.nama_kategori)'), 'master_kategori.id')
+						->where('events.activated', '=', '1')->get();
 				?>
 			  <li class="menu-has-children"><a href="#">About</a>
 						<ul>
@@ -54,7 +58,13 @@
 							@endforeach
 				    </ul>
 				</li>
-			  <li><a href="{{ route('events') }}">Events</a></li>
+				<li class="menu-has-children"><a href="#">Events</a>
+						<ul>
+							@foreach($getMenuEvents as $key)
+				      	<li><a href="{{ route('events', $key->id) }}">{{$key->nama_kategori}}</a></li>
+							@endforeach
+				    </ul>
+				</li>
 				<li><a href="{{ route('contact') }}">Contact</a></li>
 			  <li class="menu-has-children"><a href="">Blog</a>
 			    <!-- <ul>

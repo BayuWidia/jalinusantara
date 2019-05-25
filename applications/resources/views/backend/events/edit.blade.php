@@ -8,7 +8,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="block-header">
-        <h2>FORM KELOLA ARTICLE</h2>
+        <h2>FORM KELOLA EVENTS</h2>
     </div>
     <div class="row clearfix">
         <div class="col-md-12">
@@ -170,7 +170,7 @@
                             @if(isset($editEvents))
                               <div class="form-group mandatory">
                                   <div class="form-line">
-                                      <label>Gambar Article</label>
+                                      <label>Gambar Events</label>
                                       @if ($errors->has('urlFoto'))
                                         <small style="color:red">* {{$errors->first('urlFoto')}}</small>
                                       @endif
@@ -184,9 +184,9 @@
                               </div>
                             @else
                               <div class="form-group mandatory">
-                                  <label>Gambar Article</label>
+                                  <label>Gambar Events</label>
                                   @if($viewEvents->url_foto!="")
-                                    <img src="{{url('images/')}}/{{$viewEvents->url_foto}}" class="js-animating-object img-responsive">
+                                    <img src="{{url('images/events/')}}/{{$viewEvents->url_foto}}" class="js-animating-object img-responsive">
                                   @else
                                     <img src="{{url('images/')}}/no_image.jpg" class="js-animating-object img-responsive">
                                   @endif
@@ -230,7 +230,7 @@
                                         <input type="checkbox" id="md_checkbox_21" name="flagHeadline" class="filled-in chk-col-red" value="1" disabled/>
                                       @endif
                                     @endif
-                                    <label for="md_checkbox_21">* Ya, tampilkan article ini sebagai headline.</label>
+                                    <label for="md_checkbox_21">* Ya, tampilkan events ini sebagai headline.</label>
                                 </div>
                             </div>
                             <div class="form-group mandatory">

@@ -101,7 +101,7 @@
                               <div class="form-group mandatory">
                                   <label>Gambar Article</label>
                                   @if($viewArticle->url_foto!="")
-                                    <img src="{{url('images/')}}/{{$viewArticle->url_foto}}" class="js-animating-object img-responsive">
+                                    <img src="{{url('images/article/')}}/{{$viewArticle->url_foto}}" class="js-animating-object img-responsive">
                                   @else
                                     <img src="{{url('images/')}}/no_image.jpg" class="js-animating-object img-responsive">
                                   @endif

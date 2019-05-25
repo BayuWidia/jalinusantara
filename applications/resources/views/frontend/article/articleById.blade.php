@@ -42,7 +42,7 @@
               <?php $date = explode(' ', $getArticle[0]->created_at) ?>
 							<p class="user-name col-lg-12 col-md-12 col-6"><a href="#">{{$getArticle[0]->name}}</a> <span class="lnr lnr-user"></span></p>
 							<p class="date col-lg-12 col-md-12 col-6"><a href="#">{{ \Carbon\Carbon::parse($getArticle[0]->created_at)->format('d-M-y')}}</a> <span class="lnr lnr-calendar-full"></span></p>
-              <p class="date col-lg-12 col-md-12 col-6"><a href="#">{{ $date[1]}}</a> <span class="lnr lnr-calendar-full"></span></p>
+              <p class="date col-lg-12 col-md-12 col-6"><a href="#">{{ $date[1]}}</a> <span class="lnr lnr-clock"></span></p>
 							<p class="view col-lg-12 col-md-12 col-6"><a href="#">{{$getArticle[0]->view_counter}}</a> <span class="lnr lnr-eye"></span></p>
 							<ul class="social-links col-lg-12 col-md-12 col-6">
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -60,7 +60,104 @@
 					</div>
 				</div>
 
-
+        <div class="comments-area">
+					<h4>05 Comments</h4>
+					<div class="comment-list">
+                              <div class="single-comment justify-content-between d-flex">
+                                  <div class="user justify-content-between d-flex">
+                                      <div class="thumb">
+                                          <img src="{{asset('themeuser/img/blog/c1.jpg')}}" alt="">
+                                      </div>
+                                      <div class="desc">
+                                          <h5><a href="#">Emilly Blunt</a></h5>
+                                          <p class="date">December 4, 2017 at 3:12 pm </p>
+                                          <p class="comment">
+                                              Never say goodbye till the end comes!
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="reply-btn">
+                                         <a href="" class="btn-reply text-uppercase">reply</a>
+                                  </div>
+                              </div>
+                          </div>
+					<div class="comment-list left-padding">
+                              <div class="single-comment justify-content-between d-flex">
+                                  <div class="user justify-content-between d-flex">
+                                      <div class="thumb">
+                                          <img src="{{asset('themeuser/img/blog/c2.jpg')}}" alt="">
+                                      </div>
+                                      <div class="desc">
+                                          <h5><a href="#">Elsie Cunningham</a></h5>
+                                          <p class="date">December 4, 2017 at 3:12 pm </p>
+                                          <p class="comment">
+                                              Never say goodbye till the end comes!
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="reply-btn">
+                                         <a href="" class="btn-reply text-uppercase">reply</a>
+                                  </div>
+                              </div>
+                          </div>
+					<div class="comment-list left-padding">
+                              <div class="single-comment justify-content-between d-flex">
+                                  <div class="user justify-content-between d-flex">
+                                      <div class="thumb">
+                                          <img src="{{asset('themeuser/img/blog/c3.jpg')}}" alt="">
+                                      </div>
+                                      <div class="desc">
+                                          <h5><a href="#">Annie Stephens</a></h5>
+                                          <p class="date">December 4, 2017 at 3:12 pm </p>
+                                          <p class="comment">
+                                              Never say goodbye till the end comes!
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="reply-btn">
+                                         <a href="" class="btn-reply text-uppercase">reply</a>
+                                  </div>
+                              </div>
+                          </div>
+					<div class="comment-list">
+                              <div class="single-comment justify-content-between d-flex">
+                                  <div class="user justify-content-between d-flex">
+                                      <div class="thumb">
+                                          <img src="{{asset('themeuser/img/blog/c4.jpg')}}" alt="">
+                                      </div>
+                                      <div class="desc">
+                                          <h5><a href="#">Maria Luna</a></h5>
+                                          <p class="date">December 4, 2017 at 3:12 pm </p>
+                                          <p class="comment">
+                                              Never say goodbye till the end comes!
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="reply-btn">
+                                         <a href="" class="btn-reply text-uppercase">reply</a>
+                                  </div>
+                              </div>
+                          </div>
+					<div class="comment-list">
+                              <div class="single-comment justify-content-between d-flex">
+                                  <div class="user justify-content-between d-flex">
+                                      <div class="thumb">
+                                          <img src="{{asset('themeuser/img/blog/c5.jpg')}}" alt="">
+                                      </div>
+                                      <div class="desc">
+                                          <h5><a href="#">Ina Hayes</a></h5>
+                                          <p class="date">December 4, 2017 at 3:12 pm </p>
+                                          <p class="comment">
+                                              Never say goodbye till the end comes!
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="reply-btn">
+                                         <a href="" class="btn-reply text-uppercase">reply</a>
+                                  </div>
+                              </div>
+                          </div>
+				</div>
 				<div class="comment-form">
 					<h4>Leave a Comment</h4>
 					<form>
@@ -81,6 +178,8 @@
 						<a href="#" class="primary-btn text-uppercase">Post Comment</a>
 					</form>
 				</div>
+
+
 			</div>
       <div class="col-lg-4 sidebar-widgets">
 				<div class="widget-wrap">
@@ -93,7 +192,7 @@
                   <img src="{{ url('images/article/') }}/{{$key->url_foto}}" class="img-fluid">
 								</div>
 								<div class="details">
-									<a href="blog-single.html"><h6>{{$key->judul_informasi}}</h6></a>
+									<a href="{{url('articleById')}}/{{$key->id}}/{{$key->id_kategori}}"><h6>{{$key->judul_informasi}}</h6></a>
 									<p><?php echo \Carbon\Carbon::createFromTimeStamp(strtotime($key->created_at))->diffForHumans() ?></p>
 								</div>
 							</div>
@@ -113,7 +212,7 @@
                   <img src="{{ url('images/article/') }}/{{$key->url_foto}}" class="img-fluid">
 								</div>
 								<div class="details">
-									<a href="blog-single.html"><h6>{{$key->judul_informasi}}</h6></a>
+									<a href="{{url('articleById')}}/{{$key->id}}/{{$key->id_kategori}}"><h6>{{$key->judul_informasi}}</h6></a>
 									<p><?php echo \Carbon\Carbon::createFromTimeStamp(strtotime($key->created_at))->diffForHumans() ?></p>
 								</div>
 							</div>
@@ -124,7 +223,7 @@
 					<div class="single-sidebar-widget post-category-widget">
 						<h4 class="category-title">Post Catgories</h4>
 						<ul class="cat-list">
-              @foreach($getjumlahkategori as $key)
+              @foreach($getJumlahKategori as $key)
   							<li>
   								<a href="{{ route('article', $key->id_kategori) }}" class="d-flex justify-content-between">
   									<p>{{$key->nama_kategori}}</p>

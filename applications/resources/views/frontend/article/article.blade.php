@@ -100,7 +100,7 @@
               <?php $date = explode(' ', $key->created_at) ?>
 							<p class="user-name col-lg-12 col-md-12 col-6"><a href="#">{{$key->name}}</a> <span class="lnr lnr-user"></span></p>
 							<p class="date col-lg-12 col-md-12 col-6"><a href="#">{{ \Carbon\Carbon::parse($key->created_at)->format('d-M-y')}}</a> <span class="lnr lnr-calendar-full"></span></p>
-              <p class="date col-lg-12 col-md-12 col-6"><a href="#">{{ $date[1]}}</a> <span class="lnr lnr-calendar-full"></span></p>
+              <p class="date col-lg-12 col-md-12 col-6"><a href="#">{{ $date[1]}}</a> <span class="lnr lnr-clock"></span></p>
 							<p class="view col-lg-12 col-md-12 col-6"><a href="#">{{$key->view_counter}}</a> <span class="lnr lnr-eye"></span></p>
 						</div>
 					</div>
@@ -143,7 +143,7 @@
                   <img src="{{ url('images/article/') }}/{{$key->url_foto}}" class="img-fluid">
 								</div>
 								<div class="details">
-									<a href="blog-single.html"><h6>{{$key->judul_informasi}}</h6></a>
+									<a href="{{url('articleById')}}/{{$key->id}}/{{$key->id_kategori}}"><h6>{{$key->judul_informasi}}</h6></a>
 									<p><?php echo \Carbon\Carbon::createFromTimeStamp(strtotime($key->created_at))->diffForHumans() ?></p>
 								</div>
 							</div>
@@ -154,7 +154,7 @@
 					<div class="single-sidebar-widget post-category-widget">
 						<h4 class="category-title">Post Catgories</h4>
 						<ul class="cat-list">
-              @foreach($getjumlahkategori as $key)
+              @foreach($getJumlahKategori as $key)
   							<li>
   								<a href="{{ route('article', $key->id_kategori) }}" class="d-flex justify-content-between">
   									<p>{{$key->nama_kategori}}</p>

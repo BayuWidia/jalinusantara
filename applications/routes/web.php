@@ -156,7 +156,8 @@ Route::get('/', 'FeHomeController@index')->name('home');
 Route::get('about.us/{id}', 'FeAboutController@index')->name('about.us');
 Route::get('article/{id}', 'FeArticleController@index')->name('article');
 Route::get('articleById/{id}/{idKategori}', 'FeArticleController@indexById')->name('articleById');
+Route::get('events/{id}', 'FeEventsController@index')->name('events');
+Route::get('eventsById/{id}/{idKategori}', 'FeEventsController@indexById')->name('eventsById');
 Route::get('contact', 'FeContactController@index')->name('contact');
-Route::get('events', 'FeEventsController@index')->name('events');
 
 // =================================== END FRONT END ====================================================================

@@ -114,7 +114,7 @@
                             </div>
                             <div class="form-group mandatory">
                                 <div class="form-line">
-                                    <label>Gambar Article</label>
+                                    <label>Gambar Events</label>
                                     @if ($errors->has('urlFoto'))
                                       <small style="color:red">* {{$errors->first('urlFoto')}}</small>
                                     @endif
@@ -143,7 +143,7 @@
                                     <label>Headline</label>
                                     <br>
                                     <input type="checkbox" id="md_checkbox_21" name="flagHeadline" class="filled-in chk-col-red" value="1" />
-                                    <label for="md_checkbox_21">* Ya, tampilkan article ini sebagai headline.</label>
+                                    <label for="md_checkbox_21">* Ya, tampilkan events ini sebagai headline.</label>
                                 </div>
                             </div>
                             <div class="form-group mandatory">

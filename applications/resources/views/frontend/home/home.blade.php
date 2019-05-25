@@ -70,7 +70,7 @@
             <div class="thumb">
               <img class="img-fluid" src="{{url('images/events')}}/{{$key->url_foto}}" alt="">
             </div>
-            <a href="{{ route('events') }}"><h4>{{$key->judul_event}}</h4></a>
+            <a href="{{url('eventsById')}}/{{$key->id}}/{{$key->id_kategori}}"><h4>{{$key->judul_event}}</h4></a>
             <p>
               <?php $isiEvents = explode(" ", $key->isi_event); ?>
               @if(count($isiEvents)<=10)
@@ -85,7 +85,6 @@
           </div>
         </div>
       @endforeach
-			<a class="primary-btn mx-auto mt-80" href="{{ route('events') }}">Lihat Semua Event's</a>
 		</div>
 	</div>
 </section>
