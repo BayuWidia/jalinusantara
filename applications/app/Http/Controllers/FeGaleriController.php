@@ -20,11 +20,14 @@ class FeGaleriController extends Controller
     {
 
         $getSlider = MasterSlider::all();
+        $getVideo = MasterVideo::select('master_video.*')
+                            ->where('flag_video', 1)
+                            ->get();
         $getGaleri = MasterGaleri::select('master_galeri.*')
                             ->where('flag_gambar', 1)
                             ->paginate(9);
 
-        return view('frontend.galeri.galeri', compact('getSlider','getGaleri'));
+        return view('frontend.galeri.galeri', compact('getSlider','getGaleri','getVideo'));
     }
 
 }

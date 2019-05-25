@@ -31,26 +31,25 @@
 	<div class="container">
 
     <div class="section-top-border">
-      <h3 class="mb-30">Table</h3>
+      <h3 class="mb-30">Video Gallery</h3>
         <hr>
       <div class="progress-table-wrap">
         <div class="progress-table">
           <div class="table-head">
             <div class="serial">#</div>
-            <div class="country">Countries</div>
-            <div class="visit">Visits</div>
-            <div class="percentage">Percentages</div>
+            <div class="country" style="width:40%">Judul</div>
+            <div class="visit">Video</div>
           </div>
-          <div class="table-row">
-            <div class="serial">01</div>
-            <div class="country"> <img src="img/elements/f1.jpg" alt="flag">Canada</div>
-            <div class="visit">645032</div>
-            <div class="percentage">
-              <div class="progress">
-                <div class="progress-bar color-1" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+          @php $i=1; @endphp
+          @foreach($getVideo as $key)
+            <div class="table-row">
+              <div class="serial">{{$i++}}</div>
+              <div class="country" style="width:40%">{{$key->judul}}</div>
+              <div class="visit">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<?php echo substr($key->url_video,-11,23)?>" allowfullscreen></iframe>
               </div>
             </div>
-          </div>
+          @endforeach
         </div>
       </div>
     </div>
