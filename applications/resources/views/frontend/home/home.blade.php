@@ -47,7 +47,7 @@
           @endif
 
 				</p>
-				<a class="primary-btn squire mx-auto mt-20" href="#">Baca Selanjutnya...</a>
+				<a class="primary-btn squire mx-auto mt-20" href="{{ route('about.us', $getDataSejarah[0]->id) }}">Baca Selanjutnya...</a>
 			</div>
 		</div>
 	</div>
@@ -99,7 +99,7 @@
 					{{$getDataVideo[0]->judul}}
 				</h1>
 				<h6 class="text-uppercase">{{$getDataVideo[0]->url_video}}</h6>
-				<a class="primary-btn" href="#">Lihat Selengkapnya...</a>
+				<a class="primary-btn" href="{{ route('galeri') }}">Lihat Selengkapnya...</a>
 			</div>
 			<div class="col-lg-6 about-video-right justify-content-center align-items-center d-flex">
 				<a class="play-btn" href="{{$getDataVideo[0]->url_video}}">
@@ -169,7 +169,7 @@
               @else
                 <img src="{{ url('images/user/') }}/{{$key->url_foto2}}" class="img-fluid" width="30" height="30">
               @endif
-  						<a href="#"><span>{{$key->name}}</span></a>
+  						<span>{{$key->name}}</span>
   					</div>
   					<div class="meta">
               <?php $date = explode(' ', $key->created_at) ?>
