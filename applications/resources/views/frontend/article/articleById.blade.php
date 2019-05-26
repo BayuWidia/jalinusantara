@@ -61,121 +61,92 @@
 				</div>
 
         <div class="comments-area">
-					<h4>05 Comments</h4>
+					<h4>{{$getCountComment}} Comments</h4>
+          @foreach($getComment as $key)
 					<div class="comment-list">
-                              <div class="single-comment justify-content-between d-flex">
-                                  <div class="user justify-content-between d-flex">
-                                      <div class="thumb">
-                                          <img src="{{asset('themeuser/img/blog/c1.jpg')}}" alt="">
-                                      </div>
-                                      <div class="desc">
-                                          <h5><a href="#">Emilly Blunt</a></h5>
-                                          <p class="date">December 4, 2017 at 3:12 pm </p>
-                                          <p class="comment">
-                                              Never say goodbye till the end comes!
-                                          </p>
-                                      </div>
-                                  </div>
-                                  <div class="reply-btn">
-                                         <a href="" class="btn-reply text-uppercase">reply</a>
-                                  </div>
-                              </div>
-                          </div>
+              <div class="single-comment justify-content-between d-flex">
+                  <div class="user justify-content-between d-flex">
+                      <div class="thumb">
+                          <img src="{{asset('themeuser/img/blog/user2.png')}}" alt="">
+                      </div>
+                      <div class="desc">
+                          <h5><a href="#">{{$key->nama}}</a></h5>
+                          <p class="date">{{ \Carbon\Carbon::parse($key->created_at)->diffForHumans()}} </p>
+                          <p class="comment">
+                              {{$key->subject}}
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          @if($key->id_tanggapan != null)
 					<div class="comment-list left-padding">
-                              <div class="single-comment justify-content-between d-flex">
-                                  <div class="user justify-content-between d-flex">
-                                      <div class="thumb">
-                                          <img src="{{asset('themeuser/img/blog/c2.jpg')}}" alt="">
-                                      </div>
-                                      <div class="desc">
-                                          <h5><a href="#">Elsie Cunningham</a></h5>
-                                          <p class="date">December 4, 2017 at 3:12 pm </p>
-                                          <p class="comment">
-                                              Never say goodbye till the end comes!
-                                          </p>
-                                      </div>
-                                  </div>
-                                  <div class="reply-btn">
-                                         <a href="" class="btn-reply text-uppercase">reply</a>
-                                  </div>
-                              </div>
-                          </div>
-					<div class="comment-list left-padding">
-                              <div class="single-comment justify-content-between d-flex">
-                                  <div class="user justify-content-between d-flex">
-                                      <div class="thumb">
-                                          <img src="{{asset('themeuser/img/blog/c3.jpg')}}" alt="">
-                                      </div>
-                                      <div class="desc">
-                                          <h5><a href="#">Annie Stephens</a></h5>
-                                          <p class="date">December 4, 2017 at 3:12 pm </p>
-                                          <p class="comment">
-                                              Never say goodbye till the end comes!
-                                          </p>
-                                      </div>
-                                  </div>
-                                  <div class="reply-btn">
-                                         <a href="" class="btn-reply text-uppercase">reply</a>
-                                  </div>
-                              </div>
-                          </div>
-					<div class="comment-list">
-                              <div class="single-comment justify-content-between d-flex">
-                                  <div class="user justify-content-between d-flex">
-                                      <div class="thumb">
-                                          <img src="{{asset('themeuser/img/blog/c4.jpg')}}" alt="">
-                                      </div>
-                                      <div class="desc">
-                                          <h5><a href="#">Maria Luna</a></h5>
-                                          <p class="date">December 4, 2017 at 3:12 pm </p>
-                                          <p class="comment">
-                                              Never say goodbye till the end comes!
-                                          </p>
-                                      </div>
-                                  </div>
-                                  <div class="reply-btn">
-                                         <a href="" class="btn-reply text-uppercase">reply</a>
-                                  </div>
-                              </div>
-                          </div>
-					<div class="comment-list">
-                              <div class="single-comment justify-content-between d-flex">
-                                  <div class="user justify-content-between d-flex">
-                                      <div class="thumb">
-                                          <img src="{{asset('themeuser/img/blog/c5.jpg')}}" alt="">
-                                      </div>
-                                      <div class="desc">
-                                          <h5><a href="#">Ina Hayes</a></h5>
-                                          <p class="date">December 4, 2017 at 3:12 pm </p>
-                                          <p class="comment">
-                                              Never say goodbye till the end comes!
-                                          </p>
-                                      </div>
-                                  </div>
-                                  <div class="reply-btn">
-                                         <a href="" class="btn-reply text-uppercase">reply</a>
-                                  </div>
-                              </div>
-                          </div>
+              <div class="single-comment justify-content-between d-flex">
+                  <div class="user justify-content-between d-flex">
+                      <div class="thumb">
+                          <img src="{{asset('themeuser/img/blog/admin2.png')}}" alt="">
+                      </div>
+                      <div class="desc">
+                          <h5><a href="#">Admin Jalinusantara</a></h5>
+                          <p class="date">{{ \Carbon\Carbon::parse($key->created_at2)->diffForHumans()}} </p>
+                          <p class="comment">
+                              {{$key->tanggapan}}
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          @endif
+          @endforeach
+
 				</div>
 				<div class="comment-form">
 					<h4>Leave a Comment</h4>
-					<form>
+          <div class="col-md-12">
+            @if(Session::has('message'))
+              <blockquote class="generic-blockquote">
+                <h4><i class="icon fa fa-check"></i> Berhasil!</h4>
+                <p>{{ Session::get('message') }}</p>
+  						</blockquote>
+            @endif
+            @if(Session::has('messagefail'))
+              <blockquote class="generic-blockquote">
+                <h4><i class="icon fa fa-ban"></i> Oops, terjadi kesalahan!</h4>
+                <p>{{ Session::get('messagefail') }}</p>
+  						</blockquote>
+            @endif
+          </div>
+          <form action="{{route('articleById.store')}}" method="post" enctype="multipart/form-data">
+            {{csrf_field()}}
 						<div class="form-group form-inline">
 						  <div class="form-group col-lg-6 col-md-12 name">
-						    <input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
+                @if ($errors->has('nama'))
+                  <small style="color:red">* {{$errors->first('nama')}}</small>
+                @endif
+                <input type="hidden" name="id" value="{{$getArticle[0]->id}}">
+                <input type="hidden" name="idKategori" value="{{$getArticle[0]->id_kategori}}">
+						    <input type="text" class="form-control" id="name" name="nama" value="{{ old('nama') }}" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
 						  </div>
 						  <div class="form-group col-lg-6 col-md-12 email">
-						    <input type="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+                @if ($errors->has('email'))
+                  <small style="color:red">* {{$errors->first('email')}}</small>
+                @endif
+						    <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
 						  </div>
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" id="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
+              @if ($errors->has('subject'))
+                <small style="color:red">* {{$errors->first('subject')}}</small>
+              @endif
+							<input type="text" class="form-control" id="subject" name="subject" value="{{ old('subject') }}" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
 						</div>
 						<div class="form-group">
-							<textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+              @if ($errors->has('message'))
+                <small style="color:red">* {{$errors->first('message')}}</small>
+              @endif
+							<textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'">{{ old('message') }}</textarea>
 						</div>
-						<a href="#" class="primary-btn text-uppercase">Post Comment</a>
+						<button type="submit" class="primary-btn text-uppercase">Post Comment</button>
 					</form>
 				</div>
 
@@ -201,7 +172,7 @@
 						</div>
 					</div>
 					<div class="single-sidebar-widget ads-widget">
-						<a href="#"><img class="img-fluid" src="{{asset('themeuser/img/blog/ads-banner.jpg')}}" alt=""></a>
+						<a href="#"><img class="img-fluid" src="{{asset('themeuser/img/iklan.jpg')}}" alt=""></a>
 					</div>
           <div class="single-sidebar-widget popular-post-widget">
 						<h4 class="popular-title">Popular Posts</h4>

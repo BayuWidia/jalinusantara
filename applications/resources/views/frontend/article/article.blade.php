@@ -30,16 +30,18 @@
 <section class="top-category-widget-area pt-90 pb-90 ">
 	<div class="container">
 		<div class="row">
+      @for($i=0; $i < 3; $i++)
 			<div class="col-lg-4">
 				<div class="single-cat-widget">
 					<div class="content relative">
 						<div class="overlay overlay-bg"></div>
-					    <a href="#" target="_blank">
+					    <a href="{{ route('article', $getJumlahKategori[$i]->id_kategori) }}">
 					      <div class="thumb">
-					  		 <img class="content-image img-fluid d-block mx-auto" src="{{asset('themeuser/img/blog/cat-widget1.jpg')}}" alt="">
+					  		 <img class="content-image img-fluid d-block mx-auto"
+                 src="{{asset('themeuser/img/blog/cat-widget1.jpg')}}" alt="">
 					  	  </div>
 					      <div class="content-details">
-					        <h4 class="content-title mx-auto text-uppercase">Social life</h4>
+					        <h4 class="content-title mx-auto text-uppercase">{{$getJumlahKategori[$i]->nama_kategori}}</h4>
 					        <span></span>
 					        <p>Enjoy your social life together</p>
 					      </div>
@@ -47,40 +49,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-4">
-				<div class="single-cat-widget">
-					<div class="content relative">
-						<div class="overlay overlay-bg"></div>
-					    <a href="#" target="_blank">
-					      <div class="thumb">
-					  		 <img class="content-image img-fluid d-block mx-auto" src="{{asset('themeuser/img/blog/cat-widget2.jpg')}}" alt="">
-					  	  </div>
-					      <div class="content-details">
-					        <h4 class="content-title mx-auto text-uppercase">Politics</h4>
-					        <span></span>
-					        <p>Be a part of politics</p>
-					      </div>
-					    </a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="single-cat-widget">
-					<div class="content relative">
-						<div class="overlay overlay-bg"></div>
-					    <a href="#" target="_blank">
-					      <div class="thumb">
-					  		 <img class="content-image img-fluid d-block mx-auto" src="{{asset('themeuser/img/blog/cat-widget3.jpg')}}" alt="">
-					  	  </div>
-					      <div class="content-details">
-					        <h4 class="content-title mx-auto text-uppercase">Food</h4>
-					        <span></span>
-					        <p>Let the food be finished</p>
-					      </div>
-					    </a>
-					</div>
-				</div>
-			</div>
+      @endfor
+
 		</div>
 	</div>
 </section>
@@ -120,7 +90,7 @@
                   ...
                 @endif
 						</p>
-						<a href="{{url('articleById')}}/{{$key->id}}/{{$key->id_kategori}}" class="primary-btn">Baca Selengkapnya...</a>
+						<a href="{{url('articleById')}}/{{$key->id}}/{{$key->id_kategori}}" class="genric-btn primary circle">Baca Selengkapnya...</a>
 					</div>
 				</div>
         @endforeach
@@ -132,7 +102,7 @@
 			<div class="col-lg-4 sidebar-widgets">
 				<div class="widget-wrap">
 					<div class="single-sidebar-widget ads-widget">
-						<a href="#"><img class="img-fluid" src="{{asset('themeuser/img/blog/ads-banner.jpg')}}" alt=""></a>
+						<a href="#"><img class="img-fluid" src="{{asset('themeuser/img/iklan.jpg')}}" alt=""></a>
 					</div>
           <div class="single-sidebar-widget popular-post-widget">
 						<h4 class="popular-title">Popular Posts</h4>

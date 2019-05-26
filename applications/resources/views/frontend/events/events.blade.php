@@ -58,7 +58,7 @@
           </p>
           <br>
           <p>
-            <a href="{{url('eventsById')}}/{{$key->id}}/{{$key->id_kategori}}" class="primary-btn">Baca Selengkapnya...</a>
+            <a href="{{url('eventsById')}}/{{$key->id}}/{{$key->id_kategori}}" class="genric-btn primary circle">Baca Selengkapnya...</a>
           </p>
         </div>
         <div class="col-lg-3 flex-row d-flex price-size">

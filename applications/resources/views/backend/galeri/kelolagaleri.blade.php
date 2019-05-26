@@ -195,10 +195,10 @@
                                 <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Gambar Foto</label>
-                                        @if ($errors->has('urlGaleri'))
-                                          <small style="color:red">* {{$errors->first('urlGaleri')}}</small>
+                                        @if ($errors->has('urlGaleriEdit'))
+                                          <small style="color:red">* {{$errors->first('urlGaleriEdit')}}</small>
                                         @endif
-                                        <input type="file" name="urlGaleri" class="form-control" id="urlGaleriEdit">
+                                        <input type="file" name="urlGaleriEdit" class="form-control" id="urlGaleriEdit">
                                         <input type="hidden" name="id" id="id" value="{{ old('id') }}">
                                     </div>
                                     <div>

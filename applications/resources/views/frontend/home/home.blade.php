@@ -47,7 +47,7 @@
           @endif
 
 				</p>
-				<a class="primary-btn squire mx-auto mt-20" href="{{ route('about.us', $getDataSejarah[0]->id) }}">Baca Selanjutnya...</a>
+				<a class="primary-btn squire" href="{{ route('about.us', $getDataSejarah[0]->id) }}">Baca Selengkapnya...</a>
 			</div>
 		</div>
 	</div>

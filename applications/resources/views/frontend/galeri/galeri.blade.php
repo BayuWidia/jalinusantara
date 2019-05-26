@@ -59,7 +59,7 @@
       	<div class="row gallery-item">
           @for($i=0; $i < count($getGaleri); $i++)
             <div class="col-md-4">
-              <a href="{{ url('images/galeri/') }}/{{$getGaleri[$i]->url_gambar}}" class="img-gal"><div class="single-gallery-image"
+              <a href="{{ url('images/galeri/asli/') }}/{{$getGaleri[$i]->url_gambar}}" class="img-gal"><div class="single-gallery-image"
                 style="background: url({{ url('images/galeri/') }}/{{$getGaleri[$i]->url_gambar}});"></div></a>
             </div>
           @endfor

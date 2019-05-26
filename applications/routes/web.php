@@ -146,6 +146,12 @@ Route::get('admin/user.search', 'UserController@search')->name('user.search');
 //profile
 Route::get('user.profile', 'UserController@profile')->name('user.profile');
 Route::post('admin/user.profile.password', 'UserController@updatepasswordByUser')->name('user.profile.password');
+
+//Menu Comment
+Route::get('comment.index', 'CommentController@index')->name('comment.index');
+Route::get('admin/publish-comment/{id}', 'CommentController@show')->name('comment.show');
+Route::get('admin/bind-comment/{id}', 'CommentController@edit')->name('comment.edit');
+Route::post('admin/storeTanggapan', 'CommentController@storeTanggapan')->name('comment.storeTanggapan');
 // =================================== END BACK END ====================================================================
 
 
@@ -156,6 +162,7 @@ Route::get('/', 'FeHomeController@index')->name('home');
 Route::get('about.us/{id}', 'FeAboutController@index')->name('about.us');
 Route::get('article/{id}', 'FeArticleController@index')->name('article');
 Route::get('articleById/{id}/{idKategori}', 'FeArticleController@indexById')->name('articleById');
+Route::post('articleById.store', 'CommentController@store')->name('articleById.store');
 Route::get('events/{id}', 'FeEventsController@index')->name('events');
 Route::get('eventsById/{id}/{idKategori}', 'FeEventsController@indexById')->name('eventsById');
 Route::get('contact', 'FeContactController@index')->name('contact');

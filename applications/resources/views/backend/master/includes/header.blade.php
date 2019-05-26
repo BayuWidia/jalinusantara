@@ -14,108 +14,37 @@
                 <!-- Notifications -->
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                        <i class="material-icons">notifications</i>
-                        <span class="label-count">7</span>
+                        <i class="material-icons">comment</i>
+                        <?php
+                        $getCountComment = \App\Models\MasterComment::where('flag_tanggapan','=' ,0)->count();
+                        $getComment = \App\Models\MasterComment::where('flag_tanggapan','=' ,0)->get();
+                        ?>
+
+                        <span class="label-count">{{$getCountComment}}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="header">NOTIFICATIONS</li>
                         <li class="body">
                             <ul class="menu">
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        <div class="icon-circle bg-light-green">
-                                            <i class="material-icons">person_add</i>
-                                        </div>
-                                        <div class="menu-info">
-                                            <h4>12 new members joined</h4>
-                                            <p>
-                                                <i class="material-icons">access_time</i> 14 mins ago
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        <div class="icon-circle bg-cyan">
-                                            <i class="material-icons">add_shopping_cart</i>
-                                        </div>
-                                        <div class="menu-info">
-                                            <h4>4 sales made</h4>
-                                            <p>
-                                                <i class="material-icons">access_time</i> 22 mins ago
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        <div class="icon-circle bg-red">
-                                            <i class="material-icons">delete_forever</i>
-                                        </div>
-                                        <div class="menu-info">
-                                            <h4><b>Nancy Doe</b> deleted account</h4>
-                                            <p>
-                                                <i class="material-icons">access_time</i> 3 hours ago
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        <div class="icon-circle bg-orange">
-                                            <i class="material-icons">mode_edit</i>
-                                        </div>
-                                        <div class="menu-info">
-                                            <h4><b>Nancy</b> changed name</h4>
-                                            <p>
-                                                <i class="material-icons">access_time</i> 2 hours ago
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        <div class="icon-circle bg-blue-grey">
-                                            <i class="material-icons">comment</i>
-                                        </div>
-                                        <div class="menu-info">
-                                            <h4><b>John</b> commented your post</h4>
-                                            <p>
-                                                <i class="material-icons">access_time</i> 4 hours ago
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        <div class="icon-circle bg-light-green">
-                                            <i class="material-icons">cached</i>
-                                        </div>
-                                        <div class="menu-info">
-                                            <h4><b>John</b> updated status</h4>
-                                            <p>
-                                                <i class="material-icons">access_time</i> 3 hours ago
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        <div class="icon-circle bg-purple">
-                                            <i class="material-icons">settings</i>
-                                        </div>
-                                        <div class="menu-info">
-                                            <h4>Settings updated</h4>
-                                            <p>
-                                                <i class="material-icons">access_time</i> Yesterday
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
+                                @foreach($getComment as $key)
+                                  <li>
+                                      <a href="javascript:void(0);">
+                                          <div class="icon-circle bg-blue-grey">
+                                              <i class="material-icons">comment</i>
+                                          </div>
+                                          <div class="menu-info">
+                                              <h4><b>{{$key->nama}}</b> - {{$key->subject}}</h4>
+                                              <p>
+                                                  <i class="material-icons">access_time</i> {{ \Carbon\Carbon::parse($key->created_at)->diffForHumans()}}
+                                              </p>
+                                          </div>
+                                      </a>
+                                  </li>
+                                @endforeach
                             </ul>
                         </li>
                         <li class="footer">
-                            <a href="javascript:void(0);">View All Notifications</a>
+                            <a href="{{route ('comment.index')}}">View All Notifications</a>
                         </li>
                     </ul>
                 </li>

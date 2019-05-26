@@ -52,6 +52,7 @@ class GaleriController extends Controller
           $file = $request->file('urlGaleri');
           if($file!="") {
               $photoName = Auth::user()->email.'_'.time(). '.' . $file->getClientOriginalExtension();
+              Image::make($file)->save('images/galeri/asli/'. $photoName);
               Image::make($file)->fit(457,250)->save('images/galeri/'. $photoName);
               Image::make($file)->fit(200,122)->save('_thumbs/galeri/'. $photoName);
 
@@ -116,9 +117,10 @@ class GaleriController extends Controller
 
         $set = MasterGaleri::find($request->id);
         $set->judul = $request->judulEdit;
-        $file = $request->file('urlGaleri');
+        $file = $request->file('urlGaleriEdit');
         if($file!="") {
           $photoName = Auth::user()->email.'_'.time(). '.' . $file->getClientOriginalExtension();
+          Image::make($file)->save('images/galeri/asli/'. $photoName);
           Image::make($file)->fit(457,250)->save('images/galeri/'. $photoName);
           Image::make($file)->fit(200,122)->save('_thumbs/galeri/'. $photoName);
           $set->url_gambar = $photoName;

@@ -11,6 +11,7 @@ use DB;
 use App\Models\Informasi;
 use App\Models\MasterSlider;
 use App\Models\MasterSponsor;
+use App\Models\MasterComment;
 use App\Http\Requests;
 
 class FeArticleController extends Controller
@@ -83,8 +84,23 @@ class FeArticleController extends Controller
                           ->get();
                           // dd($getArticleTerkait);
 
+      $getComment = MasterComment::leftjoin('master_tanggapan', 'master_comment.id', '=', 'master_tanggapan.id_comment')
+                      ->select('master_comment.*', 'master_tanggapan.tanggapan','master_tanggapan.id as id_tanggapan',
+                      'master_tanggapan.created_at as created_at2')
+                      ->where('master_comment.id_informasi','=',$id)
+                      ->where('master_comment.flag_comment','=',1)
+                      ->get();
+
+      $getCountComment = MasterComment::leftjoin('master_tanggapan', 'master_comment.id', '=', 'master_tanggapan.id_comment')
+                      ->select('master_comment.*', 'master_tanggapan.tanggapan','master_tanggapan.id as id_tanggapan',
+                      'master_tanggapan.created_at as created_at2')
+                      ->where('master_comment.id_informasi','=',$id)
+                      ->where('master_comment.flag_comment','=',1)
+                      ->count();
+
       return view('frontend.article.articleById', compact('getArticle','getSlider','getSponsor',
-                                                          'getJumlahKategori','getArticleTerkait','getArticlePopuler'));
+                                                          'getJumlahKategori','getArticleTerkait','getArticlePopuler',
+                                                          'getComment','getCountComment'));
     }
 
 }
