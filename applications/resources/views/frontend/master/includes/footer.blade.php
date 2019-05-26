@@ -6,8 +6,10 @@
 				<div class="single-footer-widget">
 					<h6>Quote's</h6>
 					<p>
-						<i><b>“An arrow can only be shot by pulling it backward. When life is dragging your back with difficulties,
-							it means it’s going to launch you into something great. So just focus, and keep aiming”</b></i>
+						<i style="text-transform: capitalize"><b>“There is nothing more time-consuming than worries, and people who profess to believe
+							in God should be ashamed when they are worried about something.”</b></i>
+							<br>
+						~MAHATMA GANDHI~
 					</p>
 				</div>
 			</div>
