@@ -1,5 +1,10 @@
 @extends('frontend.master.layouts.master')
 
+<style>
+.about-banner{background:url({{url('images/slider')}}/{{$getSlider[0]->url_slider}}) center;background-size:cover;background-attachment:fixed}
+  @media (max-width: 767.98px){.banner-area .fullscreen{height:700px !important}}
+</style>
+
 @section('banner')
 <!-- start banner Area -->
   <section class="banner-area relative about-banner" id="home">
@@ -10,7 +15,8 @@
           <h1 class="text-white">
             Contact Us
           </h1>
-          <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="contact.html"> Contact Us</a></p>
+          <p class="text-white link-nav"><a href="{{ route('home') }}">Home </a>
+            <span class="lnr lnr-arrow-right"></span>  <a href="{{ route('contact') }}"> Contact Us</a></p>
         </div>
       </div>
     </div>

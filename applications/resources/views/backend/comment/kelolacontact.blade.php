@@ -46,6 +46,7 @@
                                     <th style="text-align:center">Keterangan</th>
                                     <th style="text-align:center">Subject</th>
                                     <th style="text-align:center">Message</th>
+                                    <th style="text-align:center">Telephone</th>
                                     <th style="text-align:center">Status</th>
                                 </tr>
                             </thead>
@@ -59,6 +60,7 @@
                                   <td>{{$key->nama}}</td>
                                   <td>{{$key->subject}}</td>
                                   <td>{{$key->isi}}</td>
+                                  <td style="text-align:center">{{$key->telepon}}</td>
                                   <td style="text-align:center">
                                     @if($key->flag_pesan=="1")
                                       <a href="#" class="btn btn-warning btn-circle waves-effect waves-circle waves-float flagpublish"

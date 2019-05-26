@@ -81,7 +81,7 @@
                             </ul>
                         </li>
                         <li class="footer">
-                            <a href="{{route ('contact.index')}}">View All Notifications</a>
+                            <a href="{{route ('contact.index')}}">View All Messages</a>
                         </li>
                     </ul>
                 </li>

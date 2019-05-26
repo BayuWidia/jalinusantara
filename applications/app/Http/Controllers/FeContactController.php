@@ -9,6 +9,7 @@ use Image;
 use Validator;
 use DB;
 use App\Models\MasterGaleri;
+use App\Models\MasterSlider;
 use App\Http\Requests;
 
 class FeContactController extends Controller
@@ -16,7 +17,8 @@ class FeContactController extends Controller
 
     public function index()
     {
-          return view('frontend.contact.contact');
+          $getSlider = MasterSlider::all();
+          return view('frontend.contact.contact', compact('getSlider'));
     }
 
 }

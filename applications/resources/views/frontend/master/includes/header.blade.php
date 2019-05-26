@@ -5,10 +5,24 @@
   		<div class="row align-items-center">
   			<div class="col-lg-6 col-sm-6 col-4 header-top-left no-padding">
 	      	<div class="menu-social-icons">
-				<a href="#"><i class="fa fa-facebook"></i></a>
-				<a href="#"><i class="fa fa-twitter"></i></a>
-				<a href="#"><i class="fa fa-dribbble"></i></a>
-				<a href="#"><i class="fa fa-behance"></i></a>
+				<?php
+					$getMedsos = \App\Models\MasterMedsos::all();
+				?>
+				@foreach($getMedsos as $key)
+						<a href="{{$key->link_sosmed}}" target="_blank">
+							@if($key->nama_sosmed == 'facebook')
+								<i class="fa fa-facebook"></i>
+							@elseif($key->nama_sosmed == 'twitter')
+								<i class="fa fa-twitter"></i>
+							@elseif($key->nama_sosmed == 'youtube')
+								<i class="fa fa-youtube"></i>
+							@elseif($key->nama_sosmed == 'google-plus')
+								<i class="fa fa-google-plus"></i>
+							@elseif($key->nama_sosmed == 'linkedin')
+								<i class="fa fa-linkedin"></i>
+							@endif
+						</a>
+				@endforeach
 			</div>
   			</div>
   			<div class="col-lg-6 col-sm-6 col-8 header-top-right no-padding">
