@@ -10,6 +10,7 @@ use Validator;
 use DB;
 use App\Models\MasterComment;
 use App\Models\MasterTanggapan;
+use App\Models\MasterPesan;
 use App\Http\Requests;
 
 class CommentController extends Controller
@@ -19,6 +20,12 @@ class CommentController extends Controller
     {
         $getComment = MasterComment::all();
         return view('backend.comment.kelolacomment', compact('getComment'));
+    }
+
+    public function indexContact()
+    {
+        $getContact = MasterPesan::all();
+        return view('backend.comment.kelolacontact', compact('getContact'));
     }
 
 
@@ -86,6 +93,22 @@ class CommentController extends Controller
         return redirect()->route('comment.index')->with('message', 'Berhasil mengubah publish comment.');
     }
 
+    public function showContact($id)
+    {
+        $set = MasterPesan::find($id);
+        if($set->flag_pesan=="1") {
+          $set->flag_pesan = 0;
+        } elseif ($set->flag_pesan=="0") {
+          $set->flag_pesan = 1;
+        }
+        $set->updated_by = Auth::user()->id;
+        $set->save();
+
+        \LogActivities::insLogActivities('log publish successfully.');
+
+        return redirect()->route('contact.index')->with('message', 'Berhasil mengubah publish Message.');
+    }
+
     public function storeTanggapan(Request $request)
     {
       // dd($request->all());
@@ -121,4 +144,44 @@ class CommentController extends Controller
 
           return redirect()->route('comment.index')->with('message', 'Berhasil memasukkan tanggapan anda.');
     }
+
+    public function storeContact(Request $request)
+    {
+      // dd($request->all());
+          $messages = [
+            'email.required' => 'Tidak boleh kosong.',
+            'nama.required' => 'Tidak boleh kosong.',
+            'subject.required' => 'Tidak boleh kosong.',
+            'message.required' => 'Tidak boleh kosong.',
+            'telephone.required' => 'Tidak boleh kosong.',
+          ];
+
+          $validator = Validator::make($request->all(), [
+                  'email' => 'required',
+                  'nama' => 'required',
+                  'subject' => 'required',
+                  'message' => 'required',
+                  'telephone' => 'required',
+              ], $messages);
+
+          if ($validator->fails()) {
+              return redirect()->route('contact')->withErrors($validator)->withInput();
+          }
+
+          $set = new MasterPesan;
+          $set->email = $request->email;
+          $set->nama = $request->nama;
+          $set->subject = $request->subject;
+          $set->telepon = $request->telephone;
+          $set->isi = $request->message;
+          $set->flag_pesan = 0;
+          $set->activated = 1;
+          $set->created_by = $request->email;
+          $set->save();
+
+          // \LogActivities::insLogActivities('log insert successfully.');
+
+          return redirect()->route('contact')->with('message', 'Berhasil memasukkan pesan anda.');
+    }
+
 }

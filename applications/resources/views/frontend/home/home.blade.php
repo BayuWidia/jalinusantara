@@ -175,6 +175,7 @@
               <?php $date = explode(' ', $key->created_at) ?>
   						<span class="lnr lnr-calendar-full"></span> {{ \Carbon\Carbon::parse($key->created_at)->format('d-M-y')}}
   						<span class="lnr lnr-clock"></span> {{$date[1]}}
+              <span class="lnr lnr-eye"></span> {{$key->view_counter}}
   					</div>
   				</div>
   				<a href="{{url('articleById')}}/{{$key->id}}/{{$key->id_kategori}}">

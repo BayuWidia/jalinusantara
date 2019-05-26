@@ -152,6 +152,10 @@ Route::get('comment.index', 'CommentController@index')->name('comment.index');
 Route::get('admin/publish-comment/{id}', 'CommentController@show')->name('comment.show');
 Route::get('admin/bind-comment/{id}', 'CommentController@edit')->name('comment.edit');
 Route::post('admin/storeTanggapan', 'CommentController@storeTanggapan')->name('comment.storeTanggapan');
+
+//Menu Comment
+Route::get('contact.index', 'CommentController@indexContact')->name('contact.index');
+Route::get('admin/publish-contact/{id}', 'CommentController@showContact')->name('contact.show');
 // =================================== END BACK END ====================================================================
 
 
@@ -166,6 +170,7 @@ Route::post('articleById.store', 'CommentController@store')->name('articleById.s
 Route::get('events/{id}', 'FeEventsController@index')->name('events');
 Route::get('eventsById/{id}/{idKategori}', 'FeEventsController@indexById')->name('eventsById');
 Route::get('contact', 'FeContactController@index')->name('contact');
+Route::post('contact.store', 'CommentController@storeContact')->name('contact.store');
 
 Route::get('galeri', 'FeGaleriController@index')->name('galeri');
 

@@ -208,6 +208,7 @@ class ArticleController extends Controller
           $set->tanggal_publish = $setTglPosting;
           $set->flag_status = 'article';
           $set->activated = 1;
+          $set->view_counter = 0;
           $set->created_by = Auth::user()->id;
           $set->save();
         } else {

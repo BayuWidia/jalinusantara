@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCommentTable extends Migration
+class AddPesanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddCommentTable extends Migration
      */
     public function up()
     {
-        Schema::table('master_comment', function($table){
-          $table->string('flag_tanggapan')->nullable()->after('flag_comment');
+        Schema::table('master_pesan', function($table){
+          $table->string('subject')->nullable()->after('nama');
         });
     }
 
@@ -25,6 +25,6 @@ class AddCommentTable extends Migration
      */
     // public function down()
     // {
-    //     Schema::dropIfExists('master_comment');
+    //     Schema::dropIfExists('master_pesan');
     // }
 }

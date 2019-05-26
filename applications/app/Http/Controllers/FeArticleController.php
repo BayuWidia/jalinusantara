@@ -50,6 +50,10 @@ class FeArticleController extends Controller
 
     public function indexById($id, $idKategori)
     {
+
+      $set = Informasi::find($id);
+      $set->view_counter = $set->view_counter + 1;
+      $set->save();
       $getSlider = MasterSlider::all();
       $getArticle = Informasi::join('master_kategori', 'informasi.id_kategori', '=', 'master_kategori.id')
                       ->leftJoin('master_users','informasi.created_by','=','master_users.id')

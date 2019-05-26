@@ -9,16 +9,20 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <!-- Call Search -->
-                <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
-                <!-- #END# Call Search -->
+                <!-- <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
+                #END# Call Search -->
                 <!-- Notifications -->
+
+                <?php
+                $getCountComment = \App\Models\MasterComment::where('flag_tanggapan','=' ,0)->count();
+                $getComment = \App\Models\MasterComment::where('flag_tanggapan','=' ,0)->get();
+
+                $getCountContact = \App\Models\MasterPesan::where('flag_pesan','=' ,0)->count();
+                $getContact = \App\Models\MasterPesan::where('flag_pesan','=' ,0)->get();
+                ?>
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                        <i class="material-icons">comment</i>
-                        <?php
-                        $getCountComment = \App\Models\MasterComment::where('flag_tanggapan','=' ,0)->count();
-                        $getComment = \App\Models\MasterComment::where('flag_tanggapan','=' ,0)->get();
-                        ?>
+                        <i class="material-icons">add_alert</i>
 
                         <span class="label-count">{{$getCountComment}}</span>
                     </a>
@@ -29,8 +33,8 @@
                                 @foreach($getComment as $key)
                                   <li>
                                       <a href="javascript:void(0);">
-                                          <div class="icon-circle bg-blue-grey">
-                                              <i class="material-icons">comment</i>
+                                          <div class="icon-circle bg-purple">
+                                              <i class="material-icons">add_alert</i>
                                           </div>
                                           <div class="menu-info">
                                               <h4><b>{{$key->nama}}</b> - {{$key->subject}}</h4>
@@ -52,77 +56,32 @@
                 <!-- Tasks -->
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                        <i class="material-icons">flag</i>
-                        <span class="label-count">9</span>
+                        <i class="material-icons">comment</i>
+                        <span class="label-count">{{$getCountContact}}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">TASKS</li>
+                        <li class="header">MESSAGE</li>
                         <li class="body">
-                            <ul class="menu tasks">
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        <h4>
-                                            Footer display issue
-                                            <small>32%</small>
-                                        </h4>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 32%">
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        <h4>
-                                            Make new buttons
-                                            <small>45%</small>
-                                        </h4>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        <h4>
-                                            Create new dashboard
-                                            <small>54%</small>
-                                        </h4>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 54%">
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        <h4>
-                                            Solve transition issue
-                                            <small>65%</small>
-                                        </h4>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 65%">
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
-                                        <h4>
-                                            Answer GitHub questions
-                                            <small>92%</small>
-                                        </h4>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 92%">
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
+                            <ul class="menu">
+                                @foreach($getContact as $key)
+                                  <li>
+                                      <a href="javascript:void(0);">
+                                          <div class="icon-circle bg-orange">
+                                              <i class="material-icons">comment</i>
+                                          </div>
+                                          <div class="menu-info">
+                                              <h4><b>{{$key->nama}}</b> - {{$key->subject}}</h4>
+                                              <p>
+                                                  <i class="material-icons">access_time</i> {{ \Carbon\Carbon::parse($key->created_at)->diffForHumans()}}
+                                              </p>
+                                          </div>
+                                      </a>
+                                  </li>
+                                @endforeach
                             </ul>
                         </li>
                         <li class="footer">
-                            <a href="javascript:void(0);">View All Tasks</a>
+                            <a href="{{route ('contact.index')}}">View All Notifications</a>
                         </li>
                     </ul>
                 </li>

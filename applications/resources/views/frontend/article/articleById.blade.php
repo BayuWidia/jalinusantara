@@ -60,62 +60,67 @@
 					</div>
 				</div>
 
-        <div class="comments-area">
-					<h4>{{$getCountComment}} Comments</h4>
-          @foreach($getComment as $key)
-					<div class="comment-list">
-              <div class="single-comment justify-content-between d-flex">
-                  <div class="user justify-content-between d-flex">
-                      <div class="thumb">
-                          <img src="{{asset('themeuser/img/blog/user2.png')}}" alt="">
-                      </div>
-                      <div class="desc">
-                          <h5><a href="#">{{$key->nama}}</a></h5>
-                          <p class="date">{{ \Carbon\Carbon::parse($key->created_at)->diffForHumans()}} </p>
-                          <p class="comment">
-                              {{$key->subject}}
-                          </p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          @if($key->id_tanggapan != null)
-					<div class="comment-list left-padding">
-              <div class="single-comment justify-content-between d-flex">
-                  <div class="user justify-content-between d-flex">
-                      <div class="thumb">
-                          <img src="{{asset('themeuser/img/blog/admin2.png')}}" alt="">
-                      </div>
-                      <div class="desc">
-                          <h5><a href="#">Admin Jalinusantara</a></h5>
-                          <p class="date">{{ \Carbon\Carbon::parse($key->created_at2)->diffForHumans()}} </p>
-                          <p class="comment">
-                              {{$key->tanggapan}}
-                          </p>
-                      </div>
-                  </div>
-              </div>
+        @if($getCountComment != 0)
+          <div class="comments-area">
+  					<h4>{{$getCountComment}} Comments</h4>
+            @foreach($getComment as $key)
+  					<div class="comment-list">
+                <div class="single-comment justify-content-between d-flex">
+                    <div class="user justify-content-between d-flex">
+                        <div class="thumb">
+                            <img src="{{asset('themeuser/img/blog/user2.png')}}" alt="">
+                        </div>
+                        <div class="desc">
+                            <h5><a href="#">{{$key->nama}}</a></h5>
+                            <p class="date">{{ \Carbon\Carbon::parse($key->created_at)->diffForHumans()}} </p>
+                            <p class="comment">
+                                {{$key->subject}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if($key->id_tanggapan != null)
+  					<div class="comment-list left-padding">
+                <div class="single-comment justify-content-between d-flex">
+                    <div class="user justify-content-between d-flex">
+                        <div class="thumb">
+                            <img src="{{asset('themeuser/img/blog/admin2.png')}}" alt="">
+                        </div>
+                        <div class="desc">
+                            <h5><a href="#">Admin Jalinusantara</a></h5>
+                            <p class="date">{{ \Carbon\Carbon::parse($key->created_at2)->diffForHumans()}} </p>
+                            <p class="comment">
+                                {{$key->tanggapan}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+            @endforeach
+  				</div>
+        @endif
+
+        <div class="col-md-12">
+          @if(Session::has('message'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4><i class="icon fa fa-check"></i> Berhasil!</h4>
+              <p>{{ Session::get('message') }}</p>
+            </div>
+          @endif
+          @if(Session::has('messagefail'))
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4><i class="icon fa fa-ban"></i> Oops, terjadi kesalahan!</h4>
+            <p>{{ Session::get('messagefail') }}</p>
           </div>
           @endif
-          @endforeach
+        </div>
 
-				</div>
 				<div class="comment-form">
 					<h4>Leave a Comment</h4>
-          <div class="col-md-12">
-            @if(Session::has('message'))
-              <blockquote class="generic-blockquote">
-                <h4><i class="icon fa fa-check"></i> Berhasil!</h4>
-                <p>{{ Session::get('message') }}</p>
-  						</blockquote>
-            @endif
-            @if(Session::has('messagefail'))
-              <blockquote class="generic-blockquote">
-                <h4><i class="icon fa fa-ban"></i> Oops, terjadi kesalahan!</h4>
-                <p>{{ Session::get('messagefail') }}</p>
-  						</blockquote>
-            @endif
-          </div>
           <form action="{{route('articleById.store')}}" method="post" enctype="multipart/form-data">
             {{csrf_field()}}
 						<div class="form-group form-inline">
