@@ -44,11 +44,14 @@
             <h4><span class="lnr lnr-user"></span>&nbsp;&nbsp;&nbsp;<span>Fasilitator</span>   :  <b>{{$getEvents[0]->fasilitator}}</b></h4>
         </p>
         <p>
+            <h4><span class="lnr lnr-location"></span>&nbsp;&nbsp;<span>Alamat</span>   :  <b>{{$getEvents[0]->alamat}}</b></h4>
+        </p>
+        <p>
             <h5><span class="lnr lnr-calendar-full"></span>&nbsp;&nbsp;&nbsp;<span><span>Tanggal</span>   :
               <b>
-                {{ \Carbon\Carbon::parse($getEvents[0]->tanggal_mulai)->format('d-M-y')}}
+                {{ \Carbon\Carbon::parse($getEvents[0]->tanggal_mulai)->format('d-M-Y')}}
                 &nbsp;s/d&nbsp;&nbsp;
-                {{ \Carbon\Carbon::parse($getEvents[0]->tanggal_akhir)->format('d-M-y')}}
+                {{ \Carbon\Carbon::parse($getEvents[0]->tanggal_akhir)->format('d-M-Y')}}
 
               </b></h5>
         </p>

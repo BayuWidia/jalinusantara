@@ -48,7 +48,7 @@
                 @for($i=0; $i < 15; $i++)
                   <span><?php echo $isiEvents[$i] ?></span>
                 @endfor
-                ...
+                [.....]
               @endif
           </p>
           <p>
@@ -58,7 +58,8 @@
           </p>
           <br>
           <p>
-            <a href="{{url('eventsById')}}/{{$key->id}}/{{$key->id_kategori}}" class="genric-btn primary circle">Baca Selengkapnya...</a>
+            <a href="{{url('eventsById')}}/{{$key->id}}/{{$key->id_kategori}}" class="genric-btn info">
+              Lihat Selengkapnya&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a>
           </p>
         </div>
         <div class="col-lg-3 flex-row d-flex price-size">

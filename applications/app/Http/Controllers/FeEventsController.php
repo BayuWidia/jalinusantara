@@ -25,9 +25,13 @@ class FeEventsController extends Controller
                                 'master_users.fullname', 'master_users.email', 'master_users.url_foto as url_foto2')
                       ->where('events.id_kategori','=',$id)
                       ->where('flag_publish', 1)
+                      ->orderBy('created_at', 'DESC')
                       ->paginate(30);
                       // dd($getInformasi[0]->nama_kategori);
-      $getSponsor = MasterSponsor::all();
+      $getSponsor = MasterSponsor::select('master_sponsor.*')
+                    ->where('flag_sponsor', 1)
+                    ->orderby(DB::raw('rand()'))
+                    ->get();
 
 
       return view('frontend.events.events', compact('getEvents','getSlider','getSponsor'));

@@ -85,6 +85,15 @@
                                     <input type="text" class="form-control" value="{{ old('lokasi') }}" placeholder="Ketikkan Lokasi..." name="lokasi" id="lokasi"/>
                                 </div>
                             </div>
+                            <div class="form-group mandatory">
+                                <div class="form-line">
+                                    <label>Alamat</label>
+                                    @if ($errors->has('alamat'))
+                                      <small style="color:red">* {{$errors->first('alamat')}}</small>
+                                    @endif
+                                    <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Alamat..." name="alamat" id="alamat">{{ old('alamat') }}</textarea>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="form-line">
                                     <label>Maps</label>

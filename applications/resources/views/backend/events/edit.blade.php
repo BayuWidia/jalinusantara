@@ -121,6 +121,19 @@
                                     @else
                                       <input type="text" class="form-control" value="{{$viewEvents->lokasi}}" placeholder="Ketikkan Lokasi..." name="lokasi" id="lokasi" disabled/>
                                     @endif
+                                </div>
+                            </div>
+                            <div class="form-group mandatory">
+                                <div class="form-line">
+                                    <label>Alamat</label>
+                                    @if ($errors->has('alamat'))
+                                      <small style="color:red">* {{$errors->first('alamat')}}</small>
+                                    @endif
+                                    @if(isset($editEvents))
+                                      <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Alamat..." name="alamat" id="alamat">{{ old('alamat') }}</textarea>
+                                    @else
+                                      <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Alamat..." name="alamat" id="alamat" disabled>{{ old('alamat') }}</textarea>
+                                    @endif
 
                                 </div>
                             </div>

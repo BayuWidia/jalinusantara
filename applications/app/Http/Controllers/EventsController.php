@@ -166,6 +166,7 @@ class EventsController extends Controller
            'fasilitator.required' => 'Tidak boleh kosong.',
            'jmlPeserta.required' => 'Tidak boleh kosong.',
            'lokasi.required' => 'Tidak boleh kosong.',
+           'alamat.required' => 'Tidak boleh kosong.',
            'kategoriId.not_in' => 'Pilih salah satu.',
          ];
 
@@ -178,6 +179,7 @@ class EventsController extends Controller
                  'fasilitator' => 'required',
                  'jmlPeserta' => 'required',
                  'lokasi' => 'required',
+                 'alamat' => 'required',
                  'kategoriId' => 'required|not_in:-- Pilih --',
                  'urlFoto' => 'required|image|mimes:jpeg,jpg,png|max:40000',
              ], $messages);
@@ -210,6 +212,7 @@ class EventsController extends Controller
            $set->fasilitator = $request->fasilitator;
            $set->jumlah_peserta = $request->jmlPeserta;
            $set->lokasi = $request->lokasi;
+           $set->alamat = $request->alamat;
            $set->isi_event = $request->isiKonten;
            $set->tags = $request->tags;
            $set->flag_headline = $flagHeadline;
@@ -310,6 +313,7 @@ class EventsController extends Controller
            'fasilitator.required' => 'Tidak boleh kosong.',
            'jmlPeserta.required' => 'Tidak boleh kosong.',
            'lokasi.required' => 'Tidak boleh kosong.',
+           'alamat.required' => 'Tidak boleh kosong.',
            'kategoriId.not_in' => 'Pilih salah satu.',
          ];
 
@@ -322,6 +326,7 @@ class EventsController extends Controller
                  'fasilitator' => 'required',
                  'jmlPeserta' => 'required',
                  'lokasi' => 'required',
+                 'alamat' => 'required',
                  'kategoriId' => 'required|not_in:-- Pilih --',
              ], $messages);
 
@@ -354,6 +359,7 @@ class EventsController extends Controller
          $set->fasilitator = $request->fasilitator;
          $set->jumlah_peserta = $request->jmlPeserta;
          $set->lokasi = $request->lokasi;
+         $set->alamat = $request->alamat;
          $set->isi_event = $request->isiKonten;
          $set->tags = $request->tags;
          $set->flag_headline = $flagHeadline;
