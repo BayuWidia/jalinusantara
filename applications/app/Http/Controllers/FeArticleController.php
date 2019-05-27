@@ -44,6 +44,7 @@ class FeArticleController extends Controller
                           ->limit(5)
                           ->orderby('view_counter', 'desc')
                           ->get();
+                          
       return view('frontend.article.article', compact('getArticle','getSlider','getSponsor',
                                                       'getJumlahKategori','getArticlePopuler'));
     }

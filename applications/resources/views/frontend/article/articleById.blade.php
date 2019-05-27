@@ -37,70 +37,20 @@
               <img src="{{ url('images/article/') }}/{{$getArticle[0]->url_foto}}" class="img-fluid">
 						</div>
 					</div>
-					<div class="col-lg-3  col-md-3 meta-details">
-						<div class="user-details row">
-              <?php $date = explode(' ', $getArticle[0]->created_at) ?>
-							<p class="user-name col-lg-12 col-md-12 col-6"><a href="#">{{$getArticle[0]->name}}</a> <span class="lnr lnr-user"></span></p>
-							<p class="date col-lg-12 col-md-12 col-6"><a href="#">{{ \Carbon\Carbon::parse($getArticle[0]->created_at)->format('d-M-y')}}</a> <span class="lnr lnr-calendar-full"></span></p>
-              <p class="date col-lg-12 col-md-12 col-6"><a href="#">{{ $date[1]}}</a> <span class="lnr lnr-clock"></span></p>
-							<p class="view col-lg-12 col-md-12 col-6"><a href="#">{{$getArticle[0]->view_counter}}</a> <span class="lnr lnr-eye"></span></p>
-							<ul class="social-links col-lg-12 col-md-12 col-6">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-github"></i></a></li>
-								<li><a href="#"><i class="fa fa-behance"></i></a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-9 col-md-9">
+					<div class="col-lg-12 col-md-12">
 						<a class="posts-title" href="#"><h3>{{$getArticle[0]->judul_informasi}}</h3></a>
+            <b>
+              <?php $date = explode(' ', $getArticle[0]->created_at) ?>
+              <span class="lnr lnr-user"></span>&nbsp;{{$getArticle[0]->fullname}} ||
+              <span class="lnr lnr-calendar-full"></span>&nbsp;{{ \Carbon\Carbon::parse($getArticle[0]->created_at)->format('d-M-y')}} -
+              <span class="lnr lnr-clock"></span>&nbsp;{{$date[1]}} ||
+              <span class="lnr lnr-eye"></span>&nbsp;{{$getArticle[0]->view_counter}}
+            </b>
 						<p class="excert">
 							<?php echo $getArticle[0]->isi_informasi ?>
 						</p>
 					</div>
 				</div>
-
-        @if($getCountComment != 0)
-          <div class="comments-area">
-  					<h4>{{$getCountComment}} Comments</h4>
-            @foreach($getComment as $key)
-  					<div class="comment-list">
-                <div class="single-comment justify-content-between d-flex">
-                    <div class="user justify-content-between d-flex">
-                        <div class="thumb">
-                            <img src="{{asset('themeuser/img/blog/user2.png')}}" alt="">
-                        </div>
-                        <div class="desc">
-                            <h5><a href="#">{{$key->nama}}</a></h5>
-                            <p class="date">{{ \Carbon\Carbon::parse($key->created_at)->diffForHumans()}} </p>
-                            <p class="comment">
-                                {{$key->subject}}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @if($key->id_tanggapan != null)
-  					<div class="comment-list left-padding">
-                <div class="single-comment justify-content-between d-flex">
-                    <div class="user justify-content-between d-flex">
-                        <div class="thumb">
-                            <img src="{{asset('themeuser/img/blog/admin2.png')}}" alt="">
-                        </div>
-                        <div class="desc">
-                            <h5><a href="#">Admin Jalinusantara</a></h5>
-                            <p class="date">{{ \Carbon\Carbon::parse($key->created_at2)->diffForHumans()}} </p>
-                            <p class="comment">
-                                {{$key->tanggapan}}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endif
-            @endforeach
-  				</div>
-        @endif
 
         <div class="col-md-12">
           @if(Session::has('message'))
@@ -118,7 +68,7 @@
           </div>
           @endif
         </div>
-
+        <hr>
 				<div class="comment-form">
 					<h4>Leave a Comment</h4>
           <form action="{{route('articleById.store')}}" method="post" enctype="multipart/form-data">
@@ -155,12 +105,54 @@
 					</form>
 				</div>
 
+        @if($getCountComment != 0)
+          <div class="comments-area" style="background:white">
+  					<h4>{{$getCountComment}} Comments</h4>
+            @foreach($getComment as $key)
+  					<div class="comment-list">
+                <div class="single-comment justify-content-between d-flex">
+                    <div class="user justify-content-between d-flex">
+                        <div class="thumb">
+                            <img src="{{asset('themeuser/img/blog/user2.png')}}" alt="">
+                        </div>
+                        <div class="desc">
+                            <h5><a href="#">{{$key->nama}}</a></h5>
+                            <p class="date">{{ \Carbon\Carbon::parse($key->created_at)}} </p>
+                            <p class="comment">
+                                {{$key->subject}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if($key->id_tanggapan != null)
+  					<div class="comment-list left-padding">
+                <div class="single-comment justify-content-between d-flex">
+                    <div class="user justify-content-between d-flex">
+                        <div class="thumb">
+                            <img src="{{asset('themeuser/img/blog/admin2.png')}}" alt="">
+                        </div>
+                        <div class="desc">
+                            <h5><a href="#">Admin Jalinusantara</a></h5>
+                            <p class="date">{{ \Carbon\Carbon::parse($key->created_at2)}} </p>
+                            <p class="comment">
+                                {{$key->tanggapan}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+            @endforeach
+  				</div>
+        @endif
 
 			</div>
+
       <div class="col-lg-4 sidebar-widgets">
-				<div class="widget-wrap">
+				<div class="widget-wrap" style="background:white">
           <div class="single-sidebar-widget popular-post-widget">
-						<h4 class="popular-title">Article Terkait</h4>
+						<h4 class="popular-title">Related Article's</h4>
 						<div class="popular-post-list">
               @foreach($getArticleTerkait as $key)
 							<div class="single-post-list d-flex flex-row align-items-center">
@@ -180,7 +172,7 @@
 						<a href="#"><img class="img-fluid" src="{{asset('themeuser/img/iklan.jpg')}}" alt=""></a>
 					</div>
           <div class="single-sidebar-widget popular-post-widget">
-						<h4 class="popular-title">Popular Posts</h4>
+						<h4 class="popular-title">Article's Popular</h4>
 						<div class="popular-post-list">
               @foreach($getArticlePopuler as $key)
 							<div class="single-post-list d-flex flex-row align-items-center">
@@ -197,7 +189,7 @@
 						</div>
 					</div>
 					<div class="single-sidebar-widget post-category-widget">
-						<h4 class="category-title">Post Catgories</h4>
+						<h4 class="category-title">Catgories</h4>
 						<ul class="cat-list">
               @foreach($getJumlahKategori as $key)
   							<li>

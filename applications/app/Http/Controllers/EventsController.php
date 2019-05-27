@@ -336,11 +336,13 @@ class EventsController extends Controller
            $flagHeadline=1;
          }
 
+         $setStartDate = date("Y-m-d", strtotime($request->tglAwal));
+         $setEndDate = date("Y-m-d", strtotime($request->tglAkhir));
          $setTglPosting = date('Y-m-d');
          $set = Events::find($request->id);
          $set->judul_event = $request->judul;
-         $set->tanggal_mulai = $request->tglAwal;
-         $set->tanggal_akhir = $request->tglAkhir;
+         $set->tanggal_mulai = $setStartDate;
+         $set->tanggal_akhir = $setEndDate;
          $set->id_kategori = $request->kategoriId;
          $file = $request->file('urlFoto');
          if($file!="") {

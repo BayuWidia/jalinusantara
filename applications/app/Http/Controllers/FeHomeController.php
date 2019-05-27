@@ -14,6 +14,7 @@ use App\Models\MasterVideo;
 use App\Models\MasterSponsor;
 use App\Models\MasterSlider;
 use App\Http\Requests;
+use Carbon\Carbon;
 
 class FeHomeController extends Controller
 {
@@ -26,17 +27,25 @@ class FeHomeController extends Controller
                       ->where('informasi.flag_status', '=', 'profile')
                       ->where('informasi.id_kategori', '=', '5')
                       ->get();
+
+        $dt = Carbon::now();
         $getDataEvents = Events::select('events.*')
+                     ->whereRaw('"'.$dt.'" between tanggal_mulai and tanggal_akhir')
                      ->where('events.flag_headline', '=', '1')
+                     ->where('flag_publish', '1')
                      ->limit(4)
                      ->orderBy('created_at', 'DESC')
                      ->get();
+                     // dd($getDataEvents);
         $getDataVideo = MasterVideo::select('master_video.*')
                      ->where('flag_important_video', 1)
                      ->limit(1)
                      ->orderby(DB::raw('rand()'))
                      ->get();
-        $getSponsor = MasterSponsor::all();
+        $getSponsor = MasterSponsor::select('master_sponsor.*')
+                      ->where('flag_sponsor', 1)
+                      ->orderby(DB::raw('rand()'))
+                      ->get();
 
         $getDataArticle = Informasi::leftJoin('master_users','informasi.created_by','=','master_users.id')
                       ->select('informasi.*', 'master_users.name', 'master_users.fullname', 'master_users.email', 'master_users.url_foto as url_foto2')

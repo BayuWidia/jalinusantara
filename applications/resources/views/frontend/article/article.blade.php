@@ -64,15 +64,19 @@
         @foreach($getArticle as $key)
 				<div class="single-post row">
 					<div class="col-lg-3  col-md-3 meta-details">
-						<ul class="tags">
+            <ul class="tags">
+              <?php $isiTags = explode(",", $key->tags);?>
+              @for($i=0; $i < count($isiTags); $i++)
+                  <li><a href="#"><?php echo $isiTags[$i] ?>,</a></li>
+              @endfor
 						</ul>
 						<div class="user-details row">
               <?php $date = explode(' ', $key->created_at) ?>
 							<p class="user-name col-lg-12 col-md-12 col-6"><a href="#">{{$key->name}}</a> <span class="lnr lnr-user"></span></p>
 							<p class="date col-lg-12 col-md-12 col-6"><a href="#">{{ \Carbon\Carbon::parse($key->created_at)->format('d-M-y')}}</a> <span class="lnr lnr-calendar-full"></span></p>
               <p class="date col-lg-12 col-md-12 col-6"><a href="#">{{ $date[1]}}</a> <span class="lnr lnr-clock"></span></p>
-							<p class="view col-lg-12 col-md-12 col-6"><a href="#">{{$key->view_counter}}</a> <span class="lnr lnr-eye"></span></p>
-						</div>
+							<p class="view col-lg-12 col-md-12 col-6"><a href="#">{{$key->view_counter}} Views</a> <span class="lnr lnr-eye"></span></p>
+					  </div>
 					</div>
 					<div class="col-lg-9 col-md-9 ">
 						<div class="feature-img">
@@ -87,12 +91,14 @@
                   @for($i=0; $i < 35; $i++)
                     <span><?php echo $isiArticle[$i] ?></span>
                   @endfor
-                  ...
+                  [.....]
                 @endif
 						</p>
-						<a href="{{url('articleById')}}/{{$key->id}}/{{$key->id_kategori}}" class="genric-btn primary circle">Baca Selengkapnya...</a>
+						<a href="{{url('articleById')}}/{{$key->id}}/{{$key->id_kategori}}" class="genric-btn info">
+              Lihat Selengkapnya&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a>
 					</div>
 				</div>
+        <hr>
         @endforeach
 
         <nav class="blog-pagination justify-content-center d-flex">
@@ -100,12 +106,12 @@
         </nav>
 			</div>
 			<div class="col-lg-4 sidebar-widgets">
-				<div class="widget-wrap">
+				<div class="widget-wrap" style="background:white">
 					<div class="single-sidebar-widget ads-widget">
 						<a href="#"><img class="img-fluid" src="{{asset('themeuser/img/iklan.jpg')}}" alt=""></a>
 					</div>
           <div class="single-sidebar-widget popular-post-widget">
-						<h4 class="popular-title">Popular Posts</h4>
+						<h4 class="popular-title">Article's Popular</h4>
 						<div class="popular-post-list">
               @foreach($getArticlePopuler as $key)
 							<div class="single-post-list d-flex flex-row align-items-center">

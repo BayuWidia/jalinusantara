@@ -23,7 +23,10 @@ class FeAboutController extends Controller
                           ->select(DB::raw('distinct(master_kategori.nama_kategori)'), 'informasi.*')
                           ->where('informasi.id','=',$id)->get();
                           // dd($getInformasi[0]->nama_kategori);
-          $getSponsor = MasterSponsor::all();
+          $getSponsor = MasterSponsor::select('master_sponsor.*')
+                        ->where('flag_sponsor', 1)
+                        ->orderby(DB::raw('rand()'))
+                        ->get();
           return view('frontend.about.about', compact('getInformasi','getSlider','getSponsor'));
     }
 

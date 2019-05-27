@@ -43,11 +43,12 @@
             @for($i=0; $i < 85; $i++)
               <span><?php echo $isiInformasi[$i] ?></span>
             @endfor
-            ...
+            [.....]
           @endif
 
 				</p>
-				<a class="primary-btn squire" href="{{ route('about.us', $getDataSejarah[0]->id) }}">Baca Selengkapnya...</a>
+				<a class="primary-btn squire" href="{{ route('about.us', $getDataSejarah[0]->id) }}">
+          Selengkapnya&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a>
 			</div>
 		</div>
 	</div>
@@ -60,31 +61,43 @@
 	<div class="container">
 		<div class="row d-flex justify-content-center">
 			<div class="col-md-12 pb-80 header-text text-center">
-				<h1 class="pb-10">Event's dalam waktu dekat ini</h1>
+				<h1 class="pb-10">Event's Today</h1>
+        @if($getDataEvents == null)
+         <br>
+          <p style="text-align:center">
+            <alert class="alert alert-success">
+              “Mohon maaf untuk hari ini belum ada event's yang lakukan...”
+            </alert>
+          </p>
+        @endif
 			</div>
 		</div>
 		<div class="row">
-      @foreach($getDataEvents as $key)
-        <div class="col-lg-3 col-md-6">
-          <div class="single-cat-item">
-            <div class="thumb">
-              <img class="img-fluid" src="{{url('images/events')}}/{{$key->url_foto}}" alt="">
+      @if($getDataEvents != null)
+        @foreach($getDataEvents as $key)
+          <div class="col-lg-3 col-md-6">
+            <div class="single-cat-item">
+              <div class="thumb">
+                <img class="img-fluid" src="{{url('images/events')}}/{{$key->url_foto}}" alt="">
+              </div>
+              <a href="{{url('eventsById')}}/{{$key->id}}/{{$key->id_kategori}}"><h4>{{$key->judul_event}}</h4></a>
+              <p>
+                <?php $isiEvents = explode(" ", $key->isi_event); ?>
+                @if(count($isiEvents)<=10)
+                  <span><?php echo $key->isi_event ?></span>
+                @else
+                  @for($i=0; $i < 10; $i++)
+                    <span><?php echo $isiEvents[$i] ?></span>
+                  @endfor
+                  [.....]
+                @endif
+              </p>
+                <a class="genric-btn info" href="{{url('eventsById')}}/{{$key->id}}/{{$key->id_kategori}}">
+                  Lihat Selengkapnya&nbsp;&nbsp;&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a>
             </div>
-            <a href="{{url('eventsById')}}/{{$key->id}}/{{$key->id_kategori}}"><h4>{{$key->judul_event}}</h4></a>
-            <p>
-              <?php $isiEvents = explode(" ", $key->isi_event); ?>
-              @if(count($isiEvents)<=10)
-                <span><?php echo $key->isi_event ?></span>
-              @else
-                @for($i=0; $i < 10; $i++)
-                  <span><?php echo $isiEvents[$i] ?></span>
-                @endfor
-                ...
-              @endif
-            </p>
           </div>
-        </div>
-      @endforeach
+        @endforeach
+      @endif
 		</div>
 	</div>
 </section>
@@ -116,10 +129,7 @@
 	<div class="container">
 		<div class="row d-flex justify-content-center">
 			<div class="col-md-9 pb-40 header-text text-center">
-				<h1 class="pb-10 text-white">Enjoy our Client’s Review</h1>
-				<p>
-					Who are in extremely love with eco friendly system.
-				</p>
+				<h1 class="pb-10 text-white">Enjoy our Sponsor's<</h1>
 			</div>
 		</div>
 		<div class="row">
@@ -153,7 +163,7 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-9 pb-30 header-text">
-				<h1>Article yang sedang populer</h1>
+				<h1>Article's Feed</h1>
 			</div>
 		</div>
 		<div class="row">
@@ -189,9 +199,11 @@
                 @for($i=0; $i < 15; $i++)
                   <span><?php echo $isiArticle[$i] ?></span>
                 @endfor
-                ...
+                [.....]
               @endif
   				</p>
+          <a class="genric-btn info" href="{{url('articleById')}}/{{$key->id}}/{{$key->id_kategori}}">
+            Lihat Selengkapnya&nbsp;&nbsp;&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a>
   			</div>
       @endforeach
 		</div>

@@ -148,11 +148,11 @@
                                 @if(isset($editEvents))
                                   <div class="input-daterange input-group" id="bs_datepicker_range_container">
                                       <div class="form-line">
-                                          <input type="text" class="form-control" value="{{$editEvents->tanggal_mulai}}" placeholder="Ketikkan Tanggal awal..." name="tglAwal" id="tglAwal">
+                                          <input type="text" class="form-control" value="{{ \Carbon\Carbon::parse($editEvents->tanggal_mulai)->format('m/d/Y')}}" placeholder="Ketikkan Tanggal awal..." name="tglAwal" id="tglAwal">
                                       </div>
                                       <span class="input-group-addon">sampai</span>
                                       <div class="form-line">
-                                          <input type="text" class="form-control" value="{{$editEvents->tanggal_akhir}}" placeholder="Ketikkan Tanggal Akhir..." name="tglAkhir" id="tglAkhir">
+                                          <input type="text" class="form-control" value="{{ \Carbon\Carbon::parse($editEvents->tanggal_akhir)->format('m/d/Y')}}" placeholder="Ketikkan Tanggal Akhir..." name="tglAkhir" id="tglAkhir">
                                       </div>
                                   </div>
                                 @else

@@ -9,6 +9,7 @@ use App\Models\Events;
 use App\Models\Informasi;
 use Auth;
 use DB;
+use Carbon\Carbon;
 
 
 class DashboardController extends Controller
@@ -95,9 +96,11 @@ class DashboardController extends Controller
                      ->orderby('jumlahkategori', 'desc')
                      ->paginate(5);
 
+     $dt = Carbon::now();
      $getEventsToday = DB::table('events')->select(DB::raw('*'))
-                 ->whereRaw('Date(created_at) = CURDATE()')
-                 ->where('flag_publish', '1')->get();
+                 ->whereRaw('"'.$dt.'" between tanggal_mulai and tanggal_akhir')
+                 ->where('flag_publish', '1')
+                 ->get();
       return view('backend.dashboard.dashboard',
                     compact('informasiTerbaru','eventsTerbaru',
                             'getCountEvents', 'getCountEventsUn',

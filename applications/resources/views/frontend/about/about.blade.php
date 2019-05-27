@@ -50,10 +50,7 @@
 	<div class="container">
 		<div class="row d-flex justify-content-center">
 			<div class="col-md-9 pb-40 header-text text-center">
-				<h1 class="pb-10 text-white">Enjoy our Client’s Review</h1>
-				<p>
-					Who are in extremely love with eco friendly system.
-				</p>
+				<h1 class="pb-10 text-white">Enjoy our Sponsor's</h1>
 			</div>
 		</div>
 		<div class="row">

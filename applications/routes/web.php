@@ -164,11 +164,14 @@ Route::get('admin/publish-contact/{id}', 'CommentController@showContact')->name(
 // =================================== START FRONT END ====================================================================
 Route::get('/', 'FeHomeController@index')->name('home');
 Route::get('about.us/{id}', 'FeAboutController@index')->name('about.us');
+
 Route::get('article/{id}', 'FeArticleController@index')->name('article');
 Route::get('articleById/{id}/{idKategori}', 'FeArticleController@indexById')->name('articleById');
 Route::post('articleById.store', 'CommentController@store')->name('articleById.store');
+
 Route::get('events/{id}', 'FeEventsController@index')->name('events');
 Route::get('eventsById/{id}/{idKategori}', 'FeEventsController@indexById')->name('eventsById');
+
 Route::get('contact', 'FeContactController@index')->name('contact');
 Route::post('contact.store', 'CommentController@storeContact')->name('contact.store');
 

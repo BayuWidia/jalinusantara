@@ -44,7 +44,7 @@
 				</div>
 			</div>
 			<div class="col-lg-12">
-				<p class="footer-text" style="text-align:center">www.jalinusantara.com |
+				<p class="footer-text" style="text-align:center">www.jalinusantara.com ||
 					Sebuah Website Untuk Para Pecinta Offroad
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
 			</div>
