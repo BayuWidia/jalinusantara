@@ -47,12 +47,13 @@
           @endif
 
 				</p>
-				<a class="primary-btn squire" href="{{ route('about.us', $getDataSejarah[0]->id) }}">
+				<a class="primary-btn squire" href="{{ route('about.us', $getDataSejarah[0]->id) }}"
+          style="background:black; color:white">
           Selengkapnya&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a>
 			</div>
 		</div>
 	</div>
-	<img class="about-img" src="{{asset('themeuser/img/about-img.png')}}" alt="">
+	<img class="about-img" src="{{asset('themeuser/img/jalinnusantara.png')}}" alt="">
 </section>
 <!-- End home-about Area -->
 
@@ -92,7 +93,7 @@
                   [.....]
                 @endif
               </p>
-                <a class="genric-btn info" href="{{url('eventsById')}}/{{$key->id}}/{{$key->id_kategori}}">
+                <a class="genric-btn info" href="{{url('eventsById')}}/{{$key->id}}/{{$key->id_kategori}}" style="background:black; color:white">
                   Lihat Selengkapnya&nbsp;&nbsp;&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a>
             </div>
           </div>
@@ -112,7 +113,8 @@
 					{{$getDataVideo[0]->judul}}
 				</h1>
 				<h6 class="text-uppercase">{{$getDataVideo[0]->url_video}}[.....]</h6>
-				<a class="primary-btn" href="{{ route('galeri') }}">Lihat Selengkapnya</a>
+				<a class="primary-btn" href="{{ route('galeri') }}" style="background:black; color:white">Selengkapnya
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a>
 			</div>
 			<div class="col-lg-6 about-video-right justify-content-center align-items-center d-flex">
 				<a class="play-btn" href="{{$getDataVideo[0]->url_video}}">
@@ -139,7 +141,11 @@
             <img src="{{url('images/sponsor')}}/{{$key->url_sponsor}}" alt="">
             <!-- <img src="{{asset('themeuser/img/logo.png')}}" alt="" title="" height="150px" width="150px"/> -->
             <div class="title justify-content-start d-flex">
-              <a href="{{$key->link_sponsor}}"><h4>{{$key->nama_sponsor}}</h4></a>
+              @if (strpos($key->link_sponsor, 'http') !== false)
+                <a href="{{$key->link_sponsor}}" target="_blank"><h4>{{$key->nama_sponsor}}</h4></a>
+              @else
+                <a href="http://{{$key->link_sponsor}}" target="_blank"><h4>{{$key->nama_sponsor}}</h4></a>
+              @endif
               <div class="star">
                 @for($i=0; $i < $key->rekomendasi; $i++)
                 <span class="fa fa-star checked"></span>
@@ -201,7 +207,7 @@
                 [.....]
               @endif
   				</p>
-          <a class="genric-btn info" href="{{url('articleById')}}/{{$key->id}}/{{$key->id_kategori}}">
+          <a class="genric-btn info" href="{{url('articleById')}}/{{$key->id}}/{{$key->id_kategori}}" style="background:black; color:white">
             Lihat Selengkapnya&nbsp;&nbsp;&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a>
   			</div>
       @endforeach

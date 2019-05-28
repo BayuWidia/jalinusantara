@@ -101,8 +101,6 @@ class SliderController extends Controller
 
     public function update(Request $request)
     {
-        // dd($request);
-
         $messages = [
           'id.required' => 'Tidak boleh kosong.',
           'judul.required' => 'Tidak boleh kosong.',
@@ -118,10 +116,9 @@ class SliderController extends Controller
         if ($validator->fails()) {
             return redirect()->route('slider.index')->withErrors($validator)->withInput();
         }
-
         $set = MasterSlider::find($request->id);
         $set->judul = $request->judul;
-        $file = $request->file('urlSlider');
+        $file = $request->file('urlSliderEdit');
         if($file!="") {
           $photoName = Auth::user()->email.'_'.time(). '.' . $file->getClientOriginalExtension();
           Image::make($file)->fit(1920,900)->save('images/slider/'. $photoName);

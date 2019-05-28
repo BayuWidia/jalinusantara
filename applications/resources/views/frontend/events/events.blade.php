@@ -58,7 +58,7 @@
           </p>
           <br>
           <p>
-            <a href="{{url('eventsById')}}/{{$key->id}}/{{$key->id_kategori}}" class="genric-btn info">
+            <a href="{{url('eventsById')}}/{{$key->id}}/{{$key->id_kategori}}" class="genric-btn info" style="background:black; color:white">
               Lihat Selengkapnya&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a>
           </p>
         </div>

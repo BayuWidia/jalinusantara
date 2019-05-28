@@ -188,6 +188,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
+        Cornford\Googlmapper\MapperServiceProvider::class,
 
     ],
 
@@ -255,6 +256,7 @@ return [
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
         'LogActivities' => App\Helpers\LogActivitiesHelper::class,
         'UtilHelper' => App\Helpers\UtilHelper::class,
+        'Mapper'=> Cornford\Googlmapper\Facades\MapperFacade::class,
 
     ],
 

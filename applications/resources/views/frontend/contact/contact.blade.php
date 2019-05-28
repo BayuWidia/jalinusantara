@@ -30,7 +30,8 @@
 <section class="contact-page-area section-gap">
 	<div class="container">
 		<div class="row">
-			<div class="map-wrap" style="width:100%; height: 445px;" id="map"></div>
+			<!-- <div class="map-wrap" style="width:100%; height: 445px;" id="map"></div> -->
+      <div style="width:100%; height: 445px;" id="map"></div>
       <div class="col-md-12">
         @if(Session::has('message'))
           <div class="alert alert-success alert-dismissible" role="alert">
@@ -47,15 +48,17 @@
         </div>
         @endif
       </div>
+      <br>
+      <br>
 			<div class="col-lg-4 d-flex flex-column address-wrap">
 				<div class="single-contact-address d-flex flex-row">
 					<div class="icon">
 						<span class="lnr lnr-home"></span>
 					</div>
 					<div class="contact-details">
-						<h5>Binghamton, New York</h5>
+						<h5>Jakarta, Indonesia</h5>
 						<p>
-							4343 Hinkle Deegan Lake Road
+							Jl. Gading Kirana Timur<br>Blok H 13 No. 31 - 14240
 						</p>
 					</div>
 				</div>
@@ -64,7 +67,7 @@
 						<span class="lnr lnr-phone-handset"></span>
 					</div>
 					<div class="contact-details">
-						<h5>00 (958) 9865 562</h5>
+						<h5>+62 812 8778 7266</h5>
 						<p>Mon to Fri 9am to 6 pm</p>
 					</div>
 				</div>
@@ -73,7 +76,7 @@
 						<span class="lnr lnr-envelope"></span>
 					</div>
 					<div class="contact-details">
-						<h5>support@colorlib.com</h5>
+						<h5>sandi@jalinnusantara.com</h5>
 						<p>Send us your query anytime!</p>
 					</div>
 				</div>

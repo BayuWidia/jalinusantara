@@ -114,10 +114,10 @@
                                 <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Gambar Slider</label>
-                                        @if ($errors->has('urlSlider'))
-                                          <small style="color:red">* {{$errors->first('urlSlider')}}</small>
+                                        @if ($errors->has('urlSliderEdit'))
+                                          <small style="color:red">* {{$errors->first('urlSliderEdit')}}</small>
                                         @endif
-                                        <input type="file" name="urlSlider" class="form-control" id="urlSliderEdit">
+                                        <input type="file" name="urlSliderEdit" class="form-control" id="urlSliderEdit">
                                         <input type="hidden" name="id" id="id" value="{{ old('id') }}">
                                     </div>
                                     <div>

@@ -19,6 +19,9 @@ class CommentController extends Controller
     public function index()
     {
         $getComment = MasterComment::all();
+        $getComment = MasterComment::leftJoin('informasi', 'master_comment.id_informasi', '=', 'informasi.id')
+                        ->select('master_comment.*', 'informasi.judul_informasi')
+                        ->get();
         return view('backend.comment.kelolacomment', compact('getComment'));
     }
 

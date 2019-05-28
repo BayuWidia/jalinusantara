@@ -26,7 +26,8 @@
         "nesbot/carbon": "^1.22",
         "simplesoftwareio/simple-qrcode": "^2.0",
         "uxweb/sweet-alert": "^2.0",
-        "yajra/laravel-datatables-oracle": "^6.10"
+        "yajra/laravel-datatables-oracle": "^6.10",
+        "cornford/googlmapper": "2.*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

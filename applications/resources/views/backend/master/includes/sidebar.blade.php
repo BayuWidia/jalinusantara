@@ -15,16 +15,16 @@
             <div class="info-container">
                 <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     @if(Auth::user())
-                      {{ Auth::user()->fullname }}
+                      <b style="color:#136433">{{ Auth::user()->name }}</b>
                     @endif
                 </div>
                 <div class="email">
                     @if(Auth::user())
-                      {{ Auth::user()->email }}
+                      <b style="color:#136433">{{ Auth::user()->email }}</b>
                     @endif
                 </div>
                 <div class="btn-group user-helper-dropdown">
-                    <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                    <i style="color:#136433" class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                     <ul class="dropdown-menu pull-right">
                         <li><a href="{{ route('user.profile') }}"><i class="material-icons">person</i>Profile</a></li>
                         <li role="separator" class="divider"></li>

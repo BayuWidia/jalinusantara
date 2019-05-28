@@ -26,12 +26,12 @@
 			</div>
   			</div>
   			<div class="col-lg-6 col-sm-6 col-8 header-top-right no-padding">
-				<a class="btns" href="tel:+953 012 3654 896">+953 012 3654 896</a>
-  				<a class="btns" href="mailto:support@colorlib.com">support@colorlib.com</a>
+				<a class="btns" href="tel:+953 012 3654 896">+62 812 8778 7266</a>
+  				<a class="btns" href="#">sandi@jalinnusantara.com</a>
   				<a class="icons" href="tel:+953 012 3654 896">
   					<span class="lnr lnr-phone-handset"></span>
   				</a>
-  				<a class="icons" href="mailto:support@colorlib.com">
+  				<a class="icons" href="#">
   					<span class="lnr lnr-envelope"></span>
   				</a>
   			</div>

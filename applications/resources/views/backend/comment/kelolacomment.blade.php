@@ -42,6 +42,7 @@
                             <thead>
                                 <tr>
                                     <th style="text-align:center">No</th>
+                                    <th style="text-align:center">Judul Informasi</th>
                                     <th style="text-align:center">Email</th>
                                     <th style="text-align:center">Keterangan</th>
                                     <th style="text-align:center">Subject</th>
@@ -56,6 +57,7 @@
                               @foreach($getComment as $key)
                                 <tr>
                                   <td>{{$i++}}</td>
+                                  <td>{{$key->judul_informasi}}</td>
                                   <td>{{$key->email}}</td>
                                   <td>{{$key->nama}}</td>
                                   <td>{{$key->subject}}</td>

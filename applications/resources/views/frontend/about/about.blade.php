@@ -40,7 +40,7 @@
 			</div>
 		</div>
 	</div>
-	<img class="about-img" src="{{asset('themeuser/img/about-img.png')}}" alt="">
+	<img class="about-img" src="{{asset('themeuser/img/jalinnusantara.png')}}" alt="">
 </section>
 <!-- End home-about Area -->
 
@@ -59,7 +59,11 @@
           <div class="single-review item">
             <img src="{{url('images/sponsor')}}/{{$key->url_sponsor}}" alt="">
             <div class="title justify-content-start d-flex">
-              <a href="{{$key->link_sponsor}}"><h4>{{$key->nama_sponsor}}</h4></a>
+              @if (strpos($key->link_sponsor, 'http') !== false)
+                <a href="{{$key->link_sponsor}}" target="_blank"><h4>{{$key->nama_sponsor}}</h4></a>
+              @else
+                <a href="http://{{$key->link_sponsor}}" target="_blank"><h4>{{$key->nama_sponsor}}</h4></a>
+              @endif
               <div class="star">
                 @for($i=0; $i < $key->rekomendasi; $i++)
                 <span class="fa fa-star checked"></span>
