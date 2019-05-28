@@ -150,7 +150,10 @@
                                     @endif
                                 </div>
                                 <div>
-                                  <span class="text-muted"><i>* Isikan dengan titik koordinat dari google.</i></span>
+                                  <div>
+                                    <span class="text-muted"><i>* Isikan Longitude dan Latitude dari google maps.</i></span><br>
+                                    <span class="text-muted" style="color:red"><i>* Ex: -6.143693, 106.902062</i></span>
+                                  </div>
                                 </div>
                             </div>
                             <div class="form-group mandatory">
