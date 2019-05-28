@@ -154,7 +154,7 @@
                                     </div>
                                     <div>
                                       <span class="text-muted"><i>* Max Size: 2MB.</i></span><br>
-                                      <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 126 x 60 px.</i></span>
+                                      <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 150 x 150 px.</i></span>
                                     </div>
                                 </div>
                                 <div class="form-group mandatory">
@@ -182,6 +182,15 @@
                                           <small style="color:red">* {{$errors->first('keteranganSponsor')}}</small>
                                         @endif
                                         <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Sponsor..." name="keteranganSponsor" id="keteranganSponsor">{{ old('keteranganSponsor') }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group mandatory">
+                                    <div class="form-line">
+                                        <label>Nilai Rekomendasi</label>
+                                        <input type="number" value="{{ old('rekomendasi') }}" class="form-control" placeholder="Ketikkan Nilai Rekomendasi..." name="rekomendasi" id="rekomendasi"/>
+                                    </div>
+                                    <div>
+                                      <span class="text-muted"><i>* Berikan nilai terbaik anda untuk sponsor ini.</i></span>
                                     </div>
                                 </div>
                                 <div class="form-group mandatory">
@@ -227,7 +236,7 @@
                                     <div>
                                       <span style="color:red;">* Biarkan kosong jika tidak ingin diganti.</span><br>
                                       <span class="text-muted"><i>* Max Size: 2MB.</i></span><br>
-                                      <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 126 x 60 px.</i></span>
+                                      <span class="text-muted"><i>* Rekomendasi ukuran terbaik: 150 x 150 px.</i></span>
                                     </div>
                                 </div>
                                 <div class="form-group mandatory">
@@ -255,6 +264,15 @@
                                           <small style="color:red">* {{$errors->first('keteranganSponsorEdit')}}</small>
                                         @endif
                                         <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Keterangan Sponsor..." name="keteranganSponsorEdit" id="keteranganSponsorEdit">{{ old('keteranganSponsorEdit') }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group mandatory">
+                                    <div class="form-line">
+                                        <label>Nilai Rekomendasi</label>
+                                        <input type="number" value="{{ old('rekomendasiEdit') }}" class="form-control" placeholder="Ketikkan Nilai Rekomendasi..." name="rekomendasiEdit" id="rekomendasiEdit"/>
+                                    </div>
+                                    <div>
+                                      <span class="text-muted"><i>* Berikan nilai terbaik anda untuk sponsor ini.</i></span>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn pull-right btn-primary">Simpan Perubahan</button>
@@ -335,11 +353,11 @@
 </script>
 
 <script>
-  @if ($errors->has('urlSponsor') || $errors->has('namaSponsor') || $errors->has('linkSponsor') || $errors->has('keteranganSponsor') || $errors->has('activated'))
+  @if ($errors->has('urlSponsor') || $errors->has('namaSponsor') || $errors->has('linkSponsor') || $errors->has('keteranganSponsor') || $errors->has('rekomendasi') || $errors->has('activated'))
   $('#modalinsert').modal('show');
   @endif
 
-  @if ($errors->has('namaSponsorEdit') || $errors->has('linkSponsorEdit') || $errors->has('keteranganSponsorEdit'))
+  @if ($errors->has('namaSponsorEdit') || $errors->has('linkSponsorEdit') || $errors->has('keteranganSponsorEdit') || $errors->has('rekomendasiEdit'))
   $('#modaledit').modal('show');
   @endif
 
@@ -370,12 +388,14 @@
         var nama_sponsor = data.nama_sponsor;
         var link_sponsor = data.link_sponsor;
         var keterangan_sponsor = data.keterangan_sponsor;
+        var rekomendasi = data.rekomendasi;
         var url_sponsor = data.url_sponsor;
 
         $('#id').attr('value', id);
         $('#namaSponsorEdit').val(nama_sponsor);
         $('#linkSponsorEdit').val(link_sponsor);
         $('#keteranganSponsorEdit').val(keterangan_sponsor);
+        $('#rekomendasiEdit').val(rekomendasi);
       }
     })
   });

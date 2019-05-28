@@ -61,11 +61,9 @@
             <div class="title justify-content-start d-flex">
               <a href="{{$key->link_sponsor}}"><h4>{{$key->nama_sponsor}}</h4></a>
               <div class="star">
+                @for($i=0; $i < $key->rekomendasi; $i++)
                 <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
+                @endfor
               </div>
             </div>
             <p>

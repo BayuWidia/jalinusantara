@@ -63,7 +63,7 @@
 			<div class="col-lg-8 posts-list">
         @foreach($getArticle as $key)
 				<div class="single-post row">
-					<div class="col-lg-3  col-md-3 meta-details">
+					<div class="col-lg-3 col-md-3 meta-details">
             <ul class="tags">
               <?php $isiTags = explode(",", $key->tags);?>
               @for($i=0; $i < count($isiTags); $i++)
@@ -76,8 +76,10 @@
 							<p class="date col-lg-12 col-md-12 col-6"><a href="#">{{ \Carbon\Carbon::parse($key->created_at)->format('d-M-y')}}</a> <span class="lnr lnr-calendar-full"></span></p>
               <p class="date col-lg-12 col-md-12 col-6"><a href="#">{{ $date[1]}}</a> <span class="lnr lnr-clock"></span></p>
 							<p class="view col-lg-12 col-md-12 col-6"><a href="#">{{$key->view_counter}} Views</a> <span class="lnr lnr-eye"></span></p>
-					  </div>
+
+            </div>
 					</div>
+
 					<div class="col-lg-9 col-md-9 ">
 						<div class="feature-img">
               <img src="{{ url('images/article/') }}/{{$key->url_foto}}" class="img-fluid">

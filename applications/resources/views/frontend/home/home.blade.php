@@ -111,8 +111,8 @@
 				<h1>
 					{{$getDataVideo[0]->judul}}
 				</h1>
-				<h6 class="text-uppercase">{{$getDataVideo[0]->url_video}}</h6>
-				<a class="primary-btn" href="{{ route('galeri') }}">Lihat Selengkapnya...</a>
+				<h6 class="text-uppercase">{{$getDataVideo[0]->url_video}}[.....]</h6>
+				<a class="primary-btn" href="{{ route('galeri') }}">Lihat Selengkapnya</a>
 			</div>
 			<div class="col-lg-6 about-video-right justify-content-center align-items-center d-flex">
 				<a class="play-btn" href="{{$getDataVideo[0]->url_video}}">
@@ -129,7 +129,7 @@
 	<div class="container">
 		<div class="row d-flex justify-content-center">
 			<div class="col-md-9 pb-40 header-text text-center">
-				<h1 class="pb-10 text-white">Enjoy our Sponsor's<</h1>
+				<h1 class="pb-10 text-white">Enjoy our Sponsor's</h1>
 			</div>
 		</div>
 		<div class="row">
@@ -137,14 +137,13 @@
         @foreach($getSponsor as $key)
           <div class="single-review item">
             <img src="{{url('images/sponsor')}}/{{$key->url_sponsor}}" alt="">
+            <!-- <img src="{{asset('themeuser/img/logo.png')}}" alt="" title="" height="150px" width="150px"/> -->
             <div class="title justify-content-start d-flex">
               <a href="{{$key->link_sponsor}}"><h4>{{$key->nama_sponsor}}</h4></a>
               <div class="star">
+                @for($i=0; $i < $key->rekomendasi; $i++)
                 <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
+                @endfor
               </div>
             </div>
             <p>
