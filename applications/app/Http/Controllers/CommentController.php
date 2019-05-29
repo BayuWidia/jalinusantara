@@ -109,7 +109,7 @@ class CommentController extends Controller
 
         \LogActivities::insLogActivities('log publish successfully.');
 
-        return redirect()->route('contact.index')->with('message', 'Berhasil mengubah publish Message.');
+        return redirect()->route('contact.index')->with('message', 'Berhasil mengubah publish message.');
     }
 
     public function storeTanggapan(Request $request)

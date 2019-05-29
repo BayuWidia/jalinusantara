@@ -103,7 +103,7 @@
                                     <input type="text" class="form-control" value="{{ old('maps') }}" placeholder="Ketikkan Maps..." name="maps" id="maps"/>
                                 </div>
                                 <div>
-                                  <span class="text-muted"><i>* Isikan Longitude dan Latitude dari google maps.</i></span><br>
+                                  <span class="text-muted"><i>* Isikan Longitude koma Latitude dari google maps.</i></span><br>
                                   <span class="text-muted" style="color:red"><i>* Ex: -6.143693, 106.902062</i></span>
                                 </div>
                             </div>

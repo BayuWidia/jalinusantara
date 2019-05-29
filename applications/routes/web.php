@@ -156,6 +156,14 @@ Route::post('admin/storeTanggapan', 'CommentController@storeTanggapan')->name('c
 //Menu Comment
 Route::get('contact.index', 'CommentController@indexContact')->name('contact.index');
 Route::get('admin/publish-contact/{id}', 'CommentController@showContact')->name('contact.show');
+
+//Menu Registrasi Events
+Route::get('registrasi.index', 'RegistrasiController@index')->name('registrasi.index');
+// Route::post('admin/store-sponsor', 'RegistrasiController@store')->name('sponsor.store');
+Route::get('admin/delete-register/{id}/{status}', 'RegistrasiController@destroy')->name('register.destroy');
+Route::post('admin/edit-register', 'RegistrasiController@update')->name('register.update');
+Route::get('admin/bind-register/{id}', 'RegistrasiController@edit')->name('register.edit');
+Route::get('admin/bind-keluarga/{id}', 'RegistrasiController@editKeluarga')->name('register.editKeluarga');
 // =================================== END BACK END ====================================================================
 
 
