@@ -74,6 +74,7 @@ class RegistrasiController extends Controller
           DB::transaction(function() use($request) {
             $registrasi = RegistrasiEvents::create([
                   'id_events'  => $request->idEvents,
+                  'no_registrasi' => 'generate',
                   'nama_driver'  => $request->namaDriver,
                   'nama_co_driver'  => $request->namaCoDriver,
                   'golongan_darah_driver'  => $request->golonganDarahDriver,

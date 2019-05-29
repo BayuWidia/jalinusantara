@@ -160,10 +160,10 @@ Route::get('admin/publish-contact/{id}', 'CommentController@showContact')->name(
 //Menu Registrasi Events
 Route::get('registrasi.index', 'RegistrasiController@index')->name('registrasi.index');
 // Route::post('admin/store-sponsor', 'RegistrasiController@store')->name('sponsor.store');
-Route::get('admin/delete-register/{id}/{status}', 'RegistrasiController@destroy')->name('register.destroy');
-Route::post('admin/edit-register', 'RegistrasiController@update')->name('register.update');
-Route::get('admin/bind-register/{id}', 'RegistrasiController@edit')->name('register.edit');
-Route::get('admin/bind-keluarga/{id}', 'RegistrasiController@editKeluarga')->name('register.editKeluarga');
+Route::get('admin/delete-registrasi/{id}/{status}', 'RegistrasiController@destroy')->name('registrasi.destroy');
+Route::post('admin/edit-registrasi', 'RegistrasiController@update')->name('registrasi.update');
+Route::get('admin/bind-registrasi/{id}', 'RegistrasiController@edit')->name('registrasi.edit');
+Route::get('admin/bind-registrasi-keluarga/{id}', 'RegistrasiController@editKeluarga')->name('registrasi.editKeluarga');
 // =================================== END BACK END ====================================================================
 
 
