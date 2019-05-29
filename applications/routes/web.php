@@ -159,11 +159,10 @@ Route::get('admin/publish-contact/{id}', 'CommentController@showContact')->name(
 
 //Menu Registrasi Events
 Route::get('registrasi.index', 'RegistrasiController@index')->name('registrasi.index');
-// Route::post('admin/store-sponsor', 'RegistrasiController@store')->name('sponsor.store');
 Route::get('admin/delete-registrasi/{id}/{status}', 'RegistrasiController@destroy')->name('registrasi.destroy');
 Route::post('admin/edit-registrasi', 'RegistrasiController@update')->name('registrasi.update');
-Route::get('admin/bind-registrasi/{id}', 'RegistrasiController@edit')->name('registrasi.edit');
-Route::get('admin/bind-registrasi-keluarga/{id}', 'RegistrasiController@editKeluarga')->name('registrasi.editKeluarga');
+Route::get('admin/registrasi.edit/{id}', 'RegistrasiController@edit')->name('registrasi.edit');
+Route::get('admin/approve-registrasi/{id}', 'RegistrasiController@approve')->name('registrasi.approve');
 // =================================== END BACK END ====================================================================
 
 
@@ -179,10 +178,13 @@ Route::post('articleById.store', 'CommentController@store')->name('articleById.s
 
 Route::get('events/{id}', 'FeEventsController@index')->name('events');
 Route::get('eventsById/{id}/{idKategori}', 'FeEventsController@indexById')->name('eventsById');
+Route::get('events.pendaftaran/{id}', 'FeEventsController@indexPendaftaran')->name('events.pendaftaran');
+Route::post('events.store', 'FeEventsController@storePendaftaran')->name('events.store');
 
 Route::get('contact', 'FeContactController@index')->name('contact');
 Route::post('contact.store', 'CommentController@storeContact')->name('contact.store');
 
-Route::get('galeri', 'FeGaleriController@index')->name('galeri');
+Route::get('galeri', 'FeGaleriController@indexGaleri')->name('galeri');
+Route::get('video', 'FeGaleriController@indexVideo')->name('video');
 
 // =================================== END FRONT END ====================================================================

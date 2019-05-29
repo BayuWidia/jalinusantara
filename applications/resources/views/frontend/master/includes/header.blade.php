@@ -80,7 +80,14 @@
 				    </ul>
 				</li>
 
-			  <li><a href="{{ route('galeri') }}">Galeri</a></li>
+				<li class="menu-has-children"><a href="#">Gallery</a>
+						<ul>
+							<li><a href="{{ route('galeri') }}">Foto</a></li>
+							<li><a href="{{ route('video') }}">Video</a></li>
+				    </ul>
+				</li>
+
+
 				<li><a href="{{ route('contact') }}">Contact</a></li>
 			</ul>
 		</nav><!-- #nav-menu-container -->

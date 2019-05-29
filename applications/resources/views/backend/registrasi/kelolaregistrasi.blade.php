@@ -48,6 +48,7 @@
                                     <th style="text-align:center">Mobil</th>
                                     <th style="text-align:center">No Polisi</th>
                                     <th style="text-align:center">No Telp</th>
+                                    <th style="text-align:center">No Pintu</th>
                                     <th style="text-align:center">Approve</th>
                                     <th style="text-align:center;width:12%">Action</th>
                                 </tr>
@@ -64,23 +65,23 @@
                                   <td>{{$key->mobil}}</td>
                                   <td>{{$key->no_polisi}}</td>
                                   <td>{{$key->no_telp_driver}}</td>
+                                  <td>{{$key->no_pintu}}</td>
                                   <td style="text-align:center">
                                     @if($key->flag_approve=="1")
-                                      <a href="#" class="btn btn-warning btn-circle waves-effect waves-circle waves-float flagpublish"
-                                      data-toggle="modal" data-target="#modalflagedit"
+                                      <a href="#" class="btn btn-warning btn-circle waves-effect waves-circle waves-float flagapprove"
+                                      data-toggle="modal" data-target="#modalflagapprove"
                                       data-value="{{$key->id}}" data-backdrop="static"
                                       data-keyboard="false"><i class="material-icons">favorite</i></a>
                                     @else
-                                      <a href="#" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float flagpublish"
-                                      data-toggle="modal" data-target="#modalflagedit" data-value="{{$key->id}}"
+                                      <a href="#" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float flagapprove"
+                                      data-toggle="modal" data-target="#modalflagapprove" data-value="{{$key->id}}"
                                       data-backdrop="static" data-keyboard="false"><i class="material-icons">favorite_border</i></a>
                                     @endif
                                   </td>
                                   <td style="text-align:center">
                                     @if($key->flag_approve=="1")
-                                      <a href="#" class="btn btn-success btn-circle waves-effect waves-circle waves-float edit"
-                                         data-toggle="modal" data-target="#modaledit" data-value="{{$key->id}}"
-                                         data-backdrop="static" data-keyboard="false"><i class="material-icons">open_in_new</i></a>
+                                    <a href="admin/registrasi.edit/'.$key->id_events.'" class="btn btn-success btn-circle waves-effect waves-circle waves-float">
+                                        <i class="material-icons">open_in_new</i></a>
                                     @else
                                       <div class="alert bg-pink alert-dismissible" role="alert">
                                         <p>Data ini tidak diapprove</p>
@@ -98,79 +99,19 @@
     </div>
     <!-- #END# Input -->
 
-    <!-- Modal Update-->
-    <div class="modal fade" id="modaledit" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content bounceInRight">
-                  <div class="modal-header">
-                      <h4 class="modal-title">Tanggapan</h4>
-                  </div>
-                  <div class="modal-body">
-                      <form action="{{route('comment.storeTanggapan')}}" method="post" enctype="multipart/form-data">
-                        {{csrf_field()}}
-                        <div class="row clearfix">
-                            <div class="col-sm-12">
-                                <div class="form-group mandatory">
-                                    <div class="form-line">
-                                        <label>Masukkan Tanggapan Anda...</label>
-                                        @if ($errors->has('tanggapan'))
-                                          <small style="color:red">* {{$errors->first('tanggapan')}}</small>
-                                        @endif
-                                        <input type="hidden" name="idComment" id="idComment" value="{{ old('idComment') }}">
-                                        <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Tanggapan Anda..." name="tanggapan" id="tanggapan">{{ old('tanggapan') }}</textarea>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn pull-right btn-primary">Simpan</button>
-                                <button type="reset" class="btn btn-default pull-left btn-flat" data-dismiss="modal">Tidak</button>
-                            </div>
-                        </div>
-                      </form>
-                  </div>
-              </div>
-        </div>
-    </div>
-
-    <!-- Modal Update-->
-    <div class="modal fade" id="modalview" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content bounceInRight">
-                  <div class="modal-header">
-                      <h4 class="modal-title">View Tanggpan</h4>
-                  </div>
-                  <div class="modal-body">
-                      <form action="" method="post" enctype="multipart/form-data">
-                        {{csrf_field()}}
-                        <div class="row clearfix">
-                            <div class="col-sm-12">
-                                <div class="form-group mandatory">
-                                    <div class="form-line">
-                                        <label>Masukkan Tanggapan Anda...</label>
-                                        <input type="hidden" name="idCommentView" id="idCommentView" value="{{ old('idCommentView') }}">
-                                        <textarea rows="4" class="form-control no-resize" placeholder="Ketikkan Tanggapan Anda..." name="tanggapanView" id="tanggapanView"></textarea>
-                                    </div>
-                                </div>
-                                <button type="reset" class="btn btn-default pull-left btn-flat" data-dismiss="modal">Tidak</button>
-                            </div>
-                        </div>
-                      </form>
-                  </div>
-              </div>
-        </div>
-    </div>
-
     <!-- Modal Publish-->
-    <div class="modal fade" id="modalflagedit" tabindex="-1" role="dialog">
+    <div class="modal fade" id="modalflagapprove" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content bounceInRight">
                   <div class="modal-header">
-                      <h4 class="modal-title">Publish Data Tanggapan</h4>
+                      <h4 class="modal-title">Approve Data Registrasi</h4>
                   </div>
                   <div class="modal-body">
-                        <p>Apakah anda yakin untuk mengubah status tanggapan ini?</p>
+                        <p>Apakah anda yakin untuk approve data ini?</p>
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-white" data-dismiss="modal"  onclick="resetPage()">Tidak</button>
-                      <a href="" class="btn btn-primary" id="setFlagPublish">Ya, saya yakin</a>
+                      <a href="" class="btn btn-primary" id="setFlagApprove">Ya, saya yakin</a>
                   </div>
               </div>
         </div>
@@ -188,44 +129,11 @@
 </script>
 
 <script>
-  @if ($errors->has('tanggapan'))
-  $('#modaledit').modal('show');
-  @endif
-
-  $("#tabelinfo").on("click", "a.flagpublish", function(){
+  $("#tabelinfo").on("click", "a.flagapprove", function(){
     var a = $(this).data('value');
-    $('#setFlagPublish').attr('href', '{{url('admin/publish-comment/')}}/'+a);
+    $('#setFlagApprove').attr('href', '{{url('admin/approve-registrasi/')}}/'+a);
   });
 
-  $("#tabelinfo").on("click", "a.edit", function(){
-    var a = $(this).data('value');
-    $.ajax({
-      url: "{{url('/')}}/admin/bind-comment/"+a,
-      dataType: 'json',
-      success: function(data){
-        var id = data[0].id;
-        var tanggapan = data[0].tanggapan;
-
-        $('#idComment').attr('value', id);
-        $('#tanggapan').val(tanggapan);
-      }
-    })
-  });
-
-  $("#tabelinfo").on("click", "a.view", function(){
-    var a = $(this).data('value');
-    $.ajax({
-      url: "{{url('/')}}/admin/bind-comment/"+a,
-      dataType: 'json',
-      success: function(data){
-        var id = data[0].id_tanggapan;
-        var tanggapan = data[0].tanggapan;
-
-        $('#idCommentView').attr('value', id);
-        $('#tanggapanView').val(tanggapan);
-      }
-    })
-  });
 
 </script>
 @endsection

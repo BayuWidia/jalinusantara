@@ -60,6 +60,11 @@
           <b>Tags:&nbsp;
             <?php echo $getEvents[0]->tags ?></b>
         </p>
+        <br>
+        <p>
+          <a href="{{url('events.pendaftaran')}}/{{$getEvents[0]->id}}" class="genric-btn info" style="background:black; color:white">
+            Formulir Pendaftaran</a>
+        </p>
       </div>
       <div class="col-lg-3 flex-row d-flex price-size">
         <div class="s-price col">
