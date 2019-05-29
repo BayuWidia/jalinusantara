@@ -34,6 +34,7 @@ class RegistrasiController extends Controller
     {
       // dd($request->all());
           $messages = [
+            'email.required' => 'Tidak boleh kosong.',
             'namaDriver.required' => 'Tidak boleh kosong.',
             'namaCoDriver.required' => 'Tidak boleh kosong.',
             'golonganDarahDriver.required' => 'Tidak boleh kosong.',
@@ -51,6 +52,7 @@ class RegistrasiController extends Controller
           ];
 
           $validator = Validator::make($request->all(), [
+                  'email' => 'required',
                   'namaDriver' => 'required',
                   'namaCoDriver' => 'required',
                   'golonganDarahDriver' => 'required',
@@ -75,6 +77,7 @@ class RegistrasiController extends Controller
             $registrasi = RegistrasiEvents::create([
                   'id_events'  => $request->idEvents,
                   'no_registrasi' => 'generate',
+                  'email' => $request->email,
                   'nama_driver'  => $request->namaDriver,
                   'nama_co_driver'  => $request->namaCoDriver,
                   'golongan_darah_driver'  => $request->golonganDarahDriver,

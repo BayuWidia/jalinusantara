@@ -102,7 +102,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content bounceInRight">
                   <div class="modal-header">
-                      <h4 class="modal-title">Tanggpan</h4>
+                      <h4 class="modal-title">Tanggapan</h4>
                   </div>
                   <div class="modal-body">
                       <form action="{{route('comment.storeTanggapan')}}" method="post" enctype="multipart/form-data">

@@ -34,7 +34,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header bg-orange">
-                    List Data Comment's
+                    List Data Registrasi
                 </div>
                 <div class="body">
                     <div class="table-responsive">
@@ -42,28 +42,30 @@
                             <thead>
                                 <tr>
                                     <th style="text-align:center">No</th>
-                                    <th style="text-align:center">Judul Informasi</th>
+                                    <th style="text-align:center">No Registrasi</th>
                                     <th style="text-align:center">Email</th>
-                                    <th style="text-align:center">Keterangan</th>
-                                    <th style="text-align:center">Subject</th>
-                                    <th style="text-align:center">Message</th>
-                                    <th style="text-align:center">Status Publish</th>
+                                    <th style="text-align:center">Nama Driver</th>
+                                    <th style="text-align:center">Mobil</th>
+                                    <th style="text-align:center">No Polisi</th>
+                                    <th style="text-align:center">No Telp</th>
+                                    <th style="text-align:center">Approve</th>
                                     <th style="text-align:center;width:12%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                               @php $i=1; @endphp
-                              @foreach($getComment as $key)
+                              @foreach($getRegistrasiEvents as $key)
                                 <tr>
                                   <td>{{$i++}}</td>
-                                  <td>{{$key->judul_informasi}}</td>
+                                  <td>{{$key->no_registrasi}}</td>
                                   <td>{{$key->email}}</td>
-                                  <td>{{$key->nama}}</td>
-                                  <td>{{$key->subject}}</td>
-                                  <td>{{$key->message}}</td>
+                                  <td>{{$key->nama_driver}}</td>
+                                  <td>{{$key->mobil}}</td>
+                                  <td>{{$key->no_polisi}}</td>
+                                  <td>{{$key->no_telp_driver}}</td>
                                   <td style="text-align:center">
-                                    @if($key->flag_comment=="1")
+                                    @if($key->flag_approve=="1")
                                       <a href="#" class="btn btn-warning btn-circle waves-effect waves-circle waves-float flagpublish"
                                       data-toggle="modal" data-target="#modalflagedit"
                                       data-value="{{$key->id}}" data-backdrop="static"
@@ -75,16 +77,15 @@
                                     @endif
                                   </td>
                                   <td style="text-align:center">
-                                    @if($key->flag_tanggapan=="1")
-                                    <a href="#" class="btn btn-primary btn-circle waves-effect waves-circle waves-float view"
-                                       data-toggle="modal" data-target="#modalview" data-value="{{$key->id}}"
-                                       data-backdrop="static" data-keyboard="false"><i class="material-icons">comment</i></a>
+                                    @if($key->flag_approve=="1")
+                                      <a href="#" class="btn btn-success btn-circle waves-effect waves-circle waves-float edit"
+                                         data-toggle="modal" data-target="#modaledit" data-value="{{$key->id}}"
+                                         data-backdrop="static" data-keyboard="false"><i class="material-icons">open_in_new</i></a>
                                     @else
-                                    <a href="#" class="btn btn-success btn-circle waves-effect waves-circle waves-float edit"
-                                       data-toggle="modal" data-target="#modaledit" data-value="{{$key->id}}"
-                                       data-backdrop="static" data-keyboard="false"><i class="material-icons">open_in_new</i></a>
+                                      <div class="alert bg-pink alert-dismissible" role="alert">
+                                        <p>Data ini tidak diapprove</p>
+                                      </div>
                                     @endif
-
                                   </td>
                                 </tr>
                               @endforeach
@@ -102,7 +103,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content bounceInRight">
                   <div class="modal-header">
-                      <h4 class="modal-title">Tanggpan</h4>
+                      <h4 class="modal-title">Tanggapan</h4>
                   </div>
                   <div class="modal-body">
                       <form action="{{route('comment.storeTanggapan')}}" method="post" enctype="multipart/form-data">
