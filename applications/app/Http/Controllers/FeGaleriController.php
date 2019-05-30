@@ -20,7 +20,7 @@ class FeGaleriController extends Controller
     {
 
         $getSlider = MasterSlider::all();
-        $getGaleri = MasterGaleri::select('master_galeri.*')
+        $getGaleri = MasterGaleri::select('*')
                             ->where('flag_gambar', 1)
                             ->paginate(27);
 
@@ -31,7 +31,7 @@ class FeGaleriController extends Controller
     {
 
         $getSlider = MasterSlider::all();
-        $getVideo = MasterVideo::select('master_video.*')
+        $getVideo = MasterVideo::select('*')
                             ->where('flag_video', 1)
                             ->paginate(20);
 

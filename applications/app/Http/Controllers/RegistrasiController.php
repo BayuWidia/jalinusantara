@@ -32,10 +32,13 @@ class RegistrasiController extends Controller
     public function edit($id)
     {
       // dd("asdasd");
+        $dataEvents =  RegistrasiEvents::Join('events','registrasi_events.id_events','=','events.id')
+            ->select('events.*')
+            ->where('registrasi_events.id','=',$id)->get();
         $editRegistrasi = RegistrasiEvents::find($id);
 
         $getDataKeluarga = Keluarga::where('id_registrasi','=' ,$id)->get();
-        return view('backend/registrasi/edit', compact('editRegistrasi', 'getDataKeluarga'));
+        return view('backend/registrasi/edit', compact('dataEvents','editRegistrasi', 'getDataKeluarga'));
     }
 
     public function approve($id)

@@ -67,7 +67,9 @@
             <ul class="tags">
               <?php $isiTags = explode(",", $key->tags);?>
               @for($i=0; $i < count($isiTags); $i++)
-                  <li><a href="#"><?php echo $isiTags[$i] ?>,</a></li>
+                  <span class="badge badge-warning">
+                    <h6 style="color:white"><?php echo $isiTags[$i] ?></h6>
+                  </span>
               @endfor
 						</ul>
 						<div class="user-details row">

@@ -65,7 +65,7 @@
                                   <td>{{$key->mobil}}</td>
                                   <td>{{$key->no_polisi}}</td>
                                   <td>{{$key->no_telp_driver}}</td>
-                                  <td>{{$key->no_pintu}}</td>
+                                  <td>{{$key->nomor_pintu}}</td>
                                   <td style="text-align:center">
                                     @if($key->flag_approve=="1")
                                       <a href="#" class="btn btn-warning btn-circle waves-effect waves-circle waves-float flagapprove"
@@ -79,14 +79,8 @@
                                     @endif
                                   </td>
                                   <td style="text-align:center">
-                                    @if($key->flag_approve=="1")
-                                    <a href="admin/registrasi.edit/'.$key->id_events.'" class="btn btn-success btn-circle waves-effect waves-circle waves-float">
+                                    <a href="{{ route('registrasi.edit', $key->id) }}" class="btn btn-success btn-circle waves-effect waves-circle waves-float">
                                         <i class="material-icons">open_in_new</i></a>
-                                    @else
-                                      <div class="alert bg-pink alert-dismissible" role="alert">
-                                        <p>Data ini tidak diapprove</p>
-                                      </div>
-                                    @endif
                                   </td>
                                 </tr>
                               @endforeach

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use DB;
+
 class RegistrasiEvents extends Model
 {
     //
@@ -19,5 +21,11 @@ class RegistrasiEvents extends Model
     public function events()
     {
       return $this->belongsTo('App\Models\Events', 'id_events');
+    }
+
+    public static function getMaxRegistrasiCode($params){
+       $getMaxRegistrasiCode = DB::select('SELECT max(no_registrasi) no_registrasi_code FROM registrasi_events
+                       where id_events=:id_events', ['id_events' => $params]);
+       return $getMaxRegistrasiCode;
     }
 }

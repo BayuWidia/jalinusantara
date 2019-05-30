@@ -89,12 +89,14 @@
               @if ($errors->has('nama'))
                 <small style="color:red">* {{$errors->first('nama')}}</small>
               @endif
+              <label><b>Name</b></label>
               <input name="nama" placeholder="Enter your name" onfocus="this.placeholder = ''"
                      onblur="this.placeholder = 'Enter your name'"
                      class="common-input mb-20 form-control" value="{{ old('nama') }}" type="text">
              @if ($errors->has('email'))
                <small style="color:red">* {{$errors->first('email')}}</small>
              @endif
+             <label><b>Email</b></label>
 						  <input name="email" placeholder="Enter email address" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
                      onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'"
                      class="common-input mb-20 form-control" value="{{ old('email') }}" type="email">
@@ -103,12 +105,14 @@
               @if ($errors->has('subject'))
                 <small style="color:red">* {{$errors->first('subject')}}</small>
               @endif
+              <label><b>Subject</b></label>
               <input name="subject" placeholder="Enter subject" onfocus="this.placeholder = ''"
                      onblur="this.placeholder = 'Enter subject'"
                      class="common-input mb-20 form-control" value="{{ old('subject') }}" type="text">
              @if ($errors->has('telephone'))
                <small style="color:red">* {{$errors->first('telephone')}}</small>
              @endif
+             <label><b>Telephone</b></label>
               <input name="telephone" placeholder="Enter telephone number" onfocus="this.placeholder = ''"
                       onblur="this.placeholder = 'Enter telephone number'"
                       class="common-input mb-20 form-control" value="{{ old('telephone') }}" type="number">
@@ -119,6 +123,7 @@
               @if ($errors->has('message'))
                 <small style="color:red">* {{$errors->first('message')}}</small>
               @endif
+              <label><b>Message</b></label>
 							<textarea class="common-textarea form-control" name="message"
                         placeholder="Enter Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Messege'"
                         >{{ old('message') }}</textarea>

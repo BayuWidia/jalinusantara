@@ -52,6 +52,17 @@
               <span class="lnr lnr-clock"></span>&nbsp;{{$date[1]}} ||
               <span class="lnr lnr-eye"></span>&nbsp;{{$getArticle[0]->view_counter}}
             </b>
+            <p>
+              <ul class="tags">
+                Tags: <?php $isiTags = explode(",", $getArticle[0]->tags);?>
+                @for($i=0; $i < count($isiTags); $i++)
+                    <span class="badge badge-warning">
+                      <h6 style="color:white"><?php echo $isiTags[$i] ?></h6>
+                    </span>
+                @endfor
+  						</ul>
+            </p>
+            <hr>
 						<p class="excert">
 							<?php echo $getArticle[0]->isi_informasi ?>
 						</p>

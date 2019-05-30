@@ -40,15 +40,24 @@
             <div class="country" style="width:40%">Judul</div>
             <div class="visit">Video</div>
           </div>
-          @php $i=1; @endphp
+          @php
+            $pageget;
+            if($getVideo->currentPage()==1)
+              $pageget = 1;
+            else
+              $pageget = (($getVideo->currentPage() - 1) * $getVideo->perPage())+1;
+          @endphp
           @foreach($getVideo as $key)
             <div class="table-row">
-              <div class="serial">{{$i++}}</div>
+              <div class="serial">{{ $pageget }}</div>
               <div class="country" style="width:40%">{{$key->judul}}</div>
               <div class="visit">
                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<?php echo substr($key->url_video,-11,23)?>" allowfullscreen></iframe>
               </div>
             </div>
+            @php
+                $pageget++;
+            @endphp
           @endforeach
         </div>
         <nav class="blog-pagination justify-content-center d-flex">

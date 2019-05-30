@@ -57,8 +57,14 @@
         </p>
         <br>
         <p>
-          <b>Tags:&nbsp;
-            <?php echo $getEvents[0]->tags ?></b>
+          <ul class="tags">
+            Tags: <?php $isiTags = explode(",", $getEvents[0]->tags);?>
+            @for($i=0; $i < count($isiTags); $i++)
+                <span class="badge badge-warning">
+                  <h6 style="color:white"><?php echo $isiTags[$i] ?></h6>
+                </span>
+            @endfor
+          </ul>
         </p>
         <br>
         <p>
@@ -82,6 +88,56 @@
         <?php echo $getEvents[0]->isi_event ?>
       </blockquote>
     </p>
+
+    <div class="section-top-border">
+      <h3 class="mb-30">List Data Pendaftar</h3>
+        <table class="table" id="">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>No Registrasi</th>
+              <th>Nama Driver</th>
+              <th>Email</th>
+              <th>No Mobil</th>
+              <th>No Telp</th>
+              <th>No Pintu</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if($getRegistrasiEvents->isEmpty())
+              <tr>
+                <td colspan="7" class="text-muted" style="text-align:center;"><i>Data Pendaftar tidak tersedia.</i></td>
+              </tr>
+            @else
+              @php
+                $pageget;
+                if($getRegistrasiEvents->currentPage()==1)
+                  $pageget = 1;
+                else
+                  $pageget = (($getRegistrasiEvents->currentPage() - 1) * $getRegistrasiEvents->perPage())+1;
+              @endphp
+
+              @foreach($getRegistrasiEvents as $key)
+                <tr>
+                  <td>{{ $pageget }}</td>
+                  <td>{{$key->no_registrasi}}</td>
+                  <td>{{$key->nama_driver}}</td>
+                  <td>{{$key->email}}</th>
+                  <td>{{$key->no_polisi}}</td>
+                  <td>{{$key->no_telp_driver}}</td>
+                  <td>{{$key->nomor_pintu}}</td>
+                </tr>
+                @php
+                    $pageget++;
+                @endphp
+              @endforeach
+           @endif
+          </tbody>
+        </table>
+        <nav class="blog-pagination justify-content-center d-flex">
+            {{ $getRegistrasiEvents->links() }}
+        </nav>
+    </div>
 	</div>
 </section>
   <!-- End menu-list Area -->

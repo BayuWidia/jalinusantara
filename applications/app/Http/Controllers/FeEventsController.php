@@ -30,13 +30,13 @@ class FeEventsController extends Controller
                       ->orderBy('created_at', 'DESC')
                       ->paginate(30);
                       // dd($getInformasi[0]->nama_kategori);
-      $getSponsor = MasterSponsor::select('master_sponsor.*')
-                    ->where('flag_sponsor', 1)
-                    ->orderby(DB::raw('rand()'))
-                    ->get();
+      // $getSponsor = MasterSponsor::select('master_sponsor.*')
+      //               ->where('flag_sponsor', 1)
+      //               ->orderby(DB::raw('rand()'))
+      //               ->get();
 
 
-      return view('frontend.events.events', compact('getEvents','getSlider','getSponsor'));
+      return view('frontend.events.events', compact('getEvents','getSlider'));
     }
 
     public function indexById($id, $idKategori)
@@ -49,42 +49,46 @@ class FeEventsController extends Controller
                       ->where('events.id','=',$id)
                       ->where('flag_publish', 1)
                       ->get();
+
+      $getRegistrasiEvents = RegistrasiEvents::find($id);
+
+      $getRegistrasiEvents = RegistrasiEvents::select('*')
+                          ->where('id_events', '=', $id)
+                          ->where('flag_approve', '=', 1)
+                          ->paginate(20);
                       // dd($getInformasi[0]->nama_kategori);
-      $getSponsor = MasterSponsor::all();
-
-      $getJumlahKategori = Events::join('master_kategori', 'events.id_kategori', '=', 'master_kategori.id')
-                          ->select('id_kategori', DB::raw('count(*) as jumlah'),'master_kategori.nama_kategori')
-                          ->where('flag_publish', 1)
-                          ->groupby('id_kategori','nama_kategori')
-                          ->orderby('jumlah', 'desc')
-                          ->get();
-
-      $getEventsTerkait = Events::select('events.*')
-                          ->where('id_kategori', $idKategori)
-                          ->where('flag_publish', 1)
-                          ->limit(5)
-                          ->orderby(DB::raw('rand()'))
-                          ->get();
-
-      $getEventsPopuler = Events::select('events.*')
-                          ->where('id_kategori', $idKategori)
-                          ->where('flag_publish', 1)
-                          ->limit(5)
-                          ->orderby('view_counter', 'desc')
-                          ->get();
+      // $getSponsor = MasterSponsor::all();
+      //
+      // $getJumlahKategori = Events::join('master_kategori', 'events.id_kategori', '=', 'master_kategori.id')
+      //                     ->select('id_kategori', DB::raw('count(*) as jumlah'),'master_kategori.nama_kategori')
+      //                     ->where('flag_publish', 1)
+      //                     ->groupby('id_kategori','nama_kategori')
+      //                     ->orderby('jumlah', 'desc')
+      //                     ->get();
+      //
+      // $getEventsTerkait = Events::select('events.*')
+      //                     ->where('id_kategori', $idKategori)
+      //                     ->where('flag_publish', 1)
+      //                     ->limit(5)
+      //                     ->orderby(DB::raw('rand()'))
+      //                     ->get();
+      //
+      // $getEventsPopuler = Events::select('events.*')
+      //                     ->where('id_kategori', $idKategori)
+      //                     ->where('flag_publish', 1)
+      //                     ->limit(5)
+      //                     ->orderby('view_counter', 'desc')
+      //                     ->get();
                           // dd($getArticleTerkait);
                           // dd($getEvents);
 
-       return view('frontend.events.eventsById', compact('getEvents','getSlider','getSponsor',
-                                                          'getJumlahKategori','getEventsTerkait','getEventsPopuler'));
+       return view('frontend.events.eventsById', compact('getEvents','getSlider','getRegistrasiEvents'));
     }
 
     public function indexPendaftaran($id)
     {
       $getSlider = MasterSlider::all();
       $getEvents = Events::where('events.id','=',$id)->get();
-
-
       return view('frontend.events.pendaftaran', compact('getEvents','getSlider'));
     }
 
@@ -132,9 +136,17 @@ class FeEventsController extends Controller
           }
 
           DB::transaction(function() use($request) {
+            $sysDate = date('Ymd');
+            $getMaxCode = RegistrasiEvents::getMaxRegistrasiCode($request->idEvents);
+            if ($getMaxCode[0]->no_registrasi_code != null) {
+              $setCode = $getMaxCode[0]->no_registrasi_code+1;
+            } else {
+              $setCode = $sysDate.'0'.$request->idEvents.'000001';
+            }
+
             $registrasi = RegistrasiEvents::create([
                   'id_events'  => $request->idEvents,
-                  'no_registrasi' => 'generate',
+                  'no_registrasi' => $setCode,
                   'email' => $request->email,
                   'nama_driver'  => $request->namaDriver,
                   'nama_co_driver'  => $request->namaCoDriver,
@@ -167,6 +179,21 @@ class FeEventsController extends Controller
                 $set->created_by = $request->email;
                 $set->save();
               }
+
+              // $i = 1;
+              // foreach ($request->namaKeluarga as $key) {
+              //   $set = new Keluarga;
+              //   // dd($request->noTelpKeluarga[$i]);
+              //   $set->id_registrasi    = $registrasi->id;
+              //   $set->nama_keluarga    = $request->namaKeluarga[$i];
+              //   $set->hubungan_keluarga    = $request->hubunganKeluarga[$i];
+              //   $set->no_telp_keluarga    = $request->noTelpKeluarga[$i];
+              //   $set->activated  = 1;
+              //   $set->created_by = $request->email;
+              //   $set->save();
+              //   $i++;
+              // }
+
           });
 
           \LogActivities::insLogActivities('log insert successfully.');

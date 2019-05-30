@@ -37,40 +37,52 @@
                         <div class="col-sm-12">
                             <div class="media">
                                 <div class="media-body">
-                                    <h4 class="media-heading">Nomor Registrasi : 120912010191 -
-                                      <span class="badge bg-red">
-                                        Non Active
-                                      </span>
-                                    </h4>
+                                    <h4 class="media-heading">Nama Events : {{$dataEvents[0]->judul_event}}</h4>
                                     <hr>
+                                    <div class="row">
+                                      <div class="col-sm-12">
+                                        <h4 class="media-heading">Nomor Registrasi : {{$editRegistrasi->no_registrasi}} -
+                                          @if($editRegistrasi->flag_approve == 1)
+                                            <span class="badge bg-success">
+                                              Sudah Diapprove
+                                            </span>
+                                          @else
+                                            <span class="badge bg-red">
+                                              Belum Diapprove
+                                            </span>
+                                          @endif
+                                        </h4>
+                                      </div>
+                                    </div>
                                     <div class="row">
                                       <div class="col-sm-6">
                                         <p><b>DRIVER</b></p>
-                                        <p>Nama :</p>
-                                        <p>Nama Golongan Darah :</p>
-                                        <p>Nama No Telp :</p>
-                                        <p>Ukuran Kemeja :</p>
+                                        <p>Nama : <b>{{$editRegistrasi->nama_driver}}</b></p>
+                                        <p>Nama Golongan Darah : <b>{{$editRegistrasi->golongan_darah_driver}}</b></p>
+                                        <p>Nama No Telp : <b>{{$editRegistrasi->no_telp_driver}}</b></p>
+                                        <p>Ukuran Kemeja : <b>{{$editRegistrasi->ukuran_kemeja_driver}}</b></p>
                                       </div>
                                       <div class="col-sm-6">
                                         <p><b>CO DRIVER</b></p>
-                                        <p>Nama :</p>
-                                        <p>Nama Golongan Darah :</p>
-                                        <p>Nama No Telp :</p>
-                                        <p>Ukuran Kemeja :</p>
+                                        <p>Nama : <b>{{$editRegistrasi->nama_co_driver}}</b></p>
+                                        <p>Nama Golongan Darah : <b>{{$editRegistrasi->golongan_darah_co_driver}}</b></p>
+                                        <p>Nama No Telp : <b>{{$editRegistrasi->no_telp_co_driver}}</b></p>
+                                        <p>Ukuran Kemeja : <b>{{$editRegistrasi->ukuran_kemeja_co_driver}}</b></p>
                                       </div>
                                     </div>
                                     <hr>
                                     <p><b>DATA GLOBAL</b></p>
                                     <div class="row">
                                       <div class="col-sm-6">
-                                        <p>Mobil :</p>
-                                        <p>No Polisi :</p>
-                                        <p>Bahan Bakar :</p>
+                                        <p>Email : <b>{{$editRegistrasi->email}}</b></p>
+                                        <p>Mobil : <b>{{$editRegistrasi->mobil}}</b></p>
+                                        <p>No Polisi : <b>{{$editRegistrasi->no_polisi}}</b></p>
+                                        <p>Bahan Bakar : <b>{{$editRegistrasi->bahan_bakar}}</b></p>
                                       </div>
                                       <div class="col-sm-6">
-                                        <p>PAX :</p>
-                                        <p>Penumpang 1 :</p>
-                                        <p>Penumpang 2 :</p>
+                                        <p>PAX : <b>{{$editRegistrasi->pax}}</b></p>
+                                        <p>Penumpang 1 : <b>{{$editRegistrasi->penumpang_1}}</b></p>
+                                        <p>Penumpang 2 : <b>{{$editRegistrasi->penumpang_2}}</b></p>
                                       </div>
                                     </div>
                                 </div>
@@ -81,8 +93,8 @@
                                     @if ($errors->has('nomorPintu'))
                                       <small style="color:red">* {{$errors->first('nomorPintu')}}</small>
                                     @endif
-                                    <input type="hidden" class="form-control" value="" name="id" id="id"/>
-                                    <input type="text" class="form-control" value="{{ old('nomorPintu') }}" placeholder="Ketikkan Nomor Pintu..." name="nomorPintu" id="nomorPintu"/>
+                                    <input type="hidden" class="form-control" value="{{$editRegistrasi->id}}" name="id" id="id"/>
+                                    <input type="text" class="form-control" value="{{$editRegistrasi->nomor_pintu}}" placeholder="Ketikkan Nomor Pintu..." name="nomorPintu" id="nomorPintu"/>
                                 </div>
                             </div>
                             <table class="table table-striped table-hover">

@@ -179,7 +179,7 @@ Route::post('articleById.store', 'CommentController@store')->name('articleById.s
 Route::get('events/{id}', 'FeEventsController@index')->name('events');
 Route::get('eventsById/{id}/{idKategori}', 'FeEventsController@indexById')->name('eventsById');
 Route::get('events.pendaftaran/{id}', 'FeEventsController@indexPendaftaran')->name('events.pendaftaran');
-Route::post('events.store', 'FeEventsController@storePendaftaran')->name('events.store');
+Route::post('registrasi.events.store', 'FeEventsController@storePendaftaran')->name('registrasi.events.store');
 
 Route::get('contact', 'FeContactController@index')->name('contact');
 Route::post('contact.store', 'CommentController@storeContact')->name('contact.store');
