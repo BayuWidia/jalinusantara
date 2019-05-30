@@ -100,7 +100,7 @@
 						</p>
 						<a href="{{url('articleById')}}/{{$key->id}}/{{$key->id_kategori}}" class="genric-btn info"
               style="background:black; color:white">
-              Lihat Selengkapnya&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a>
+              Selengkapnya&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a>
 					</div>
 				</div>
         <hr>

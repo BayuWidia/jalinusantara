@@ -60,48 +60,40 @@
 <!-- Start item-category Area -->
 <section class="item-category-area section-gap">
 	<div class="container">
-    <h1 style="text-align:center">Event's Today</h1>
-    <br>
+		<div class="row d-flex justify-content-center">
+			<div class="col-md-12 pb-80 header-text text-center">
+				<h1 class="pb-10">Event's Today</h1>
+        @if($getDataEvents == null)
+         <i>“Mohon maaf untuk hari ini belum ada event's yang tersedia...”</i>
+        @endif
+			</div>
+		</div>
 		<div class="row">
-      <table class="table" id="">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Judul Event's</th>
-            <th>Images</th>
-            <th>Lokasi</th>
-            <th>Tgl Mulai</th>
-            <th>Tgl Akhir</th>
-            <th>Lihat</th>
-          </tr>
-        </thead>
-        <tbody>
-          @if($getDataEvents->isEmpty())
-            <tr>
-              <td colspan="7" class="text-muted" style="text-align:center;"><i>“Mohon maaf untuk hari ini belum ada event's yang tersedia...”</i></td>
-            </tr>
-          @else
-            @php
-              $pageget = 1;
-            @endphp
-
-            @foreach($getDataEvents as $key)
-              <tr>
-                <td>{{ $pageget++ }}</td>
-                <td>{{$key->judul_event}}</td>
-                <td><img class="img-fluid" src="{{url('images/events')}}/{{$key->url_foto}}" alt="" width="200" height="100"></td>
-                <td>{{$key->lokasi}}</td>
-                <td>{{ \Carbon\Carbon::parse($key->tanggal_mulai)->format('d-M-Y')}}</td>
-                <td>{{ \Carbon\Carbon::parse($key->tanggal_akhir)->format('d-M-Y')}}</td>
-                <td>
-                  <a class="genric-btn info" href="{{url('eventsById')}}/{{$key->id}}/{{$key->id_kategori}}" style="background:black; color:white">
-                  Selengkapnya&nbsp;&nbsp;&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a>
-                </td>
-              </tr>
-            @endforeach
-         @endif
-        </tbody>
-      </table>
+      @if($getDataEvents != null)
+        @foreach($getDataEvents as $key)
+          <div class="col-lg-3 col-md-6">
+            <div class="single-cat-item">
+              <div class="thumb">
+                <img class="img-fluid" src="{{url('images/events')}}/{{$key->url_foto}}" alt="">
+              </div>
+              <a href="{{url('eventsById')}}/{{$key->id}}/{{$key->id_kategori}}"><h4>{{$key->judul_event}}</h4></a>
+              <p>
+                <?php $isiEvents = explode(" ", $key->isi_event); ?>
+                @if(count($isiEvents)<=10)
+                  <span><?php echo $key->isi_event ?></span>
+                @else
+                  @for($i=0; $i < 10; $i++)
+                    <span><?php echo $isiEvents[$i] ?></span>
+                  @endfor
+                  [.....]
+                @endif
+              </p>
+                <a class="genric-btn info" href="{{url('eventsById')}}/{{$key->id}}/{{$key->id_kategori}}" style="background:black; color:white">
+                  Lihat Selengkapnya&nbsp;&nbsp;&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a>
+            </div>
+          </div>
+        @endforeach
+      @endif
 		</div>
 	</div>
 </section>
@@ -196,9 +188,6 @@
               <span class="lnr lnr-eye"></span> {{$key->view_counter}}
   					</div>
   				</div>
-          <br>
-          <a class="genric-btn info" href="{{url('articleById')}}/{{$key->id}}/{{$key->id_kategori}}" style="background:black; color:white">
-            Selengkapnya&nbsp;&nbsp;&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a>
   				<a href="{{url('articleById')}}/{{$key->id}}/{{$key->id_kategori}}">
   					<h4>{{$key->judul_informasi}}</h4>
   				</a>
@@ -213,6 +202,8 @@
                 [.....]
               @endif
   				</p>
+          <a class="genric-btn info" href="{{url('articleById')}}/{{$key->id}}/{{$key->id_kategori}}" style="background:black; color:white">
+            Lihat Selengkapnya&nbsp;&nbsp;&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a>
   			</div>
       @endforeach
 		</div>

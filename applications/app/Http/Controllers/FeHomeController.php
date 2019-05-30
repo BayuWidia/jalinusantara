@@ -33,7 +33,7 @@ class FeHomeController extends Controller
                      ->whereRaw('"'.$dt.'" between tanggal_mulai and tanggal_akhir')
                      ->where('events.flag_headline', '=', '1')
                      ->where('flag_publish', '1')
-                     ->limit(4)
+                     ->limit(10)
                      ->orderBy('created_at', 'DESC')
                      ->get();
                      // dd($getDataEvents);

@@ -36,15 +36,22 @@
 				</div>
 			</div>
 		</div>
+    <br>
+
     <div class="single-menu-list row justify-content-between align-items-center">
-      <div class="col-lg-9">
+      <div class="col-lg-7">
+        <br>
+        <br>
         <a href="#"><h3>{{$getEvents[0]->judul_event}}</h3></a>
         <hr>
+        <p>
+            <h4><span class="lnr lnr-star"></span>&nbsp;&nbsp;&nbsp;<span>Lokasi</span>   :  <b>{{$getEvents[0]->lokasi}}</b></h4>
+        </p>
         <p>
             <h4><span class="lnr lnr-user"></span>&nbsp;&nbsp;&nbsp;<span>Fasilitator</span>   :  <b>{{$getEvents[0]->fasilitator}}</b></h4>
         </p>
         <p>
-            <h4><span class="lnr lnr-location"></span>&nbsp;&nbsp;<span>Alamat</span>   :  <b>{{$getEvents[0]->alamat}}</b></h4>
+            <h4><span class="lnr lnr-flag"></span>&nbsp;&nbsp;<span>Alamat</span>   :  <b>{{$getEvents[0]->alamat}}</b></h4>
         </p>
         <p>
             <h5><span class="lnr lnr-calendar-full"></span>&nbsp;&nbsp;&nbsp;<span><span>Tanggal</span>   :
@@ -72,15 +79,9 @@
             Formulir Pendaftaran</a>
         </p>
       </div>
-      <div class="col-lg-3 flex-row d-flex price-size">
-        <div class="s-price col">
-          <h5>Lokasi</h5>
-          <span>{{$getEvents[0]->lokasi}}</span>
-        </div>
-        <div class="s-price col">
-          <h5>Peserta</h4>
-          <span>{{$getEvents[0]->jumlah_peserta}}</span>
-        </div>
+      <div class="col-lg-5">
+          <img src="{{ url('images/events/') }}/{{$getEvents[0]->url_foto}}" class="img-fluid">
+
       </div>
     </div>
     <p class="excert">
