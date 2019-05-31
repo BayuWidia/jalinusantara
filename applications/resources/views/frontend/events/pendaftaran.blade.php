@@ -167,8 +167,8 @@
             </div>
             <h3><b>DATA KELUARGA</b></h3>
             <br>
-              <label class="genric-btn info-border" onclick="addKeluarga('tblKeluarga')">Tambah Keluarga</label>
-                &nbsp;<label class="genric-btn danger-border" onclick="delKeluarga('tblKeluarga')">Hapus Keluarga</label>
+              <label class="genric-btn info" onclick="addKeluarga('tblKeluarga')">Tambah Keluarga</label>
+                &nbsp;<label class="genric-btn danger" onclick="delKeluarga('tblKeluarga')">Hapus Keluarga</label>
 
             <table class="table" id="tblKeluarga">
               <tbody>

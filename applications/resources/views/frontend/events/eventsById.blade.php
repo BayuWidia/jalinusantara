@@ -32,7 +32,7 @@
     <div class="row d-flex justify-content-center">
 			<div class="menu-content pb-70 col-lg-8">
 				<div class="title text-center">
-					<h1 class="mb-10">Events {{$getEvents[0]->nama_kategori}}</h1>
+					<h1 class="mb-10">Category {{$getEvents[0]->nama_kategori}}</h1>
 				</div>
 			</div>
 		</div>
@@ -84,17 +84,20 @@
 
       </div>
     </div>
-    <p class="excert">
-      <blockquote class="generic-blockquote">
-        <?php echo $getEvents[0]->isi_event ?>
-      </blockquote>
-    </p>
+    <div class="single-menu-list row justify-content-between align-items-center">
+      <div class="col-lg-12">
+          <h3>Isi Konten Event's</h3>
+          <hr>
+          <?php echo $getEvents[0]->isi_event ?>
+      </div>
+    </div>
 
     <div class="section-top-border">
       <h3 class="mb-30">List Data Pendaftar</h3>
+      <hr>
         <table class="table" id="">
           <thead>
-            <tr>
+            <tr style="background-color:#CC9E61;color:white">
               <th>#</th>
               <th>No Registrasi</th>
               <th>Nama Driver</th>

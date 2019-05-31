@@ -57,10 +57,18 @@
 						->select(DB::raw('distinct(master_kategori.nama_kategori)'), 'master_kategori.id')
 						->where('events.activated', '=', '1')->get();
 				?>
-			  <li class="menu-has-children"><a href="#">About</a>
+			  <li class="menu-has-children"><a href="#">About Us</a>
 						<ul>
 							@foreach($getMenuAbout as $key)
 				      	<li><a href="{{ route('about.us', $key->id) }}">{{$key->nama_kategori}}</a></li>
+							@endforeach
+				    </ul>
+				</li>
+
+				<li class="menu-has-children"><a href="#">Event's</a>
+						<ul>
+							@foreach($getMenuEvents as $key)
+				      	<li><a href="{{ route('events', $key->id) }}">{{$key->nama_kategori}}</a></li>
 							@endforeach
 				    </ul>
 				</li>
@@ -72,13 +80,6 @@
 							@endforeach
 				    </ul>
 				</li>
-				<li class="menu-has-children"><a href="#">Events</a>
-						<ul>
-							@foreach($getMenuEvents as $key)
-				      	<li><a href="{{ route('events', $key->id) }}">{{$key->nama_kategori}}</a></li>
-							@endforeach
-				    </ul>
-				</li>
 
 				<li class="menu-has-children"><a href="#">Gallery</a>
 						<ul>
@@ -86,7 +87,6 @@
 							<li><a href="{{ route('video') }}">Video</a></li>
 				    </ul>
 				</li>
-
 
 				<li><a href="{{ route('contact') }}">Contact</a></li>
 			</ul>

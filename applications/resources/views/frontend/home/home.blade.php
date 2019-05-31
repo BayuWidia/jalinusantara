@@ -65,7 +65,7 @@
 		<div class="row">
       <table class="table" id="">
         <thead>
-          <tr>
+          <tr style="background-color:#CC9E61;color:white">
             <th>#</th>
             <th>Judul Event's</th>
             <th>Images</th>
