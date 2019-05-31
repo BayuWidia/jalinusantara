@@ -48,7 +48,6 @@
 				  </li>
 				</ul>
 			</div>
-
 		</div>
 		<div id="pills-tabContent" class="tab-content absolute">
 			<div class="tab-pane fade show active" id="foto" role="tabpanel" aria-labelledby="foto-tab">
