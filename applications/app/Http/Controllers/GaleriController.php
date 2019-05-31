@@ -9,6 +9,7 @@ use Image;
 use Validator;
 use DB;
 use App\Models\MasterGaleri;
+use App\Models\Events;
 use App\Http\Requests;
 
 class GaleriController extends Controller
@@ -20,14 +21,19 @@ class GaleriController extends Controller
 
     public function index()
     {
+      $getDataEvents = Events::leftJoin('master_kategori','events.id_kategori','=','master_kategori.id')
+          ->select(['events.*','master_kategori.nama_kategori'])
+                    ->orderBy('nama_kategori', 'ASC')
+                    ->orderBy('judul_event', 'ASC')->get();
           $getGaleri = MasterGaleri::all();
-          return view('backend.galeri.kelolagaleri', compact('getGaleri'));
+          return view('backend.galeri.kelolagaleri', compact('getGaleri','getDataEvents'));
     }
 
     public function store(Request $request)
     {
       // dd($request->all());
           $messages = [
+            'eventsId.required' => 'Tidak boleh kosong.',
             'judul.required' => 'Tidak boleh kosong.',
             'urlGaleri.required' => 'Tidak boleh kosong.',
             'urlGaleri.required' => 'Periksa kembali file image anda.',
@@ -39,6 +45,7 @@ class GaleriController extends Controller
           ];
 
           $validator = Validator::make($request->all(), [
+                  'eventsId' => 'required',
                   'judul' => 'required',
                   'keteranganGaleri' => 'required',
                   'activated' => 'required',
@@ -57,6 +64,7 @@ class GaleriController extends Controller
               Image::make($file)->fit(200,122)->save('_thumbs/galeri/'. $photoName);
 
               $set = new MasterGaleri;
+              $set->id_events = $request->eventsId;
               $set->judul = $request->judul;
               $set->url_gambar = $photoName;
               $set->keterangan_gambar = $request->keteranganGaleri;
@@ -100,12 +108,14 @@ class GaleriController extends Controller
         // dd($request);
         $messages = [
           'id.required' => 'Tidak boleh kosong.',
+          'eventsIdEdit.required' => 'Tidak boleh kosong.',
           'judulEdit.required' => 'Tidak boleh kosong.',
           'keteranganGaleriEdit.required' => 'Tidak boleh kosong.',
         ];
 
         $validator = Validator::make($request->all(), [
                 'id' => 'required',
+                'eventsIdEdit' => 'required',
                 'judulEdit' => 'required',
                 'keteranganGaleriEdit' => 'required',
             ], $messages);
@@ -116,6 +126,7 @@ class GaleriController extends Controller
         }
 
         $set = MasterGaleri::find($request->id);
+        $set->id_events = $request->eventsIdEdit;
         $set->judul = $request->judulEdit;
         $file = $request->file('urlGaleriEdit');
         if($file!="") {

@@ -132,6 +132,20 @@
                             <div class="col-sm-12">
                                 <div class="form-group mandatory">
                                     <div class="form-line">
+                                        <label>Events</label>
+                                        @if ($errors->has('eventsId'))
+                                          <small style="color:red">* {{$errors->first('eventsId')}}</small>
+                                        @endif
+                                        <select name="roleId" class="form-control" style="width: 100%;">
+                                          <option value="">-- Pilih --</option>
+                                          @foreach($getDataEvents as $key)
+                                            <option value="{{ $key->id }}" {{ old('eventsId') == $key->id ? 'selected=""' : ''}}>{{ $key->nama_kategori }} - {{ $key->judul_event }}</option>
+                                          @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group mandatory">
+                                    <div class="form-line">
                                         <label>Gambar Foto</label>
                                         @if ($errors->has('urlSlider'))
                                           <small style="color:red">* {{$errors->first('urlGaleri')}}</small>
@@ -192,6 +206,20 @@
                         {{csrf_field()}}
                         <div class="row clearfix">
                             <div class="col-sm-12">
+                                <div class="form-group mandatory">
+                                    <div class="form-line">
+                                        <label>Events</label>
+                                        @if ($errors->has('eventsIdEdit'))
+                                          <small style="color:red">* {{$errors->first('eventsIdEdit')}}</small>
+                                        @endif
+                                        <select name="eventsIdEdit" id="eventsIdEdit" class="form-control" style="width: 100%;">
+                                          <option value="">-- Pilih --</option>
+                                          @foreach($getDataEvents as $key)
+                                            <option value="{{ $key->id }}" {{ old('eventsIdEdit') == $key->id ? 'selected=""' : ''}}>{{ $key->nama_kategori }} - {{ $key->judul_event }}</option>
+                                          @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Gambar Foto</label>
@@ -302,11 +330,11 @@
 </script>
 
 <script>
-  @if ($errors->has('urlGaleri') || $errors->has('judul') || $errors->has('keteranganGaleri') || $errors->has('activated'))
+  @if ($errors->has('eventsId') || $errors->has('urlGaleri') || $errors->has('judul') || $errors->has('keteranganGaleri') || $errors->has('activated'))
   $('#modalinsert').modal('show');
   @endif
 
-  @if ($errors->has('judulEdit') || $errors->has('keteranganGaleriEdit'))
+  @if ($errors->has('eventsIdEdit') || $errors->has('judulEdit') || $errors->has('keteranganGaleriEdit'))
   $('#modaledit').modal('show');
   @endif
 
@@ -334,13 +362,16 @@
       dataType: 'json',
       success: function(data){
         var id = data.id;
+        var id_events = data.id_events;
         var judul = data.judul;
         var keterangan_gambar = data.keterangan_gambar;
         var url_gambar = data.url_gambar;
 
         $('#id').attr('value', id);
+        $("#eventsIdEdit").val(0).trigger("change");
         $('#judulEdit').val(judul);
         $('#keteranganGaleriEdit').val(keterangan_gambar);
+        $("#eventsIdEdit").val(id_events).trigger("change");
       }
     })
   });

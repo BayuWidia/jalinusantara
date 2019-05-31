@@ -55,7 +55,10 @@
 
 					$getMenuEvents = \App\Models\Events::join('master_kategori', 'events.id_kategori', '=', 'master_kategori.id')
 						->select(DB::raw('distinct(master_kategori.nama_kategori)'), 'master_kategori.id')
-						->where('events.activated', '=', '1')->get();
+						->where('master_kategori.activated', '=', '1')->get();
+
+					$getMenuGallery = \App\Models\Events::select('events.*')
+						->where('events.flag_publish', '=', '1')->get();
 				?>
 			  <li class="menu-has-children"><a href="#">About Us</a>
 						<ul>
@@ -83,8 +86,9 @@
 
 				<li class="menu-has-children"><a href="#">Gallery</a>
 						<ul>
-							<li><a href="{{ route('galeri') }}">Foto</a></li>
-							<li><a href="{{ route('video') }}">Video</a></li>
+							@foreach($getMenuGallery as $key)
+				      	<li><a href="{{ route('galeri.video', $key->id) }}">{{$key->judul_event}}</a></li>
+							@endforeach
 				    </ul>
 				</li>
 

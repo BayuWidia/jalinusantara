@@ -184,7 +184,7 @@ Route::post('registrasi.events.store', 'FeEventsController@storePendaftaran')->n
 Route::get('contact', 'FeContactController@index')->name('contact');
 Route::post('contact.store', 'CommentController@storeContact')->name('contact.store');
 
-Route::get('galeri', 'FeGaleriController@indexGaleri')->name('galeri');
-Route::get('video', 'FeGaleriController@indexVideo')->name('video');
+Route::get('galeri.video/{id}', 'FeGaleriController@index')->name('galeri.video');
+// Route::get('video', 'FeGaleriController@indexVideo')->name('video');
 
 // =================================== END FRONT END ====================================================================

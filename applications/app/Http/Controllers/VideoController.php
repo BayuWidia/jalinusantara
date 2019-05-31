@@ -9,6 +9,7 @@ use Image;
 use Validator;
 use DB;
 use App\Models\MasterVideo;
+use App\Models\Events;
 use App\Http\Requests;
 
 class VideoController extends Controller
@@ -21,8 +22,13 @@ class VideoController extends Controller
     public function index()
     {
         //
+        $getDataEvents = Events::leftJoin('master_kategori','events.id_kategori','=','master_kategori.id')
+            ->select(['events.*','master_kategori.nama_kategori'])
+                      ->orderBy('nama_kategori', 'ASC')
+                      ->orderBy('judul_event', 'ASC')->get();
+
         $getVideo = MasterVideo::all();
-        return view('backend.video.kelolavideo', compact('getVideo'));
+        return view('backend.video.kelolavideo', compact('getVideo','getDataEvents'));
     }
 
 
@@ -31,12 +37,14 @@ class VideoController extends Controller
         //
         // dd($request);
         $messages = [
+          'eventsId.required' => 'Tidak boleh kosong.',
           'judul.required' => 'Tidak boleh kosong.',
           'urlVideo.required' => 'Tidak boleh kosong.',
           'activated.required' => 'Tidak boleh kosong.',
         ];
 
         $validator = Validator::make($request->all(), [
+                'eventsId' => 'required',
                 'judul' => 'required',
                 'urlVideo' => 'required',
                 'activated' => 'required',
@@ -61,6 +69,7 @@ class VideoController extends Controller
         }
 
         $set = new MasterVideo;
+        $set->id_events = $request->eventsId;
         $set->judul = $request->judul;
         $set->url_video = $request->urlVideo;
         $set->flag_important_video = $valimportantvideo;
@@ -122,12 +131,14 @@ class VideoController extends Controller
         //
         $messages = [
           'id.required' => 'Tidak boleh kosong.',
+          'eventsIdEdit.required' => 'Tidak boleh kosong.',
           'judulEdit.required' => 'Tidak boleh kosong.',
           'urlVideoEdit.required' => 'Tidak boleh kosong.',
         ];
 
         $validator = Validator::make($request->all(), [
                 'id' => 'required',
+                'eventsIdEdit' => 'required',
                 'judulEdit' => 'required',
                 'urlVideoEdit' => 'required',
             ], $messages);
@@ -137,6 +148,7 @@ class VideoController extends Controller
         }
 
         $set = MasterVideo::find($request->id);
+        $set->id_events = $request->eventsIdEdit;
         $set->judul = $request->judulEdit;
         $set->url_video = $request->urlVideoEdit;
         $set->updated_by = Auth::user()->id;

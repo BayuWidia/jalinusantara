@@ -139,6 +139,20 @@
                             <div class="col-sm-12">
                                 <div class="form-group mandatory">
                                     <div class="form-line">
+                                        <label>Events</label>
+                                        @if ($errors->has('eventsId'))
+                                          <small style="color:red">* {{$errors->first('eventsId')}}</small>
+                                        @endif
+                                        <select name="roleId" class="form-control" style="width: 100%;">
+                                          <option value="">-- Pilih --</option>
+                                          @foreach($getDataEvents as $key)
+                                            <option value="{{ $key->id }}" {{ old('eventsId') == $key->id ? 'selected=""' : ''}}>{{ $key->nama_kategori }} - {{ $key->judul_event }}</option>
+                                          @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group mandatory">
+                                    <div class="form-line">
                                         <label>Judul Video</label>
                                         @if ($errors->has('judul'))
                                           <small style="color:red">* {{$errors->first('judul')}}</small>
@@ -194,6 +208,20 @@
                         {{csrf_field()}}
                         <div class="row clearfix">
                             <div class="col-sm-12">
+                                <div class="form-group mandatory">
+                                    <div class="form-line">
+                                        <label>Events</label>
+                                        @if ($errors->has('eventsIdEdit'))
+                                          <small style="color:red">* {{$errors->first('eventsIdEdit')}}</small>
+                                        @endif
+                                        <select name="eventsIdEdit" id="eventsIdEdit" class="form-control" style="width: 100%;">
+                                          <option value="">-- Pilih --</option>
+                                          @foreach($getDataEvents as $key)
+                                            <option value="{{ $key->id }}" {{ old('eventsIdEdit') == $key->id ? 'selected=""' : ''}}>{{ $key->nama_kategori }} - {{ $key->judul_event }}</option>
+                                          @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group mandatory">
                                     <div class="form-line">
                                         <label>Judul Video</label>
@@ -308,11 +336,11 @@
 </script>
 
 <script>
-  @if ($errors->has('judul') || $errors->has('urlVideo') || $errors->has('activated'))
+  @if ($errors->has('eventsId') || $errors->has('judul') || $errors->has('urlVideo') || $errors->has('activated'))
   $('#modalinsert').modal('show');
   @endif
 
-  @if ($errors->has('judulEdit') || $errors->has('urlVideoEdit'))
+  @if ($errors->has('eventsIdEdit') || $errors->has('judulEdit') || $errors->has('urlVideoEdit'))
   $('#modaledit').modal('show');
   @endif
 
@@ -345,13 +373,16 @@
       dataType: 'json',
       success: function(data){
         var id = data.id;
+        var id_events = data.id_events;
         var judul = data.judul;
         var url_video = data.url_video;
         var flag_important_video = data.flag_important_video;
 
         $('#id').attr('value', id);
+        $("#eventsIdEdit").val(0).trigger("change");
         $('#judulEdit').val(judul);
         $('#urlVideoEdit').val(url_video);
+        $("#eventsIdEdit").val(id_events).trigger("change");
       }
     })
   });
