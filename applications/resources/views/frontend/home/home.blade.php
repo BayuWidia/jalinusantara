@@ -116,8 +116,8 @@
 					{{$getDataVideo[0]->judul}}
 				</h1>
 				<h6 class="text-uppercase">{{$getDataVideo[0]->url_video}}[.....]</h6>
-				<a class="primary-btn" href="{{ route('galeri') }}" style="background:black; color:white">Selengkapnya
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a>
+				<!-- <a class="primary-btn" href="#" style="background:black; color:white">Selengkapnya
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="lnr lnr-pointer-right"></span></a> -->
 			</div>
 			<div class="col-lg-6 about-video-right justify-content-center align-items-center d-flex">
 				<a class="play-btn" href="{{$getDataVideo[0]->url_video}}">
