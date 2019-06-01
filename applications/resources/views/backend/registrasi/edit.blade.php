@@ -52,11 +52,13 @@
                                             </span>
                                           @endif
                                         </h4>
+                                        <hr>
                                       </div>
                                     </div>
                                     <div class="row">
                                       <div class="col-sm-6">
-                                        <p><b>DRIVER</b></p>
+                                        <p><b><h5>DRIVER</h5></b></p>
+                                        <hr>
                                         <p>Email : <b>{{$editRegistrasi->email}}</b></p>
                                         <p>Nama Lengkap : <b>{{$editRegistrasi->nama_lengkap_driver}}</b></p>
                                         <p>Nama Panggilan : <b>{{$editRegistrasi->nama_driver}}</b></p>
@@ -74,7 +76,8 @@
                                         <p>No Telp : <b>{{$editRegistrasi->no_telp_driver}}</b></p>
                                       </div>
                                       <div class="col-sm-6">
-                                        <p><b>CO DRIVER</b></p>
+                                        <p><b><h5>CO DRIVER</h5></b></p>
+                                        <hr>
                                         <p>Email : <b>{{$editRegistrasi->email_co}}</b></p>
                                         <p>Nama Lengkap : <b>{{$editRegistrasi->nama_lengkap_co_driver}}</b></p>
                                         <p>Nama Panggilan : <b>{{$editRegistrasi->nama_co_driver}}</b></p>
