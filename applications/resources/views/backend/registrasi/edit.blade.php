@@ -57,34 +57,42 @@
                                     <div class="row">
                                       <div class="col-sm-6">
                                         <p><b>DRIVER</b></p>
-                                        <p>Nama : <b>{{$editRegistrasi->nama_driver}}</b></p>
-                                        <p>Nama Golongan Darah : <b>{{$editRegistrasi->golongan_darah_driver}}</b></p>
-                                        <p>Nama No Telp : <b>{{$editRegistrasi->no_telp_driver}}</b></p>
+                                        <p>Email : <b>{{$editRegistrasi->email}}</b></p>
+                                        <p>Nama Lengkap : <b>{{$editRegistrasi->nama_lengkap_driver}}</b></p>
+                                        <p>Nama Panggilan : <b>{{$editRegistrasi->nama_driver}}</b></p>
+                                        <p>Golongan Darah : <b>{{$editRegistrasi->golongan_darah_driver}}</b></p>
+                                        <p>TTL : <b>{{$editRegistrasi->tmp_lahir_driver}}</b></p>
                                         <p>Ukuran Kemeja : <b>{{$editRegistrasi->ukuran_kemeja_driver}}</b></p>
+                                        <p>Alamat : <b>{{$editRegistrasi->alamat_driver}}</b></p>
+                                        <p>Kota : <b>{{$editRegistrasi->kota_driver}}</b></p>
+                                        <p>No Anggota IOF : <b>{{$editRegistrasi->no_anggota_iof}}</b></p>
+                                        <p>Rhesus : <b>{{$editRegistrasi->rhesus}}</b></p>
+                                        <p>Tgl Lahir : <b>{{$editRegistrasi->tgl_lhr_driver}}</b></p>
+                                        <p>Kode Pos : <b>{{$editRegistrasi->kode_pos}}</b></p>
+                                        <p>No SIM : <b>{{$editRegistrasi->no_sim_driver}}</b></p>
+                                        <p>Pengalaman Event's : <b>{{$editRegistrasi->pengalaman_event_driver}}</b></p>
+                                        <p>No Telp : <b>{{$editRegistrasi->no_telp_driver}}</b></p>
                                       </div>
                                       <div class="col-sm-6">
                                         <p><b>CO DRIVER</b></p>
-                                        <p>Nama : <b>{{$editRegistrasi->nama_co_driver}}</b></p>
-                                        <p>Nama Golongan Darah : <b>{{$editRegistrasi->golongan_darah_co_driver}}</b></p>
-                                        <p>Nama No Telp : <b>{{$editRegistrasi->no_telp_co_driver}}</b></p>
+                                        <p>Email : <b>{{$editRegistrasi->email_co}}</b></p>
+                                        <p>Nama Lengkap : <b>{{$editRegistrasi->nama_lengkap_co_driver}}</b></p>
+                                        <p>Nama Panggilan : <b>{{$editRegistrasi->nama_co_driver}}</b></p>
+                                        <p>Golongan Darah : <b>{{$editRegistrasi->golongan_darah_co_driver}}</b></p>
+                                        <p>TTL : <b>{{$editRegistrasi->tmp_lahir_co_driver}}</b></p>
                                         <p>Ukuran Kemeja : <b>{{$editRegistrasi->ukuran_kemeja_co_driver}}</b></p>
+                                        <p>Alamat : <b>{{$editRegistrasi->alamat_co_driver}}</b></p>
+                                        <p>Kota : <b>{{$editRegistrasi->kota_co_driver}}</b></p>
+                                        <p>No Anggota IOF : <b>{{$editRegistrasi->no_anggota_iof_co}}</b></p>
+                                        <p>Rhesus : <b>{{$editRegistrasi->rhesus_co}}</b></p>
+                                        <p>Tgl Lahir : <b>{{$editRegistrasi->tgl_lhr_co_driver}}</b></p>
+                                        <p>Kode Pos : <b>{{$editRegistrasi->kode_pos_co}}</b></p>
+                                        <p>No SIM : <b>{{$editRegistrasi->no_sim_co_driver}}</b></p>
+                                        <p>Pengalaman Event's : <b>{{$editRegistrasi->pengalaman_event_co_driver}}</b></p>
+                                        <p>No Telp : <b>{{$editRegistrasi->no_telp_co_driver}}</b></p>
                                       </div>
                                     </div>
-                                    <hr>
-                                    <p><b>DATA GLOBAL</b></p>
-                                    <div class="row">
-                                      <div class="col-sm-6">
-                                        <p>Email : <b>{{$editRegistrasi->email}}</b></p>
-                                        <p>Mobil : <b>{{$editRegistrasi->mobil}}</b></p>
-                                        <p>No Polisi : <b>{{$editRegistrasi->no_polisi}}</b></p>
-                                        <p>Bahan Bakar : <b>{{$editRegistrasi->bahan_bakar}}</b></p>
-                                      </div>
-                                      <div class="col-sm-6">
-                                        <p>PAX : <b>{{$editRegistrasi->pax}}</b></p>
-                                        <p>Penumpang 1 : <b>{{$editRegistrasi->penumpang_1}}</b></p>
-                                        <p>Penumpang 2 : <b>{{$editRegistrasi->penumpang_2}}</b></p>
-                                      </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="form-group mandatory">
@@ -101,9 +109,12 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Nama Keluarga</th>
-                                        <th>Hubungan Keluarga</th>
+                                        <th>Email</th>
+                                        <th>Nama Lengkap</th>
+                                        <th>Nama Panggilan</th>
+                                        <th>Hubungan</th>
                                         <th>No Telp</th>
+                                        <th>No Hp</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -111,9 +122,12 @@
                                   @foreach($getDataKeluarga as $key)
                                     <tr>
                                       <td>{{$i++}}</td>
+                                      <td>{{$key->email}}</td>
+                                      <td>{{$key->nama_lengkap_keluarga}}</td>
                                       <td>{{$key->nama_keluarga}}</td>
                                       <td>{{$key->hubungan_keluarga}}</td>
                                       <td>{{$key->no_telp_keluarga}}</td>
+                                      <td>{{$key->no_hp_keluarga}}</td>
                                     </tr>
                                   @endforeach
                                 </tbody>

@@ -13,6 +13,7 @@
 <script src="{{asset('themeuser/js/owl.carousel.min.js')}}"></script>
 <script src="{{asset('themeuser/js/jquery.nice-select.min.js')}}"></script>
 <script src="{{asset('themeuser/js/mail-script.js')}}"></script>
+<script src="{{asset('themeuser/datepicker/bootstrap-datepicker.js')}}"></script>
 <script src="{{asset('themeuser/js/main.js')}}"></script>
 <script src="{{asset('themeuser/js/api.js')}}"></script>
 <script src="{{asset('themeuser/js/gmaps.js')}}"></script>

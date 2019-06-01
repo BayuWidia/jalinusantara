@@ -12,6 +12,8 @@ use App\Models\Events;
 use App\Models\MasterSlider;
 use App\Models\MasterSponsor;
 use App\Models\RegistrasiEvents;
+use App\Models\Mekanik;
+use App\Models\Kendaraan;
 use App\Models\Keluarga;
 use App\Http\Requests;
 
@@ -87,6 +89,7 @@ class FeEventsController extends Controller
 
     public function indexPendaftaran($id)
     {
+      // dd(date("Y-m-d"));
       $getSlider = MasterSlider::all();
       $getEvents = Events::where('events.id','=',$id)->get();
       return view('frontend.events.pendaftaran', compact('getEvents','getSlider'));
@@ -96,39 +99,180 @@ class FeEventsController extends Controller
     {
       // dd($request->all());
           $messages = [
-            'email.required' => 'Tidak boleh kosong.',
-            'namaDriver.required' => 'Tidak boleh kosong.',
-            'namaCoDriver.required' => 'Tidak boleh kosong.',
-            'golonganDarahDriver.required' => 'Tidak boleh kosong.',
-            'golonganDarahCoDriver.required' => 'Tidak boleh kosong.',
-            'noTelpDriver.required' => 'Tidak boleh kosong.',
-            'noTelpCoDriver.required' => 'Tidak boleh kosong.',
-            'mobil.required' => 'Tidak boleh kosong.',
-            'noPolisi.required' => 'Tidak boleh kosong.',
-            'bahanBakar.required' => 'Tidak boleh kosong.',
-            'ukuranKemejaDriver.required' => 'Tidak boleh kosong.',
-            'ukuranKemejaCoDriver.required' => 'Tidak boleh kosong.',
-            'pax.required' => 'Tidak boleh kosong.',
-            'penumpang1.required' => 'Tidak boleh kosong.',
-            'penumpang2.required' => 'Tidak boleh kosong.',
+            'email1' =>  'Tidak boleh kosong.',
+            'namaLengkap1' =>  'Tidak boleh kosong.',
+            'nama1' =>  'Tidak boleh kosong.',
+            'golonganDarah1' =>  'Tidak boleh kosong.',
+            'tempatLahir1' =>  'Tidak boleh kosong.',
+            'noTelp1' =>  'Tidak boleh kosong.',
+            'alamat1' =>  'Tidak boleh kosong.',
+            'ukuranKemeja1' =>  'Tidak boleh kosong.',
+            'kota1' =>  'Tidak boleh kosong.',
+            'noAnggotaIof1' =>  'Tidak boleh kosong.',
+            'rhesus1' =>  'Tidak boleh kosong.',
+            'tanggalLahir1' =>  'Tidak boleh kosong.',
+            'kodePos1' =>  'Tidak boleh kosong.',
+            'nomorSim1' =>  'Tidak boleh kosong.',
+
+            'email2' =>  'Tidak boleh kosong.',
+            'namaLengkap2' =>  'Tidak boleh kosong.',
+            'nama2' =>  'Tidak boleh kosong.',
+            'golonganDarah2' =>  'Tidak boleh kosong.',
+            'tempatLahir2' =>  'Tidak boleh kosong.',
+            'noTelp2' =>  'Tidak boleh kosong.',
+            'alamat2' =>  'Tidak boleh kosong.',
+            'ukuranKemeja2' =>  'Tidak boleh kosong.',
+            'kota2' =>  'Tidak boleh kosong.',
+            'noAnggotaIof2' =>  'Tidak boleh kosong.',
+            'rhesus2' =>  'Tidak boleh kosong.',
+            'tanggalLahir2' =>  'Tidak boleh kosong.',
+            'kodePos2' =>  'Tidak boleh kosong.',
+            'nomorSim2' =>  'Tidak boleh kosong.',
+
+            'email3' =>  'Tidak boleh kosong.',
+            'namaLengkap3' =>  'Tidak boleh kosong.',
+            'nama3' =>  'Tidak boleh kosong.',
+            'golonganDarah3' =>  'Tidak boleh kosong.',
+            'tempatLahir3' =>  'Tidak boleh kosong.',
+            'noTelp3' =>  'Tidak boleh kosong.',
+            'alamat3' =>  'Tidak boleh kosong.',
+            'ukuranKemeja3' =>  'Tidak boleh kosong.',
+            'kota3' =>  'Tidak boleh kosong.',
+            'noAnggotaIof3' =>  'Tidak boleh kosong.',
+            'rhesus3' =>  'Tidak boleh kosong.',
+            'tanggalLahir3' =>  'Tidak boleh kosong.',
+            'kodePos3' =>  'Tidak boleh kosong.',
+            'nomorSim3' =>  'Tidak boleh kosong.',
+
+            'email4' =>  'Tidak boleh kosong.',
+            'namaLengkap4' =>  'Tidak boleh kosong.',
+            'nama4' =>  'Tidak boleh kosong.',
+            'golonganDarah4' =>  'Tidak boleh kosong.',
+            'tempatLahir4' =>  'Tidak boleh kosong.',
+            'noTelp4' =>  'Tidak boleh kosong.',
+            'alamat4' =>  'Tidak boleh kosong.',
+            'ukuranKemeja4' =>  'Tidak boleh kosong.',
+            'kota4' =>  'Tidak boleh kosong.',
+            'noAnggotaIof4' =>  'Tidak boleh kosong.',
+            'rhesus4' =>  'Tidak boleh kosong.',
+            'tanggalLahir4' =>  'Tidak boleh kosong.',
+            'kodePos4' =>  'Tidak boleh kosong.',
+            'nomorSim4' =>  'Tidak boleh kosong.',
+
+            'merek' =>  'Tidak boleh kosong.',
+            'noPolisi' =>  'Tidak boleh kosong.',
+            'typeMesin' =>  'Tidak boleh kosong.',
+            'cc' =>  'Tidak boleh kosong.',
+            'merekBan' =>  'Tidak boleh kosong.',
+            'ukuranBan' =>  'Tidak boleh kosong.',
+            'rollbar' =>  'Tidak boleh kosong.',
+            'cargoBarrier' =>  'Tidak boleh kosong.',
+            'sideBar' =>  'Tidak boleh kosong.',
+            'safetyBelt' =>  'Tidak boleh kosong.',
+            'type' =>  'Tidak boleh kosong.',
+            'tahun' =>  'Tidak boleh kosong.',
+            'warna' =>  'Tidak boleh kosong.',
+            'snorkel' =>  'Tidak boleh kosong.',
+            'engineCutOff' =>  'Tidak boleh kosong.',
+            'gps' =>  'Tidak boleh kosong.',
+            'radioKomunikasi' =>  'Tidak boleh kosong.',
+            'winchDepanMerek' =>  'Tidak boleh kosong.',
+            'winchDepanType' =>  'Tidak boleh kosong.',
+            'winchBelakangMerek' =>  'Tidak boleh kosong.',
+            'winchBelakangType' =>  'Tidak boleh kosong.',
+            'snatchBlock' =>  'Tidak boleh kosong.',
+            'shackle' =>  'Tidak boleh kosong.',
+            'glove' =>  'Tidak boleh kosong.',
+            'sling' =>  'Tidak boleh kosong.',
+
           ];
 
           $validator = Validator::make($request->all(), [
-                  'email' => 'required',
-                  'namaDriver' => 'required',
-                  'namaCoDriver' => 'required',
-                  'golonganDarahDriver' => 'required',
-                  'golonganDarahCoDriver' => 'required',
-                  'noTelpDriver' => 'required',
-                  'noTelpCoDriver' => 'required',
-                  'mobil' => 'required',
-                  'noPolisi' => 'required',
-                  'bahanBakar' => 'required',
-                  'ukuranKemejaDriver' => 'required',
-                  'ukuranKemejaCoDriver' => 'required',
-                  'pax' => 'required',
-                  'penumpang1' => 'required',
-                  'penumpang2' => 'required',
+                'email1' =>  'required',
+                'namaLengkap1' =>  'required',
+                'nama1' =>  'required',
+                'golonganDarah1' =>  'required',
+                'tempatLahir1' =>  'required',
+                'noTelp1' =>  'required',
+                'alamat1' =>  'required',
+                'ukuranKemeja1' =>  'required',
+                'kota1' =>  'required',
+                'noAnggotaIof1' =>  'required',
+                'rhesus1' =>  'required',
+                'tanggalLahir1' =>  'required',
+                'kodePos1' =>  'required',
+                'nomorSim1' =>  'required',
+
+                'email2' =>  'required',
+                'namaLengkap2' =>  'required',
+                'nama2' =>  'required',
+                'golonganDarah2' =>  'required',
+                'tempatLahir2' =>  'required',
+                'noTelp2' =>  'required',
+                'alamat2' =>  'required',
+                'ukuranKemeja2' =>  'required',
+                'kota2' =>  'required',
+                'noAnggotaIof2' =>  'required',
+                'rhesus2' =>  'required',
+                'tanggalLahir2' =>  'required',
+                'kodePos2' =>  'required',
+                'nomorSim2' =>  'required',
+
+                'email3' =>  'required',
+                'namaLengkap3' =>  'required',
+                'nama3' =>  'required',
+                'golonganDarah3' =>  'required',
+                'tempatLahir3' =>  'required',
+                'noTelp3' =>  'required',
+                'alamat3' =>  'required',
+                'ukuranKemeja3' =>  'required',
+                'kota3' =>  'required',
+                'noAnggotaIof3' =>  'required',
+                'rhesus3' =>  'required',
+                'tanggalLahir3' =>  'required',
+                'kodePos3' =>  'required',
+                'nomorSim3' =>  'required',
+
+                'email4' =>  'required',
+                'namaLengkap4' =>  'required',
+                'nama4' =>  'required',
+                'golonganDarah4' =>  'required',
+                'tempatLahir4' =>  'required',
+                'noTelp4' =>  'required',
+                'alamat4' =>  'required',
+                'ukuranKemeja4' =>  'required',
+                'kota4' =>  'required',
+                'noAnggotaIof4' =>  'required',
+                'rhesus4' =>  'required',
+                'tanggalLahir4' =>  'required',
+                'kodePos4' =>  'required',
+                'nomorSim4' =>  'required',
+
+                'merek' =>  'required',
+                'noPolisi' =>  'required',
+                'typeMesin' =>  'required',
+                'cc' =>  'required',
+                'merekBan' =>  'required',
+                'ukuranBan' =>  'required',
+                'rollbar' =>  'required',
+                'cargoBarrier' =>  'required',
+                'sideBar' =>  'required',
+                'safetyBelt' =>  'required',
+                'type' =>  'required',
+                'tahun' =>  'required',
+                'warna' =>  'required',
+                'snorkel' =>  'required',
+                'engineCutOff' =>  'required',
+                'gps' =>  'required',
+                'radioKomunikasi' =>  'required',
+                'winchDepanMerek' =>  'required',
+                'winchDepanType' =>  'required',
+                'winchBelakangMerek' =>  'required',
+                'winchBelakangType' =>  'required',
+                'snatchBlock' =>  'required',
+                'shackle' =>  'required',
+                'glove' =>  'required',
+                'sling' =>  'required',
               ], $messages);
 
           if ($validator->fails()) {
@@ -141,58 +285,188 @@ class FeEventsController extends Controller
             if ($getMaxCode[0]->no_registrasi_code != null) {
               $setCode = $getMaxCode[0]->no_registrasi_code+1;
             } else {
-              $setCode = $sysDate.'0'.$request->idEvents.'000001';
+              $setCode = $sysDate.'0'.$request->idEvents.'0001';
             }
 
+            //Tempopary ins data pengalaman 1
+            $tempPengalaman1 = "";
+            $dataPengalaman1s = $request->input('dataPengalaman1');
+            foreach($dataPengalaman1s as $dataPengalaman1){
+              $tempPengalaman1 = $tempPengalaman1.','.$dataPengalaman1['namaEvent1'].'-'.$dataPengalaman1['tahunEvent1'];
+            }
+
+            //Tempopary ins data pengalaman 2
+            $tempPengalaman2 = "";
+            $dataPengalaman2s = $request->input('dataPengalaman2');
+            foreach($dataPengalaman2s as $dataPengalaman2){
+              $tempPengalaman2 = $tempPengalaman2.','.$dataPengalaman2['namaEvent2'].'-'.$dataPengalaman2['tahunEvent2'];
+            }
+
+            //Tempopary ins data pengalaman 3
+            $tempPengalaman3 = "";
+            $dataPengalaman3s = $request->input('dataPengalaman3');
+            foreach($dataPengalaman3s as $dataPengalaman3){
+              $tempPengalaman3 = $tempPengalaman3.','.$dataPengalaman3['namaEvent3'].'-'.$dataPengalaman3['tahunEvent3'];
+            }
+
+            //Tempopary ins data pengalaman 4
+            $tempPengalaman4 = "";
+            $dataPengalaman4s = $request->input('dataPengalaman4');
+            foreach($dataPengalaman4s as $dataPengalaman4){
+              $tempPengalaman4 = $tempPengalaman4.','.$dataPengalaman4['namaEvent4'].'-'.$dataPengalaman4['tahunEvent4'];
+            }
+
+            //Tempopary ins data Spec Up Kendaraan
+            $tempSpecUp = "";
+            $dataSpecUpKendaraans = $request->input('dataSpecUpKendaraan');
+            foreach($dataSpecUpKendaraans as $dataSpecUpKendaraan){
+              $tempSpecUp = $tempSpecUp.','.$dataSpecUpKendaraan['namaEvent4'];
+            }
+
+            //Tempopary ins data Strap
+            $tempStrap = "";
+            $dataStraps = $request->input('dataStrap');
+            foreach($dataStraps as $dataStrap){
+              $tempStrap = $tempStrap.','.$dataStrap['merekStrap'].'-'.$dataStrap['merekPanjang'];
+            }
+
+
+            //insert table register event's
             $registrasi = RegistrasiEvents::create([
-                  'id_events'  => $request->idEvents,
+                  'id_events' => $request->idEvents,
                   'no_registrasi' => $setCode,
-                  'email' => $request->email,
-                  'nama_driver'  => $request->namaDriver,
-                  'nama_co_driver'  => $request->namaCoDriver,
-                  'golongan_darah_driver'  => $request->golonganDarahDriver,
-                  'golongan_darah_co_driver'  => $request->golonganDarahCoDriver,
-                  'no_telp_driver'  => $request->noTelpDriver,
-                  'no_telp_co_driver'  => $request->noTelpCoDriver,
-                  'mobil'  => $request->mobil,
-                  'no_polisi'  => $request->noPolisi,
-                  'bahan_bakar'  => $request->bahanBakar,
-                  'ukuran_kemeja_driver'  => $request->ukuranKemejaDriver,
-                  'ukuran_kemeja_co_driver'  => $request->ukuranKemejaCoDriver,
-                  'pax'  => $request->pax,
-                  'penumpang_1'  => $request->penumpang1,
-                  'penumpang_2'  => $request->penumpang2,
-                  'nomor_pintu'  => 0,
-                  'flag_approve'  => 0,
-                  'activated'  => 1,
-                  'created_by' => $request->email,
+                  'email' => $request->email1,
+                  'email_co' => $request->email2,
+                  'nama_lengkap_driver' => $request->namaLengkap1,
+                  'nama_lengkap_co_driver' => $request->namaLengkap2,
+                  'nama_driver' => $request->nama1,
+                  'nama_co_driver' => $request->nama2,
+                  'golongan_darah_driver' => $request->golonganDarah1,
+                  'golongan_darah_co_driver' => $request->golonganDarah2,
+                  'tmp_lahir_driver' => $request->tempatLahir1,
+                  'tmp_lahir_co_driver' => $request->tempatLahir2,
+                  'ukuran_kemeja_driver' => $request->ukuranKemeja1,
+                  'ukuran_kemeja_co_driver' => $request->ukuranKemeja2,
+                  'alamat_driver' => $request->alamat1,
+                  'alamat_co_driver' => $request->alamat2,
+                  'kota_driver' => $request->kota1,
+                  'kota_co_driver' => $request->kota2,
+                  'no_anggota_iof' => $request->noAnggotaIof1,
+                  'no_anggota_iof_co' => $request->noAnggotaIof2,
+                  'rhesus' => $request->rhesus1,
+                  'rhesus_co' => $request->rhesus2,
+                  'tgl_lhr_driver' => $request->tanggalLahir1,
+                  'tgl_lhr_co_driver' => $request->tanggalLahir2,
+                  'kode_pos' => $request->kodePos1,
+                  'kode_pos_co' => $request->kodePos2,
+                  'no_sim_driver' => $request->nomorSim1,
+                  'no_sim_co_driver' => $request->nomorSim2,
+                  'pengalaman_event_driver' => $tempPengalaman1,
+                  'pengalaman_event_co_driver' => $tempPengalaman2,
+                  'no_telp_driver' => $request->noTelp1,
+                  'no_telp_co_driver' => $request->noTelp2,
+                  'nomor_pintu' => 0,
+                  'flag_approve' => 0,
+                  'activated' => 1,
+                  'created_by' => $request->email1,
+                  'updated_by' => $request->email1,
             ]);
 
+              //insert table mekanik1
+              $setMekanik1 = new Mekanik;
+              $setMekanik1->id_registrasi => $registrasi->id;
+              $setMekanik1->email => $request->email3;
+              $setMekanik1->nama_lengkap_mekanik => $request->namaLengkap3;
+              $setMekanik1->nama_mekanik => $request->nama3;
+              $setMekanik1->golongan_darah_mekanik => $request->golonganDarah3;
+              $setMekanik1->tmp_lahir_mekanik => $request->tempatLahir3;
+              $setMekanik1->no_telp_mekanik => $request->noTelp3;
+              $setMekanik1->ukuran_kemeja_mekanik => $request->ukuranKemeja3;
+              $setMekanik1->alamat_mekanik => $request->alamat3;
+              $setMekanik1->kota_mekanik => $request->kota3;
+              $setMekanik1->no_anggota_iof => $request->noAnggotaIof3;
+              $setMekanik1->rhesus => $request->rhesus3;
+              $setMekanik1->tgl_lhr_mekanik => $request->tanggalLahir3;
+              $setMekanik1->kode_pos => $request->kodePos3;
+              $setMekanik1->no_sim_mekanik => $request->nomorSim3;
+              $setMekanik1->pengalaman_event_mekanik => $tempPengalaman3;
+              $setMekanik1->activated => 1;
+              $setMekanik1->created_by => $request->email1;
+              $setMekanik1->updated_by =>$request->email1;
+              $setMekanik1->save();
+
+              //insert table mekanik2
+              $setMekanik2 = new Mekanik;
+              $setMekanik2->id_registrasi => $registrasi->id;
+              $setMekanik2->email => $request->email4;
+              $setMekanik2->nama_lengkap_mekanik => $request->namaLengkap4;
+              $setMekanik2->nama_mekanik => $request->nama4;
+              $setMekanik2->golongan_darah_mekanik => $request->golonganDarah4;
+              $setMekanik2->tmp_lahir_mekanik => $request->tempatLahir4;
+              $setMekanik2->no_telp_mekanik => $request->noTelp4;
+              $setMekanik2->ukuran_kemeja_mekanik => $request->ukuranKemeja4;
+              $setMekanik2->alamat_mekanik => $request->alamat4;
+              $setMekanik2->kota_mekanik => $request->kota4;
+              $setMekanik2->no_anggota_iof => $request->noAnggotaIof4;
+              $setMekanik2->rhesus => $request->rhesus4;
+              $setMekanik2->tgl_lhr_mekanik => $request->tanggalLahir4;
+              $setMekanik2->kode_pos => $request->kodePos4;
+              $setMekanik2->no_sim_mekanik => $request->nomorSim4;
+              $setMekanik2->pengalaman_event_mekanik => $tempPengalaman4;
+              $setMekanik2->activated => 1;
+              $setMekanik2->created_by => $request->email1;
+              $setMekanik2->updated_by =>$request->email1;
+              $setMekanik2->save();
+
+
+              //insert table kendaraan
+              $setKendaraan = new Kendaraan;
+              $setKendaraan->id_registrasi => $registrasi->id;
+              $setKendaraan->merek => $request->merek;
+              $setKendaraan->no_polisi => $request->noPolisi;
+              $setKendaraan->type_mesin => $request->typeMesin;
+              $setKendaraan->cc => $request->cc;
+              $setKendaraan->merek_ban => $request->merekBan;
+              $setKendaraan->ukuran_ban => $request->ukuranBan;
+              $setKendaraan->rollbar => $request->rollbar;
+              $setKendaraan->cargo_barrier => $request->cargoBarrier;
+              $setKendaraan->side_bar => $request->sideBar;
+              $setKendaraan->safety_belt => $request->safetyBelt;
+              $setKendaraan->spec_up_kendaraan => $tempSpecUp;
+              $setKendaraan->type => $request->type;
+              $setKendaraan->tahun => $request->tahun;
+              $setKendaraan->warna => $request->warna;
+              $setKendaraan->snorkel => $request->snorkel;
+              $setKendaraan->engine_cut_off => $request->engineCutOff;
+              $setKendaraan->gps => $request->gps;
+              $setKendaraan->radio_komunikasi => $request->radioKomunikasi;
+              $setKendaraan->winch_depan_merek => $request->winchDepanMerek;
+              $setKendaraan->winch_depan_type => $request->winchDepanType;
+              $setKendaraan->strap => $tempStrap;
+              $setKendaraan->winch_belakang_merek => $request->winchBelakangMerek;
+              $setKendaraan->winch_belakang_type => $request->winchBelakangType;
+              $setKendaraan->snatch_block => $request->snatchBlock;
+              $setKendaraan->shackle => $request->shackle;
+              $setKendaraan->glove => $request->glove;
+              $setKendaraan->sling => $request->sling;
+              $setKendaraan->created_by => $request->email1;
+              $setKendaraan->updated_by => $request->email1;
+
+              //insert table keluarga
               $dataKeluargas = $request->input('dataKeluarga');
               foreach($dataKeluargas as $dataKeluarga){
                 $set = new Keluarga;
                 $set->id_registrasi    = $registrasi->id;
+                $set->email    = $dataKeluarga['emailKeluarga'];
+                $set->nama_lengkap_keluarga    = $dataKeluarga['namaLengkapKeluarga'];
                 $set->nama_keluarga    = $dataKeluarga['namaKeluarga'];
                 $set->hubungan_keluarga    = $dataKeluarga['hubunganKeluarga'];
                 $set->no_telp_keluarga    = $dataKeluarga['noTelpKeluarga'];
+                $set->no_hp_keluarga    = $dataKeluarga['noHpKeluarga'];
                 $set->activated  = 1;
-                $set->created_by = $request->email;
+                $set->created_by = $request->email1;
                 $set->save();
               }
-
-              // $i = 1;
-              // foreach ($request->namaKeluarga as $key) {
-              //   $set = new Keluarga;
-              //   // dd($request->noTelpKeluarga[$i]);
-              //   $set->id_registrasi    = $registrasi->id;
-              //   $set->nama_keluarga    = $request->namaKeluarga[$i];
-              //   $set->hubungan_keluarga    = $request->hubunganKeluarga[$i];
-              //   $set->no_telp_keluarga    = $request->noTelpKeluarga[$i];
-              //   $set->activated  = 1;
-              //   $set->created_by = $request->email;
-              //   $set->save();
-              //   $i++;
-              // }
 
           });
 

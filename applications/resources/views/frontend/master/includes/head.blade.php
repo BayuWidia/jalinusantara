@@ -25,4 +25,5 @@
 <link rel="stylesheet" href="{{asset('themeuser/css/jquery-ui.css')}}">
 <link rel="stylesheet" href="{{asset('themeuser/css/owl.carousel.css')}}">
 <link rel="stylesheet" href="{{asset('themeuser/css/main.css')}}">
+<link rel="stylesheet" href="{{asset('themeuser/datepicker/datepicker3.css')}}">
 <!-- end head Area -->

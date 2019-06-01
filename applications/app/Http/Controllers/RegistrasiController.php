@@ -10,6 +10,8 @@ use Validator;
 use DB;
 use App\Models\Events;
 use App\Models\RegistrasiEvents;
+use App\Models\Mekanik;
+use App\Models\Kendaraan;
 use App\Models\Keluarga;
 use App\Http\Requests;
 
@@ -37,8 +39,16 @@ class RegistrasiController extends Controller
             ->where('registrasi_events.id','=',$id)->get();
         $editRegistrasi = RegistrasiEvents::find($id);
 
+        $getDataMekanik = Mekanik::where('id_registrasi','=' ,$id)->get();
+        $getDataKendaraan = Kendaraan::where('id_registrasi','=' ,$id)->get();
         $getDataKeluarga = Keluarga::where('id_registrasi','=' ,$id)->get();
-        return view('backend/registrasi/edit', compact('dataEvents','editRegistrasi', 'getDataKeluarga'));
+
+        // dd($getDataKendaraan);
+        return view('backend/registrasi/edit', compact('dataEvents'
+                                                        , 'editRegistrasi'
+                                                        , 'getDataMekanik'
+                                                        , 'getDataKendaraan'
+                                                        , 'getDataKeluarga'));
     }
 
     public function approve($id)

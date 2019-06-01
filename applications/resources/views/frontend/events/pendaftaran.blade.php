@@ -189,8 +189,8 @@
                 	 <small style="color:red">* {{$errors->first('tanggalLahir1')}}</small>
                    @endif
                    <label><b>Tanggal Lahir</b></label>
-                   <input name="tanggalLahir1" placeholder="DD/MM/YYYY..."
-                		  class="common-input mb-20 form-control" value="{{ old('tanggalLahir1') }}" type="text" required>
+                   <input name="tanggalLahir1" placeholder="YYYY-MM-DD"
+                		  class="common-input mb-20 form-control datepicker1" value="{{ old('tanggalLahir1') }}" type="text" required>
 
                    @if ($errors->has('kodePos1'))
                 	  <small style="color:red">* {{$errors->first('kodePos1')}}</small>
@@ -346,8 +346,8 @@
                 	 <small style="color:red">* {{$errors->first('tanggalLahir2')}}</small>
                    @endif
                    <label><b>Tanggal Lahir</b></label>
-                   <input name="tanggalLahir2" placeholder="DD/MM/YYYY..."
-                		  class="common-input mb-20 form-control" value="{{ old('tanggalLahir2') }}" type="text" required>
+                   <input name="tanggalLahir2" placeholder="YYYY-MM-DD"
+                		  class="common-input mb-20 form-control datepicker1" value="{{ old('tanggalLahir2') }}" type="text" required>
 
                    @if ($errors->has('kodePos2'))
                 	  <small style="color:red">* {{$errors->first('kodePos2')}}</small>
@@ -505,8 +505,8 @@
                 	 <small style="color:red">* {{$errors->first('tanggalLahir3')}}</small>
                    @endif
                    <label><b>Tanggal Lahir</b></label>
-                   <input name="tanggalLahir3" placeholder="DD/MM/YYYY..."
-                		  class="common-input mb-20 form-control" value="{{ old('tanggalLahir3') }}" type="text" required>
+                   <input name="tanggalLahir3" placeholder="YYYY-MM-DD"
+                		  class="common-input mb-20 form-control datepicker1" value="{{ old('tanggalLahir3') }}" type="text" required>
 
                    @if ($errors->has('kodePos3'))
                 	  <small style="color:red">* {{$errors->first('kodePos3')}}</small>
@@ -664,8 +664,8 @@
                 	 <small style="color:red">* {{$errors->first('tanggalLahir4')}}</small>
                    @endif
                    <label><b>Tanggal Lahir</b></label>
-                   <input name="tanggalLahir4" placeholder="DD/MM/YYYY..."
-                		  class="common-input mb-20 form-control" value="{{ old('tanggalLahir4') }}" type="text" required>
+                   <input name="tanggalLahir4" placeholder="YYYY-MM-DD"
+                		  class="common-input mb-20 form-control datepicker1" value="{{ old('tanggalLahir4') }}" type="text" required>
 
                    @if ($errors->has('kodePos4'))
                 	  <small style="color:red">* {{$errors->first('kodePos4')}}</small>
@@ -851,7 +851,6 @@
                   <label><b>Radio Komunikasi</b></label>
                   <input name="radioKomunikasi" placeholder="Ketikkan Radio Komunikasi..."
                 		  class="common-input mb-20 form-control" value="{{ old('radioKomunikasi') }}" type="text" required>
-
 
                   @if ($errors->has('winchDepanMerek'))
                	  <small style="color:red">* {{$errors->first('winchDepanMerek')}}</small>
@@ -1055,6 +1054,15 @@
 
 @section('footscript')
 
+<script type="text/javascript">
+$('.datepicker1').datepicker({
+  autoclose: true,
+  format: 'yyyy-mm-dd',
+  todayHighlight: true,
+  orientation: "top"
+});
+</script>
+
 <script language="javascript">
 
   //START TAB 1 -----------------------------------------------------------------------------------------------
@@ -1205,6 +1213,76 @@
       //END TAB 4 -----------------------------------------------------------------------------------------------
 
 
+      //START TAB 5 -----------------------------------------------------------------------------------------------
+      var numE=1;
+      function addSpecUpKendaraan(tableID) {
+        numE++;
+        var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = '<input type="checkbox" name="chk5[]"/>';
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = '<input type="text" name="dataSpecUpKendaraan['+numE+'][namaSpecUpKendaraan]" class="form-control" placeholder="Ketikkan Nama Spec Up Kendaraan..." required>';
+      }
+
+      function delSpecUpKendaraan(tableID) {
+          try {
+          var table = document.getElementById(tableID);
+          var rowCount = table.rows.length;
+
+          for(var i=0; i<rowCount; i++) {
+              var row = table.rows[i];
+              var chkbox = row.cells[0].childNodes[0];
+              if(null != chkbox && true == chkbox.checked) {
+                  table.deleteRow(i);
+                  rowCount--;
+                  i--;
+                  numE--;
+              }
+          }
+          }catch(e) {
+              alert(e);
+          }
+       }
+
+
+       var numF=1;
+       function addStrap(tableID) {
+         numF++;
+         var table = document.getElementById(tableID);
+         var rowCount = table.rows.length;
+         var row = table.insertRow(rowCount);
+         var cell1 = row.insertCell(0);
+         cell1.innerHTML = '<input type="checkbox" name="chk6[]"/>';
+         var cell2 = row.insertCell(1);
+         cell2.innerHTML = '<input type="text" name="dataStrap['+numF+'][merekStrap]" class="form-control" placeholder="Ketikkan Merek..." required>';
+         var cell3 = row.insertCell(2);
+         cell3.innerHTML = '<input type="text" name="dataStrap['+numF+'][merekPanjang]" class="form-control" placeholder="Ketikkan Panjang..." required>';
+       }
+
+       function delStrap(tableID) {
+           try {
+           var table = document.getElementById(tableID);
+           var rowCount = table.rows.length;
+
+           for(var i=0; i<rowCount; i++) {
+               var row = table.rows[i];
+               var chkbox = row.cells[0].childNodes[0];
+               if(null != chkbox && true == chkbox.checked) {
+                   table.deleteRow(i);
+                   rowCount--;
+                   i--;
+                   numF--;
+               }
+           }
+           }catch(e) {
+               alert(e);
+           }
+        }
+       //END TAB 5 -----------------------------------------------------------------------------------------------
+
+
       //START TAB 6 -----------------------------------------------------------------------------------------------
       var numG=1;
         function addKeluarga(tableID) {
@@ -1213,7 +1291,7 @@
           var rowCount = table.rows.length;
           var row = table.insertRow(rowCount);
           var cell1 = row.insertCell(0);
-          cell1.innerHTML = '<input type="checkbox" name="chk[]"/>';
+          cell1.innerHTML = '<input type="checkbox" name="chk7[]"/>';
           var cell2 = row.insertCell(1);
           cell2.innerHTML = '<input type="email" name="dataKeluarga['+numG+'][emailKeluarga]" class="form-control" placeholder="Ketikkan Email...">';
           var cell3 = row.insertCell(2);
@@ -1327,8 +1405,6 @@
       $('div#kendaraantab').attr('class','tab-pane container active');
     });
     // END ONCLICK BUTTON KE TAB SEBELUMNYA
-
-
 </script>
 
 
