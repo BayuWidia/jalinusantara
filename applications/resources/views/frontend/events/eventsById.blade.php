@@ -75,8 +75,10 @@
         </p>
         <br>
         <p>
-          <a href="{{url('events.pendaftaran')}}/{{$getEvents[0]->id}}" class="genric-btn info" style="background:black; color:white">
+          <a href="{{url('events.pendaftaran')}}/{{$getEvents[0]->id}}" target="_blank" class="genric-btn info" style="background:black; color:white">
             Formulir Pendaftaran</a>
+            <a href='#' class='genric-btn info' data-toggle='modal' style="background:#626266; color:white"
+            data-target='#modalUpload' data-backdrop="static" data-keyboard="false">Upload Formulir</a>
         </p>
       </div>
       <div class="col-lg-5">
@@ -145,6 +147,48 @@
 	</div>
 </section>
   <!-- End menu-list Area -->
+
+  <!-- Modal TAMBAH -->
+  <div id="modalUpload" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="max-width: 60%!important;" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Tambah Data Upload Promo</h5>
+        </div>
+        <form action="{{route('registrasi.events.storeByUpload')}}" method='POST' name="Form" enctype="multipart/form-data">
+          {{csrf_field()}}
+          <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="alert alert-primary">
+                      <label for="site">Download Template : </label>
+                      <a href="{{ route('download.file.registrasi') }}" class="col-md-2 btn btn-success btn-sm">Download</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group mandatory">
+                    <label for="uploadFile">Upload File</label>
+                    <input type="hidden" name="idEvents" id="idEvents" value="{{$getEvents[0]->id}}">
+                    <input type="hidden" name="idKategori" id="idKategori" value="{{$getEvents[0]->id_kategori}}">
+                    <input type="file" name="uploadFile" id="uploadFile" class="form-control" required>
+                  </div>
+                </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button class="col-md-2 genric-btn info" id="submit" type="submit">Simpan</button>
+            &nbsp;&nbsp;
+            <button type="button" class="col-md-2 genric-btn danger" data-dismiss="modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
 @endsection
 

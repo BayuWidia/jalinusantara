@@ -1039,6 +1039,23 @@
                 <a href="#kendaraantab" data-toggle="tab" id="btndarikendaraan">
                   <label class="genric-btn info">Sebelumnya</label>
                 </a>
+                <button class="genric-btn primary" style="float: right;" type="submit">Register</button>
+
+                  <blockquote class="generic-blockquote"><b>
+                    Keterangan yang tertulis diatas adalah yang sebenar-benarnya.<br>
+                    Apabila ditemukan keterangan yang tidak sesuai, maka saya bersedia menerima sanksi diskualifikasi.<br>
+
+                    Jakarta,                                   <?php echo date('Y'); ?><br>
+
+                    Hormat saya,<br><br><br><br>
+
+
+
+                    Rp. 6.000,-<br>
+
+
+                    (………………………………………)<br></b>
+                  </blockquote>
               </div>
               {{-- END Data Contact --}}
             </div>

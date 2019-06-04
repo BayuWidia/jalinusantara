@@ -43,7 +43,7 @@
                                       <div class="col-sm-12">
                                         <h4 class="media-heading">Nomor Registrasi : {{$editRegistrasi->no_registrasi}} -
                                           @if($editRegistrasi->flag_approve == 1)
-                                            <span class="badge bg-success">
+                                            <span class="badge bg-green">
                                               Sudah Diapprove
                                             </span>
                                           @else
@@ -95,7 +95,83 @@
                                         <p>No Telp : <b>{{$editRegistrasi->no_telp_co_driver}}</b></p>
                                       </div>
                                     </div>
-
+                                    <hr>
+                                    <div class="row">
+                                      <div class="col-sm-6">
+                                    	<p><b><h5>MEKANIK 1</h5></b></p>
+                                        <hr>
+                                    	<p>Email : <b>{{$getDataMekanik[0]->email}}</b></p>
+                                    	<p>Nama Lengkap : <b>{{$getDataMekanik[0]->nama_lengkap_mekanik}}</b></p>
+                                    	<p>Nama Panggilan : <b>{{$getDataMekanik[0]->nama_mekanik}}</b></p>
+                                    	<p>Golongan Darah : <b>{{$getDataMekanik[0]->golongan_darah_mekanik}}</b></p>
+                                    	<p>TTL : <b>{{$getDataMekanik[0]->tmp_lahir_mekanik}}</b></p>
+                                    	<p>Ukuran Kemeja : <b>{{$getDataMekanik[0]->ukuran_kemeja_mekanik}}</b></p>
+                                    	<p>Alamat : <b>{{$getDataMekanik[0]->alamat_mekanik}}</b></p>
+                                    	<p>Kota : <b>{{$getDataMekanik[0]->kota_mekanik}}</b></p>
+                                    	<p>No Anggota IOF : <b>{{$getDataMekanik[0]->no_anggota_iof}}</b></p>
+                                    	<p>Rhesus : <b>{{$getDataMekanik[0]->rhesus}}</b></p>
+                                    	<p>Tgl Lahir : <b>{{$getDataMekanik[0]->tgl_lhr_mekanik}}</b></p>
+                                    	<p>Kode Pos : <b>{{$getDataMekanik[0]->kode_pos}}</b></p>
+                                    	<p>No SIM : <b>{{$getDataMekanik[0]->no_sim_mekanik}}</b></p>
+                                    	<p>Pengalaman Event's : <b>{{$getDataMekanik[0]->pengalaman_event_mekanik}}</b></p>
+                                    	<p>No Telp : <b>{{$getDataMekanik[0]->no_telp_mekanik}}</b></p>
+                                      </div>
+                                      <div class="col-sm-6">
+                                    	<p><b><h5>MEKANIK 2</h5></b></p>
+                                        <hr>
+                                    	<p>Email : <b>{{$getDataMekanik[1]->email}}</b></p>
+                                    	<p>Nama Lengkap : <b>{{$getDataMekanik[1]->nama_lengkap_mekanik}}</b></p>
+                                    	<p>Nama Panggilan : <b>{{$getDataMekanik[1]->nama_mekanik}}</b></p>
+                                    	<p>Golongan Darah : <b>{{$getDataMekanik[1]->golongan_darah_mekanik}}</b></p>
+                                    	<p>TTL : <b>{{$getDataMekanik[1]->tmp_lahir_mekanik}}</b></p>
+                                    	<p>Ukuran Kemeja : <b>{{$getDataMekanik[1]->ukuran_kemeja_mekanik}}</b></p>
+                                    	<p>Alamat : <b>{{$getDataMekanik[1]->alamat_mekanik}}</b></p>
+                                    	<p>Kota : <b>{{$getDataMekanik[1]->kota_mekanik}}</b></p>
+                                    	<p>No Anggota IOF : <b>{{$getDataMekanik[1]->no_anggota_iof}}</b></p>
+                                    	<p>Rhesus : <b>{{$getDataMekanik[1]->rhesus}}</b></p>
+                                    	<p>Tgl Lahir : <b>{{$getDataMekanik[1]->tgl_lhr_mekanik}}</b></p>
+                                    	<p>Kode Pos : <b>{{$getDataMekanik[1]->kode_pos}}</b></p>
+                                    	<p>No SIM : <b>{{$getDataMekanik[1]->no_sim_mekanik}}</b></p>
+                                    	<p>Pengalaman Event's : <b>{{$getDataMekanik[1]->pengalaman_event_mekanik}}</b></p>
+                                    	<p>No Telp : <b>{{$getDataMekanik[1]->no_telp_mekanik}}</b></p>
+                                      </div>
+                                    </div>
+                                    <hr>
+                                    <p><b><h5>DATA KENDARAAN</h5></b></p>
+                                    <hr>
+                                    <div class="row">
+                                      <div class="col-sm-6">
+                                    	<p>Merek : <b>{{$getDataKendaraan[0]->merek}}</b></p>
+                                    	<p>No Polisi : <b>{{$getDataKendaraan[0]->no_polisi}}</b></p>
+                                    	<p>Type Mesin : <b>{{$getDataKendaraan[0]->type_mesin}}</b></p>
+                                    	<p>CC : <b>{{$getDataKendaraan[0]->cc}}</b></p>
+                                    	<p>Merek Ban : <b>{{$getDataKendaraan[0]->merek_ban}}</b></p>
+                                    	<p>Ukuran Ban : <b>{{$getDataKendaraan[0]->ukuran_ban}}</b></p>
+                                    	<p>Rollban : <b>{{$getDataKendaraan[0]->rollbar}}</b></p>
+                                    	<p>Cargo Barrier : <b>{{$getDataKendaraan[0]->cargo_barrier}}</b></p>
+                                    	<p>Side Bar : <b>{{$getDataKendaraan[0]->side_bar}}</b></p>
+                                    	<p>Safety Belt : <b>{{$getDataKendaraan[0]->safety_belt}}</b></p>
+                                    	<p>Spec Up Kendaraan : <b>{{$getDataKendaraan[0]->spec_up_kendaraan}}</b></p>
+                                    	<p>Type : <b>{{$getDataKendaraan[0]->type}}</b></p>
+                                    	<p>Tahun : <b>{{$getDataKendaraan[0]->tahun}}</b></p>
+                                    	<p>Warna : <b>{{$getDataKendaraan[0]->warna}}</b></p>
+                                      </div>
+                                      <div class="col-sm-6">
+                                    	<p>Snorkel : <b>{{$getDataKendaraan[0]->snorkel}}</b></p>
+                                    	<p>Engine Cut Off : <b>{{$getDataKendaraan[0]->engine_cut_off}}</b></p>
+                                    	<p>GPS : <b>{{$getDataKendaraan[0]->gps}}</b></p>
+                                    	<p>Radio Komunikasi : <b>{{$getDataKendaraan[0]->radio_komunikasi}}</b></p>
+                                    	<p>Winch Depan Merek : <b>{{$getDataKendaraan[0]->winch_depan_merek}}</b></p>
+                                    	<p>Winch Depan Type : <b>{{$getDataKendaraan[0]->winch_depan_type}}</b></p>
+                                    	<p>Strap : <b>{{$getDataKendaraan[0]->strap}}</b></p>
+                                    	<p>Winch Belakang Merek : <b>{{$getDataKendaraan[0]->winch_belakang_merek}}</b></p>
+                                    	<p>Winch Belakang type : <b>{{$getDataKendaraan[0]->winch_belakang_type}}</b></p>
+                                    	<p>Snatch Block : <b>{{$getDataKendaraan[0]->snatch_block}}</b></p>
+                                    	<p>Shackle : <b>{{$getDataKendaraan[0]->shackle}}</b></p>
+                                    	<p>Glove : <b>{{$getDataKendaraan[0]->glove}}</b></p>
+                                    	<p>Sling : <b>{{$getDataKendaraan[0]->sling}}</b></p>
+                                      </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group mandatory">

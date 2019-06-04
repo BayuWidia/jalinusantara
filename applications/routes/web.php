@@ -180,6 +180,8 @@ Route::get('events/{id}', 'FeEventsController@index')->name('events');
 Route::get('eventsById/{id}/{idKategori}', 'FeEventsController@indexById')->name('eventsById');
 Route::get('events.pendaftaran/{id}', 'FeEventsController@indexPendaftaran')->name('events.pendaftaran');
 Route::post('registrasi.events.store', 'FeEventsController@storePendaftaran')->name('registrasi.events.store');
+Route::get('download.file.registrasi', 'FeEventsController@getDownload')->name('download.file.registrasi');
+Route::post('registrasi.events.storeByUpload', 'FeEventsController@storePendaftaranByUpload')->name('registrasi.events.storeByUpload');
 
 Route::get('contact', 'FeContactController@index')->name('contact');
 Route::post('contact.store', 'CommentController@storeContact')->name('contact.store');

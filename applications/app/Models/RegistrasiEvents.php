@@ -46,6 +46,8 @@ class RegistrasiEvents extends Model
       , 'no_telp_co_driver'
       , 'nomor_pintu'
       , 'flag_approve'
+      , 'file_name'
+      , 'status_register'
       , 'activated'
       , 'created_by'
       , 'updated_by'

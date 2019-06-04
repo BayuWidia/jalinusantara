@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 use Auth;
 use Image;
 use Validator;
 use DB;
+use Response;
+use PDF;
+use Excel;
+use PHPExcel_Worksheet_Drawing;
+use PHPExcel_Worksheet_PageSetup;
 use App\Models\Events;
 use App\Models\MasterSlider;
 use App\Models\MasterSponsor;
@@ -367,90 +373,92 @@ class FeEventsController extends Controller
                   'no_telp_co_driver' => $request->noTelp2,
                   'nomor_pintu' => 0,
                   'flag_approve' => 0,
+                  'file_name' => '',
+                  'status_register' => 'FORM',
                   'activated' => 1,
                   'created_by' => $request->email1,
                   'updated_by' => $request->email1,
             ]);
 
-              //insert table mekanik1
-              $setMekanik1 = new Mekanik;
-              $setMekanik1->id_registrasi => $registrasi->id;
-              $setMekanik1->email => $request->email3;
-              $setMekanik1->nama_lengkap_mekanik => $request->namaLengkap3;
-              $setMekanik1->nama_mekanik => $request->nama3;
-              $setMekanik1->golongan_darah_mekanik => $request->golonganDarah3;
-              $setMekanik1->tmp_lahir_mekanik => $request->tempatLahir3;
-              $setMekanik1->no_telp_mekanik => $request->noTelp3;
-              $setMekanik1->ukuran_kemeja_mekanik => $request->ukuranKemeja3;
-              $setMekanik1->alamat_mekanik => $request->alamat3;
-              $setMekanik1->kota_mekanik => $request->kota3;
-              $setMekanik1->no_anggota_iof => $request->noAnggotaIof3;
-              $setMekanik1->rhesus => $request->rhesus3;
-              $setMekanik1->tgl_lhr_mekanik => $request->tanggalLahir3;
-              $setMekanik1->kode_pos => $request->kodePos3;
-              $setMekanik1->no_sim_mekanik => $request->nomorSim3;
-              $setMekanik1->pengalaman_event_mekanik => $tempPengalaman3;
-              $setMekanik1->activated => 1;
-              $setMekanik1->created_by => $request->email1;
-              $setMekanik1->updated_by =>$request->email1;
-              $setMekanik1->save();
+                //insert table mekanik1
+                $setMekanik1 = new Mekanik;
+                $setMekanik1->id_registrasi = $registrasi->id;
+                $setMekanik1->email = $request->email3;
+                $setMekanik1->nama_lengkap_mekanik = $request->namaLengkap3;
+                $setMekanik1->nama_mekanik = $request->nama3;
+                $setMekanik1->golongan_darah_mekanik = $request->golonganDarah3;
+                $setMekanik1->tmp_lahir_mekanik = $request->tempatLahir3;
+                $setMekanik1->no_telp_mekanik = $request->noTelp3;
+                $setMekanik1->ukuran_kemeja_mekanik = $request->ukuranKemeja3;
+                $setMekanik1->alamat_mekanik = $request->alamat3;
+                $setMekanik1->kota_mekanik = $request->kota3;
+                $setMekanik1->no_anggota_iof = $request->noAnggotaIof3;
+                $setMekanik1->rhesus = $request->rhesus3;
+                $setMekanik1->tgl_lhr_mekanik = $request->tanggalLahir3;
+                $setMekanik1->kode_pos = $request->kodePos3;
+                $setMekanik1->no_sim_mekanik = $request->nomorSim3;
+                $setMekanik1->pengalaman_event_mekanik = $tempPengalaman3;
+                $setMekanik1->activated = 1;
+                $setMekanik1->created_by = $request->email1;
+                $setMekanik1->updated_by =$request->email1;
+                $setMekanik1->save();
 
-              //insert table mekanik2
-              $setMekanik2 = new Mekanik;
-              $setMekanik2->id_registrasi => $registrasi->id;
-              $setMekanik2->email => $request->email4;
-              $setMekanik2->nama_lengkap_mekanik => $request->namaLengkap4;
-              $setMekanik2->nama_mekanik => $request->nama4;
-              $setMekanik2->golongan_darah_mekanik => $request->golonganDarah4;
-              $setMekanik2->tmp_lahir_mekanik => $request->tempatLahir4;
-              $setMekanik2->no_telp_mekanik => $request->noTelp4;
-              $setMekanik2->ukuran_kemeja_mekanik => $request->ukuranKemeja4;
-              $setMekanik2->alamat_mekanik => $request->alamat4;
-              $setMekanik2->kota_mekanik => $request->kota4;
-              $setMekanik2->no_anggota_iof => $request->noAnggotaIof4;
-              $setMekanik2->rhesus => $request->rhesus4;
-              $setMekanik2->tgl_lhr_mekanik => $request->tanggalLahir4;
-              $setMekanik2->kode_pos => $request->kodePos4;
-              $setMekanik2->no_sim_mekanik => $request->nomorSim4;
-              $setMekanik2->pengalaman_event_mekanik => $tempPengalaman4;
-              $setMekanik2->activated => 1;
-              $setMekanik2->created_by => $request->email1;
-              $setMekanik2->updated_by =>$request->email1;
-              $setMekanik2->save();
+                //insert table mekanik2
+                $setMekanik2 = new Mekanik;
+                $setMekanik2->id_registrasi = $registrasi->id;
+                $setMekanik2->email = $request->email4;
+                $setMekanik2->nama_lengkap_mekanik = $request->namaLengkap4;
+                $setMekanik2->nama_mekanik = $request->nama4;
+                $setMekanik2->golongan_darah_mekanik = $request->golonganDarah4;
+                $setMekanik2->tmp_lahir_mekanik = $request->tempatLahir4;
+                $setMekanik2->no_telp_mekanik = $request->noTelp4;
+                $setMekanik2->ukuran_kemeja_mekanik = $request->ukuranKemeja4;
+                $setMekanik2->alamat_mekanik = $request->alamat4;
+                $setMekanik2->kota_mekanik = $request->kota4;
+                $setMekanik2->no_anggota_iof = $request->noAnggotaIof4;
+                $setMekanik2->rhesus = $request->rhesus4;
+                $setMekanik2->tgl_lhr_mekanik = $request->tanggalLahir4;
+                $setMekanik2->kode_pos = $request->kodePos4;
+                $setMekanik2->no_sim_mekanik = $request->nomorSim4;
+                $setMekanik2->pengalaman_event_mekanik = $tempPengalaman4;
+                $setMekanik2->activated = 1;
+                $setMekanik2->created_by = $request->email1;
+                $setMekanik2->updated_by =$request->email1;
+                $setMekanik2->save();
 
 
-              //insert table kendaraan
-              $setKendaraan = new Kendaraan;
-              $setKendaraan->id_registrasi => $registrasi->id;
-              $setKendaraan->merek => $request->merek;
-              $setKendaraan->no_polisi => $request->noPolisi;
-              $setKendaraan->type_mesin => $request->typeMesin;
-              $setKendaraan->cc => $request->cc;
-              $setKendaraan->merek_ban => $request->merekBan;
-              $setKendaraan->ukuran_ban => $request->ukuranBan;
-              $setKendaraan->rollbar => $request->rollbar;
-              $setKendaraan->cargo_barrier => $request->cargoBarrier;
-              $setKendaraan->side_bar => $request->sideBar;
-              $setKendaraan->safety_belt => $request->safetyBelt;
-              $setKendaraan->spec_up_kendaraan => $tempSpecUp;
-              $setKendaraan->type => $request->type;
-              $setKendaraan->tahun => $request->tahun;
-              $setKendaraan->warna => $request->warna;
-              $setKendaraan->snorkel => $request->snorkel;
-              $setKendaraan->engine_cut_off => $request->engineCutOff;
-              $setKendaraan->gps => $request->gps;
-              $setKendaraan->radio_komunikasi => $request->radioKomunikasi;
-              $setKendaraan->winch_depan_merek => $request->winchDepanMerek;
-              $setKendaraan->winch_depan_type => $request->winchDepanType;
-              $setKendaraan->strap => $tempStrap;
-              $setKendaraan->winch_belakang_merek => $request->winchBelakangMerek;
-              $setKendaraan->winch_belakang_type => $request->winchBelakangType;
-              $setKendaraan->snatch_block => $request->snatchBlock;
-              $setKendaraan->shackle => $request->shackle;
-              $setKendaraan->glove => $request->glove;
-              $setKendaraan->sling => $request->sling;
-              $setKendaraan->created_by => $request->email1;
-              $setKendaraan->updated_by => $request->email1;
+                //insert table kendaraan
+                $setKendaraan = new Kendaraan;
+                $setKendaraan->id_registrasi = $registrasi->id;
+                $setKendaraan->merek = $request->merek;
+                $setKendaraan->no_polisi = $request->noPolisi;
+                $setKendaraan->type_mesin = $request->typeMesin;
+                $setKendaraan->cc = $request->cc;
+                $setKendaraan->merek_ban = $request->merekBan;
+                $setKendaraan->ukuran_ban = $request->ukuranBan;
+                $setKendaraan->rollbar = $request->rollbar;
+                $setKendaraan->cargo_barrier = $request->cargoBarrier;
+                $setKendaraan->side_bar = $request->sideBar;
+                $setKendaraan->safety_belt = $request->safetyBelt;
+                $setKendaraan->spec_up_kendaraan = $tempSpecUp;
+                $setKendaraan->type = $request->type;
+                $setKendaraan->tahun = $request->tahun;
+                $setKendaraan->warna = $request->warna;
+                $setKendaraan->snorkel = $request->snorkel;
+                $setKendaraan->engine_cut_off = $request->engineCutOff;
+                $setKendaraan->gps = $request->gps;
+                $setKendaraan->radio_komunikasi = $request->radioKomunikasi;
+                $setKendaraan->winch_depan_merek = $request->winchDepanMerek;
+                $setKendaraan->winch_depan_type = $request->winchDepanType;
+                $setKendaraan->strap = $tempStrap;
+                $setKendaraan->winch_belakang_merek = $request->winchBelakangMerek;
+                $setKendaraan->winch_belakang_type = $request->winchBelakangType;
+                $setKendaraan->snatch_block = $request->snatchBlock;
+                $setKendaraan->shackle = $request->shackle;
+                $setKendaraan->glove = $request->glove;
+                $setKendaraan->sling = $request->sling;
+                $setKendaraan->created_by = $request->email1;
+                $setKendaraan->updated_by = $request->email1;
 
               //insert table keluarga
               $dataKeluargas = $request->input('dataKeluarga');
@@ -473,6 +481,181 @@ class FeEventsController extends Controller
           \LogActivities::insLogActivities('log insert successfully.');
 
           return redirect()->route('events.pendaftaran', ['id' => $request->idEvents])->with('message', 'Pendaftaran pada events tersebut berhasil.');
+    }
+
+    public function getDownload(){
+        //PDF file is stored under project/public/download/info.pdf
+        $file= public_path(). "\download\FILE_UPLOAD_REGISTER.xls";
+        // dd($file);
+        $headers = array(
+                  'Content-Type: application/xls',
+                );
+
+        return Response::download($file, 'FILE_UPLOAD_REGISTER.xls', $headers);
+    }
+
+    public function storePendaftaranByUpload(Request $request)
+    {
+      if(Input::hasFile('uploadFile')){
+
+        DB::transaction(function() use($request) {
+          $sysDate = date('Ymd');
+          $getMaxCode = RegistrasiEvents::getMaxRegistrasiCode($request->idEvents);
+          if ($getMaxCode[0]->no_registrasi_code != null) {
+            $setCode = $getMaxCode[0]->no_registrasi_code+1;
+          } else {
+            $setCode = $sysDate.'0'.$request->idEvents.'0001';
+          }
+
+      		$path = Input::file('uploadFile')->getRealPath();
+
+          $dataDriver = Excel::selectSheets('Data-Driver')->load($path)->get();
+          $dataMekanik = Excel::selectSheets('Data-Mekanik')->load($path)->get();
+          $dataKendaraan = Excel::selectSheets('Data-Kendaraan')->load($path)->get();
+          $dataContact = Excel::selectSheets('Data-Contact')->load($path)->get();
+
+          $fileName = $file->getClientOriginalName().'-'.date('ymdhis');
+          if(!empty($dataDriver) && $dataDriver->count()){
+            //foreach untuk data sheets Driver
+          	foreach ($dataDriver as $key) {
+              //insert table register event's
+              $registrasi = RegistrasiEvents::create([
+                            'id_events' => $key->idEvents,
+                            'no_registrasi' => $setCode,
+                            'email' => $key->email,
+                            'email_co' => $key->email_co,
+                            'nama_lengkap_driver' => $key->nama_lengkap_driver,
+                            'nama_lengkap_co_driver' => $key->nama_lengkap_co_driver,
+                            'nama_driver' => $key->nama_driver,
+                            'nama_co_driver' => $key->nama_co_driver,
+                            'golongan_darah_driver' => $key->golongan_darah_driver,
+                            'golongan_darah_co_driver' => $key->golongan_darah_co_driver,
+                            'tmp_lahir_driver' => $key->tmp_lahir_driver,
+                            'tmp_lahir_co_driver' => $key->tmp_lahir_co_driver,
+                            'ukuran_kemeja_driver' => $key->ukuran_kemeja_driver,
+                            'ukuran_kemeja_co_driver' => $key->ukuran_kemeja_co_driver,
+                            'alamat_driver' => $key->alamat_driver,
+                            'alamat_co_driver' => $key->alamat_co_driver,
+                            'kota_driver' => $key->kota_driver,
+                            'kota_co_driver' => $key->kota_co_driver,
+                            'no_anggota_iof' => $key->no_anggota_iof,
+                            'no_anggota_iof_co' => $key->no_anggota_iof_co,
+                            'rhesus' => $key->rhesus,
+                            'rhesus_co' => $key->rhesus_co,
+                            'tgl_lhr_driver' => $key->tgl_lhr_driver,
+                            'tgl_lhr_co_driver' => $key->tgl_lhr_co_driver,
+                            'kode_pos' => $key->kode_pos,
+                            'kode_pos_co' => $key->kode_pos_co,
+                            'no_sim_driver' => $key->no_sim_driver,
+                            'no_sim_co_driver' => $key->no_sim_co_driver,
+                            'pengalaman_event_driver' => $key->pengalaman_event_driver,
+                            'pengalaman_event_co_driver' => $key->pengalaman_event_co_driver,
+                            'no_telp_driver' => $key->no_telp_driver,
+                            'no_telp_co_driver' => $key->no_telp_co_driver,
+                            'nomor_pintu' => 0,
+                            'flag_approve' => 0,
+                            'file_name' => $fileName,
+                            'status_register' => 'UPLOAD',
+                            'activated' => 1,
+                            'created_by' => $key->email,
+                            'updated_by' => $key->email,
+              ]);
+
+              //foreach untuk data sheets Mekanik
+              foreach ($dataMekanik as $key) {
+                  $set = new Mekanik;
+                  $set->id_registrasi = $registrasi->id;
+                  $set->email = $key->email;
+                  $set->nama_lengkap_mekanik = $key->nama_lengkap_mekanik;
+                  $set->nama_mekanik = $key->nama_mekanik;
+                  $set->golongan_darah_mekanik = $key->golongan_darah_mekanik;
+                  $set->tmp_lahir_mekanik = $key->tmp_lahir_mekanik;
+                  $set->no_telp_mekanik = $key->no_telp_mekanik;
+                  $set->ukuran_kemeja_mekanik = $key->ukuran_kemeja_mekanik;
+                  $set->alamat_mekanik = $key->alamat_mekanik;
+                  $set->kota_mekanik = $key->kota_mekanik;
+                  $set->no_anggota_iof = $key->no_anggota_iof;
+                  $set->rhesus = $key->rhesus;
+                  $set->tgl_lhr_mekanik = $key->tgl_lhr_mekanik;
+                  $set->kode_pos = $key->kode_pos;
+                  $set->no_sim_mekanik = $key->no_sim_mekanik;
+                  $set->pengalaman_event_mekanik = $key->pengalaman_event_mekanik;
+                  $set->activated = 1;
+                  $set->created_by = $registrasi->id;
+                  $set->updated_by = $registrasi->id;
+                  $set->save();
+            	}
+
+              //foreach untuk data sheets Kendaraan
+              foreach ($dataKendaraan as $key) {
+
+                  $set = new Kendaraan;
+                  $set->id_registrasi = $registrasi->id;
+                  $set->merek = $key->merek;
+                  $set->no_polisi = $key->no_polisi;
+                  $set->type_mesin = $key->type_mesin;
+                  $set->cc = $key->cc;
+                  $set->merek_ban = $key->merek_ban;
+                  $set->ukuran_ban = $key->ukuran_ban;
+                  $set->rollbar = $key->rollbar;
+                  $set->cargo_barrier = $key->cargo_barrier;
+                  $set->side_bar = $key->side_bar;
+                  $set->safety_belt = $key->safety_belt;
+                  $set->spec_up_kendaraan = $key->spec_up_kendaraan;
+                  $set->type = $key->type;
+                  $set->tahun = $key->tahun;
+                  $set->warna = $key->warna;
+                  $set->snorkel = $key->snorkel;
+                  $set->engine_cut_off = $key->engine_cut_off;
+                  $set->gps = $key->gps;
+                  $set->radio_komunikasi = $key->radio_komunikasi;
+                  $set->winch_depan_merek = $key->winch_depan_merek;
+                  $set->winch_depan_type = $key->winch_depan_type;
+                  $set->strap = $key->strap;
+                  $set->winch_belakang_merek = $key->winch_belakang_merek;
+                  $set->winch_belakang_type = $key->winch_belakang_type;
+                  $set->snatch_block = $key->snatch_block;
+                  $set->shackle = $key->shackle;
+                  $set->glove = $key->glove;
+                  $set->sling = $key->sling;
+                  $set->created_by = $registrasi->id;
+                  $set->updated_by = $registrasi->id;
+            	}
+
+              //foreach untuk data sheets Contact
+              foreach ($dataContact as $key) {
+                $set = new Keluarga;
+                $set->id_registrasi    = $registrasi->id;
+                $set->email    = $key->email;
+                $set->nama_lengkap_keluarga    = $key->nama_lengkap_keluarga;
+                $set->nama_keluarga    = $key->nama_keluarga;
+                $set->hubungan_keluarga    = $key->hubungan_keluarga;
+                $set->no_telp_keluarga    = $key->no_telp_keluarga;
+                $set->no_hp_keluarga    = $key->no_hp_keluarga;
+                $set->activated  = 1;
+                $set->created_by = $registrasi->id;
+                $set->save();
+            	}
+
+
+
+          	}
+
+
+            if(!empty($registrasi)){
+              \LogActivities::insLogActivities('log insert successfully.');
+
+              return redirect()->route('eventsById', ['id' => $request->idEvents, 'idKategori' => $request->idKategori])->with('message', 'Pendaftaran pada events tersebut berhasil.');
+            }
+          }
+
+        });
+
+
+
+  		}
+
+  		return back()->with('error', 'Harap Pilih File Sesuai Dengan Template');
     }
 
 }
