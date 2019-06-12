@@ -30,7 +30,7 @@
 <section class="home-about-area section-gap">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-9">
+			<div class="col-lg-8">
 				<h1 class="text-uppercase">
 					{{$getInformasi[0]->judul_informasi}}
 				</h1>

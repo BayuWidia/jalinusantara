@@ -96,6 +96,7 @@
                                       </div>
                                     </div>
                                     <hr>
+                                    @if(count($getDataMekanik) != 0)
                                     <div class="row">
                                       <div class="col-sm-6">
                                     	<p><b><h5>MEKANIK 1</h5></b></p>
@@ -136,6 +137,8 @@
                                     	<p>No Telp : <b>{{$getDataMekanik[1]->no_telp_mekanik}}</b></p>
                                       </div>
                                     </div>
+                                    @endif
+                                    @if(count($getDataKendaraan) != 0)
                                     <hr>
                                     <p><b><h5>DATA KENDARAAN</h5></b></p>
                                     <hr>
@@ -172,6 +175,7 @@
                                     	<p>Sling : <b>{{$getDataKendaraan[0]->sling}}</b></p>
                                       </div>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group mandatory">
