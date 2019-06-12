@@ -61,6 +61,32 @@
       <!-- #END# Widgets -->
 
       <div class="row clearfix">
+          <!-- Answered Tickets -->
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="card">
+                  <div class="body bg-teal">
+                      <div class="font-bold m-b--35">EVENTS HARI INI</div>
+                      <ul class="dashboard-stat-list">
+                        @if(sizeof($getEventsToday) != 0)
+                          @foreach($getEventsToday as $key)
+                            <li>
+                                {{$key->judul_event}}
+                                <span class="pull-right"><b>{{$key->jumlah_peserta}}</b> <small>Peserta</small></span>
+                            </li>
+                          @endforeach
+                        @else
+                        <li style="text-align:center">
+                            <i>Events hari ini belum tersedia</i>
+                        </li>
+                        @endif
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <!-- #END# Answered Tickets -->
+      </div>
+
+      <div class="row clearfix">
           <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
               <div class="card">
                   <div class="header bg-orange">
@@ -201,91 +227,6 @@
                     </div>
                 </div>
               </div>
-      </div>
-
-      <div class="row clearfix">
-          <!-- Task Info -->
-          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-              <div class="card">
-                  <div class="header">
-                      <h2>Kategori Terfavorite</h2>
-                  </div>
-                  <div class="body">
-                      <div class="table-responsive">
-                          <table class="table table-hover dashboard-task-infos">
-                              <thead>
-                                  <tr>
-                                      <th>#</th>
-                                      <th>Nama Kategori</th>
-                                      <th>Jumlah</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                @if(!$getkategori == null)
-                                  @php $j=1; @endphp
-                                  @foreach($getkategori as $key)
-                                    @if($j<=10)
-                                      <tr>
-                                        <td>{{$j}}</td>
-                                        <td>
-                                          {{$key->nama_kategori}}
-                                        </td>
-                                        <td >
-                                          <span class="badge bg-purple">
-                                            @if($key->jumlahkategori=="")
-                                              0
-                                            @else
-                                              {{$key->jumlahkategori}}
-                                            @endif
-                                          </span>
-                                        </td>
-                                      </tr>
-                                    @endif
-                                    @php $j++ @endphp
-                                  @endforeach
-                                @else
-                                  <tr>
-                                    <td colspan="3" style="text-align:center" class="text-muted">
-                                      Data tidak tersedia.
-                                    </td>
-                                  </tr>
-                                @endif
-                              </tbody>
-                          </table>
-                          <nav>
-                              <ul class="pagination">
-                                {{ $getkategori->links() }}
-                              </ul>
-                          </nav>
-                      </div>
-
-                  </div>
-              </div>
-          </div>
-          <!-- #END# Task Info -->
-          <!-- Answered Tickets -->
-          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <div class="card">
-                  <div class="body bg-teal">
-                      <div class="font-bold m-b--35">EVENTS HARI INI</div>
-                      <ul class="dashboard-stat-list">
-                        @if(sizeof($getEventsToday) != 0)
-                          @foreach($getEventsToday as $key)
-                            <li>
-                                {{$key->judul_event}}
-                                <span class="pull-right"><b>{{$key->jumlah_peserta}}</b> <small>Peserta</small></span>
-                            </li>
-                          @endforeach
-                        @else
-                        <li style="text-align:center">
-                            <i>Events hari ini belum tersedia</i>
-                        </li>
-                        @endif
-                      </ul>
-                  </div>
-              </div>
-          </div>
-          <!-- #END# Answered Tickets -->
       </div>
   </div>
 @endsection

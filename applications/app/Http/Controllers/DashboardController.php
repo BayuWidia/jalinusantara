@@ -87,14 +87,14 @@ class DashboardController extends Controller
                       ->orderBy('flag_publish', 'DESC')
                       ->orderBy('id_events', 'DESC')->limit(15)->get();
       }
-      $getkategori = DB::table('informasi')
-                      ->join('master_kategori', 'informasi.id_kategori', '=', 'master_kategori.id')
-                     ->select('informasi.id_kategori', 'master_kategori.nama_kategori',
-                        DB::raw('count(informasi.id_kategori) as jumlahkategori'))
-                     ->where('informasi.flag_status', '=', 'article')
-                     ->groupBy('informasi.id_kategori','master_kategori.nama_kategori')
-                     ->orderby('jumlahkategori', 'desc')
-                     ->paginate(5);
+      // $getkategori = DB::table('informasi')
+      //                 ->join('master_kategori', 'informasi.id_kategori', '=', 'master_kategori.id')
+      //                ->select('informasi.id_kategori', 'master_kategori.nama_kategori',
+      //                   DB::raw('count(informasi.id_kategori) as jumlahkategori'))
+      //                ->where('informasi.flag_status', '=', 'article')
+      //                ->groupBy('informasi.id_kategori','master_kategori.nama_kategori')
+      //                ->orderby('jumlahkategori', 'desc')
+      //                ->paginate(5);
 
      $dt = Carbon::now();
      $getEventsToday = DB::table('events')->select(DB::raw('*'))
@@ -105,7 +105,7 @@ class DashboardController extends Controller
                     compact('informasiTerbaru','eventsTerbaru',
                             'getCountEvents', 'getCountEventsUn',
                             'getCountInformasi', 'getCountInformasiUn',
-                            'getkategori','getEventsToday'));
+                            'getEventsToday'));
     }
 
 }
