@@ -336,7 +336,7 @@ class FeEventsController extends Controller
               $tempStrap = $tempStrap.','.$dataStrap['merekStrap'].'-'.$dataStrap['merekPanjang'];
             }
 
-
+            // dd($request->all());
             //insert table register event's
             $registrasi = RegistrasiEvents::create([
                   'id_events' => $request->idEvents,
@@ -426,7 +426,6 @@ class FeEventsController extends Controller
                 $setMekanik2->updated_by =$request->email1;
                 $setMekanik2->save();
 
-
                 //insert table kendaraan
                 $setKendaraan = new Kendaraan;
                 $setKendaraan->id_registrasi = $registrasi->id;
@@ -459,6 +458,7 @@ class FeEventsController extends Controller
                 $setKendaraan->sling = $request->sling;
                 $setKendaraan->created_by = $request->email1;
                 $setKendaraan->updated_by = $request->email1;
+                $setKendaraan->save();
 
               //insert table keluarga
               $dataKeluargas = $request->input('dataKeluarga');
