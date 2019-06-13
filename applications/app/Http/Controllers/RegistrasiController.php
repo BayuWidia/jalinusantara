@@ -27,7 +27,12 @@ class RegistrasiController extends Controller
     public function index()
     {
         //
-        $getRegistrasiEvents = RegistrasiEvents::all();
+        // $getRegistrasiEvents = RegistrasiEvents::all();
+        $getRegistrasiEvents = RegistrasiEvents::
+          select('registrasi_events.*', 'events.judul_event')
+          ->leftjoin('events', 'registrasi_events.id_events', '=', 'events.id')
+          ->orderby('registrasi_events.created_at', 'desc')
+          ->get();
         return view('backend.registrasi.kelolaregistrasi', compact('getRegistrasiEvents'));
     }
 

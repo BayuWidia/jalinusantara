@@ -43,6 +43,7 @@
                                 <tr>
                                     <th style="text-align:center">No</th>
                                     <th style="text-align:center">No Registrasi</th>
+                                    <th style="text-align:center">Judul Events</th>
                                     <th style="text-align:center">Email</th>
                                     <th style="text-align:center">Nama Driver</th>
                                     <th style="text-align:center">No Telp</th>
@@ -58,6 +59,7 @@
                                 <tr>
                                   <td>{{$i++}}</td>
                                   <td>{{$key->no_registrasi}}</td>
+                                  <td>{{$key->judul_event}}</td>
                                   <td>{{$key->email}}</td>
                                   <td>{{$key->nama_driver}}</td>
                                   <td>{{$key->no_telp_driver}}</td>
