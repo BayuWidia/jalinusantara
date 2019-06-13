@@ -119,13 +119,10 @@
                 	   <small style="color:red">* {{$errors->first('golonganDarah1')}}</small>
                 	 @endif
                 	 <label><b>Golongan Darah</b></label>
-                   <select style="height:50px;border-radius: 0" name="golonganDarah1" class="common-input mb-20 form-control" required>
-                   		<option value="" >-- Pilih --</option>
-                   		<option value="A">A</option>
-                   		<option value="B">B</option>
-                   		<option value="AB">AB</option>
-                   		<option value="O">O</option>
-                   	</select>
+
+                	 <input name="golonganDarah1" placeholder="Ketikkan Golongan Darah..."
+                			class="common-input mb-20 form-control" value="{{ old('golonganDarah1') }}" type="text" required>
+
                 	  @if ($errors->has('tempatLahir1'))
                 		<small style="color:red">* {{$errors->first('tempatLahir1')}}</small>
                 	  @endif
@@ -138,7 +135,7 @@
                 	 @endif
                 	 <label><b>No Telepone</b></label>
                 	 <input name="noTelp1" placeholder="Ketikkan No Telepone..."  maxlength="13"
-                			class="common-input mb-20 form-control" value="{{ old('noTelp1') }}" type="number" required>
+                			class="common-input mb-20 form-control" value="{{ old('noTelp1') }}" type="text" required>
 
                 	  @if ($errors->has('alamat1'))
                 		<small style="color:red">* {{$errors->first('alamat1')}}</small>
@@ -201,7 +198,7 @@
                    @endif
                    <label><b>Kode Pos</b></label>
                    <input name="kodePos1" placeholder="Ketikkan Kode Pos..." maxlength="5"
-                		   class="common-input mb-20 form-control" value="{{ old('kodePos1') }}" type="number" required>
+                		   class="common-input mb-20 form-control" value="{{ old('kodePos1') }}" type="text" required>
 
                    @if ($errors->has('nomorSim1'))
                 	 <small style="color:red">* {{$errors->first('nomorSim1')}}</small>
@@ -280,13 +277,8 @@
                 	   <small style="color:red">* {{$errors->first('golonganDarah2')}}</small>
                 	 @endif
                 	 <label><b>Golongan Darah</b></label>
-                   <select style="height:50px;border-radius: 0" name="golonganDarah2" class="common-input mb-20 form-control" required>
-                   		<option value="" >-- Pilih --</option>
-                   		<option value="A">A</option>
-                   		<option value="B">B</option>
-                   		<option value="AB">AB</option>
-                   		<option value="O">O</option>
-                   	</select>
+                	 <input name="golonganDarah2" placeholder="Ketikkan Golongan Darah..."
+                			class="common-input mb-20 form-control" value="{{ old('golonganDarah2') }}" type="text" required>
 
                 	  @if ($errors->has('tempatLahir2'))
                 		<small style="color:red">* {{$errors->first('tempatLahir2')}}</small>
@@ -300,7 +292,7 @@
                 	 @endif
                 	 <label><b>No Telepone</b></label>
                 	 <input name="noTelp2" placeholder="Ketikkan No Telepone..." maxlength="13"
-                			class="common-input mb-20 form-control" value="{{ old('noTelp2') }}" type="number" required>
+                			class="common-input mb-20 form-control" value="{{ old('noTelp2') }}" type="text" required>
 
                 	  @if ($errors->has('alamat2'))
                 		<small style="color:red">* {{$errors->first('alamat2')}}</small>
@@ -363,7 +355,7 @@
                    @endif
                    <label><b>Kode Pos</b></label>
                    <input name="kodePos2" placeholder="Ketikkan Kode Pos..." maxlength="5"
-                		   class="common-input mb-20 form-control" value="{{ old('kodePos2') }}" type="number" required>
+                		   class="common-input mb-20 form-control" value="{{ old('kodePos2') }}" type="text" required>
 
                    @if ($errors->has('nomorSim2'))
                 	 <small style="color:red">* {{$errors->first('nomorSim2')}}</small>
@@ -444,13 +436,8 @@
                 	   <small style="color:red">* {{$errors->first('golonganDarah3')}}</small>
                 	 @endif
                 	 <label><b>Golongan Darah</b></label>
-                   <select style="height:50px;border-radius: 0" name="golonganDarah3" class="common-input mb-20 form-control" required>
-                   		<option value="" >-- Pilih --</option>
-                   		<option value="A">A</option>
-                   		<option value="B">B</option>
-                   		<option value="AB">AB</option>
-                   		<option value="O">O</option>
-                   	</select>
+                	 <input name="golonganDarah3" placeholder="Ketikkan Golongan Darah..."
+                			class="common-input mb-20 form-control" value="{{ old('golonganDarah3') }}" type="text" required>
 
                 	  @if ($errors->has('tempatLahir3'))
                 		<small style="color:red">* {{$errors->first('tempatLahir3')}}</small>
@@ -464,7 +451,7 @@
                 	 @endif
                 	 <label><b>No Telepone</b></label>
                 	 <input name="noTelp3" placeholder="Ketikkan No Telepone..." maxlength="13"
-                			class="common-input mb-20 form-control" value="{{ old('noTelp3') }}" type="number" required>
+                			class="common-input mb-20 form-control" value="{{ old('noTelp3') }}" type="text" required>
 
                 	  @if ($errors->has('alamat3'))
                 		<small style="color:red">* {{$errors->first('alamat3')}}</small>
@@ -527,7 +514,7 @@
                    @endif
                    <label><b>Kode Pos</b></label>
                    <input name="kodePos3" placeholder="Ketikkan Kode Pos..." maxlength="5"
-                		   class="common-input mb-20 form-control" value="{{ old('kodePos3') }}" type="number" required>
+                		   class="common-input mb-20 form-control" value="{{ old('kodePos3') }}" type="text" required>
 
                    @if ($errors->has('nomorSim3'))
                 	 <small style="color:red">* {{$errors->first('nomorSim3')}}</small>
@@ -608,13 +595,8 @@
                 	   <small style="color:red">* {{$errors->first('golonganDarah4')}}</small>
                 	 @endif
                 	 <label><b>Golongan Darah</b></label>
-                   <select style="height:50px;border-radius: 0" name="golonganDarah4" class="common-input mb-20 form-control" required>
-                   		<option value="" >-- Pilih --</option>
-                   		<option value="A">A</option>
-                   		<option value="B">B</option>
-                   		<option value="AB">AB</option>
-                   		<option value="O">O</option>
-                   	</select>
+                	 <input name="golonganDarah4" placeholder="Ketikkan Golongan Darah..."
+                			class="common-input mb-20 form-control" value="{{ old('golonganDarah4') }}" type="text" required>
 
                 	  @if ($errors->has('tempatLahir4'))
                 		<small style="color:red">* {{$errors->first('tempatLahir4')}}</small>
@@ -628,7 +610,7 @@
                 	 @endif
                 	 <label><b>No Telepone</b></label>
                 	 <input name="noTelp4" placeholder="Ketikkan No Telepone..." maxlength="13"
-                			class="common-input mb-20 form-control" value="{{ old('noTelp4') }}" type="number" required>
+                			class="common-input mb-20 form-control" value="{{ old('noTelp4') }}" type="text" required>
 
                 	  @if ($errors->has('alamat4'))
                 		<small style="color:red">* {{$errors->first('alamat4')}}</small>
@@ -691,7 +673,7 @@
                    @endif
                    <label><b>Kode Pos</b></label>
                    <input name="kodePos4" placeholder="Ketikkan Kode Pos..." maxlength="5"
-                		   class="common-input mb-20 form-control" value="{{ old('kodePos4') }}" type="number" required>
+                		   class="common-input mb-20 form-control" value="{{ old('kodePos4') }}" type="text" required>
 
                    @if ($errors->has('nomorSim4'))
                 	 <small style="color:red">* {{$errors->first('nomorSim4')}}</small>
@@ -1043,12 +1025,12 @@
                       </td>
                       <td>
                         <input name="dataKeluarga[0][noTelpKeluarga]" placeholder="Ketikkan No Telp..." maxlength="13"
-                                     class="form-control" value="" type="number" required>
+                                     class="form-control" value="" type="text" required>
                       </td>
 
                       <td>
-                        <input name="dataKeluarga[0][noHpKeluarga]" placeholder="Ketikkan No Hp..." maxlength="13"
-                                     class="form-control" value="" type="number" required>
+                        <input name="dataKeluarga[0][noHpKeluarga]" placeholder="Ketikkan No Hp..."
+                                     class="form-control" value="" type="text" required>
                       </td>
                     </tr>
                   </tbody>
@@ -1337,9 +1319,9 @@ $('.datepicker1').datepicker({
           var cell5 = row.insertCell(4);
           cell5.innerHTML = '<select style="height:50px;border-radius: 0" name=dataKeluarga['+numG+'][hubunganKeluarga]" class="form-control"><option value="" >-- Pilih --</option><option value="AYAH">AYAH</option><option value="IBU">IBU</option><option value="SUAMI">SUAMI</option><option value="ISTRI">ISTRI</option><option value="KAKAK">KAKAK</option><option value="ADIK">ADIK</option><option value="ANAK">ANAK</option><option value="LAINNYA">LAINNYA</option></select>';
           var cell6 = row.insertCell(5);
-          cell6.innerHTML = '<input type="number" name=dataKeluarga['+numG+'][noTelpKeluarga]" maxlength="13" class="form-control" value="" placeholder="Ketikkan No Telp...">';
+          cell6.innerHTML = '<input type="text" name=dataKeluarga['+numG+'][noTelpKeluarga]" maxlength="13" class="form-control" value="" placeholder="Ketikkan No Telp...">';
           var cell7 = row.insertCell(6);
-          cell7.innerHTML = '<input type="number" name=dataKeluarga['+numG+'][noHpKeluarga]"  maxlength="13" class="form-control" value="" placeholder="Ketikkan No Hp...">';
+          cell7.innerHTML = '<input type="text" name=dataKeluarga['+numG+'][noHpKeluarga]"  maxlength="13" class="form-control" value="" placeholder="Ketikkan No Hp...">';
         }
 
         function delKeluarga(tableID) {
