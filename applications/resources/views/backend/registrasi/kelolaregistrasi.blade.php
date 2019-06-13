@@ -45,8 +45,6 @@
                                     <th style="text-align:center">No Registrasi</th>
                                     <th style="text-align:center">Email</th>
                                     <th style="text-align:center">Nama Driver</th>
-                                    <th style="text-align:center">Mobil</th>
-                                    <th style="text-align:center">No Polisi</th>
                                     <th style="text-align:center">No Telp</th>
                                     <th style="text-align:center">No Pintu</th>
                                     <th style="text-align:center">Approve</th>
@@ -62,8 +60,6 @@
                                   <td>{{$key->no_registrasi}}</td>
                                   <td>{{$key->email}}</td>
                                   <td>{{$key->nama_driver}}</td>
-                                  <td>{{$key->mobil}}</td>
-                                  <td>{{$key->no_polisi}}</td>
                                   <td>{{$key->no_telp_driver}}</td>
                                   <td>{{$key->nomor_pintu}}</td>
                                   <td style="text-align:center">

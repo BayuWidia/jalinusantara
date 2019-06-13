@@ -43,7 +43,6 @@ class RegistrasiController extends Controller
         $getDataKendaraan = Kendaraan::where('id_registrasi','=' ,$id)->get();
         $getDataKeluarga = Keluarga::where('id_registrasi','=' ,$id)->get();
 
-        // dd($editRegistrasi);
         return view('backend/registrasi/edit', compact('dataEvents'
                                                         , 'editRegistrasi'
                                                         , 'getDataMekanik'

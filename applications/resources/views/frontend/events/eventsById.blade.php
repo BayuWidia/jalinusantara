@@ -36,6 +36,22 @@
 				</div>
 			</div>
 		</div>
+    <div class="col-md-12">
+      @if(Session::has('message'))
+        <div class="alert alert-success alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4><i class="icon fa fa-check"></i> Berhasil!</h4>
+          <p>{{ Session::get('message') }}</p>
+        </div>
+      @endif
+      @if(Session::has('messagefail'))
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4><i class="icon fa fa-ban"></i> Oops, terjadi kesalahan!</h4>
+        <p>{{ Session::get('messagefail') }}</p>
+      </div>
+      @endif
+    </div>
     <br>
 
     <div class="single-menu-list row justify-content-between align-items-center">

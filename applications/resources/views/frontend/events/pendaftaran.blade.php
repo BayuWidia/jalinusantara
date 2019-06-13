@@ -122,9 +122,17 @@
                    <select style="height:50px;border-radius: 0" name="golonganDarah1" class="common-input mb-20 form-control" required>
                    		<option value="" >-- Pilih --</option>
                    		<option value="A">A</option>
+                      <option value="A-">A-</option>
+                      <option value="A+">A+</option>
                    		<option value="B">B</option>
-                   		<option value="AB">AB</option>
+                      <option value="B-">B-</option>
+                      <option value="B+">B+</option>
                    		<option value="O">O</option>
+                   		<option value="O-">O-</option>
+                   		<option value="O+">O+</option>
+                   		<option value="AB">AB</option>
+                      <option value="AB-">AB-</option>
+                      <option value="AB+">AB+</option>
                    	</select>
                 	  @if ($errors->has('tempatLahir1'))
                 		<small style="color:red">* {{$errors->first('tempatLahir1')}}</small>
@@ -282,10 +290,19 @@
                 	 <label><b>Golongan Darah</b></label>
                    <select style="height:50px;border-radius: 0" name="golonganDarah2" class="common-input mb-20 form-control" required>
                    		<option value="" >-- Pilih --</option>
+                      <option value="" >-- Pilih --</option>
                    		<option value="A">A</option>
+                      <option value="A-">A-</option>
+                      <option value="A+">A+</option>
                    		<option value="B">B</option>
-                   		<option value="AB">AB</option>
+                      <option value="B-">B-</option>
+                      <option value="B+">B+</option>
                    		<option value="O">O</option>
+                   		<option value="O-">O-</option>
+                   		<option value="O+">O+</option>
+                   		<option value="AB">AB</option>
+                      <option value="AB-">AB-</option>
+                      <option value="AB+">AB+</option>
                    	</select>
 
                 	  @if ($errors->has('tempatLahir2'))
@@ -446,10 +463,19 @@
                 	 <label><b>Golongan Darah</b></label>
                    <select style="height:50px;border-radius: 0" name="golonganDarah3" class="common-input mb-20 form-control" required>
                    		<option value="" >-- Pilih --</option>
+                      <option value="" >-- Pilih --</option>
                    		<option value="A">A</option>
+                      <option value="A-">A-</option>
+                      <option value="A+">A+</option>
                    		<option value="B">B</option>
-                   		<option value="AB">AB</option>
+                      <option value="B-">B-</option>
+                      <option value="B+">B+</option>
                    		<option value="O">O</option>
+                   		<option value="O-">O-</option>
+                   		<option value="O+">O+</option>
+                   		<option value="AB">AB</option>
+                      <option value="AB-">AB-</option>
+                      <option value="AB+">AB+</option>
                    	</select>
 
                 	  @if ($errors->has('tempatLahir3'))
@@ -610,10 +636,19 @@
                 	 <label><b>Golongan Darah</b></label>
                    <select style="height:50px;border-radius: 0" name="golonganDarah4" class="common-input mb-20 form-control" required>
                    		<option value="" >-- Pilih --</option>
+                      <option value="" >-- Pilih --</option>
                    		<option value="A">A</option>
+                      <option value="A-">A-</option>
+                      <option value="A+">A+</option>
                    		<option value="B">B</option>
-                   		<option value="AB">AB</option>
+                      <option value="B-">B-</option>
+                      <option value="B+">B+</option>
                    		<option value="O">O</option>
+                   		<option value="O-">O-</option>
+                   		<option value="O+">O+</option>
+                   		<option value="AB">AB</option>
+                      <option value="AB-">AB-</option>
+                      <option value="AB+">AB+</option>
                    	</select>
 
                 	  @if ($errors->has('tempatLahir4'))
