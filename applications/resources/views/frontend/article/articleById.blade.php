@@ -66,6 +66,13 @@
 						<p class="excert">
 							<?php echo $getArticle[0]->isi_informasi ?>
 						</p>
+            <hr>
+            <h5>Bagikan artikel ini</h5>
+            <br>
+            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58a5140167663aee"></script>
+            <div class="addthis_inline_share_toolbox"></div>
+
 					</div>
 				</div>
 

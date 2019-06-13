@@ -1,8 +1,17 @@
+{{-- google translate --}}
+<script type="text/javascript">
+	function googleTranslateElementInit() {
+		new google.translate.TranslateElement({pageLanguage: 'id'}, 'google_translate_element');
+	}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+{{-- google translate --}}
 <!-- start header Area -->
 <header id="header" id="home">
 	<div class="header-top">
 		<div class="container">
   		<div class="row align-items-center">
+
   			<div class="col-lg-6 col-sm-6 col-4 header-top-left no-padding">
 	      	<div class="menu-social-icons">
 				<?php
@@ -23,6 +32,7 @@
 							@endif
 						</a>
 				@endforeach
+					<div id="google_translate_element" style="float:left;"></div>
 			</div>
   			</div>
   			<div class="col-lg-6 col-sm-6 col-8 header-top-right no-padding">
